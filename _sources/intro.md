@@ -1,14 +1,12 @@
 ![](_static/images/vu_logo.jpg?h=750&w=1260)
 
-#
-## A Jupyter Book for Global Infrastructure Risk Assessments
+# Welcome
+This is a Jupyter book providing the tools to perform critical infrastructure risk assessments for each country globally, based on publicly-available information.
 
-This is a small sample book to give you a feel for how book content is
-structured.
 It shows off a few of the major file types, as well as some sample content.
 It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
 
-Check out the content pages bundled with this sample book to see more.
+Check out the content pages bundled with this book to see more.
 
 ```{tableofcontents}
 ```
