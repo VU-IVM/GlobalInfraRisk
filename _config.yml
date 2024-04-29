@@ -1,9 +1,10 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: My sample book
-author: Institute for Environmental Studies, Vrije Universiteit Amsterdam
-logo: logo.png
+title           : Global Infrastructure Risk Assesments
+author          : Institute for Environmental Studies, Vrije Universiteit Amsterdam
+logo            : _static/images/IVM_logo_kort.png
+announcement    : "This Jupyter Book is work in progress!" # A banner announcement at the top of the site.
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
