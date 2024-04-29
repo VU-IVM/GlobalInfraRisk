@@ -7,12 +7,12 @@ root: intro
 parts:
   - caption: The Basics
     chapters:
+    - file: intro/ci_explained.md
     - file: intro/hazard.md
     - file: intro/exposure.md
     - file: intro/vulnerability.md
     - file: intro/damage_risk.md
-    - file: intro/ci_explained.md
-  - caption: Per Infrastructure Type
+  - caption: By Infrastructure System
     chapters:
     - file: ci/transport
     - file: ci/power
@@ -21,7 +21,8 @@ parts:
     - file: ci/education
     - file: ci/water
     - file: ci/waste    
-  - caption: Per Hazard
+    - file: ci/multiple-infrastructure
+  - caption: By Natural Hazard
     chapters:
     - file: hazard/flood
     - file: hazard/earthquake
@@ -29,3 +30,4 @@ parts:
     - file: hazard/wildfire
     - file: hazard/heatwaves
     - file: hazard/tropical_cyclone
+    - file: hazard/multiple-hazard
