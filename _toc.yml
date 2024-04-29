@@ -19,10 +19,13 @@ parts:
     - file: ci/telecom
     - file: ci/healthcare
     - file: ci/education
+    - file: ci/water
+    - file: ci/waste    
   - caption: Per Hazard
     chapters:
     - file: hazard/flood
     - file: hazard/earthquake
     - file: hazard/landslide
     - file: hazard/wildfire
+    - file: hazard/heatwaves
     - file: hazard/tropical_cyclone
