@@ -1,4 +1,7 @@
-# A Jupyter Book for Global Infrastructure Risk Assessments
+![](_static/images/vu_logo.jpg?h=750&w=1260)
+
+#
+## A Jupyter Book for Global Infrastructure Risk Assessments
 
 This is a small sample book to give you a feel for how book content is
 structured.

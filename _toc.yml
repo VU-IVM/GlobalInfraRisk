@@ -3,7 +3,26 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+
+parts:
+  - caption: The Basics
+    chapters:
+    - file: intro/hazard.md
+    - file: intro/exposure.md
+    - file: intro/vulnerability.md
+    - file: intro/damage_risk.md
+    - file: intro/ci_explained.md
+  - caption: Per Infrastructure Type
+    chapters:
+    - file: ci/transport
+    - file: ci/power
+    - file: ci/telecom
+    - file: ci/healthcare
+    - file: ci/education
+  - caption: Per Hazard
+    chapters:
+    - file: hazard/flood
+    - file: hazard/earthquake
+    - file: hazard/landslide
+    - file: hazard/wildfire
+    - file: hazard/tropical_cyclone
