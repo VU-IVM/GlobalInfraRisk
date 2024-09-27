@@ -611,7 +611,7 @@ Wall time: 5.31 s
 <h3>Ancilliary data for processing<a class="headerlink" href="#ancilliary-data-for-processing" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Data</span><span class="se">\\</span><span class="s1">Global_Geospatial</span><span class="se">\\</span><span class="s1">shapefiles</span><span class="se">\\</span><span class="s1">ne_10m_admin_0_countries.shp&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
 <span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
 </pre></div>
 </div>
