@@ -185,7 +185,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../ci/education.html">Education</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ci/water.html">Water</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ci/waste.html">Waste</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ci/multiple-infrastructure.html">Multiple Infrastructure Systems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
@@ -368,7 +367,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -384,6 +385,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-hazards">Types of Hazards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-hazards">1. Natural Hazards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#human-made-hazards">2. Human-Made Hazards</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-and-return-periods">Hazard Intensity and Return Periods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-mapping">Hazard Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-bands">Hazard Intensity Bands</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -395,6 +413,45 @@ document.write(`
                   
   <section id="hazard">
 <h1>Hazard<a class="headerlink" href="#hazard" title="Permalink to this heading">#</a></h1>
+<p>Hazards refer to potentially damaging physical events, phenomena, or human activities that can lead to the destruction or degradation of critical infrastructure (CI). These hazards can be natural, such as floods and earthquakes, or human-made, such as industrial accidents and cyber-attacks. Understanding the range and intensity of hazards that infrastructure is exposed to is a crucial step in assessing risks and ensuring resilience.</p>
+<section id="types-of-hazards">
+<h2>Types of Hazards<a class="headerlink" href="#types-of-hazards" title="Permalink to this heading">#</a></h2>
+<p>Hazards are broadly categorized into two main types:</p>
+<section id="natural-hazards">
+<h3>1. Natural Hazards<a class="headerlink" href="#natural-hazards" title="Permalink to this heading">#</a></h3>
+<p>Natural hazards are caused by environmental factors and include events that occur due to geological, meteorological, and climatic processes. These can lead to widespread damage and disruption to CI. Common natural hazards include:</p>
+<ul class="simple">
+<li><p><strong>Flooding</strong>: Both river and surface flooding are common natural hazards affecting CI. Flooding can cause road damage, electrical outages, and impede access to health facilities. Surface flooding occurs when intense rainfall overwhelms drainage systems, while river flooding occurs when rivers overflow their banks. Coastal flooding can also occur due to storm surges and rising sea levels.</p></li>
+<li><p><strong>Earthquakes</strong>: Seismic activity can cause infrastructure failure, especially in areas where roads, bridges, and buildings are not designed to withstand strong ground shaking. Earthquakes can also trigger secondary hazards like landslides and tsunamis.</p></li>
+<li><p><strong>Tropical Cyclones</strong>: These storms are accompanied by strong winds and heavy rains, causing damage to electrical grids, transportation networks, and communication systems. The high wind speeds can knock down power lines and communication towers, while storm surges can cause coastal flooding.</p></li>
+<li><p><strong>Landslides</strong>: These hazards occur when unstable slopes fail, usually triggered by heavy rainfall or seismic activity. Landslides can destroy transportation routes, power lines, and water supply systems.</p></li>
+<li><p><strong>Tsunamis</strong>: Tsunamis are caused by underwater earthquakes, volcanic eruptions, or landslides. They can lead to widespread flooding, destroying coastal infrastructure and disrupting essential services.</p></li>
+</ul>
+</section>
+<section id="human-made-hazards">
+<h3>2. Human-Made Hazards<a class="headerlink" href="#human-made-hazards" title="Permalink to this heading">#</a></h3>
+<p>Human-made hazards result from industrial activities, conflicts, or accidents. These hazards can be just as disruptive to CI as natural hazards:</p>
+<ul class="simple">
+<li><p><strong>Cyber Attacks</strong>: In an increasingly digitized world, critical infrastructure is vulnerable to cyber-attacks that target communication networks, power grids, and other systems. A successful attack can disable critical services, such as water supply or emergency response systems.</p></li>
+<li><p><strong>Industrial Accidents</strong>: Chemical spills, explosions, and fires in industrial areas can cause localized damage to surrounding infrastructure, including transportation networks and water treatment plants.</p></li>
+<li><p><strong>Terrorism</strong>: Acts of terrorism, such as bombings or targeted sabotage, can directly damage key infrastructure, including transportation hubs, power plants, and government buildings.</p></li>
+<li><p><strong>War and Civil Unrest</strong>: Conflict zones often experience damage to critical infrastructure, such as roads, bridges, and communication systems. The destruction of these systems can have long-term impacts on the affected regions.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="hazard-intensity-and-return-periods">
+<h2>Hazard Intensity and Return Periods<a class="headerlink" href="#hazard-intensity-and-return-periods" title="Permalink to this heading">#</a></h2>
+<p>The severity and frequency of hazards are often expressed through <strong>intensity</strong> and <strong>return periods</strong>. Intensity refers to the magnitude or severity of the hazard event, while return periods refer to the likelihood of the event occurring over a specified time frame (e.g., a 1-in-100-year flood).</p>
+<section id="hazard-mapping">
+<h3>Hazard Mapping<a class="headerlink" href="#hazard-mapping" title="Permalink to this heading">#</a></h3>
+<p>Hazard mapping is used to visually represent areas that are prone to specific hazards, such as floodplains, seismic zones, or areas frequently hit by tropical storms. These maps are critical tools in risk assessment as they help identify which CI systems are most vulnerable.</p>
+</section>
+<section id="hazard-intensity-bands">
+<h3>Hazard Intensity Bands<a class="headerlink" href="#hazard-intensity-bands" title="Permalink to this heading">#</a></h3>
+<p>Hazards are categorized into intensity bands to estimate potential damage. For example, earthquake intensity is measured by peak ground acceleration (PGA), while wind speeds are used for cyclones. Flood hazard intensity is typically measured in terms of water depth.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -451,6 +508,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-hazards">Types of Hazards</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-hazards">1. Natural Hazards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#human-made-hazards">2. Human-Made Hazards</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-and-return-periods">Hazard Intensity and Return Periods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-mapping">Hazard Mapping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-bands">Hazard Intensity Bands</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
