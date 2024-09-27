@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ci/transport';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Power" href="power.html" />
+    <link rel="next" title="Healthcare Infrastructure" href="healthcare.html" />
     <link rel="prev" title="Damage &amp; Risk" href="../intro/damage_risk.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -179,12 +179,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Transportation Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="power.html">Power</a></li>
-<li class="toctree-l1"><a class="reference internal" href="telecom.html">Telecommunication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="healthcare.html">Healthcare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="education.html">Education</a></li>
-<li class="toctree-l1"><a class="reference internal" href="water.html">Water</a></li>
-<li class="toctree-l1"><a class="reference internal" href="waste.html">Waste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="healthcare.html">Healthcare Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="education.html">Education Infrastructure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
@@ -533,22 +529,55 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">)</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s2">&quot;highway&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.97 s
-Wall time: 5.31 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.53 s
+Wall time: 4.92 s
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;motorway&#39;</span><span class="p">,</span> <span class="s1">&#39;motorway_link&#39;</span><span class="p">,</span> <span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;trunk_link&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types_extract</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;motorway&#39;</span><span class="p">,</span> <span class="s1">&#39;motorway_link&#39;</span><span class="p">,</span> <span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;trunk_link&#39;</span><span class="p">,</span>
                             <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;primary_link&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary_link&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;tertiary_link&#39;</span><span class="p">,</span> <span class="s1">&#39;residential&#39;</span><span class="p">,</span> <span class="s1">&#39;road&#39;</span><span class="p">,</span> <span class="s1">&#39;unclassified&#39;</span><span class="p">,</span><span class="s1">&#39;track&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                            <span class="s1">&#39;tertiary_link&#39;</span><span class="p">,</span> <span class="s1">&#39;residential&#39;</span><span class="p">,</span> <span class="s1">&#39;road&#39;</span><span class="p">,</span> <span class="s1">&#39;unclassified&#39;</span><span class="p">,</span><span class="s1">&#39;track&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;highway&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are many subtypes to consider, so we combine some</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;highway&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;motorway_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;motorway&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;trunk_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;trunk&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;primary_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;primary&#39;</span> <span class="p">,</span>
+                        <span class="s1">&#39;secondary_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;tertiary_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;primary_link&#39;</span> <span class="p">:</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;residential&#39;</span> <span class="p">:</span> <span class="s1">&#39;other&#39;</span> <span class="p">,</span>
+                        <span class="s1">&#39;road&#39;</span> <span class="p">:</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;unclassified&#39;</span> <span class="p">:</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;track&#39;</span> <span class="p">:</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span>                              
+                              <span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now define a new set of sub_types, to be used in the remainder of this analysis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;motorway&#39;</span><span class="p">,</span> <span class="s1">&#39;trunk&#39;</span><span class="p">,</span><span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -571,20 +600,12 @@ Wall time: 5.31 s
 <p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. Here we provide a baseline set of values, but these should be updated through national consultations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;unclassified&#39;</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span> 
-        <span class="s1">&#39;primary&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;secondary&#39;</span><span class="p">:</span><span class="mi">1300</span><span class="p">,</span> 
-        <span class="s1">&#39;tertiary&#39;</span><span class="p">:</span><span class="mi">700</span><span class="p">,</span> 
-        <span class="s1">&#39;residential&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span>
-        <span class="s1">&#39;trunk&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;trunk_link&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;motorway&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;motorway_link&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;primary_link&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;secondary_link&#39;</span><span class="p">:</span><span class="mi">1300</span><span class="p">,</span>
-        <span class="s1">&#39;tertiary_link&#39;</span><span class="p">:</span><span class="mi">700</span><span class="p">,</span>
-        <span class="s1">&#39;road&#39;</span><span class="p">:</span><span class="mi">700</span><span class="p">,</span>
-        <span class="s1">&#39;track&#39;</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span> <span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;trunk&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
+               <span class="s1">&#39;motorway&#39;</span> <span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                <span class="s1">&#39;primary&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
+                <span class="s1">&#39;secondary&#39;</span><span class="p">:</span><span class="mi">1300</span><span class="p">,</span> 
+                <span class="s1">&#39;tertiary&#39;</span><span class="p">:</span><span class="mi">700</span><span class="p">,</span> 
+                <span class="s1">&#39;other&#39;</span><span class="p">:</span><span class="mi">300</span> <span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -602,6 +623,588 @@ Wall time: 5.31 s
 <span class="n">road_curves</span> <span class="o">=</span> <span class="n">road_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
 <span class="n">road_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">road_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">road_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>And let’s have a look at all the available options</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">display</span><span class="p">(</span><span class="n">vul_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ID number</th>
+      <td>Infrastructure description</td>
+      <td>Additional characteristics</td>
+    </tr>
+    <tr>
+      <th>F1.1</th>
+      <td>plant</td>
+      <td>Small power plants, capacity &lt;100 MW</td>
+    </tr>
+    <tr>
+      <th>F1.2</th>
+      <td>plant</td>
+      <td>Medium power plants, capacity 100-500 MW</td>
+    </tr>
+    <tr>
+      <th>F1.3</th>
+      <td>plant</td>
+      <td>Large power plants, &gt;500 MW</td>
+    </tr>
+    <tr>
+      <th>F1.4</th>
+      <td>plant</td>
+      <td>thermal plant</td>
+    </tr>
+    <tr>
+      <th>F1.5</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F1.6</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F1.7</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F2.1</th>
+      <td>substation</td>
+      <td>Low Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F2.2</th>
+      <td>substation</td>
+      <td>Medium Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F2.3</th>
+      <td>substation</td>
+      <td>High Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F5.1</th>
+      <td>cable</td>
+      <td>Distribution circuits buried crossings</td>
+    </tr>
+    <tr>
+      <th>F6.1</th>
+      <td>Power (minor) line</td>
+      <td>Distribution circuits (non-crossings)</td>
+    </tr>
+    <tr>
+      <th>F6.2</th>
+      <td>cable</td>
+      <td>Distribution circuits elevated crossings</td>
+    </tr>
+    <tr>
+      <th>F6.3</th>
+      <td>Energy system</td>
+      <td>Generalized curve for energy assets in diked a...</td>
+    </tr>
+    <tr>
+      <th>F7.1</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2a (lower boundary)</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2b (upper boundary)</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.3</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.4</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - sophisticated acce...</td>
+    </tr>
+    <tr>
+      <th>F7.5</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - sophisticated acce...</td>
+    </tr>
+    <tr>
+      <th>F7.6</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - without sophistica...</td>
+    </tr>
+    <tr>
+      <th>F7.7</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - without sophistica...</td>
+    </tr>
+    <tr>
+      <th>F7.8</th>
+      <td>Roads</td>
+      <td>Other roads - low flow</td>
+    </tr>
+    <tr>
+      <th>F7.9</th>
+      <td>Roads</td>
+      <td>Other roads - high flow</td>
+    </tr>
+    <tr>
+      <th>F7.10</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.11</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.12</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.13</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.1</th>
+      <td>Railways</td>
+      <td>Double-tracked railway</td>
+    </tr>
+    <tr>
+      <th>F8.2</th>
+      <td>Railways</td>
+      <td>Double-tracked railway</td>
+    </tr>
+    <tr>
+      <th>F8.3</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.4</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.5</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6a (lower boundary)</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6b (upper boundary)</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.7</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.8</th>
+      <td>Railways</td>
+      <td>Railway station</td>
+    </tr>
+    <tr>
+      <th>F9.1</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F9.2</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F9.3</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F10.1</th>
+      <td>Telecommunication</td>
+      <td>Communication tower</td>
+    </tr>
+    <tr>
+      <th>F12.1</th>
+      <td>Telecommunication</td>
+      <td>Communication system</td>
+    </tr>
+    <tr>
+      <th>F13.1</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade concrete</td>
+    </tr>
+    <tr>
+      <th>F13.2</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade steel</td>
+    </tr>
+    <tr>
+      <th>F13.3</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade wood</td>
+    </tr>
+    <tr>
+      <th>F13.4</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks elevated</td>
+    </tr>
+    <tr>
+      <th>F13.5</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks below grade</td>
+    </tr>
+    <tr>
+      <th>F14.1</th>
+      <td>Water treatment plants</td>
+      <td>Small water treatment plants open/gravity - av...</td>
+    </tr>
+    <tr>
+      <th>F14.2</th>
+      <td>Water treatment plants</td>
+      <td>Medium water treatment plants open/gravity - a...</td>
+    </tr>
+    <tr>
+      <th>F14.3</th>
+      <td>Water treatment plants</td>
+      <td>Large water treatment plants open/gravity - av...</td>
+    </tr>
+    <tr>
+      <th>F14.4</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants open...</td>
+    </tr>
+    <tr>
+      <th>F14.5</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants open...</td>
+    </tr>
+    <tr>
+      <th>F14.6</th>
+      <td>Water treatment plants</td>
+      <td>Small water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.7</th>
+      <td>Water treatment plants</td>
+      <td>Medium water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.8</th>
+      <td>Water treatment plants</td>
+      <td>Large water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.9</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants clos...</td>
+    </tr>
+    <tr>
+      <th>F14.10</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants clos...</td>
+    </tr>
+    <tr>
+      <th>F15.1</th>
+      <td>Water well</td>
+      <td>Wells</td>
+    </tr>
+    <tr>
+      <th>F16.1</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Exposed transmission pipeline crossing</td>
+    </tr>
+    <tr>
+      <th>F16.2</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Buried transmission pipeline crossing</td>
+    </tr>
+    <tr>
+      <th>F16.3</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Pipelines (non-crossing)</td>
+    </tr>
+    <tr>
+      <th>F17.1</th>
+      <td>Others</td>
+      <td>Pumping plants (small) below grade</td>
+    </tr>
+    <tr>
+      <th>F17.2</th>
+      <td>Others</td>
+      <td>Pumping plants (medium/large) below grade</td>
+    </tr>
+    <tr>
+      <th>F17.3</th>
+      <td>Others</td>
+      <td>Pumping plants (small) above grade</td>
+    </tr>
+    <tr>
+      <th>F17.4</th>
+      <td>Others</td>
+      <td>Pumping plants (medium/large) above grade</td>
+    </tr>
+    <tr>
+      <th>F17.5</th>
+      <td>Others</td>
+      <td>Pumping plants</td>
+    </tr>
+    <tr>
+      <th>F17.6</th>
+      <td>Others</td>
+      <td>Control vaults and stations</td>
+    </tr>
+    <tr>
+      <th>F18.1</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.2</th>
+      <td>Wastewater treatment plant</td>
+      <td>Medium wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.3</th>
+      <td>Wastewater treatment plant</td>
+      <td>Large wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.4</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small, medium, large Wastewater treatment plan...</td>
+    </tr>
+    <tr>
+      <th>F18.5</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small, medium, large Wastewater treatment plan...</td>
+    </tr>
+    <tr>
+      <th>F18.6</th>
+      <td>Wastewater treatment plant</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F19.1</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Exposed collector river...</td>
+    </tr>
+    <tr>
+      <th>F19.2</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Buried collector river ...</td>
+    </tr>
+    <tr>
+      <th>F19.3</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Pipes (non-crossings)</td>
+    </tr>
+    <tr>
+      <th>F20.1</th>
+      <td>Others</td>
+      <td>Control vaults and control stations</td>
+    </tr>
+    <tr>
+      <th>F20.2</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (small), wet well/...</td>
+    </tr>
+    <tr>
+      <th>F20.3</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (medium large), we...</td>
+    </tr>
+    <tr>
+      <th>F20.4</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (small), submersible</td>
+    </tr>
+    <tr>
+      <th>F20.5</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (medium large), su...</td>
+    </tr>
+    <tr>
+      <th>F21.1</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.2</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.3</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.3a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.3b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.4</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.4a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.4b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.5</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.5a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.5b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.6</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, wh...</td>
+    </tr>
+    <tr>
+      <th>F21.7</th>
+      <td>School buildings</td>
+      <td>Generalized curve for companies (incl. governm...</td>
+    </tr>
+    <tr>
+      <th>F21.8</th>
+      <td>Health &amp; education</td>
+      <td>Generalized curve for offices in diked areas</td>
+    </tr>
+    <tr>
+      <th>F21.9</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized function for industry</td>
+    </tr>
+    <tr>
+      <th>F21.10</th>
+      <td>School buildings</td>
+      <td>Generalized curve for buildings</td>
+    </tr>
+    <tr>
+      <th>F21.11</th>
+      <td>School buildings</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F21.12</th>
+      <td>Health buildings</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F21.13</th>
+      <td>Education buildings</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And select a curve to use for each different subtype we are analysing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;motorway&#39;, &#39;trunk&#39;, &#39;primary&#39;, &#39;secondary&#39;, &#39;tertiary&#39;, &#39;other&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F7.5&#39;</span><span class="p">,</span><span class="s1">&#39;F7.5&#39;</span><span class="p">,</span><span class="s1">&#39;F7.5&#39;</span><span class="p">,</span><span class="s1">&#39;F7.7&#39;</span><span class="p">,</span><span class="s1">&#39;F7.7&#39;</span><span class="p">,</span><span class="s1">&#39;F7.9&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">selected_curves</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
 </pre></div>
 </div>
 </div>
@@ -657,6 +1260,12 @@ Wall time: 5.31 s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 109 ms
+Wall time: 497 ms
+</pre></div>
+</div>
+</div>
 </div>
 <p>Let’s check the extent of the flood and the units in the data</p>
 <div class="cell docutils container">
@@ -668,6 +1277,9 @@ Wall time: 5.31 s
 <span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0800dd3f858acbfba4df121f89099d84581b6710c59ed11328c7baa8e9561fe4.png" src="../_images/0800dd3f858acbfba4df121f89099d84581b6710c59ed11328c7baa8e9561fe4.png" />
 </div>
 </div>
 </section>
@@ -684,10 +1296,13 @@ Wall time: 5.31 s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\osgeo\osr.py:410: FutureWarning: Neither osr.UseExceptions() nor osr.DontUseExceptions() has been explicitly called. In GDAL 4.0, exceptions will be enabled by default.
+  warnings.warn(
+</pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;coverage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 35s
+Wall time: 1min 48s
 </pre></div>
 </div>
 </div>
@@ -701,15 +1316,7 @@ Wall time: 5.31 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_intensity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">road_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-<span class="n">fragility_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">road_curves</span><span class="p">[</span><span class="s1">&#39;F7.1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_damage_per_element</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span><span class="n">hazard_intensity</span><span class="p">,</span><span class="n">fragility_values</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_damage_per_element</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span><span class="n">damage_curves</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">cell_area_m2</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate damage for a given asset based on hazard information.</span>
 <span class="sd">    Arguments:</span>
@@ -720,9 +1327,18 @@ Wall time: 5.31 s
 <span class="sd">    Returns:</span>
 <span class="sd">        *tuple*: A tuple containing the asset index or identifier and the calculated damage.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiPolygon&quot;</span><span class="p">):</span>
+        <span class="n">coverage</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">cell_area_m2</span>
+    <span class="k">elif</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiLineString&quot;</span><span class="p">):</span>
+        <span class="n">coverage</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geometry type </span><span class="si">{</span><span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="si">}</span><span class="s2"> not supported&quot;</span><span class="p">)</span>
+
+    <span class="n">fragility_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">damage_curves</span><span class="p">[</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">hazard_intensity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
     
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]),</span>
-       <span class="n">hazard_intensity</span><span class="p">,</span><span class="n">fragility_values</span><span class="p">)</span><span class="o">*</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;coverage&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">maxdam_dict</span><span class="p">[</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]])</span>
+       <span class="n">hazard_intensity</span><span class="p">,</span><span class="n">fragility_values</span><span class="p">)</span><span class="o">*</span><span class="n">coverage</span><span class="o">*</span><span class="n">maxdam_dict</span><span class="p">[</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]])</span>
    
 </pre></div>
 </div>
@@ -733,7 +1349,12 @@ Wall time: 5.31 s
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tqdm</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
 <span class="n">features</span><span class="p">[</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">progress_apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">asset</span> <span class="p">:</span> 
                                                      <span class="n">_get_damage_per_element</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span>
-                                                    <span class="n">hazard_intensity</span><span class="p">,</span> <span class="n">fragility_values</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+                                                    <span class="n">damage_curves</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████| 45129/45129 [00:03&lt;00:00, 12906.40it/s]
 </pre></div>
 </div>
 </div>
@@ -762,6 +1383,9 @@ Wall time: 5.31 s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/60a19c548e2edf2f0a9f879aa7ca65e39efea7971ab22a96279b67d896ede4c5.png" src="../_images/60a19c548e2edf2f0a9f879aa7ca65e39efea7971ab22a96279b67d896ede4c5.png" />
+</div>
 </div>
 <p>And create a distribution of the damages.</p>
 <div class="cell docutils container">
@@ -771,6 +1395,12 @@ Wall time: 5.31 s
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">damage_results</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;damage&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/6aa91d90eb692967c680f3d2d53655fb8a5f35e7f15363039389fb99f3f311de.png" src="../_images/6aa91d90eb692967c680f3d2d53655fb8a5f35e7f15363039389fb99f3f311de.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -786,6 +1416,9 @@ Wall time: 5.31 s
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eede3df45ed6580ccbb33fa202abc2373c31b01f892c78a0ec4e26c5ea7c8ac9.png" src="../_images/eede3df45ed6580ccbb33fa202abc2373c31b01f892c78a0ec4e26c5ea7c8ac9.png" />
 </div>
 </div>
 </section>
@@ -831,11 +1464,11 @@ Wall time: 5.31 s
       </div>
     </a>
     <a class="right-next"
-       href="power.html"
+       href="healthcare.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Power</p>
+        <p class="prev-next-title">Healthcare Infrastructure</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
