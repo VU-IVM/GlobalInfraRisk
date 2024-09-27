@@ -15,13 +15,13 @@ parts:
   - caption: By Infrastructure System
     chapters:
     - file: ci/transport
-    - file: ci/power
-    - file: ci/telecom
+    # - file: ci/power
+    # - file: ci/telecom
     - file: ci/healthcare
     - file: ci/education
-    - file: ci/water
-    - file: ci/waste    
-    - file: ci/multiple-infrastructure
+    # - file: ci/water
+    # - file: ci/waste    
+    # - file: ci/multiple-infrastructure
   - caption: By Natural Hazard
     chapters:
     - file: hazard/flood
