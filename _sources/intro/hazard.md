@@ -3,10 +3,6 @@
 Hazards refer to potentially damaging physical events, phenomena, or human activities that can lead to the destruction or degradation of critical infrastructure (CI). These hazards can be natural, such as floods and earthquakes, or human-made, such as industrial accidents and cyber-attacks. Understanding the range and intensity of hazards that infrastructure is exposed to is a crucial step in assessing risks and ensuring resilience.
 
 ## Types of Hazards
-
-Hazards are broadly categorized into two main types:
-
-### 1. Natural Hazards
 Natural hazards are caused by environmental factors and include events that occur due to geological, meteorological, and climatic processes. These can lead to widespread damage and disruption to CI. Common natural hazards include:
 
 - **Flooding**: Both river and surface flooding are common natural hazards affecting CI. Flooding can cause road damage, electrical outages, and impede access to health facilities. Surface flooding occurs when intense rainfall overwhelms drainage systems, while river flooding occurs when rivers overflow their banks. Coastal flooding can also occur due to storm surges and rising sea levels.
@@ -19,16 +15,9 @@ Natural hazards are caused by environmental factors and include events that occu
 
 - **Tsunamis**: Tsunamis are caused by underwater earthquakes, volcanic eruptions, or landslides. They can lead to widespread flooding, destroying coastal infrastructure and disrupting essential services.
 
-### 2. Human-Made Hazards
-Human-made hazards result from industrial activities, conflicts, or accidents. These hazards can be just as disruptive to CI as natural hazards:
+- **Heatwaves**: Prolonged periods of extreme heat can lead to infrastructure failures, such as power outages due to increased demand for cooling systems. Heatwaves can also affect transportation networks, causing railway tracks to warp and roads to soften, leading to dangerous driving conditions.
 
-- **Cyber Attacks**: In an increasingly digitized world, critical infrastructure is vulnerable to cyber-attacks that target communication networks, power grids, and other systems. A successful attack can disable critical services, such as water supply or emergency response systems.
-
-- **Industrial Accidents**: Chemical spills, explosions, and fires in industrial areas can cause localized damage to surrounding infrastructure, including transportation networks and water treatment plants.
-
-- **Terrorism**: Acts of terrorism, such as bombings or targeted sabotage, can directly damage key infrastructure, including transportation hubs, power plants, and government buildings.
-
-- **War and Civil Unrest**: Conflict zones often experience damage to critical infrastructure, such as roads, bridges, and communication systems. The destruction of these systems can have long-term impacts on the affected regions.
+- **Wildfires**: Wildfires, often triggered by droughts and extreme heat, can severely damage infrastructure. These fires can destroy power lines, telecommunications towers, and transportation routes, as well as disrupt water and fuel supplies. In areas prone to wildfires, critical infrastructure must be designed to withstand or mitigate the risks of fire.
 
 ---
 
