@@ -430,8 +430,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">4. Performing the Damage Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersecting-hazard-and-feature-informatoin">4. Intersecting hazard and feature informatoin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a></li>
 </ul>
             </nav>
@@ -462,6 +462,18 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 </ol>
 <section id="loading-the-necessary-packages">
 <h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
+<p>To perform the assessment, we are going to make use of several <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">python packages</a>.</p>
+<p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rioxarray</span>
+<span class="c1">#!pip install contextily</span>
+<span class="c1">#!pip install exactextract</span>
+<span class="c1">#!pip install osm-flex</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1257,10 +1269,9 @@ Wall time: 5.44 s
 </div>
 </div>
 </section>
-<section id="id1">
-<h2>4. Preparing the Data<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>In the next step, we have to ensure that we can run this in every country, irrespective of its size.</p>
-<p>To ensure this, we first cut the country into smaller pieces through a grid. This is done in the <strong>create_grid</strong> function below.</p>
+<section id="intersecting-hazard-and-feature-informatoin">
+<h2>4. Intersecting hazard and feature informatoin<a class="headerlink" href="#intersecting-hazard-and-feature-informatoin" title="Permalink to this heading">#</a></h2>
+<p>In the next step, we have to ensure that we can run this in every country, irrespective of its size. To ensure this, we first cut the country into smaller pieces through a grid. This is done in the <strong>create_grid</strong> function below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_grid</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span><span class="n">height</span><span class="p">):</span>
@@ -1397,7 +1408,7 @@ Wall time: 5.44 s
 </div>
 </div>
 </div>
-<p>And here we merge the features with the overlay information</p>
+<p>And here we merge the features with the overlay information.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_overlaid</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_overlay</span><span class="p">),</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1407,7 +1418,7 @@ Wall time: 5.44 s
 </div>
 </section>
 <section id="performing-the-damage-assessment">
-<h2>4. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
+<h2>5. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
 <p>We will apply vulnerability curves to the exposed infrastructure to estimate the damage based on the intensity of the hazard. The vulnerability curve translates hazard intensity (e.g., flood depth) into damage potential.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1449,7 +1460,7 @@ Wall time: 5.44 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|███████                                                                   | 4379/45673 [00:00&lt;00:03, 11083.14it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████| 45673/45673 [00:04&lt;00:00, 9950.35it/s]
 </pre></div>
 </div>
 </div>
@@ -1478,6 +1489,9 @@ Wall time: 5.44 s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/09d68b85377730a9ed35b863b151b3b967647e5a649b646fd1a829355bfa69b1.png" src="../_images/09d68b85377730a9ed35b863b151b3b967647e5a649b646fd1a829355bfa69b1.png" />
+</div>
 </div>
 <p>And create a distribution of the damages.</p>
 <div class="cell docutils container">
@@ -1487,6 +1501,12 @@ Wall time: 5.44 s
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">damage_results</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;damage&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/ec384387f7f71374889e50ce594bf46f63ba60ca66e1cf104fd38d2f74eb51a1.png" src="../_images/ec384387f7f71374889e50ce594bf46f63ba60ca66e1cf104fd38d2f74eb51a1.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -1502,6 +1522,9 @@ Wall time: 5.44 s
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/07283fa12b254e96fd469eeb56bfb763e233cbf89330dc623edf6d01fb3a4783.png" src="../_images/07283fa12b254e96fd469eeb56bfb763e233cbf89330dc623edf6d01fb3a4783.png" />
 </div>
 </div>
 </section>
@@ -1583,8 +1606,8 @@ Wall time: 5.44 s
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">4. Performing the Damage Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersecting-hazard-and-feature-informatoin">4. Intersecting hazard and feature informatoin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a></li>
 </ul>
   </nav></div>
