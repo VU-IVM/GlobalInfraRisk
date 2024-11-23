@@ -15,19 +15,24 @@ parts:
   - caption: By Infrastructure System
     chapters:
     - file: ci/transport
-    # - file: ci/power
-    # - file: ci/telecom
+    - file: ci/power
+    - file: ci/telecom
     - file: ci/healthcare
     - file: ci/education
     # - file: ci/water
     # - file: ci/waste    
-    # - file: ci/multiple-infrastructure
   - caption: By Natural Hazard
     chapters:
     - file: hazard/flood
     - file: hazard/earthquake
-    - file: hazard/landslide
-    - file: hazard/wildfire
-    - file: hazard/heatwaves
+    # - file: hazard/landslide
+    # - file: hazard/wildfire
+    # - file: hazard/heatwaves
     - file: hazard/tropical_cyclone
-    - file: hazard/multiple-hazard
+  - caption: Specific Use Cases
+    chapters:
+    - file: use_cases/all_ci_exposure
+    - file: use_cases/all_ci_vulnerability
+    # - file: use_cases/all_ci_risk
+    # - file: use_cases/multi-country
+    # - file: use_cases/multi-hazard
