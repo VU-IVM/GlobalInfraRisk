@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Education Infrastructure" href="education.html" />
-    <link rel="prev" title="Transportation Infrastructure" href="transport.html" />
+    <link rel="prev" title="Telecommunication Infrastructure" href="telecom.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,6 +179,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="transport.html">Transportation Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power.html">Power Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telecom.html">Telecommunication Infrastructure</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Healthcare Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="education.html">Education Infrastructure</a></li>
 </ul>
@@ -186,11 +188,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Floods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquakes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/landslide.html">Landslides</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/wildfire.html">Wildfires</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/heatwaves.html">Heatwaves</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclones</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/multiple-hazard.html">Multiple Hazards</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_exposure.html">Country-level exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
 </ul>
 
     </div>
@@ -430,9 +433,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersecting-hazard-and-feature-informatoin">4. Intersecting hazard and feature informatoin</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>
             </nav>
         </div>
@@ -466,7 +469,7 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rioxarray</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b4</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
 <span class="c1">#!pip install osm-flex</span>
@@ -497,6 +500,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 
 <span class="kn">from</span> <span class="nn">osm_flex</span> <span class="kn">import</span> <span class="n">download</span>
 <span class="kn">from</span> <span class="nn">exactextract</span> <span class="kn">import</span> <span class="n">exact_extract</span>
+<span class="kn">from</span> <span class="nn">damagescanner.core</span> <span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span> <span class="nn">damagescanner.osm</span> <span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span> <span class="nn">lonboard</span> <span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 </pre></div>
@@ -543,31 +549,35 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s2">&quot;multipolygons&quot;</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="s1">&#39;healthcare&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 21.4 s
-Wall time: 27.8 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>357
+313
+CPU times: total: 22.2 s
+Wall time: 38.8 s
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;clinic&#39;</span><span class="p">,</span> <span class="s1">&#39;hospital&#39;</span><span class="p">,</span> <span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span> <span class="s1">&#39;doctors&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>And we can explore our data interactively</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;amenity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4d542ece8bbf41bfa9f744415ad6f297", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -581,17 +591,429 @@ Wall time: 27.8 s
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 747GB
+Dimensions:      (band: 1, x: 432000, y: 216000)
+Coordinates:
+  * band         (band) int32 4B 1
+  * x            (x) float64 3MB -180.0 -180.0 -180.0 ... 180.0 180.0 180.0
+  * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
+    spatial_ref  int32 4B ...
+Data variables:
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-10541be9-3bf8-437e-8dab-4b688c00d04c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-10541be9-3bf8-437e-8dab-4b688c00d04c' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-5f1a1550-dd55-4fb4-bdc2-6e2448a59005' class='xr-section-summary-in' type='checkbox'  checked><label for='section-5f1a1550-dd55-4fb4-bdc2-6e2448a59005' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-77e8c65b-8c44-41aa-ae40-c686d83f9795' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-77e8c65b-8c44-41aa-ae40-c686d83f9795' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2b91c59b-e155-48b1-a03d-4858b1748268' class='xr-var-data-in' type='checkbox'><label for='data-2b91c59b-e155-48b1-a03d-4858b1748268' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-d721ea95-38a8-4cb7-8515-9368af11fd98' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d721ea95-38a8-4cb7-8515-9368af11fd98' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-20a0939f-2e47-49ab-bfad-c923afb902f7' class='xr-var-data-in' type='checkbox'><label for='data-20a0939f-2e47-49ab-bfad-c923afb902f7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-4376e303-94a5-493c-9d38-a99d36a892a1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4376e303-94a5-493c-9d38-a99d36a892a1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4b6a3dea-f49e-4725-9f36-68c5ecf40067' class='xr-var-data-in' type='checkbox'><label for='data-4b6a3dea-f49e-4725-9f36-68c5ecf40067' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-09580313-489e-4189-82b8-7697b192f137' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-09580313-489e-4189-82b8-7697b192f137' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-19ea3b77-8679-4740-8201-5793e28d79bd' class='xr-var-data-in' type='checkbox'><label for='data-19ea3b77-8679-4740-8201-5793e28d79bd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-03b2456c-a1e8-42a1-99be-7f3d6107a398' class='xr-section-summary-in' type='checkbox'  checked><label for='section-03b2456c-a1e8-42a1-99be-7f3d6107a398' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-adef3030-4613-4dd6-86cd-ac3e8c94cf2d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-adef3030-4613-4dd6-86cd-ac3e8c94cf2d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9bdb9830-7709-49e6-82e2-f608048fd04e' class='xr-var-data-in' type='checkbox'><label for='data-9bdb9830-7709-49e6-82e2-f608048fd04e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-fb883d2f-91ba-4b34-a239-dbcd86d246d1' class='xr-section-summary-in' type='checkbox'  ><label for='section-fb883d2f-91ba-4b34-a239-dbcd86d246d1' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c2341a32-0ce5-457b-9645-1f3e56f557fa' class='xr-index-data-in' type='checkbox'/><label for='index-c2341a32-0ce5-457b-9645-1f3e56f557fa' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-ca312905-b5ad-483d-999b-9ae7be81e3c5' class='xr-index-data-in' type='checkbox'/><label for='index-ca312905-b5ad-483d-999b-9ae7be81e3c5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+       -179.99708333333334,          -179.99625, -179.99541666666667,
+       -179.99458333333334,          -179.99375, -179.99291666666667,
+       -179.99208333333334,
+       ...
+        179.99208333333334,  179.99291666666667,           179.99375,
+        179.99458333333334,  179.99541666666667,           179.99625,
+        179.99708333333334,  179.99791666666667,           179.99875,
+        179.99958333333333],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-51efaa11-93cd-409f-89eb-8d3bf1fec541' class='xr-index-data-in' type='checkbox'/><label for='index-51efaa11-93cd-409f-89eb-8d3bf1fec541' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+        89.99708333333334,           89.99625,  89.99541666666667,
+        89.99458333333334,           89.99375,  89.99291666666667,
+        89.99208333333334,
+       ...
+       -89.99208333333334, -89.99291666666667,          -89.99375,
+       -89.99458333333334, -89.99541666666667,          -89.99625,
+       -89.99708333333334, -89.99791666666667,          -89.99875,
+       -89.99958333333333],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b1a73dac-7225-46dd-b901-3c3def0d995a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b1a73dac-7225-46dd-b901-3c3def0d995a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
 </section>
 <section id="maximum-damages">
 <h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
 <p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. Here we provide a baseline set of values, but these should be updated through national consultations.</p>
+<p>Locations of healthcare facilities are (somewhat randomly) geotagged as either points or polygons. This matters quite a lot for the maximum damages. For polygons, we would use damage per square meter, whereas for points, we would estimate the damage to the entire asset at once. Here we take the approach of converting the points to polygons, and there define our maximum damages in dollar per square meter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;hospital&#39;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span> 
-        <span class="s1">&#39;clinic&#39;</span><span class="p">:</span><span class="mi">1500</span><span class="p">,</span> 
-        <span class="s1">&#39;doctors&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span> 
-        <span class="s1">&#39;pharmacy&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;clinic&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;dentist&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;laboratory&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;doctors&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;pharmacy&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+               <span class="s1">&#39;hospital&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mi">1000</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To be used in our damage assessment, we convert this to a Pandas DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1167,14 +1589,15 @@ Wall time: 27.8 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;clinic&#39;, &#39;hospital&#39;, &#39;pharmacy&#39;, &#39;doctors&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;clinic&#39;, &#39;dentist&#39;, &#39;laboratory&#39;, &#39;doctors&#39;, &#39;pharmacy&#39;,
+       &#39;hospital&#39;, &#39;alternative&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.12&#39;</span><span class="p">,</span><span class="s1">&#39;F21.12&#39;</span><span class="p">,</span><span class="s1">&#39;F21.12&#39;</span><span class="p">,</span><span class="s1">&#39;F21.12&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.3&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -1185,7 +1608,16 @@ Wall time: 27.8 s
 <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
 <span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
+<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make sure we set the index of the damage curves (the inundation depth) in the same metric as the hazard data (e.g. meters or centimeters).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 </div>
 </div>
@@ -1201,18 +1633,17 @@ Wall time: 27.8 s
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="preparing-the-data">
-<h2>3. Preparing the Data<a class="headerlink" href="#preparing-the-data" title="Permalink to this heading">#</a></h2>
-<p>Change the column name of the object data, to ensure we can use the same functions across different infrastructure assets</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;amenity&#39;</span> <span class="p">:</span> <span class="s1">&#39;object_type&#39;</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_1_states_provinces.shp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="preparing-the-data">
+<h2>3. Preparing the Data<a class="headerlink" href="#preparing-the-data" title="Permalink to this heading">#</a></h2>
 <p>Clip the hazard data to the country of interest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1233,150 +1664,112 @@ Wall time: 27.8 s
 </div>
 </div>
 </div>
-</section>
-<section id="intersecting-hazard-and-feature-informatoin">
-<h2>4. Intersecting hazard and feature informatoin<a class="headerlink" href="#intersecting-hazard-and-feature-informatoin" title="Permalink to this heading">#</a></h2>
-<p>In the next step, we have to ensure that we can run this in every country, irrespective of its size. To ensure this, we first cut the country into smaller pieces through a grid. This is done in the <strong>create_grid</strong> function below.</p>
+<p>Convert the point data to polygons. We first try to estimate an average size of each building based on each subtype.</p>
+<p>To do so, let’s first grab the polygon data and estimate their size:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_grid</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span><span class="n">height</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a vector-based grid</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        bbox ([type]): [description]</span>
-<span class="sd">        height ([type]): [description]</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        [type]: [description]</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
-
-    <span class="c1"># set xmin,ymin,xmax,and ymax of the grid</span>
-    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">(</span><span class="n">bbox</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="n">shapely</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">(</span><span class="n">bbox</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">(</span><span class="n">bbox</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span><span class="n">shapely</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">(</span><span class="n">bbox</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
-    
-    <span class="c1">#estimate total rows and columns</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="n">height</span><span class="p">))</span>
-    <span class="n">cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">height</span><span class="p">))</span>
-
-    <span class="c1"># set corner points</span>
-    <span class="n">x_left_origin</span> <span class="o">=</span> <span class="n">xmin</span>
-    <span class="n">x_right_origin</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="n">height</span>
-    <span class="n">y_top_origin</span> <span class="o">=</span> <span class="n">ymax</span>
-    <span class="n">y_bottom_origin</span> <span class="o">=</span> <span class="n">ymax</span> <span class="o">-</span> <span class="n">height</span>
-
-    <span class="c1"># create actual grid</span>
-    <span class="n">res_geoms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">countcols</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
-        <span class="n">y_top</span> <span class="o">=</span> <span class="n">y_top_origin</span>
-        <span class="n">y_bottom</span> <span class="o">=</span> <span class="n">y_bottom_origin</span>
-        <span class="k">for</span> <span class="n">countrows</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
-            <span class="n">res_geoms</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
-                <span class="p">((</span><span class="n">x_left_origin</span><span class="p">,</span> <span class="n">y_top</span><span class="p">),</span> <span class="p">(</span><span class="n">x_right_origin</span><span class="p">,</span> <span class="n">y_top</span><span class="p">),</span>
-                <span class="p">(</span><span class="n">x_right_origin</span><span class="p">,</span> <span class="n">y_bottom</span><span class="p">),</span> <span class="p">(</span><span class="n">x_left_origin</span><span class="p">,</span> <span class="n">y_bottom</span><span class="p">)</span>
-                <span class="p">)))</span>
-            <span class="n">y_top</span> <span class="o">=</span> <span class="n">y_top</span> <span class="o">-</span> <span class="n">height</span>
-            <span class="n">y_bottom</span> <span class="o">=</span> <span class="n">y_bottom</span> <span class="o">-</span> <span class="n">height</span>
-        <span class="n">x_left_origin</span> <span class="o">=</span> <span class="n">x_left_origin</span> <span class="o">+</span> <span class="n">height</span>
-        <span class="n">x_right_origin</span> <span class="o">=</span> <span class="n">x_right_origin</span> <span class="o">+</span> <span class="n">height</span>
-
-    <span class="c1"># return grid as shapely polygons</span>
-    <span class="k">return</span> <span class="n">shapely</span><span class="o">.</span><span class="n">polygons</span><span class="p">(</span><span class="n">res_geoms</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+<span class="n">polygon_features</span><span class="p">[</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="o">.</span><span class="n">area</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>For the grid, we want to specify a size of the each cell. It generally makes sense to use 1 or 0.5 degree. You can set the size in the box below. Following, we create the grid.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_cell_size</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># in degrees</span>
-
-<span class="n">gridded</span> <span class="o">=</span> <span class="n">create_grid</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">hazard_country</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">bounds</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">hazard_country</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">bounds</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">hazard_country</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">bounds</span><span class="p">()[</span><span class="mi">2</span><span class="p">],</span>
-                                      <span class="n">hazard_country</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">bounds</span><span class="p">()[</span><span class="mi">3</span><span class="p">]),</span><span class="n">grid_cell_size</span><span class="p">)</span>
-    
-<span class="c1"># get all bounds</span>
-<span class="n">all_bounds</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">gridded</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">bounds</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>And let’s have a look how this looks</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">gridded</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4f4571d5b6d6971210b335a15af8ade286da2cafa504f5dde4565157823d97fb.png" src="../_images/4f4571d5b6d6971210b335a15af8ade286da2cafa504f5dde4565157823d97fb.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>square_m2</th>
+    </tr>
+    <tr>
+      <th>object_type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>alternative</th>
+      <td>162.894836</td>
+    </tr>
+    <tr>
+      <th>clinic</th>
+      <td>340.664510</td>
+    </tr>
+    <tr>
+      <th>dentist</th>
+      <td>288.480891</td>
+    </tr>
+    <tr>
+      <th>doctors</th>
+      <td>239.060389</td>
+    </tr>
+    <tr>
+      <th>hospital</th>
+      <td>13246.523810</td>
+    </tr>
+    <tr>
+      <th>pharmacy</th>
+      <td>191.714272</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-</div>
-<p>Now we perform perform the following steps to overlay the hazard and feature data:</p>
-<ul class="simple">
-<li><p>We loop over the individual grid cells.</p></li>
-<li><p>We clip the hazard information to each individual grid cell.</p></li>
-<li><p>We clip the feature information to each individual grid cell.</p></li>
-<li><p>We reproject the hazard data to <strong>EPSG:3857</strong> so we ensure that we can overlay this with the features we will analyse, and have all the overlay in meters.</p></li>
-<li><p>We perform the overlay using the <a class="reference external" href="https://isciences.github.io/exactextract/"><em>exact_extract</em></a> function.</p></li>
-<li><p>We make sure the output of <em>extact_extract</em> will match with the index of the features.</p></li>
-<li><p>We store all the outputs in a single list, to merge with the features later.</p></li>
-</ul>
+<p>It seems we are missing some features. Let’s check which one:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a list to collect the subsets</span>
-<span class="n">collect_subsets</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1">#features to clip</span>
-<span class="n">features_to_clip</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
-
-<span class="n">collect_overlay</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># loop over all grids</span>
-<span class="k">for</span> <span class="n">bounds</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">all_bounds</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(),</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">all_bounds</span><span class="p">)):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># subset hazard</span>
-        <span class="n">subset_hazard</span> <span class="o">=</span> <span class="n">hazard_country</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip_box</span><span class="p">(</span>
-        <span class="n">minx</span><span class="o">=</span><span class="n">bounds</span><span class="o">.</span><span class="n">minx</span><span class="p">,</span>
-        <span class="n">miny</span><span class="o">=</span><span class="n">bounds</span><span class="o">.</span><span class="n">miny</span><span class="p">,</span>
-        <span class="n">maxx</span><span class="o">=</span><span class="n">bounds</span><span class="o">.</span><span class="n">maxx</span><span class="p">,</span>
-        <span class="n">maxy</span><span class="o">=</span><span class="n">bounds</span><span class="o">.</span><span class="n">maxy</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">subset_hazard</span><span class="p">[</span><span class="s1">&#39;band_data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subset_hazard</span><span class="o">.</span><span class="n">band_data</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_nodata</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
-        <span class="c1">#subset features</span>
-        <span class="n">subset_features</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features_to_clip</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">bounds</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset_features</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-        <span class="n">subset_hazard</span> <span class="o">=</span> <span class="n">subset_hazard</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">reproject</span><span class="p">(</span><span class="s2">&quot;EPSG:3857&quot;</span><span class="p">)</span>
-
-        <span class="c1"># get each unique severity of the hazard per object</span>
-        <span class="n">values_and_coverage_per_object</span> <span class="o">=</span> <span class="n">exact_extract</span><span class="p">(</span>
-            <span class="n">subset_hazard</span><span class="p">,</span> <span class="n">subset_features</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span>
-        <span class="p">)</span>
-
-        <span class="c1"># make sure we can connect the results with the features</span>
-        <span class="n">values_and_coverage_per_object</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">subset_features</span><span class="o">.</span><span class="n">index</span>
-        <span class="n">collect_overlay</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values_and_coverage_per_object</span><span class="p">)</span>
-        
-    <span class="k">except</span><span class="p">:</span>
-        <span class="k">continue</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  6.74it/s]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;laboratory&#39;]
 </pre></div>
 </div>
 </div>
 </div>
-<p>And here we merge the features with the overlay information.</p>
+<p>Now we can add this to our list. Let’s use pharmacy as the square_m2 size.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_overlaid</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_overlay</span><span class="p">),</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;laboratory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now we can use this to create polygons, using this square meters as the average size for each point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> 
+                                                                    <span class="n">shapely</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> 
+                                                                    <span class="n">distance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">object_type</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]),</span>
+                                                                    <span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1384,93 +1777,77 @@ Wall time: 27.8 s
 </section>
 <section id="performing-the-damage-assessment">
 <h2>5. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
-<p>We will apply vulnerability curves to the exposed infrastructure to estimate the damage based on the intensity of the hazard. The vulnerability curve translates hazard intensity (e.g., flood depth) into damage potential.</p>
+<p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_overlaid</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">values_and_coverage_per_object</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_get_damage_per_element</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span><span class="n">damage_curves</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">cell_area_m2</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate damage for a given asset based on hazard information.</span>
-<span class="sd">    Arguments:</span>
-<span class="sd">        *asset*: Tuple containing information about the asset. It includes:</span>
-<span class="sd">            - Index or identifier of the asset (asset[0]).</span>
-<span class="sd">            - Asset-specific information, including hazard points (asset[1][&#39;hazard_point&#39;]).</span>
-<span class="sd">        *maxdam_dict*: Maximum damage value.</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        *tuple*: A tuple containing the asset index or identifier and the calculated damage.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiPolygon&quot;</span><span class="p">):</span>
-        <span class="n">coverage</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">cell_area_m2</span>
-    <span class="k">elif</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiLineString&quot;</span><span class="p">):</span>
-        <span class="n">coverage</span> <span class="o">=</span> <span class="n">asset</span><span class="p">[</span><span class="s2">&quot;coverage&quot;</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geometry type </span><span class="si">{</span><span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="si">}</span><span class="s2"> not supported&quot;</span><span class="p">)</span>
-
-    <span class="n">fragility_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">damage_curves</span><span class="p">[</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-    <span class="n">hazard_intensity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-    
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">(</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]),</span>
-       <span class="n">hazard_intensity</span><span class="p">,</span><span class="n">fragility_values</span><span class="p">)</span><span class="o">*</span><span class="n">coverage</span><span class="o">*</span><span class="n">maxdam_dict</span><span class="p">[</span><span class="n">asset</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]])</span>
-   
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tqdm</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
-<span class="n">features_overlaid</span><span class="p">[</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features_overlaid</span><span class="o">.</span><span class="n">progress_apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">asset</span> <span class="p">:</span> 
-                                                     <span class="n">_get_damage_per_element</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span>
-                                                    <span class="n">damage_curves</span><span class="p">,</span><span class="n">maxdam_dict</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00&lt;?, ?it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.68it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 9/9 [00:00&lt;?, ?it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████████████| 9/9 [00:00&lt;00:00, 688.73it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 469 ms
+Wall time: 2.2 s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-the-results">
+<h2>5. Save the Results<a class="headerlink" href="#save-the-results" title="Permalink to this heading">#</a></h2>
+<p>For further analysis, we can save the results in their full detail, or save summary estimates per subnational unit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
+<span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Healthcare_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_country</span> <span class="o">=</span> <span class="n">admin1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">admin1</span><span class="o">.</span><span class="n">sov_a3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span> <span class="o">=</span> <span class="n">damage_results</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">admin1_country</span><span class="p">[[</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">damage_results</span><span class="p">[[</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name_right&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                                     <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span>
+                                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="visualizing-the-results">
-<h2>5. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
+<h2>6. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
 <p>The results of the damage assessment can be visualized using charts and maps. This will provide a clear representation of which infrastructure is most affected by the hazard and the expected damage levels.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span> <span class="o">=</span> <span class="n">features_overlaid</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features_overlaid</span><span class="o">.</span><span class="n">damage</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Find the locations of the twenty most damaged hospitals.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="n">subset</span> <span class="o">=</span> <span class="n">damage_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;damage&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">subset</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">centroid</span>
-<span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">features</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">world_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">SOV_A3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\eks510\AppData\Local\Temp\ipykernel_4652\2039463634.py:5: UserWarning: The GeoDataFrame you are attempting to plot is empty. Nothing has been displayed.
-  subset.plot(ax=ax,column=&#39;object_type&#39;,markersize=10,legend=True)
-</pre></div>
-</div>
-<img alt="../_images/39e7746966a884c80ca156bb086327b9cb1a2cbea01bbc58e2a4ecd1cedf26d8.png" src="../_images/39e7746966a884c80ca156bb086327b9cb1a2cbea01bbc58e2a4ecd1cedf26d8.png" />
-</div>
-</div>
 <p>And create a distribution of the damages.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1484,17 +1861,17 @@ Wall time: 27.8 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/820eb95d02beab228c792f36aa6bf6edbf0556e817945d8b69aecf8ae6eed8d1.png" src="../_images/820eb95d02beab228c792f36aa6bf6edbf0556e817945d8b69aecf8ae6eed8d1.png" />
+<img alt="../_images/89fa40bca4f53b7fa19b2d0c8642ced4d09683b53d3109fe666d9d9a5c0b0f04.png" src="../_images/89fa40bca4f53b7fa19b2d0c8642ced4d09683b53d3109fe666d9d9a5c0b0f04.png" />
 </div>
 </div>
-<p>Plot all damages</p>
+<p>Plot location of most damaged healthcare facilities</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-<span class="n">damage_results</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;damage&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                   <span class="n">legend_kwds</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shrink&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">:</span><span class="s1">&#39;Absolute Damage&#39;</span><span class="p">},</span><span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">features</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">damage_results</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;damage&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">centroid</span>
+<span class="n">subset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">world_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">SOV_A3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
@@ -1502,12 +1879,17 @@ Wall time: 27.8 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\eks510\AppData\Local\Temp\ipykernel_4652\86582804.py:3: UserWarning: The GeoDataFrame you are attempting to plot is empty. Nothing has been displayed.
-  damage_results.plot(ax=ax,column=&#39;damage&#39;,cmap=&#39;Reds&#39;,legend=True,
+<img alt="../_images/005c37ed562a4a728887196fe14aa7bb1f9e6703aaca40094d70d54aa2023964.png" src="../_images/005c37ed562a4a728887196fe14aa7bb1f9e6703aaca40094d70d54aa2023964.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/39e7746966a884c80ca156bb086327b9cb1a2cbea01bbc58e2a4ecd1cedf26d8.png" src="../_images/39e7746966a884c80ca156bb086327b9cb1a2cbea01bbc58e2a4ecd1cedf26d8.png" />
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ad79a5f2cc834d8c95dfc96ac8da9e67", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 </section>
@@ -1543,12 +1925,12 @@ Wall time: 27.8 s
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="transport.html"
+       href="telecom.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Transportation Infrastructure</p>
+        <p class="prev-next-title">Telecommunication Infrastructure</p>
       </div>
     </a>
     <a class="right-next"
@@ -1588,9 +1970,9 @@ Wall time: 27.8 s
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersecting-hazard-and-feature-informatoin">4. Intersecting hazard and feature informatoin</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>
   </nav></div>
 

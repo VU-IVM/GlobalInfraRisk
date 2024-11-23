@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Education Infrastructure &#8212; Global Infrastructure Risk Assesments</title>
+    <title>Power Infrastructure &#8212; Global Infrastructure Risk Assesments</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ci/education';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ci/power';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Floods" href="../hazard/flood.html" />
-    <link rel="prev" title="Healthcare Infrastructure" href="healthcare.html" />
+    <link rel="next" title="Telecommunication Infrastructure" href="telecom.html" />
+    <link rel="prev" title="Transportation Infrastructure" href="transport.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,10 +179,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="transport.html">Transportation Infrastructure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="power.html">Power Infrastructure</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Power Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="telecom.html">Telecommunication Infrastructure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="healthcare.html">Healthcare Infrastructure</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Education Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="education.html">Education Infrastructure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
@@ -248,7 +248,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/VU-IVM/GlobalInfraRisk/blob/main/ci/education.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/VU-IVM/GlobalInfraRisk/blob/main/ci/power.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fci/education.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fci/power.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +326,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/ci/education.ipynb" target="_blank"
+      <li><a href="../_sources/ci/power.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -410,7 +410,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Education Infrastructure</h1>
+    <h1>Power Infrastructure</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,11 +432,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-the-point-data-to-polygons">Convert the point data to polygons.</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">7. Performing the Risk Assessment</a></li>
 </ul>
             </nav>
         </div>
@@ -448,21 +450,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="education-infrastructure">
-<h1>Education Infrastructure<a class="headerlink" href="#education-infrastructure" title="Permalink to this heading">#</a></h1>
-<p>In this notebook, we will perform a <strong>damage and risk assessment</strong> for education infrastructure. The assessment is based on combining hazard data (e.g., flood depths) with vulnerability curves to estimate the potential damage to infrastructure.</p>
+  <section id="power-infrastructure">
+<h1>Power Infrastructure<a class="headerlink" href="#power-infrastructure" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we will perform a <strong>damage and risk assessment</strong> for power infrastructure. The assessment is based on combining hazard data (e.g., flood depths) with vulnerability curves to estimate the potential damage to infrastructure.</p>
 <p>We will follow the steps outlined below to conduct the assessment:</p>
 <ol class="arabic simple">
 <li><p><strong>Loading the necessary packages:</strong><br />
 We will import the Python libraries required for data handling, analysis, and visualization.</p></li>
 <li><p><strong>Loading the data:</strong><br />
-The infrastructure data (e.g., secondary schools) and hazard data (e.g., flood depths) will be loaded into the notebook.</p></li>
+The infrastructure data (e.g., substations) and hazard data (e.g., flood depths) will be loaded into the notebook.</p></li>
 <li><p><strong>Preparing the data:</strong><br />
 The infrastructure and hazard data will be processed and data gaps can be filled, if required.</p></li>
 <li><p><strong>Performing the damage assessment:</strong><br />
 We will apply vulnerability curves to estimate the potential damage based on the intensity of the hazard.</p></li>
 <li><p><strong>Visualizing the results:</strong><br />
-Finally, we will visualize the estimated damage using graphs and maps to illustrate the impact on education infrastructure.</p></li>
+Finally, we will visualize the estimated damage using graphs and maps to illustrate the impact on healthcare infrastructure.</p></li>
 </ol>
 <section id="loading-the-necessary-packages">
 <h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
@@ -503,16 +505,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">from</span> <span class="nn">exactextract</span> <span class="kn">import</span> <span class="n">exact_extract</span>
 <span class="kn">from</span> <span class="nn">damagescanner.core</span> <span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span> <span class="nn">damagescanner.osm</span> <span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span> <span class="nn">damagescanner.base_values</span> <span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
-
 <span class="kn">from</span> <span class="nn">lonboard</span> <span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The history saving thread hit an unexpected error (OperationalError(&#39;database is locked&#39;)).History will not be written to the database.
 </pre></div>
 </div>
 </div>
@@ -557,13 +552,13 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="s1">&#39;education&#39;</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="s1">&#39;power&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 25.2 s
-Wall time: 36.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.6 s
+Wall time: 39.3 s
 </pre></div>
 </div>
 </div>
@@ -582,8 +577,8 @@ Wall time: 36.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;community_centre&#39;, &#39;school&#39;, &#39;kindergarten&#39;, &#39;university&#39;,
-       &#39;college&#39;, &#39;library&#39;], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;tower&#39;, &#39;pole&#39;, &#39;portal&#39;, &#39;generator&#39;, &#39;transformer&#39;, &#39;plant&#39;,
+       &#39;substation&#39;, &#39;line&#39;, &#39;minor_line&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
@@ -596,7 +591,7 @@ Wall time: 36.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "21cd7aa218584bd086cbd272de8d13d5", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "27aa7c509b834b1b8dc15d0ed958c7f8", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -988,9 +983,9 @@ Coordinates:
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
     spatial_ref  int32 4B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-58aab8ab-b82d-4e81-809c-a96dea9f1117' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-58aab8ab-b82d-4e81-809c-a96dea9f1117' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-d29ed5b2-c3bf-465b-aa68-cfa205194a45' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d29ed5b2-c3bf-465b-aa68-cfa205194a45' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-0d5cff6d-cd11-4040-8dff-c56548e95f20' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0d5cff6d-cd11-4040-8dff-c56548e95f20' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc281a5c-5f85-4aae-9467-5def04c06ead' class='xr-var-data-in' type='checkbox'><label for='data-fc281a5c-5f85-4aae-9467-5def04c06ead' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-056f3b3f-cf83-4c1c-ab8e-e45777f10f68' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-056f3b3f-cf83-4c1c-ab8e-e45777f10f68' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dad34e3f-7dba-4569-82a5-a85fcb8dff43' class='xr-var-data-in' type='checkbox'><label for='data-dad34e3f-7dba-4569-82a5-a85fcb8dff43' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-86e72ce7-a97a-41ed-9249-b74809044d4f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-86e72ce7-a97a-41ed-9249-b74809044d4f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-95f6af08-66fb-4eed-a492-f00d3535ae49' class='xr-var-data-in' type='checkbox'><label for='data-95f6af08-66fb-4eed-a492-f00d3535ae49' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-8331ff6c-afe8-48bc-8a34-72fe7f4d3fff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8331ff6c-afe8-48bc-8a34-72fe7f4d3fff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e066dc49-1eb5-4b05-ad99-7963a91f319c' class='xr-var-data-in' type='checkbox'><label for='data-e066dc49-1eb5-4b05-ad99-7963a91f319c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-62b1e9d6-baab-4921-90e7-52324c4709c7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-62b1e9d6-baab-4921-90e7-52324c4709c7' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-33ee9c58-c876-4d81-b36b-8b735697b485' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-33ee9c58-c876-4d81-b36b-8b735697b485' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-247f8931-1250-4d53-bf60-5dbec06babe5' class='xr-var-data-in' type='checkbox'><label for='data-247f8931-1250-4d53-bf60-5dbec06babe5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-26ab0a5b-09b1-44bb-9ba9-e514c970fb5d' class='xr-section-summary-in' type='checkbox'  ><label for='section-26ab0a5b-09b1-44bb-9ba9-e514c970fb5d' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-75466b34-28e3-4075-b273-502290ab3425' class='xr-index-data-in' type='checkbox'/><label for='index-75466b34-28e3-4075-b273-502290ab3425' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-aeaa1485-d869-47c4-9770-72c161b50a0a' class='xr-index-data-in' type='checkbox'/><label for='index-aeaa1485-d869-47c4-9770-72c161b50a0a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-fe15fce6-790a-4a7e-ab7e-6bd86c88b300' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fe15fce6-790a-4a7e-ab7e-6bd86c88b300' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6ed68264-213b-4395-aa9c-8af722293baf' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6ed68264-213b-4395-aa9c-8af722293baf' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-dd826317-3a87-4172-9370-9a1ed2e1f45c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-dd826317-3a87-4172-9370-9a1ed2e1f45c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-90920ef3-9a29-428c-a2d4-bf5d89a1ce8b' class='xr-var-data-in' type='checkbox'><label for='data-90920ef3-9a29-428c-a2d4-bf5d89a1ce8b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-e189f438-57e3-46e1-8944-3b3433664f5a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e189f438-57e3-46e1-8944-3b3433664f5a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7359edcc-fbaf-4237-a893-c23c4facac7c' class='xr-var-data-in' type='checkbox'><label for='data-7359edcc-fbaf-4237-a893-c23c4facac7c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-9b4152a0-3cbd-4222-8298-baef8bc1a70d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9b4152a0-3cbd-4222-8298-baef8bc1a70d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-46f344db-d84c-4afd-b605-64ecdd666fd5' class='xr-var-data-in' type='checkbox'><label for='data-46f344db-d84c-4afd-b605-64ecdd666fd5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-534592f1-5d38-484b-833c-15c7ace34ea4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-534592f1-5d38-484b-833c-15c7ace34ea4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e317606f-67a9-4397-b9b0-f9d5639d621b' class='xr-var-data-in' type='checkbox'><label for='data-e317606f-67a9-4397-b9b0-f9d5639d621b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3b3d268f-96e1-45a6-9a70-0c792e02f332' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3b3d268f-96e1-45a6-9a70-0c792e02f332' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e3b88488-ad6f-43e4-9bd1-7d74e2242002' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e3b88488-ad6f-43e4-9bd1-7d74e2242002' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5d0acfb1-857a-4b73-a33f-3181a31883ca' class='xr-var-data-in' type='checkbox'><label for='data-5d0acfb1-857a-4b73-a33f-3181a31883ca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e29d3721-2cfd-4461-8211-dbe9d325d10a' class='xr-section-summary-in' type='checkbox'  ><label for='section-e29d3721-2cfd-4461-8211-dbe9d325d10a' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-121dde51-4bcf-4252-8192-a4c7443d74fc' class='xr-index-data-in' type='checkbox'/><label for='index-121dde51-4bcf-4252-8192-a4c7443d74fc' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-04df6365-1002-4ea7-a591-6bd790dd7cfa' class='xr-index-data-in' type='checkbox'/><label for='index-04df6365-1002-4ea7-a591-6bd790dd7cfa' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
        -179.99708333333334,          -179.99625, -179.99541666666667,
        -179.99458333333334,          -179.99375, -179.99291666666667,
        -179.99208333333334,
@@ -999,7 +994,7 @@ Data variables:
         179.99458333333334,  179.99541666666667,           179.99625,
         179.99708333333334,  179.99791666666667,           179.99875,
         179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-31096410-1984-4e43-bece-a593fed0972d' class='xr-index-data-in' type='checkbox'/><label for='index-31096410-1984-4e43-bece-a593fed0972d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-bc47ee79-4b80-42fc-b426-d5ef03b59135' class='xr-index-data-in' type='checkbox'/><label for='index-bc47ee79-4b80-42fc-b426-d5ef03b59135' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
         89.99708333333334,           89.99625,  89.99541666666667,
         89.99458333333334,           89.99375,  89.99291666666667,
         89.99208333333334,
@@ -1008,22 +1003,26 @@ Data variables:
        -89.99458333333334, -89.99541666666667,          -89.99625,
        -89.99708333333334, -89.99791666666667,          -89.99875,
        -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-62c4f99f-bf95-4db4-af7e-9d03ac90e2f1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-62c4f99f-bf95-4db4-af7e-9d03ac90e2f1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-bc6a534e-2a48-4818-bff7-ee7867bc4b0c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bc6a534e-2a48-4818-bff7-ee7867bc4b0c' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
 <h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
 <p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. Here we provide a baseline set of values, but these should be updated through national consultations.</p>
-<p>Locations of education facilities are (somewhat randomly) geotagged as either points or polygons. This matters quite a lot for the maximum damages. For polygons, we would use damage per square meter, whereas for points, we would estimate the damage to the entire asset at once. Here we take the approach of converting the points to polygons, and there define our maximum damages in dollar per square meter.</p>
+<p>Locations of substations (or power plants) are (somewhat randomly) geotagged as either points or polygons. This matters quite a lot for the maximum damages. For polygons, we would use damage per square meter, whereas for points, we would estimate the damage to the entire asset at once. Here we take the approach of converting the points to polygons, and there define our maximum damages in dollar per square meter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;community_centre&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;school&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;kindergarten&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;university&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;college&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-               <span class="s1">&#39;library&#39;</span> <span class="p">:</span> <span class="mi">1000</span>
-              <span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tower&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;pole&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;portal&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;generator&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;transformer&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;plant&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;substation&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>  
+    <span class="s1">&#39;line&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+    <span class="s1">&#39;minor_line&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+     <span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1044,7 +1043,7 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.0.0.xlsx?download=1&quot;</span>
-<span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1159,27 +1158,27 @@ Data variables:
     <tr>
       <th>F7.1</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.2</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.2a (lower boundary)</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.2b (upper boundary)</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.3</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.4</th>
@@ -1214,22 +1213,22 @@ Data variables:
     <tr>
       <th>F7.10</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.11</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.12</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F7.13</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.1</th>
@@ -1244,37 +1243,37 @@ Data variables:
     <tr>
       <th>F8.3</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.4</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.5</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.6</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.6a (lower boundary)</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.6b (upper boundary)</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.7</th>
       <td>Railways</td>
-      <td>Railways</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F8.8</th>
@@ -1284,17 +1283,17 @@ Data variables:
     <tr>
       <th>F9.1</th>
       <td>Airports</td>
-      <td>Airports</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F9.2</th>
       <td>Airports</td>
-      <td>Airports</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F9.3</th>
       <td>Airports</td>
-      <td>Airports</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F10.1</th>
@@ -1459,7 +1458,7 @@ Data variables:
     <tr>
       <th>F18.6</th>
       <td>Wastewater treatment plant</td>
-      <td>Wastewater treatment plant</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F19.1</th>
@@ -1584,17 +1583,17 @@ Data variables:
     <tr>
       <th>F21.11</th>
       <td>School buildings</td>
-      <td>School buildings</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F21.12</th>
       <td>Health buildings</td>
-      <td>Health buildings</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>F21.13</th>
       <td>Education buildings</td>
-      <td>Education buildings</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -1608,15 +1607,15 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;community_centre&#39;, &#39;school&#39;, &#39;kindergarten&#39;, &#39;university&#39;,
-       &#39;college&#39;, &#39;library&#39;], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;tower&#39;, &#39;pole&#39;, &#39;portal&#39;, &#39;generator&#39;, &#39;transformer&#39;, &#39;plant&#39;,
+       &#39;substation&#39;, &#39;line&#39;, &#39;minor_line&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.7&#39;</span><span class="p">,</span><span class="s1">&#39;F21.7&#39;</span><span class="p">,</span><span class="s1">&#39;F21.7&#39;</span><span class="p">,</span><span class="s1">&#39;F21.7&#39;</span><span class="p">,</span><span class="s1">&#39;F21.7&#39;</span><span class="p">,</span><span class="s1">&#39;F21.7&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F10.1&#39;</span><span class="p">,</span><span class="s1">&#39;F6.1&#39;</span><span class="p">,</span><span class="s1">&#39;F2.1&#39;</span><span class="p">,</span><span class="s1">&#39;F2.3&#39;</span><span class="p">,</span><span class="s1">&#39;F2.2&#39;</span><span class="p">,</span><span class="s1">&#39;F1.2&#39;</span><span class="p">,</span><span class="s1">&#39;F2.2&#39;</span><span class="p">,</span><span class="s1">&#39;F6.1&#39;</span><span class="p">,</span><span class="s1">&#39;F6.1&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -1637,32 +1636,6 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>But in some cases, we do not exactly know which curves we may want to use. As such, we can also run the analysis with all curves. To do so, we select all education-related curves from Nirandjan et al. (2024)’s database.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_curves</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">xs</span> <span class="ow">in</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And create a dictionary that contains a pandas DataFrame for all object types, for each vulnerability curve.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multi_curves</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">unique_curve</span> <span class="ow">in</span> <span class="n">unique_curves</span><span class="p">:</span>
-
-    <span class="n">curve_creation</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    
-    <span class="n">get_curve_values</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[</span><span class="n">unique_curve</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    
-    <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="n">curve_creation</span><span class="p">:</span>
-        <span class="n">curve_creation</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">curve</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_curve_values</span>
-
-    <span class="n">multi_curves</span><span class="p">[</span><span class="n">unique_curve</span><span class="p">]</span> <span class="o">=</span> <span class="n">curve_creation</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1709,7 +1682,10 @@ Data variables:
 </div>
 </div>
 </div>
-<p>Convert the point data to polygons. We first try to estimate an average size of each building based on each subtype.</p>
+<section id="convert-the-point-data-to-polygons">
+<h3>Convert the point data to polygons.<a class="headerlink" href="#convert-the-point-data-to-polygons" title="Permalink to this heading">#</a></h3>
+<p>For some data, there are both points and polygons available. It makes life easier to estimate the damage using polygons. Therefore, we convert those points to Polygons below.</p>
+<p>We first try to estimate an average size of each building based on each subtype.</p>
 <p>To do so, let’s first grab the polygon data and estimate their size:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1726,30 +1702,19 @@ Data variables:
 </div>
 </div>
 </div>
-<p>It seems we are missing some features. Let’s check which one:</p>
-<p>Now we can add this to our list. Let’s use pharmacy as the square_m2 size.</p>
+<p>In some countries, substations are stored as linestrings. We convert them to polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;community_centre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;library&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And now we can use this to create polygons, using this square meters as the average size for each point.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> 
-                                                                    <span class="n">shapely</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> 
-                                                                    <span class="n">distance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">object_type</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]),</span>
-                                                                    <span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="s1">&#39;substation&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="s1">&#39;substation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">polygonize</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+</section>
 <section id="performing-the-damage-assessment">
 <h2>5. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
-<p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment. We will first perform this using only a single damage curve.</p>
+<p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
@@ -1758,46 +1723,13 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.86it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5186.03it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4332.27it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 16.59it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 88/88 [00:00&lt;00:00, 3328.72it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 88/88 [00:00&lt;00:00, 6576.02it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.56 s
-Wall time: 3.64 s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And run this also with the range of vulnerability curves.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">all_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">multi_curves</span><span class="o">=</span><span class="n">multi_curves</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  3.52it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6159.04it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6488.10it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5678.01it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6497.37it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4620.06it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4245.91it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6509.78it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.84 s
-Wall time: 2.95 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 453 ms
+Wall time: 1.12 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1813,7 +1745,7 @@ Wall time: 2.95 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Education_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1834,9 +1766,9 @@ Wall time: 2.95 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">damage_results</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">damage_results</span><span class="p">[[</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name_right&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
                                      <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
-                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span>
                                      <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
@@ -1844,7 +1776,7 @@ Wall time: 2.95 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Eduation_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1866,7 +1798,7 @@ Wall time: 2.95 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/66a13c3230acc77ce4feb826c2def7ca83e09a89a5a859debce3076acca97045.png" src="../_images/66a13c3230acc77ce4feb826c2def7ca83e09a89a5a859debce3076acca97045.png" />
+<img alt="../_images/4b36b7a6a4e7a90e659218fcdd3343a9b25664413b23d0fb8da86145efde378f.png" src="../_images/4b36b7a6a4e7a90e659218fcdd3343a9b25664413b23d0fb8da86145efde378f.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1884,108 +1816,7 @@ Wall time: 2.95 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d349acf192802b46330461c34b50adebddeb28e5ab21b591f78979adbcbb08d8.png" src="../_images/d349acf192802b46330461c34b50adebddeb28e5ab21b591f78979adbcbb08d8.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d039f679acf54bda91539bf10950fe9d", "version_major": 2, "version_minor": 1}</script></div>
-</div>
-</section>
-<section id="performing-the-risk-assessment">
-<h2>7. Performing the Risk Assessment<a class="headerlink" href="#performing-the-risk-assessment" title="Permalink to this heading">#</a></h2>
-<p>To do so, we need to select the return periods we want to include, and create a dictioniary as input. We will create this below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">return_periods</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span> 
-
-<span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">return_period</span> <span class="ow">in</span> <span class="n">return_periods</span><span class="p">:</span>
-    <span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s2">glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
-
-    <span class="n">hazard_dict</span><span class="p">[</span><span class="n">return_period</span><span class="p">]</span> <span class="o">=</span> <span class="n">hazard_map</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip_box</span><span class="p">(</span><span class="n">minx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                     <span class="n">miny</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                     <span class="n">maxx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                     <span class="n">maxy</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="p">)</span>
-    
-</pre></div>
-</div>
-</div>
-</div>
-<p>And below we will run a multi-curve risk assessment.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">risk_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span><span class="n">multi_curves</span><span class="o">=</span><span class="n">multi_curves</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_risks</span> <span class="o">=</span> <span class="n">risk_results</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">multi_curves</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Re-attempting with explicit assignment of the boxplot object</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-<span class="c1"># Creating the boxplot explicitly to access its elements</span>
-<span class="n">boxplot</span> <span class="o">=</span> <span class="n">grouped_risks</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;kindergarten&#39;</span><span class="p">,</span> <span class="s1">&#39;library&#39;</span><span class="p">,</span> <span class="s1">&#39;school&#39;</span><span class="p">],</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dict&#39;</span><span class="p">)</span>
-
-<span class="c1"># Customizing box colors and ensuring all lines have the same color</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#ccd5ae&#39;</span><span class="p">,</span> <span class="s1">&#39;#e9edc9&#39;</span><span class="p">,</span> <span class="s1">&#39;#faedcd&#39;</span><span class="p">]</span>
-<span class="n">line_color</span> <span class="o">=</span> <span class="s1">&#39;#333333&#39;</span>  <span class="c1"># Uniform line color for all components</span>
-
-<span class="c1"># Customizing boxes</span>
-<span class="k">for</span> <span class="n">box</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">boxplot</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">colors</span><span class="p">):</span>  <span class="c1"># Accessing box artists</span>
-    <span class="n">box</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">box</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-    <span class="n">box</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-
-<span class="c1"># Customizing whiskers, caps, medians, and fliers</span>
-<span class="k">for</span> <span class="n">whisker</span> <span class="ow">in</span> <span class="n">boxplot</span><span class="p">[</span><span class="s1">&#39;whiskers&#39;</span><span class="p">]:</span>
-    <span class="n">whisker</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-    <span class="n">whisker</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">cap</span> <span class="ow">in</span> <span class="n">boxplot</span><span class="p">[</span><span class="s1">&#39;caps&#39;</span><span class="p">]:</span>
-    <span class="n">cap</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-    <span class="n">cap</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">median</span> <span class="ow">in</span> <span class="n">boxplot</span><span class="p">[</span><span class="s1">&#39;medians&#39;</span><span class="p">]:</span>
-    <span class="n">median</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-    <span class="n">median</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">flier</span> <span class="ow">in</span> <span class="n">boxplot</span><span class="p">[</span><span class="s1">&#39;fliers&#39;</span><span class="p">]:</span>
-    <span class="n">flier</span><span class="o">.</span><span class="n">set_markerfacecolor</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-    <span class="n">flier</span><span class="o">.</span><span class="n">set_markeredgecolor</span><span class="p">(</span><span class="n">line_color</span><span class="p">)</span>
-
-<span class="c1"># Adding titles and labels</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expected Annual Damage per object type&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Total EAD (Log Scale)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Object Types&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Using log scale for better visualization of large range</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Adding gridlines for better readability</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-
-<span class="c1"># Display the boxplot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1940383cb312da5fa8feb198a159334af056e3d46622e3dccc5d34f1549919ad.png" src="../_images/1940383cb312da5fa8feb198a159334af056e3d46622e3dccc5d34f1549919ad.png" />
+<img alt="../_images/6c567e0fd0cdcbb05501e29036f9642cde6f835c5c63814c64d89a4fc054a44f.png" src="../_images/6c567e0fd0cdcbb05501e29036f9642cde6f835c5c63814c64d89a4fc054a44f.png" />
 </div>
 </div>
 </section>
@@ -2022,20 +1853,20 @@ Wall time: 2.95 s
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="healthcare.html"
+       href="transport.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Healthcare Infrastructure</p>
+        <p class="prev-next-title">Transportation Infrastructure</p>
       </div>
     </a>
     <a class="right-next"
-       href="../hazard/flood.html"
+       href="telecom.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Floods</p>
+        <p class="prev-next-title">Telecommunication Infrastructure</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2066,11 +1897,13 @@ Wall time: 2.95 s
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-the-point-data-to-polygons">Convert the point data to polygons.</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">7. Performing the Risk Assessment</a></li>
 </ul>
   </nav></div>
 
