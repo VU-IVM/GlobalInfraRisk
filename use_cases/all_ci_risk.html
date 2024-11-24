@@ -1,0 +1,1430 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Country-level risk assessment &#8212; Global Infrastructure Risk Assesments</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'use_cases/all_ci_risk';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/IVM_logo_kort.jpg" class="logo__image only-light" alt="Global Infrastructure Risk Assesments - Home"/>
+    <script>document.write(`<img src="../_static/IVM_logo_kort.jpg" class="logo__image only-dark" alt="Global Infrastructure Risk Assesments - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ci/transport.html">Transportation Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/power.html">Power Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/telecom.html">Telecommunication Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/healthcare.html">Healthcare Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/education.html">Education Infrastructure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Floods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquakes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="all_ci_exposure.html">Country-level exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/VU-IVM/GlobalInfraRisk/blob/main/use_cases/all_ci_risk.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fuse_cases/all_ci_risk.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/use_cases/all_ci_risk.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Country-level risk assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-results">5. Visualising the results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="country-level-risk-assessment">
+<h1>Country-level risk assessment<a class="headerlink" href="#country-level-risk-assessment" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we will perform a <strong>risk assessmente</strong> for all available CI data within a country. The assessment is based on combining hazard data (e.g., flood depths) with OpenStreetMap feature data.</p>
+<p>We will follow the steps outlined below to conduct the assessment:</p>
+<ol class="arabic simple">
+<li><p><strong>Loading the necessary packages:</strong><br />
+We will import the Python libraries required for data handling, analysis, and visualization.</p></li>
+<li><p><strong>Loading the data:</strong><br />
+The infrastructure data (e.g., roads) and hazard data (e.g., flood depths) will be loaded into the notebook.</p></li>
+<li><p><strong>Preparing the data:</strong><br />
+The infrastructure and hazard data will be processed and data gaps can be filled, if required.</p></li>
+<li><p><strong>Performing the risk assessment:</strong><br />
+We will overlay the hazard data with the feature information.</p></li>
+<li><p><strong>Visualizing the results:</strong><br />
+Finally, we will visualize the estimated exposure using graphs and maps.</p></li>
+</ol>
+<section id="loading-the-necessary-packages">
+<h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
+<p>To perform the assessment, we are going to make use of several <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">python packages</a>.</p>
+<p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b4</span>
+<span class="c1">#!pip install contextily</span>
+<span class="c1">#!pip install exactextract</span>
+<span class="c1">#!pip install osm-flex</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">import</span> <span class="nn">shapely</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">cx</span>
+
+<span class="kn">from</span> <span class="nn">osm_flex</span> <span class="kn">import</span> <span class="n">download</span>
+<span class="kn">from</span> <span class="nn">exactextract</span> <span class="kn">import</span> <span class="n">exact_extract</span>
+<span class="kn">from</span> <span class="nn">damagescanner.core</span> <span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span> <span class="nn">damagescanner.base_values</span> <span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="specify-the-country-of-interest">
+<h3>Specify the country of interest<a class="headerlink" href="#specify-the-country-of-interest" title="Permalink to this heading">#</a></h3>
+<p>Before we continue, we should specify the country for which we want to assess the damage. We use the ISO3 code for the country to download the OpenStreetMap data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_full_name</span> <span class="o">=</span> <span class="s1">&#39;Belize&#39;</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s1">&#39;BLZ&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="loading-the-data">
+<h2>2. Loading the Data<a class="headerlink" href="#loading-the-data" title="Permalink to this heading">#</a></h2>
+<p>In this step, we will prepare and load two key datasets:</p>
+<ol class="arabic simple">
+<li><p><strong>Infrastructure data:</strong><br />
+This dataset contains information on the location and type of infrastructure (e.g., roads). Each asset may have attributes such as type, length, and replacement cost.</p></li>
+<li><p><strong>Hazard data:</strong><br />
+This dataset includes information on the hazard affecting the infrastructure (e.g., flood depth at various locations).</p></li>
+</ol>
+<section id="infrastructure-data">
+<h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
+<p>We will perform this example analysis for Jamaica. To start the analysis, we first download the OpenStreetMap data from GeoFabrik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">infrastructure_path</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will not load the data directly, we will let the code itself read the information. It is important, however, to specificy which infrastructure systems you want to include. We do so in the list below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset_types</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;roads&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rail&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;air&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;telecom&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;water_supply&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;waste_solid&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;healthcare&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;power&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wastewater&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vulnerability-data">
+<h3>Vulnerability data<a class="headerlink" href="#vulnerability-data" title="Permalink to this heading">#</a></h3>
+<p>We will collect all the vulnerability curves for each of the asset types. Important to note is that national or local-scale analysis requires a thorough check which curves can and should be used!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.0.0.xlsx?download=1&quot;</span>
+
+<span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves_all_ci</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">ci_type</span> <span class="ow">in</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span><span class="p">:</span>
+
+    <span class="n">ci_system</span> <span class="o">=</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span><span class="p">[</span><span class="n">ci_type</span><span class="p">]</span>
+    
+    <span class="n">selected_curves</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">subtype</span> <span class="ow">in</span> <span class="n">ci_system</span><span class="p">:</span>
+        <span class="n">selected_curves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ci_system</span><span class="p">[</span><span class="n">subtype</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">selected_curves</span><span class="p">]</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ci_system</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Make sure we set the index of the damage curves (the inundation depth) in the same metric as the hazard data (e.g. meters or centimeters).</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span>
+
+    <span class="n">damage_curves_all_ci</span><span class="p">[</span><span class="n">ci_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">damage_curves</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-damages">
+<h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
+<p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. As such, we sometimes may want to run the analysis without already multiplying the results with those costs. To do so, we simply set all the maximum damage values to 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MAXDAM_DICT</span> <span class="o">=</span> <span class="p">{</span>
+    
+    <span class="s2">&quot;roads&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;motorway&quot;</span> <span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;motorway_link&quot;</span> <span class="p">:</span>  <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;trunk&quot;</span> <span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;trunk_link&quot;</span> <span class="p">:</span>  <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;primary&quot;</span> <span class="p">:</span>  <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;primary_link&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                <span class="s2">&quot;secondary&quot;</span> <span class="p">:</span> <span class="mi">1300</span><span class="p">,</span>
+                <span class="s2">&quot;secondary_link&quot;</span> <span class="p">:</span>  <span class="mi">1300</span><span class="p">,</span>
+                <span class="s2">&quot;tertiary&quot;</span> <span class="p">:</span>  <span class="mi">700</span><span class="p">,</span>
+                <span class="s2">&quot;tertiary_link&quot;</span> <span class="p">:</span> <span class="mi">700</span><span class="p">,</span>
+                <span class="s2">&quot;residential&quot;</span> <span class="p">:</span>  <span class="mi">300</span><span class="p">,</span>
+                <span class="s2">&quot;road&quot;</span> <span class="p">:</span>  <span class="mi">300</span><span class="p">,</span>
+                <span class="s2">&quot;unclassified&quot;</span> <span class="p">:</span>  <span class="mi">300</span><span class="p">,</span>
+                <span class="s2">&quot;track&quot;</span> <span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+                <span class="s2">&quot;service&quot;</span> <span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+    
+        <span class="p">},</span>
+
+    <span class="s2">&quot;rail&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;rail&#39;</span> <span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="s2">&quot;air&quot;</span><span class="p">:</span> <span class="p">{</span> 
+        <span class="s2">&quot;aerodrome&quot;</span> <span class="p">:</span> <span class="mi">850</span><span class="p">,</span>
+        <span class="s2">&quot;terminal&quot;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s2">&quot;runway&quot;</span> <span class="p">:</span> <span class="mi">700</span><span class="p">,},</span>
+
+    <span class="s2">&quot;telecom&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># curves beschikbaar voor overstromingen</span>
+        <span class="s2">&quot;mast&quot;</span> <span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit</span>
+        <span class="s2">&quot;communications_tower&quot;</span> <span class="p">:</span><span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+        <span class="p">},</span>
+
+    <span class="s2">&quot;water_supply&quot;</span><span class="p">:</span> <span class="p">{</span> 
+                <span class="s2">&quot;water_works&quot;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1"># m2,</span>
+                <span class="s2">&quot;water_well&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1"># m2,</span>
+                <span class="s2">&quot;water_tower&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+                <span class="s2">&quot;reservoir_covered&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;storage_tank&quot;</span><span class="p">:</span> <span class="mi">25000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+        <span class="p">},</span>
+
+    <span class="s2">&quot;waste_solid&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;waste_transfer_station&quot;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1"># m2,</span>
+            <span class="p">},</span>
+
+    <span class="s2">&quot;education&quot;</span><span class="p">:</span> <span class="p">{</span> 
+            <span class="s2">&quot;school&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+            <span class="s2">&quot;kindergarten&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+            <span class="s2">&quot;college&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+            <span class="s2">&quot;university&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span> 
+            <span class="s2">&quot;library&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+
+
+        <span class="p">},</span>
+
+    <span class="s2">&quot;healthcare&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># curves beschikbaar voor overstromingen</span>
+                <span class="s2">&quot;hospital&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;clinic&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;doctors&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;pharmacy&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;dentist&quot;</span> <span class="p">:</span><span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;physiotherapist&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;alternative&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;laboratory&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;optometrist&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;rehabilitation&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;blood_donation&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;birthing_center&quot;</span> <span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+        <span class="p">},</span>
+
+    <span class="s2">&quot;power&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;line&quot;</span> <span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="c1">#m </span>
+                <span class="s2">&quot;cable&quot;</span> <span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="c1">#m </span>
+                <span class="s2">&quot;minor_line&quot;</span> <span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="c1">#m </span>
+                <span class="s2">&quot;plant&quot;</span> <span class="p">:</span> <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;generator&quot;</span> <span class="p">:</span> <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;substation&quot;</span> <span class="p">:</span> <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;transformer&quot;</span> <span class="p">:</span> <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;pole&quot;</span> <span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+                <span class="s2">&quot;portal&quot;</span> <span class="p">:</span>  <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;tower&quot;</span> <span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+                <span class="s2">&quot;terminal&quot;</span> <span class="p">:</span>  <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;switch&quot;</span> <span class="p">:</span>  <span class="mi">5000</span> <span class="p">,</span> <span class="c1">#m2</span>
+                <span class="s2">&quot;catenary_mast&quot;</span> <span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="c1">#entire unit,</span>
+        <span class="p">},</span>
+
+
+    <span class="s2">&quot;wastewater&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;wastewater_plant&quot;</span> <span class="p">:</span> <span class="mi">2500</span><span class="p">,</span> <span class="c1">#m2,</span>
+            <span class="s2">&quot;waste_transfer_station&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">#m2, </span>
+        <span class="p">},</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_all_ci</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">ci_type</span> <span class="ow">in</span> <span class="n">MAXDAM_DICT</span><span class="p">:</span>
+    <span class="n">maxdam_dict</span> <span class="o">=</span> <span class="n">MAXDAM_DICT</span><span class="p">[</span><span class="n">ci_type</span><span class="p">]</span>
+    <span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
+    <span class="n">maxdam_all_ci</span><span class="p">[</span><span class="n">ci_type</span><span class="p">]</span> <span class="o">=</span>  <span class="n">maxdam</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hazard-data">
+<h3>Hazard Data<a class="headerlink" href="#hazard-data" title="Permalink to this heading">#</a></h3>
+<p>For this example, we make use of the flood data provided by <a class="reference external" href="https://giri.unepgrid.ch/map?list=explore">CDRI</a>.</p>
+<p>We use a 1/100 flood map to showcase the approach.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h100glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ancilliary-data-for-processing">
+<h3>Ancilliary data for processing<a class="headerlink" href="#ancilliary-data-for-processing" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
+<span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="preparing-the-data">
+<h2>3. Preparing the Data<a class="headerlink" href="#preparing-the-data" title="Permalink to this heading">#</a></h2>
+<p>Clip the hazard data to the country of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_bounds</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">country_geom</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_box</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set the return periods and download the hazard data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">return_periods</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
+
+<span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">return_period</span> <span class="ow">in</span> <span class="n">return_periods</span><span class="p">:</span>
+    <span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s2">glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+
+    <span class="n">hazard_dict</span><span class="p">[</span><span class="n">return_period</span><span class="p">]</span> <span class="o">=</span> <span class="n">hazard_map</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip_box</span><span class="p">(</span><span class="n">minx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">miny</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">maxx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">maxy</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="performing-the-risk-assessment">
+<h2>4. Performing the Risk Assessment<a class="headerlink" href="#performing-the-risk-assessment" title="Permalink to this heading">#</a></h2>
+<p>We will use the DamageScanner approach. This is a fully optimised exposure, vulnerability damage and risk calculation method, that can capture a wide range of inputs to perform such an assessment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_asset_risk_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
+        <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
+                                                       <span class="n">infrastructure_path</span><span class="p">,</span> 
+                                                       <span class="n">curves</span><span class="o">=</span><span class="n">damage_curves_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">],</span> 
+                                                       <span class="n">maxdam</span><span class="o">=</span><span class="n">maxdam_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+                                                           <span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span>
+            <span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.54it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:18,  1.18s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:17&lt;01:58,  7.88s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:18&lt;01:12,  5.16s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.69s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.17s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.81s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:04,  6.44s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:54,  6.01s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:55&lt;00:52,  6.53s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:56&lt;00:32,  4.69s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:57&lt;00:13,  2.70s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:01&lt;00:12,  3.16s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:02&lt;00:07,  2.49s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:03&lt;00:00,  3.51s/it]
+
+convert coverage to meters:   0%|                                                             | 0/2735 [00:00&lt;?, ?it/s]
+convert coverage to meters:  11%|█████▌                                           | 308/2735 [00:00&lt;00:00, 2758.49it/s]
+convert coverage to meters:  21%|██████████▍                                      | 584/2735 [00:00&lt;00:00, 2294.88it/s]
+convert coverage to meters:  30%|██████████████▋                                  | 817/2735 [00:00&lt;00:00, 2072.31it/s]
+convert coverage to meters:  38%|██████████████████                              | 1027/2735 [00:00&lt;00:00, 1871.13it/s]
+convert coverage to meters:  44%|█████████████████████▎                          | 1216/2735 [00:00&lt;00:00, 1703.92it/s]
+convert coverage to meters:  52%|████████████████████████▉                       | 1424/2735 [00:00&lt;00:00, 1807.68it/s]
+convert coverage to meters:  59%|████████████████████████████▏                   | 1608/2735 [00:00&lt;00:00, 1660.48it/s]
+convert coverage to meters:  66%|███████████████████████████████▉                | 1818/2735 [00:00&lt;00:00, 1708.52it/s]
+convert coverage to meters:  75%|███████████████████████████████████▉            | 2047/2735 [00:01&lt;00:00, 1860.79it/s]
+convert coverage to meters:  85%|████████████████████████████████████████▌       | 2312/2735 [00:01&lt;00:00, 1995.83it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 2735/2735 [00:01&lt;00:00, 1966.80it/s]
+
+Calculating damage:   0%|                                                                     | 0/2735 [00:00&lt;?, ?it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 2735/2735 [00:00&lt;00:00, 13665.24it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [01:08&lt;07:57, 68.19s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  3.23it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:18,  1.16s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:17&lt;01:58,  7.90s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:18&lt;01:12,  5.17s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.63s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:22&lt;00:37,  3.16s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.76s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:05,  6.59s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:56,  6.25s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:54,  6.76s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:34,  4.87s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:14,  2.80s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:02&lt;00:13,  3.25s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.58s/it]
+
+convert coverage to meters:   0%|                                                             | 0/3215 [00:00&lt;?, ?it/s]
+convert coverage to meters:   9%|████▌                                            | 301/3215 [00:00&lt;00:01, 2743.62it/s]
+convert coverage to meters:  18%|████████▊                                        | 576/3215 [00:00&lt;00:01, 2402.06it/s]
+convert coverage to meters:  25%|████████████▍                                    | 818/3215 [00:00&lt;00:01, 2056.81it/s]
+convert coverage to meters:  32%|███████████████▎                                | 1028/3215 [00:00&lt;00:01, 1739.88it/s]
+convert coverage to meters:  38%|██████████████████                              | 1208/3215 [00:00&lt;00:01, 1572.14it/s]
+convert coverage to meters:  43%|████████████████████▍                           | 1369/3215 [00:00&lt;00:01, 1541.45it/s]
+convert coverage to meters:  47%|██████████████████████▊                         | 1527/3215 [00:00&lt;00:01, 1511.43it/s]
+convert coverage to meters:  53%|█████████████████████████▌                      | 1716/3215 [00:01&lt;00:00, 1572.78it/s]
+convert coverage to meters:  58%|███████████████████████████▉                    | 1875/3215 [00:01&lt;00:00, 1473.91it/s]
+convert coverage to meters:  64%|██████████████████████████████▋                 | 2055/3215 [00:01&lt;00:00, 1521.58it/s]
+convert coverage to meters:  71%|█████████████████████████████████▉              | 2274/3215 [00:01&lt;00:00, 1659.04it/s]
+convert coverage to meters:  78%|█████████████████████████████████████▌          | 2518/3215 [00:01&lt;00:00, 1824.73it/s]
+convert coverage to meters:  85%|█████████████████████████████████████████       | 2747/3215 [00:01&lt;00:00, 1912.27it/s]
+convert coverage to meters:  91%|███████████████████████████████████████████▉    | 2940/3215 [00:01&lt;00:00, 1915.40it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3215/3215 [00:01&lt;00:00, 1797.33it/s]
+
+Calculating damage:   0%|                                                                     | 0/3215 [00:00&lt;?, ?it/s]
+Calculating damage:  46%|█████████████████████████                              | 1464/3215 [00:00&lt;00:00, 13340.77it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 3215/3215 [00:00&lt;00:00, 13672.27it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [02:17&lt;06:54, 69.11s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.77it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.23s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.08s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:14,  5.31s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:02,  4.78s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:39,  3.28s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.75s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:05,  6.54s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:49&lt;00:55,  6.20s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:57&lt;00:53,  6.73s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.82s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.31s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:04&lt;00:07,  2.62s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:05&lt;00:00,  3.61s/it]
+
+convert coverage to meters:   0%|                                                             | 0/3601 [00:00&lt;?, ?it/s]
+convert coverage to meters:   8%|███▉                                             | 286/3601 [00:00&lt;00:01, 2602.99it/s]
+convert coverage to meters:  15%|███████▍                                         | 547/3601 [00:00&lt;00:01, 2114.99it/s]
+convert coverage to meters:  21%|██████████▍                                      | 763/3601 [00:00&lt;00:01, 2052.72it/s]
+convert coverage to meters:  27%|█████████████▏                                   | 971/3601 [00:00&lt;00:01, 1798.22it/s]
+convert coverage to meters:  32%|███████████████▍                                | 1155/3601 [00:00&lt;00:01, 1680.14it/s]
+convert coverage to meters:  37%|█████████████████▋                              | 1326/3601 [00:00&lt;00:01, 1642.52it/s]
+convert coverage to meters:  41%|███████████████████▉                            | 1492/3601 [00:00&lt;00:01, 1536.03it/s]
+convert coverage to meters:  46%|█████████████████████▉                          | 1647/3601 [00:00&lt;00:01, 1499.47it/s]
+convert coverage to meters:  52%|█████████████████████████                       | 1876/3601 [00:01&lt;00:01, 1673.24it/s]
+convert coverage to meters:  57%|███████████████████████████▎                    | 2045/3601 [00:01&lt;00:01, 1504.48it/s]
+convert coverage to meters:  63%|██████████████████████████████                  | 2252/3601 [00:01&lt;00:00, 1611.12it/s]
+convert coverage to meters:  68%|████████████████████████████████▌               | 2441/3601 [00:01&lt;00:00, 1642.08it/s]
+convert coverage to meters:  74%|███████████████████████████████████▌            | 2668/3601 [00:01&lt;00:00, 1765.31it/s]
+convert coverage to meters:  80%|██████████████████████████████████████▌         | 2891/3601 [00:01&lt;00:00, 1843.12it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████▎      | 3100/3601 [00:01&lt;00:00, 1860.43it/s]
+convert coverage to meters:  92%|████████████████████████████████████████████    | 3301/3601 [00:01&lt;00:00, 1851.50it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3601/3601 [00:02&lt;00:00, 1792.13it/s]
+
+Calculating damage:   0%|                                                                     | 0/3601 [00:00&lt;?, ?it/s]
+Calculating damage:  37%|████████████████████▏                                  | 1324/3601 [00:00&lt;00:00, 12056.52it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 3601/3601 [00:00&lt;00:00, 13487.25it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [03:28&lt;05:48, 69.74s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.90it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.19s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:03,  8.24s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:16,  5.47s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:03,  4.86s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:24&lt;00:39,  3.30s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:38&lt;01:15,  6.90s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:46&lt;01:11,  7.19s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:51&lt;01:00,  6.74s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:00&lt;00:58,  7.30s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:01&lt;00:36,  5.25s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:01&lt;00:15,  3.01s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:07&lt;00:14,  3.57s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:07&lt;00:08,  2.80s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:08&lt;00:00,  3.83s/it]
+
+convert coverage to meters:   0%|                                                             | 0/4230 [00:00&lt;?, ?it/s]
+convert coverage to meters:   5%|██▋                                              | 229/4230 [00:00&lt;00:01, 2093.07it/s]
+convert coverage to meters:  12%|█████▊                                           | 502/4230 [00:00&lt;00:01, 2324.70it/s]
+convert coverage to meters:  17%|████████▌                                        | 735/4230 [00:00&lt;00:01, 2095.83it/s]
+convert coverage to meters:  22%|██████████▉                                      | 947/4230 [00:00&lt;00:01, 1928.92it/s]
+convert coverage to meters:  27%|████████████▉                                   | 1142/4230 [00:00&lt;00:01, 1708.92it/s]
+convert coverage to meters:  31%|██████████████▉                                 | 1317/4230 [00:00&lt;00:01, 1603.23it/s]
+convert coverage to meters:  35%|████████████████▊                               | 1480/4230 [00:00&lt;00:01, 1504.91it/s]
+convert coverage to meters:  39%|██████████████████▌                             | 1632/4230 [00:00&lt;00:01, 1469.70it/s]
+convert coverage to meters:  42%|████████████████████▏                           | 1780/4230 [00:01&lt;00:01, 1434.29it/s]
+convert coverage to meters:  45%|█████████████████████▊                          | 1924/4230 [00:01&lt;00:01, 1341.56it/s]
+convert coverage to meters:  50%|████████████████████████                        | 2118/4230 [00:01&lt;00:01, 1497.65it/s]
+convert coverage to meters:  54%|█████████████████████████▊                      | 2271/4230 [00:01&lt;00:01, 1372.87it/s]
+convert coverage to meters:  58%|███████████████████████████▉                    | 2459/4230 [00:01&lt;00:01, 1468.70it/s]
+convert coverage to meters:  63%|██████████████████████████████                  | 2651/4230 [00:01&lt;00:01, 1548.91it/s]
+convert coverage to meters:  68%|████████████████████████████████▍               | 2863/4230 [00:01&lt;00:00, 1660.21it/s]
+convert coverage to meters:  73%|███████████████████████████████████             | 3086/4230 [00:01&lt;00:00, 1768.95it/s]
+convert coverage to meters:  79%|█████████████████████████████████████▋          | 3325/4230 [00:01&lt;00:00, 1891.51it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▉        | 3524/4230 [00:02&lt;00:00, 1896.87it/s]
+convert coverage to meters:  88%|██████████████████████████████████████████▏     | 3715/4230 [00:02&lt;00:00, 1899.24it/s]
+convert coverage to meters:  92%|████████████████████████████████████████████▎   | 3906/4230 [00:02&lt;00:00, 1900.42it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4230/4230 [00:02&lt;00:00, 1749.93it/s]
+
+Calculating damage:   0%|                                                                     | 0/4230 [00:00&lt;?, ?it/s]
+Calculating damage:  36%|███████████████████▉                                   | 1536/4230 [00:00&lt;00:00, 13993.10it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4230/4230 [00:00&lt;00:00, 14163.91it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [04:43&lt;04:47, 71.78s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.88it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.19s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.12s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:13,  5.28s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:00,  4.68s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.18s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:13,  6.72s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:04,  6.49s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:54,  6.10s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:57&lt;00:55,  6.90s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:34,  4.94s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:14,  2.84s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.42s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:04&lt;00:08,  2.69s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:05&lt;00:00,  3.64s/it]
+
+convert coverage to meters:   0%|                                                             | 0/4470 [00:00&lt;?, ?it/s]
+convert coverage to meters:   4%|█▉                                               | 172/4470 [00:00&lt;00:02, 1671.54it/s]
+convert coverage to meters:  10%|█████                                            | 466/4470 [00:00&lt;00:01, 2278.24it/s]
+convert coverage to meters:  16%|███████▌                                         | 693/4470 [00:00&lt;00:01, 2184.87it/s]
+convert coverage to meters:  20%|█████████▉                                       | 911/4470 [00:00&lt;00:01, 2104.60it/s]
+convert coverage to meters:  25%|████████████                                    | 1122/4470 [00:00&lt;00:01, 1764.79it/s]
+convert coverage to meters:  29%|██████████████                                  | 1305/4470 [00:00&lt;00:01, 1733.89it/s]
+convert coverage to meters:  33%|███████████████▉                                | 1483/4470 [00:00&lt;00:01, 1561.52it/s]
+convert coverage to meters:  37%|█████████████████▋                              | 1644/4470 [00:00&lt;00:01, 1418.38it/s]
+convert coverage to meters:  40%|███████████████████▏                            | 1790/4470 [00:01&lt;00:01, 1394.06it/s]
+convert coverage to meters:  43%|████████████████████▋                           | 1932/4470 [00:01&lt;00:01, 1286.71it/s]
+convert coverage to meters:  47%|██████████████████████▍                         | 2086/4470 [00:01&lt;00:01, 1351.09it/s]
+convert coverage to meters:  51%|████████████████████████▌                       | 2290/4470 [00:01&lt;00:01, 1534.66it/s]
+convert coverage to meters:  55%|██████████████████████████▎                     | 2448/4470 [00:01&lt;00:01, 1292.85it/s]
+convert coverage to meters:  58%|███████████████████████████▊                    | 2586/4470 [00:01&lt;00:01, 1302.00it/s]
+convert coverage to meters:  62%|█████████████████████████████▋                  | 2764/4470 [00:01&lt;00:01, 1390.67it/s]
+convert coverage to meters:  66%|███████████████████████████████▍                | 2928/4470 [00:01&lt;00:01, 1453.75it/s]
+convert coverage to meters:  69%|█████████████████████████████████▎              | 3106/4470 [00:02&lt;00:00, 1542.00it/s]
+convert coverage to meters:  74%|███████████████████████████████████▍            | 3296/4470 [00:02&lt;00:00, 1640.50it/s]
+convert coverage to meters:  78%|█████████████████████████████████████▎          | 3471/4470 [00:02&lt;00:00, 1669.57it/s]
+convert coverage to meters:  82%|███████████████████████████████████████▎        | 3665/4470 [00:02&lt;00:00, 1734.32it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████▍      | 3864/4470 [00:02&lt;00:00, 1753.40it/s]
+convert coverage to meters:  91%|███████████████████████████████████████████▌    | 4053/4470 [00:02&lt;00:00, 1792.19it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4470/4470 [00:02&lt;00:00, 1649.97it/s]
+
+Calculating damage:   0%|                                                                     | 0/4470 [00:00&lt;?, ?it/s]
+Calculating damage:  30%|████████████████▌                                      | 1346/4470 [00:00&lt;00:00, 13378.99it/s]
+Calculating damage:  63%|██████████████████████████████████▋                    | 2821/4470 [00:00&lt;00:00, 14156.20it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4470/4470 [00:00&lt;00:00, 14126.14it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [05:55&lt;03:35, 71.82s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.46it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:20,  1.27s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:19&lt;02:09,  8.61s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:20&lt;01:18,  5.64s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:24&lt;01:04,  4.99s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:24&lt;00:40,  3.40s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:38&lt;01:14,  6.77s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:44&lt;01:05,  6.58s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:50&lt;00:57,  6.36s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:58&lt;00:55,  6.91s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:59&lt;00:34,  4.95s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:00&lt;00:14,  2.84s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:04&lt;00:13,  3.30s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:05&lt;00:07,  2.60s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:06&lt;00:00,  3.69s/it]
+
+convert coverage to meters:   0%|                                                             | 0/4658 [00:00&lt;?, ?it/s]
+convert coverage to meters:   4%|█▉                                               | 190/4658 [00:00&lt;00:02, 1885.70it/s]
+convert coverage to meters:  10%|████▉                                            | 472/4658 [00:00&lt;00:01, 2428.52it/s]
+convert coverage to meters:  15%|███████▌                                         | 715/4658 [00:00&lt;00:01, 2109.23it/s]
+convert coverage to meters:  20%|█████████▊                                       | 931/4658 [00:00&lt;00:01, 2028.95it/s]
+convert coverage to meters:  24%|███████████▋                                    | 1137/4658 [00:00&lt;00:02, 1712.72it/s]
+convert coverage to meters:  28%|█████████████▌                                  | 1316/4658 [00:00&lt;00:02, 1611.63it/s]
+convert coverage to meters:  32%|███████████████▎                                | 1482/4658 [00:00&lt;00:02, 1470.71it/s]
+convert coverage to meters:  35%|████████████████▊                               | 1635/4658 [00:00&lt;00:02, 1442.44it/s]
+convert coverage to meters:  38%|██████████████████▎                             | 1782/4658 [00:01&lt;00:02, 1413.06it/s]
+convert coverage to meters:  41%|███████████████████▊                            | 1925/4658 [00:01&lt;00:01, 1389.84it/s]
+convert coverage to meters:  44%|█████████████████████▎                          | 2065/4658 [00:01&lt;00:01, 1329.52it/s]
+convert coverage to meters:  48%|███████████████████████                         | 2242/4658 [00:01&lt;00:01, 1432.87it/s]
+convert coverage to meters:  52%|████████████████████████▊                       | 2412/4658 [00:01&lt;00:01, 1505.01it/s]
+convert coverage to meters:  55%|██████████████████████████▍                     | 2564/4658 [00:01&lt;00:01, 1309.67it/s]
+convert coverage to meters:  59%|████████████████████████████▏                   | 2730/4658 [00:01&lt;00:01, 1386.90it/s]
+convert coverage to meters:  62%|█████████████████████████████▋                  | 2886/4658 [00:01&lt;00:01, 1429.67it/s]
+convert coverage to meters:  66%|███████████████████████████████▋                | 3070/4658 [00:01&lt;00:01, 1529.04it/s]
+convert coverage to meters:  70%|█████████████████████████████████▍              | 3241/4658 [00:02&lt;00:00, 1577.20it/s]
+convert coverage to meters:  74%|███████████████████████████████████▌            | 3453/4658 [00:02&lt;00:00, 1690.07it/s]
+convert coverage to meters:  78%|█████████████████████████████████████▎          | 3624/4658 [00:02&lt;00:00, 1690.44it/s]
+convert coverage to meters:  82%|███████████████████████████████████████▍        | 3826/4658 [00:02&lt;00:00, 1774.57it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████▎      | 4005/4658 [00:02&lt;00:00, 1746.08it/s]
+convert coverage to meters:  90%|███████████████████████████████████████████▏    | 4194/4658 [00:02&lt;00:00, 1784.51it/s]
+convert coverage to meters:  94%|█████████████████████████████████████████████▎  | 4399/4658 [00:02&lt;00:00, 1861.31it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4658/4658 [00:02&lt;00:00, 1654.86it/s]
+
+Calculating damage:   0%|                                                                     | 0/4658 [00:00&lt;?, ?it/s]
+Calculating damage:  26%|██████████████▌                                        | 1231/4658 [00:00&lt;00:00, 12287.60it/s]
+Calculating damage:  58%|███████████████████████████████▊                       | 2699/4658 [00:00&lt;00:00, 13626.28it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4658/4658 [00:00&lt;00:00, 13277.72it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [07:08&lt;02:24, 72.16s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.36it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.25s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;01:59,  7.97s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:13,  5.23s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.67s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.18s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:15,  6.88s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:06,  6.60s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:49&lt;00:55,  6.19s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:53,  6.72s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.84s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.26s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.59s/it]
+
+convert coverage to meters:   0%|                                                             | 0/5022 [00:00&lt;?, ?it/s]
+convert coverage to meters:   3%|█▋                                               | 174/5022 [00:00&lt;00:02, 1728.49it/s]
+convert coverage to meters:   9%|████▎                                            | 436/5022 [00:00&lt;00:02, 2239.65it/s]
+convert coverage to meters:  13%|██████▍                                          | 660/5022 [00:00&lt;00:02, 1891.67it/s]
+convert coverage to meters:  17%|████████▎                                        | 855/5022 [00:00&lt;00:02, 1848.87it/s]
+convert coverage to meters:  21%|█████████▉                                      | 1044/5022 [00:00&lt;00:02, 1859.60it/s]
+convert coverage to meters:  25%|███████████▊                                    | 1232/5022 [00:00&lt;00:02, 1674.78it/s]
+convert coverage to meters:  28%|█████████████▍                                  | 1404/5022 [00:00&lt;00:02, 1590.01it/s]
+convert coverage to meters:  31%|██████████████▉                                 | 1566/5022 [00:00&lt;00:02, 1385.85it/s]
+convert coverage to meters:  34%|████████████████▍                               | 1718/5022 [00:01&lt;00:02, 1403.50it/s]
+convert coverage to meters:  37%|█████████████████▊                              | 1863/5022 [00:01&lt;00:02, 1367.93it/s]
+convert coverage to meters:  40%|███████████████████▏                            | 2003/5022 [00:01&lt;00:02, 1343.40it/s]
+convert coverage to meters:  43%|████████████████████▍                           | 2139/5022 [00:01&lt;00:02, 1256.01it/s]
+convert coverage to meters:  45%|█████████████████████▋                          | 2267/5022 [00:01&lt;00:02, 1248.27it/s]
+convert coverage to meters:  50%|███████████████████████▉                        | 2499/5022 [00:01&lt;00:01, 1511.47it/s]
+convert coverage to meters:  53%|█████████████████████████▎                      | 2653/5022 [00:01&lt;00:01, 1343.45it/s]
+convert coverage to meters:  56%|██████████████████████████▊                     | 2802/5022 [00:01&lt;00:01, 1380.54it/s]
+convert coverage to meters:  59%|████████████████████████████▍                   | 2976/5022 [00:01&lt;00:01, 1441.78it/s]
+convert coverage to meters:  62%|█████████████████████████████▊                  | 3123/5022 [00:02&lt;00:01, 1421.42it/s]
+convert coverage to meters:  65%|███████████████████████████████▏                | 3267/5022 [00:02&lt;00:01, 1419.35it/s]
+convert coverage to meters:  69%|█████████████████████████████████               | 3457/5022 [00:02&lt;00:01, 1517.96it/s]
+convert coverage to meters:  72%|██████████████████████████████████▌             | 3614/5022 [00:02&lt;00:00, 1529.60it/s]
+convert coverage to meters:  76%|████████████████████████████████████▎           | 3804/5022 [00:02&lt;00:00, 1635.18it/s]
+convert coverage to meters:  79%|██████████████████████████████████████          | 3980/5022 [00:02&lt;00:00, 1669.52it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▋        | 4148/5022 [00:02&lt;00:00, 1668.28it/s]
+convert coverage to meters:  87%|█████████████████████████████████████████▌      | 4348/5022 [00:02&lt;00:00, 1764.66it/s]
+convert coverage to meters:  90%|███████████████████████████████████████████▎    | 4530/5022 [00:02&lt;00:00, 1777.63it/s]
+convert coverage to meters:  95%|█████████████████████████████████████████████▎  | 4747/5022 [00:03&lt;00:00, 1891.54it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 5022/5022 [00:03&lt;00:00, 1607.45it/s]
+
+Calculating damage:   0%|                                                                     | 0/5022 [00:00&lt;?, ?it/s]
+Calculating damage:  28%|███████████████▍                                       | 1412/5022 [00:00&lt;00:00, 12842.08it/s]
+Calculating damage:  57%|███████████████████████████████▏                       | 2853/5022 [00:00&lt;00:00, 13000.66it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 5022/5022 [00:00&lt;00:00, 13552.66it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [08:19&lt;01:11, 71.91s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.84it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:20,  1.28s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.12s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:14,  5.32s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:01,  4.71s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.21s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:12,  6.63s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:03,  6.38s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:55,  6.18s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:53,  6.74s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.85s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:02&lt;00:13,  3.25s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.58s/it]
+
+convert coverage to meters:   0%|                                                             | 0/5464 [00:00&lt;?, ?it/s]
+convert coverage to meters:   3%|█▍                                               | 164/5464 [00:00&lt;00:03, 1492.35it/s]
+convert coverage to meters:   8%|███▉                                             | 438/5464 [00:00&lt;00:02, 2082.03it/s]
+convert coverage to meters:  12%|█████▊                                           | 647/5464 [00:00&lt;00:02, 1997.31it/s]
+convert coverage to meters:  16%|███████▌                                         | 847/5464 [00:00&lt;00:02, 1807.19it/s]
+convert coverage to meters:  19%|█████████▎                                      | 1056/5464 [00:00&lt;00:02, 1831.02it/s]
+convert coverage to meters:  23%|██████████▉                                     | 1241/5464 [00:00&lt;00:02, 1702.78it/s]
+convert coverage to meters:  26%|████████████▍                                   | 1413/5464 [00:00&lt;00:02, 1524.34it/s]
+convert coverage to meters:  29%|█████████████▊                                  | 1569/5464 [00:00&lt;00:02, 1390.36it/s]
+convert coverage to meters:  31%|███████████████                                 | 1711/5464 [00:01&lt;00:02, 1285.81it/s]
+convert coverage to meters:  35%|████████████████▌                               | 1890/5464 [00:01&lt;00:02, 1379.47it/s]
+convert coverage to meters:  37%|█████████████████▊                              | 2031/5464 [00:01&lt;00:02, 1350.94it/s]
+convert coverage to meters:  40%|███████████████████                             | 2168/5464 [00:01&lt;00:02, 1321.58it/s]
+convert coverage to meters:  42%|████████████████████▏                           | 2302/5464 [00:01&lt;00:02, 1276.79it/s]
+convert coverage to meters:  44%|█████████████████████▎                          | 2431/5464 [00:01&lt;00:02, 1141.06it/s]
+convert coverage to meters:  49%|███████████████████████▎                        | 2653/5464 [00:01&lt;00:02, 1364.57it/s]
+convert coverage to meters:  52%|████████████████████████▉                       | 2836/5464 [00:01&lt;00:01, 1473.23it/s]
+convert coverage to meters:  55%|██████████████████████████▏                     | 2987/5464 [00:02&lt;00:01, 1305.96it/s]
+convert coverage to meters:  58%|███████████████████████████▋                    | 3149/5464 [00:02&lt;00:01, 1355.32it/s]
+convert coverage to meters:  61%|█████████████████████████████▎                  | 3336/5464 [00:02&lt;00:01, 1467.30it/s]
+convert coverage to meters:  64%|██████████████████████████████▋                 | 3487/5464 [00:02&lt;00:01, 1359.53it/s]
+convert coverage to meters:  68%|████████████████████████████████▍               | 3693/5464 [00:02&lt;00:01, 1489.03it/s]
+convert coverage to meters:  71%|██████████████████████████████████              | 3878/5464 [00:02&lt;00:01, 1536.16it/s]
+convert coverage to meters:  75%|████████████████████████████████████            | 4105/5464 [00:02&lt;00:00, 1688.68it/s]
+convert coverage to meters:  78%|█████████████████████████████████████▌          | 4277/5464 [00:02&lt;00:00, 1653.31it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▋        | 4512/5464 [00:02&lt;00:00, 1770.60it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████▎      | 4708/5464 [00:03&lt;00:00, 1780.70it/s]
+convert coverage to meters:  89%|██████████████████████████████████████████▉     | 4887/5464 [00:03&lt;00:00, 1760.28it/s]
+convert coverage to meters:  93%|████████████████████████████████████████████▋   | 5086/5464 [00:03&lt;00:00, 1816.84it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 5464/5464 [00:03&lt;00:00, 1567.46it/s]
+
+Calculating damage:   0%|                                                                     | 0/5464 [00:00&lt;?, ?it/s]
+Calculating damage:  24%|█████████████                                          | 1302/5464 [00:00&lt;00:00, 11839.81it/s]
+Calculating damage:  50%|███████████████████████████▍                           | 2730/5464 [00:00&lt;00:00, 13214.82it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 5464/5464 [00:00&lt;00:00, 13514.49it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [09:31&lt;00:00, 71.38s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:12&lt;00:00,  1.51s/it]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\base.py:3805,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3804</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3805</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File index.pyx:167,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File index.pyx:196,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7081,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7089,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;damage&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">save_asset_risk_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                        <span class="n">infrastructure_path</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span>                                                        <span class="n">curves</span><span class="o">=</span><span class="n">damage_curves_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span>                                                        <span class="n">maxdam</span><span class="o">=</span><span class="n">maxdam_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>                                                            <span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\damagescanner\core.py:183,</span> in <span class="ni">DamageScanner.risk</span><span class="nt">(self, hazard_dict, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="n">largest_rp</span> <span class="o">=</span> <span class="n">df_risk</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">pd</span><span class="o">.</span><span class="n">IndexSlice</span><span class="p">[</span><span class="n">RP_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],:]]</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;multi_curves&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span>  
+<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="c1"># only keep the damage values</span>
+<span class="ne">--&gt; </span><span class="mi">183</span>     <span class="n">df_risk</span> <span class="o">=</span> <span class="n">df_risk</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">pd</span><span class="o">.</span><span class="n">IndexSlice</span><span class="p">[</span><span class="n">RP_list</span><span class="p">,</span> <span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="n">RPS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">RP_list</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>     <span class="n">risk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span>         <span class="n">df_risk</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span>             <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">RP_list</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">RPS</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span>         <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tot_risk&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1184,</span> in <span class="ni">_LocationIndexer.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_scalar_access</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1183</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">takeable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_takeable</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1184</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_tuple</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1185</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span>     <span class="c1"># we by definition only have the 0th axis</span>
+<span class="g g-Whitespace">   </span><span class="mi">1187</span>     <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="ow">or</span> <span class="mi">0</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1368,</span> in <span class="ni">_LocIndexer._getitem_tuple</span><span class="nt">(self, tup)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span> <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">IndexingError</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1367</span>     <span class="n">tup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_ellipsis</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1368</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_lowerdim</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span> <span class="c1"># no multi-index, so validate all of the indexers</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span> <span class="n">tup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_tuple_indexer</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1041,</span> in <span class="ni">_LocationIndexer._getitem_lowerdim</span><span class="nt">(self, tup)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span> <span class="c1"># we may have a nested tuples indexer here</span>
+<span class="g g-Whitespace">   </span><span class="mi">1040</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_nested_tuple_indexer</span><span class="p">(</span><span class="n">tup</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1041</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_nested_tuple</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span> <span class="c1"># we maybe be using a tuple to represent multiple dimensions here</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span> <span class="n">ax0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_get_axis</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1153,</span> in <span class="ni">_LocationIndexer._getitem_nested_tuple</span><span class="nt">(self, tup)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1150</span>     <span class="n">axis</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1151</span>     <span class="k">continue</span>
+<span class="ne">-&gt; </span><span class="mi">1153</span> <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_getitem_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1154</span> <span class="n">axis</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1156</span> <span class="c1"># if we have a scalar, we are done</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1424,</span> in <span class="ni">_LocIndexer._getitem_axis</span><span class="nt">(self, key, axis)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1422</span> <span class="c1"># nested tuple slicing</span>
+<span class="g g-Whitespace">   </span><span class="mi">1423</span> <span class="k">if</span> <span class="n">is_nested_tuple</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1424</span>     <span class="n">locs</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">get_locs</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1425</span>     <span class="n">indexer</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">slice</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span>
+<span class="g g-Whitespace">   </span><span class="mi">1426</span>     <span class="n">indexer</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:3536,</span> in <span class="ni">MultiIndex.get_locs</span><span class="nt">(self, seq)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3532</span>     <span class="k">continue</span>
+<span class="g g-Whitespace">   </span><span class="mi">3534</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3535</span>     <span class="c1"># a slice or a single label</span>
+<span class="ne">-&gt; </span><span class="mi">3536</span>     <span class="n">lvl_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_level_indexer</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">indexer</span><span class="o">=</span><span class="n">indexer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3538</span> <span class="c1"># update indexer</span>
+<span class="g g-Whitespace">   </span><span class="mi">3539</span> <span class="n">lvl_indexer</span> <span class="o">=</span> <span class="n">_to_bool_indexer</span><span class="p">(</span><span class="n">lvl_indexer</span><span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:3391,</span> in <span class="ni">MultiIndex._get_level_indexer</span><span class="nt">(self, key, level, indexer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3388</span>         <span class="k">return</span> <span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3390</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3391</span>     <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_loc_single_level_index</span><span class="p">(</span><span class="n">level_index</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3393</span>     <span class="k">if</span> <span class="n">level</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexsort_depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3394</span>         <span class="c1"># Desired level is not sorted</span>
+<span class="g g-Whitespace">   </span><span class="mi">3395</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3396</span>             <span class="c1"># test_get_loc_partial_timestamp_multiindex</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:2980,</span> in <span class="ni">MultiIndex._get_loc_single_level_index</span><span class="nt">(self, level_index, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2978</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">2979</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2980</span>     <span class="k">return</span> <span class="n">level_index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\base.py:3812,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3807</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3808</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3809</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3810</span>     <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3811</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3812</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3813</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3814</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3815</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3816</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3817</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;damage&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising-the-results">
+<h2>5. Visualising the results<a class="headerlink" href="#visualising-the-results" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_damages</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
+    <span class="n">damage_results</span> <span class="o">=</span> <span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">collect_damages</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">damage_results</span><span class="o">.</span><span class="n">damage</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#66c2a5&#39;</span><span class="p">,</span><span class="s1">&#39;#fc8d62&#39;</span><span class="p">,</span><span class="s1">&#39;#8da0cb&#39;</span><span class="p">,</span><span class="s1">&#39;#e78ac3&#39;</span><span class="p">,</span><span class="s1">&#39;#a6d854&#39;</span><span class="p">,</span><span class="s1">&#39;#ffd92f&#39;</span><span class="p">,</span><span class="s1">&#39;#e5c494&#39;</span><span class="p">,</span><span class="s1">&#39;#b3b3b3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">collect_damages</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="n">collect_damages</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">pie</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">labeldistance</span><span class="o">=</span><span class="mf">1.15</span><span class="p">,</span> <span class="n">wedgeprops</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;linewidth&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;edgecolor&#39;</span> <span class="p">:</span> <span class="s1">&#39;white&#39;</span> <span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;River Flood Damage for </span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1"> for multiple </span><span class="se">\n</span><span class="s1"> Critical Infrastructure systems&#39;</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./use_cases"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-results">5. Visualising the results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Institute for Environmental Studies, Vrije Universiteit Amsterdam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
