@@ -65,6 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'use_cases/all_ci_risk';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multi-country Analysis for Transportation Infrastructure" href="multi-country.html" />
+    <link rel="prev" title="Country-level vulnerability assessment" href="all_ci_vulnerability.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,9 +191,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclones</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="all_ci_exposure.html">Country-level exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Country-level risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-country.html">Multi-country Analysis for Transportation Infrastructure</a></li>
 </ul>
 
     </div>
@@ -796,481 +800,994 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.54it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:18,  1.18s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:17&lt;01:58,  7.88s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:18&lt;01:12,  5.16s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.69s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.17s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.81s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:04,  6.44s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:54,  6.01s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:55&lt;00:52,  6.53s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:56&lt;00:32,  4.69s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:57&lt;00:13,  2.70s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:01&lt;00:12,  3.16s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:02&lt;00:07,  2.49s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:03&lt;00:00,  3.51s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:08,  1.95it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:24,  1.52s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:21&lt;02:21,  9.43s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:22&lt;01:27,  6.22s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:27&lt;01:13,  5.63s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:27&lt;00:45,  3.83s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:44&lt;01:27,  7.94s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:51&lt;01:17,  7.77s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:58&lt;01:07,  7.49s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:10&lt;01:10,  8.87s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:11&lt;00:44,  6.38s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:12&lt;00:18,  3.68s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:18&lt;00:17,  4.35s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:19&lt;00:10,  3.45s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:21&lt;00:00,  4.52s/it]
 
 convert coverage to meters:   0%|                                                             | 0/2735 [00:00&lt;?, ?it/s]
-convert coverage to meters:  11%|█████▌                                           | 308/2735 [00:00&lt;00:00, 2758.49it/s]
-convert coverage to meters:  21%|██████████▍                                      | 584/2735 [00:00&lt;00:00, 2294.88it/s]
-convert coverage to meters:  30%|██████████████▋                                  | 817/2735 [00:00&lt;00:00, 2072.31it/s]
-convert coverage to meters:  38%|██████████████████                              | 1027/2735 [00:00&lt;00:00, 1871.13it/s]
-convert coverage to meters:  44%|█████████████████████▎                          | 1216/2735 [00:00&lt;00:00, 1703.92it/s]
-convert coverage to meters:  52%|████████████████████████▉                       | 1424/2735 [00:00&lt;00:00, 1807.68it/s]
-convert coverage to meters:  59%|████████████████████████████▏                   | 1608/2735 [00:00&lt;00:00, 1660.48it/s]
-convert coverage to meters:  66%|███████████████████████████████▉                | 1818/2735 [00:00&lt;00:00, 1708.52it/s]
-convert coverage to meters:  75%|███████████████████████████████████▉            | 2047/2735 [00:01&lt;00:00, 1860.79it/s]
-convert coverage to meters:  85%|████████████████████████████████████████▌       | 2312/2735 [00:01&lt;00:00, 1995.83it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 2735/2735 [00:01&lt;00:00, 1966.80it/s]
+convert coverage to meters:   9%|████▌                                            | 256/2735 [00:00&lt;00:00, 2555.02it/s]
+convert coverage to meters:  19%|█████████▏                                       | 512/2735 [00:00&lt;00:01, 1886.47it/s]
+convert coverage to meters:  26%|████████████▋                                    | 711/2735 [00:00&lt;00:01, 1416.15it/s]
+convert coverage to meters:  32%|███████████████▌                                 | 866/2735 [00:00&lt;00:01, 1362.26it/s]
+convert coverage to meters:  37%|█████████████████▋                              | 1010/2735 [00:00&lt;00:01, 1334.22it/s]
+convert coverage to meters:  42%|████████████████████▏                           | 1148/2735 [00:00&lt;00:01, 1189.99it/s]
+convert coverage to meters:  46%|██████████████████████▎                         | 1271/2735 [00:00&lt;00:01, 1188.81it/s]
+convert coverage to meters:  53%|█████████████████████████▌                      | 1457/2735 [00:01&lt;00:00, 1356.68it/s]
+convert coverage to meters:  58%|████████████████████████████                    | 1597/2735 [00:01&lt;00:00, 1212.60it/s]
+convert coverage to meters:  64%|██████████████████████████████▌                 | 1739/2735 [00:01&lt;00:00, 1253.46it/s]
+convert coverage to meters:  69%|█████████████████████████████████▏              | 1893/2735 [00:01&lt;00:00, 1329.54it/s]
+convert coverage to meters:  76%|████████████████████████████████████▍           | 2075/2735 [00:01&lt;00:00, 1465.00it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▋        | 2260/2735 [00:01&lt;00:00, 1570.50it/s]
+convert coverage to meters:  89%|██████████████████████████████████████████▍     | 2421/2735 [00:01&lt;00:00, 1561.60it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 2735/2735 [00:01&lt;00:00, 1463.51it/s]
 
 Calculating damage:   0%|                                                                     | 0/2735 [00:00&lt;?, ?it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 2735/2735 [00:00&lt;00:00, 13665.24it/s]
-Risk Calculation:  12%|████████▎                                                         | 1/8 [01:08&lt;07:57, 68.19s/it]
+Calculating damage:  40%|█████████████████████▊                                 | 1086/2735 [00:00&lt;00:00, 10809.65it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 2735/2735 [00:00&lt;00:00, 10674.16it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [01:27&lt;10:13, 87.68s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  3.23it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:18,  1.16s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:17&lt;01:58,  7.90s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:18&lt;01:12,  5.17s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.63s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:22&lt;00:37,  3.16s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.76s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:05,  6.59s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:56,  6.25s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:54,  6.76s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:34,  4.87s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:14,  2.80s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:02&lt;00:13,  3.25s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.58s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.22it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:03&lt;00:29,  1.81s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:25&lt;02:45, 11.04s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:26&lt;01:40,  7.15s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:30&lt;01:20,  6.18s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:31&lt;00:50,  4.20s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:49&lt;01:37,  8.89s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:58&lt;01:26,  8.69s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:04&lt;01:13,  8.14s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:14&lt;01:08,  8.54s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:15&lt;00:42,  6.13s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:16&lt;00:17,  3.50s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:22&lt;00:16,  4.14s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:22&lt;00:09,  3.26s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:24&lt;00:00,  4.67s/it]
 
 convert coverage to meters:   0%|                                                             | 0/3215 [00:00&lt;?, ?it/s]
-convert coverage to meters:   9%|████▌                                            | 301/3215 [00:00&lt;00:01, 2743.62it/s]
-convert coverage to meters:  18%|████████▊                                        | 576/3215 [00:00&lt;00:01, 2402.06it/s]
-convert coverage to meters:  25%|████████████▍                                    | 818/3215 [00:00&lt;00:01, 2056.81it/s]
-convert coverage to meters:  32%|███████████████▎                                | 1028/3215 [00:00&lt;00:01, 1739.88it/s]
-convert coverage to meters:  38%|██████████████████                              | 1208/3215 [00:00&lt;00:01, 1572.14it/s]
-convert coverage to meters:  43%|████████████████████▍                           | 1369/3215 [00:00&lt;00:01, 1541.45it/s]
-convert coverage to meters:  47%|██████████████████████▊                         | 1527/3215 [00:00&lt;00:01, 1511.43it/s]
-convert coverage to meters:  53%|█████████████████████████▌                      | 1716/3215 [00:01&lt;00:00, 1572.78it/s]
-convert coverage to meters:  58%|███████████████████████████▉                    | 1875/3215 [00:01&lt;00:00, 1473.91it/s]
-convert coverage to meters:  64%|██████████████████████████████▋                 | 2055/3215 [00:01&lt;00:00, 1521.58it/s]
-convert coverage to meters:  71%|█████████████████████████████████▉              | 2274/3215 [00:01&lt;00:00, 1659.04it/s]
-convert coverage to meters:  78%|█████████████████████████████████████▌          | 2518/3215 [00:01&lt;00:00, 1824.73it/s]
-convert coverage to meters:  85%|█████████████████████████████████████████       | 2747/3215 [00:01&lt;00:00, 1912.27it/s]
-convert coverage to meters:  91%|███████████████████████████████████████████▉    | 2940/3215 [00:01&lt;00:00, 1915.40it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3215/3215 [00:01&lt;00:00, 1797.33it/s]
+convert coverage to meters:   8%|███▋                                             | 246/3215 [00:00&lt;00:01, 2458.30it/s]
+convert coverage to meters:  15%|███████▍                                         | 492/3215 [00:00&lt;00:01, 2060.62it/s]
+convert coverage to meters:  22%|██████████▋                                      | 703/3215 [00:00&lt;00:01, 1748.51it/s]
+convert coverage to meters:  27%|█████████████▍                                   | 884/3215 [00:00&lt;00:01, 1674.62it/s]
+convert coverage to meters:  33%|███████████████▊                                | 1057/3215 [00:00&lt;00:01, 1665.79it/s]
+convert coverage to meters:  38%|██████████████████▎                             | 1226/3215 [00:00&lt;00:01, 1463.87it/s]
+convert coverage to meters:  43%|████████████████████▌                           | 1377/3215 [00:00&lt;00:01, 1407.14it/s]
+convert coverage to meters:  47%|██████████████████████▋                         | 1523/3215 [00:00&lt;00:01, 1421.34it/s]
+convert coverage to meters:  53%|█████████████████████████▌                      | 1715/3215 [00:01&lt;00:00, 1560.11it/s]
+convert coverage to meters:  58%|███████████████████████████▉                    | 1874/3215 [00:01&lt;00:00, 1394.51it/s]
+convert coverage to meters:  63%|██████████████████████████████▍                 | 2039/3215 [00:01&lt;00:00, 1462.42it/s]
+convert coverage to meters:  68%|████████████████████████████████▊               | 2201/3215 [00:01&lt;00:00, 1499.80it/s]
+convert coverage to meters:  75%|███████████████████████████████████▉            | 2404/3215 [00:01&lt;00:00, 1647.55it/s]
+convert coverage to meters:  82%|███████████████████████████████████████▍        | 2640/3215 [00:01&lt;00:00, 1840.51it/s]
+convert coverage to meters:  88%|██████████████████████████████████████████▏     | 2828/3215 [00:01&lt;00:00, 1705.47it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3215/3215 [00:01&lt;00:00, 1669.77it/s]
 
 Calculating damage:   0%|                                                                     | 0/3215 [00:00&lt;?, ?it/s]
-Calculating damage:  46%|█████████████████████████                              | 1464/3215 [00:00&lt;00:00, 13340.77it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 3215/3215 [00:00&lt;00:00, 13672.27it/s]
-Risk Calculation:  25%|████████████████▌                                                 | 2/8 [02:17&lt;06:54, 69.11s/it]
+Calculating damage:  38%|█████████████████████                                  | 1228/3215 [00:00&lt;00:00, 12257.65it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 3215/3215 [00:00&lt;00:00, 11246.61it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [02:57&lt;08:55, 89.17s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.77it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.23s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.08s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:14,  5.31s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:02,  4.78s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:39,  3.28s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:14,  6.75s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:05,  6.54s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:49&lt;00:55,  6.20s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:57&lt;00:53,  6.73s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.82s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.31s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:04&lt;00:07,  2.62s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:05&lt;00:00,  3.61s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.41it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:24,  1.55s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:23&lt;02:36, 10.46s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:25&lt;01:35,  6.85s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:30&lt;01:20,  6.21s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:30&lt;00:50,  4.20s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:50&lt;01:44,  9.49s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:59&lt;01:30,  9.06s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:06&lt;01:17,  8.59s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:18&lt;01:16,  9.51s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:18&lt;00:47,  6.81s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:20&lt;00:19,  3.94s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:27&lt;00:19,  4.80s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:28&lt;00:11,  3.88s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:30&lt;00:00,  5.01s/it]
 
 convert coverage to meters:   0%|                                                             | 0/3601 [00:00&lt;?, ?it/s]
-convert coverage to meters:   8%|███▉                                             | 286/3601 [00:00&lt;00:01, 2602.99it/s]
-convert coverage to meters:  15%|███████▍                                         | 547/3601 [00:00&lt;00:01, 2114.99it/s]
-convert coverage to meters:  21%|██████████▍                                      | 763/3601 [00:00&lt;00:01, 2052.72it/s]
-convert coverage to meters:  27%|█████████████▏                                   | 971/3601 [00:00&lt;00:01, 1798.22it/s]
-convert coverage to meters:  32%|███████████████▍                                | 1155/3601 [00:00&lt;00:01, 1680.14it/s]
-convert coverage to meters:  37%|█████████████████▋                              | 1326/3601 [00:00&lt;00:01, 1642.52it/s]
-convert coverage to meters:  41%|███████████████████▉                            | 1492/3601 [00:00&lt;00:01, 1536.03it/s]
-convert coverage to meters:  46%|█████████████████████▉                          | 1647/3601 [00:00&lt;00:01, 1499.47it/s]
-convert coverage to meters:  52%|█████████████████████████                       | 1876/3601 [00:01&lt;00:01, 1673.24it/s]
-convert coverage to meters:  57%|███████████████████████████▎                    | 2045/3601 [00:01&lt;00:01, 1504.48it/s]
-convert coverage to meters:  63%|██████████████████████████████                  | 2252/3601 [00:01&lt;00:00, 1611.12it/s]
-convert coverage to meters:  68%|████████████████████████████████▌               | 2441/3601 [00:01&lt;00:00, 1642.08it/s]
-convert coverage to meters:  74%|███████████████████████████████████▌            | 2668/3601 [00:01&lt;00:00, 1765.31it/s]
-convert coverage to meters:  80%|██████████████████████████████████████▌         | 2891/3601 [00:01&lt;00:00, 1843.12it/s]
-convert coverage to meters:  86%|█████████████████████████████████████████▎      | 3100/3601 [00:01&lt;00:00, 1860.43it/s]
-convert coverage to meters:  92%|████████████████████████████████████████████    | 3301/3601 [00:01&lt;00:00, 1851.50it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3601/3601 [00:02&lt;00:00, 1792.13it/s]
+convert coverage to meters:   6%|██▉                                              | 217/3601 [00:00&lt;00:01, 2168.15it/s]
+convert coverage to meters:  12%|██████                                           | 443/3601 [00:00&lt;00:01, 2202.67it/s]
+convert coverage to meters:  18%|█████████                                        | 664/3601 [00:00&lt;00:01, 1945.53it/s]
+convert coverage to meters:  24%|███████████▋                                     | 862/3601 [00:00&lt;00:01, 1721.50it/s]
+convert coverage to meters:  29%|█████████████▊                                  | 1039/3601 [00:00&lt;00:01, 1498.01it/s]
+convert coverage to meters:  33%|███████████████▉                                | 1195/3601 [00:00&lt;00:01, 1504.85it/s]
+convert coverage to meters:  37%|█████████████████▉                              | 1350/3601 [00:00&lt;00:01, 1345.08it/s]
+convert coverage to meters:  41%|███████████████████▊                            | 1489/3601 [00:01&lt;00:01, 1192.13it/s]
+convert coverage to meters:  45%|█████████████████████▌                          | 1613/3601 [00:01&lt;00:01, 1165.56it/s]
+convert coverage to meters:  50%|████████████████████████                        | 1803/3601 [00:01&lt;00:01, 1345.90it/s]
+convert coverage to meters:  54%|█████████████████████████▉                      | 1943/3601 [00:01&lt;00:01, 1200.88it/s]
+convert coverage to meters:  57%|███████████████████████████▌                    | 2069/3601 [00:01&lt;00:01, 1182.40it/s]
+convert coverage to meters:  61%|█████████████████████████████▌                  | 2214/3601 [00:01&lt;00:01, 1248.52it/s]
+convert coverage to meters:  65%|███████████████████████████████▏                | 2343/3601 [00:01&lt;00:01, 1210.80it/s]
+convert coverage to meters:  70%|█████████████████████████████████▋              | 2525/3601 [00:01&lt;00:00, 1375.06it/s]
+convert coverage to meters:  75%|███████████████████████████████████▊            | 2691/3601 [00:01&lt;00:00, 1449.75it/s]
+convert coverage to meters:  79%|█████████████████████████████████████▉          | 2848/3601 [00:02&lt;00:00, 1480.66it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▉        | 2999/3601 [00:02&lt;00:00, 1476.51it/s]
+convert coverage to meters:  87%|█████████████████████████████████████████▉      | 3149/3601 [00:02&lt;00:00, 1416.97it/s]
+convert coverage to meters:  92%|████████████████████████████████████████████    | 3307/3601 [00:02&lt;00:00, 1455.08it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3601/3601 [00:02&lt;00:00, 1455.21it/s]
 
 Calculating damage:   0%|                                                                     | 0/3601 [00:00&lt;?, ?it/s]
-Calculating damage:  37%|████████████████████▏                                  | 1324/3601 [00:00&lt;00:00, 12056.52it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 3601/3601 [00:00&lt;00:00, 13487.25it/s]
-Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [03:28&lt;05:48, 69.74s/it]
+Calculating damage:  32%|█████████████████▊                                     | 1164/3601 [00:00&lt;00:00, 11569.59it/s]
+Calculating damage:  64%|███████████████████████████████████▍                   | 2321/3601 [00:00&lt;00:00, 10921.15it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 3601/3601 [00:00&lt;00:00, 11222.70it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [04:35&lt;07:44, 92.84s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.90it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.19s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:03,  8.24s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:16,  5.47s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:03,  4.86s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:24&lt;00:39,  3.30s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:38&lt;01:15,  6.90s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:46&lt;01:11,  7.19s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:51&lt;01:00,  6.74s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:00&lt;00:58,  7.30s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:01&lt;00:36,  5.25s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:01&lt;00:15,  3.01s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:07&lt;00:14,  3.57s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:07&lt;00:08,  2.80s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:08&lt;00:00,  3.83s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.24it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:25,  1.59s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:24&lt;02:44, 10.96s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:26&lt;01:43,  7.39s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:33&lt;01:33,  7.22s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:34&lt;00:58,  4.88s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:52&lt;01:41,  9.24s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:59&lt;01:26,  8.66s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:07&lt;01:16,  8.52s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:21&lt;01:19,  9.93s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:21&lt;00:49,  7.14s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:23&lt;00:20,  4.14s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:29&lt;00:19,  4.79s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:31&lt;00:11,  3.81s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:32&lt;00:00,  5.14s/it]
 
 convert coverage to meters:   0%|                                                             | 0/4230 [00:00&lt;?, ?it/s]
-convert coverage to meters:   5%|██▋                                              | 229/4230 [00:00&lt;00:01, 2093.07it/s]
-convert coverage to meters:  12%|█████▊                                           | 502/4230 [00:00&lt;00:01, 2324.70it/s]
-convert coverage to meters:  17%|████████▌                                        | 735/4230 [00:00&lt;00:01, 2095.83it/s]
-convert coverage to meters:  22%|██████████▉                                      | 947/4230 [00:00&lt;00:01, 1928.92it/s]
-convert coverage to meters:  27%|████████████▉                                   | 1142/4230 [00:00&lt;00:01, 1708.92it/s]
-convert coverage to meters:  31%|██████████████▉                                 | 1317/4230 [00:00&lt;00:01, 1603.23it/s]
-convert coverage to meters:  35%|████████████████▊                               | 1480/4230 [00:00&lt;00:01, 1504.91it/s]
-convert coverage to meters:  39%|██████████████████▌                             | 1632/4230 [00:00&lt;00:01, 1469.70it/s]
-convert coverage to meters:  42%|████████████████████▏                           | 1780/4230 [00:01&lt;00:01, 1434.29it/s]
-convert coverage to meters:  45%|█████████████████████▊                          | 1924/4230 [00:01&lt;00:01, 1341.56it/s]
-convert coverage to meters:  50%|████████████████████████                        | 2118/4230 [00:01&lt;00:01, 1497.65it/s]
-convert coverage to meters:  54%|█████████████████████████▊                      | 2271/4230 [00:01&lt;00:01, 1372.87it/s]
-convert coverage to meters:  58%|███████████████████████████▉                    | 2459/4230 [00:01&lt;00:01, 1468.70it/s]
-convert coverage to meters:  63%|██████████████████████████████                  | 2651/4230 [00:01&lt;00:01, 1548.91it/s]
-convert coverage to meters:  68%|████████████████████████████████▍               | 2863/4230 [00:01&lt;00:00, 1660.21it/s]
-convert coverage to meters:  73%|███████████████████████████████████             | 3086/4230 [00:01&lt;00:00, 1768.95it/s]
-convert coverage to meters:  79%|█████████████████████████████████████▋          | 3325/4230 [00:01&lt;00:00, 1891.51it/s]
-convert coverage to meters:  83%|███████████████████████████████████████▉        | 3524/4230 [00:02&lt;00:00, 1896.87it/s]
-convert coverage to meters:  88%|██████████████████████████████████████████▏     | 3715/4230 [00:02&lt;00:00, 1899.24it/s]
-convert coverage to meters:  92%|████████████████████████████████████████████▎   | 3906/4230 [00:02&lt;00:00, 1900.42it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 4230/4230 [00:02&lt;00:00, 1749.93it/s]
+convert coverage to meters:   4%|██▏                                              | 184/4230 [00:00&lt;00:02, 1826.05it/s]
+convert coverage to meters:  10%|████▋                                            | 402/4230 [00:00&lt;00:01, 2032.78it/s]
+convert coverage to meters:  14%|███████                                          | 606/4230 [00:00&lt;00:02, 1720.48it/s]
+convert coverage to meters:  19%|█████████▏                                       | 798/4230 [00:00&lt;00:01, 1788.73it/s]
+convert coverage to meters:  23%|███████████▎                                     | 981/4230 [00:00&lt;00:02, 1560.84it/s]
+convert coverage to meters:  27%|████████████▉                                   | 1143/4230 [00:00&lt;00:02, 1469.18it/s]
+convert coverage to meters:  31%|██████████████▋                                 | 1294/4230 [00:00&lt;00:02, 1302.87it/s]
+convert coverage to meters:  34%|████████████████▏                               | 1429/4230 [00:00&lt;00:02, 1254.22it/s]
+convert coverage to meters:  37%|█████████████████▋                              | 1558/4230 [00:01&lt;00:02, 1243.31it/s]
+convert coverage to meters:  40%|███████████████████                             | 1685/4230 [00:01&lt;00:02, 1139.37it/s]
+convert coverage to meters:  43%|████████████████████▊                            | 1801/4230 [00:01&lt;00:02, 902.12it/s]
+convert coverage to meters:  45%|██████████████████████▎                          | 1922/4230 [00:01&lt;00:02, 965.55it/s]
+convert coverage to meters:  50%|████████████████████████                        | 2120/4230 [00:01&lt;00:01, 1210.09it/s]
+convert coverage to meters:  53%|█████████████████████████▌                      | 2252/4230 [00:01&lt;00:01, 1130.40it/s]
+convert coverage to meters:  56%|██████████████████████████▉                     | 2374/4230 [00:01&lt;00:01, 1143.45it/s]
+convert coverage to meters:  59%|████████████████████████████▍                   | 2502/4230 [00:01&lt;00:01, 1177.32it/s]
+convert coverage to meters:  63%|██████████████████████████████▏                 | 2657/4230 [00:02&lt;00:01, 1269.95it/s]
+convert coverage to meters:  67%|████████████████████████████████▏               | 2840/4230 [00:02&lt;00:00, 1424.14it/s]
+convert coverage to meters:  71%|█████████████████████████████████▉              | 2987/4230 [00:02&lt;00:00, 1432.79it/s]
+convert coverage to meters:  76%|████████████████████████████████████▎           | 3199/4230 [00:02&lt;00:00, 1627.53it/s]
+convert coverage to meters:  80%|██████████████████████████████████████▍         | 3388/4230 [00:02&lt;00:00, 1697.55it/s]
+convert coverage to meters:  85%|████████████████████████████████████████▋       | 3582/4230 [00:02&lt;00:00, 1762.43it/s]
+convert coverage to meters:  89%|██████████████████████████████████████████▋     | 3760/4230 [00:02&lt;00:00, 1677.09it/s]
+convert coverage to meters:  93%|████████████████████████████████████████████▊   | 3950/4230 [00:02&lt;00:00, 1733.49it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4230/4230 [00:02&lt;00:00, 1446.48it/s]
 
 Calculating damage:   0%|                                                                     | 0/4230 [00:00&lt;?, ?it/s]
-Calculating damage:  36%|███████████████████▉                                   | 1536/4230 [00:00&lt;00:00, 13993.10it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 4230/4230 [00:00&lt;00:00, 14163.91it/s]
-Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [04:43&lt;04:47, 71.78s/it]
+Calculating damage:  29%|███████████████▊                                       | 1218/4230 [00:00&lt;00:00, 12151.97it/s]
+Calculating damage:  60%|████████████████████████████████▊                      | 2519/4230 [00:00&lt;00:00, 12548.58it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4230/4230 [00:00&lt;00:00, 12396.17it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [06:14&lt;06:22, 95.58s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.88it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.19s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.12s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:13,  5.28s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:00,  4.68s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.18s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:13,  6.72s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:04,  6.49s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:54,  6.10s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:57&lt;00:55,  6.90s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:34,  4.94s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:14,  2.84s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.42s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:04&lt;00:08,  2.69s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:05&lt;00:00,  3.64s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:08,  1.97it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:25,  1.60s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:24&lt;02:38, 10.59s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:25&lt;01:36,  6.93s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:30&lt;01:19,  6.08s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:30&lt;00:49,  4.12s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:48&lt;01:35,  8.71s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:56&lt;01:23,  8.38s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:03&lt;01:12,  8.07s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:14&lt;01:11,  8.97s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:15&lt;00:44,  6.42s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:16&lt;00:18,  3.69s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:22&lt;00:17,  4.28s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:23&lt;00:10,  3.36s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:24&lt;00:00,  4.69s/it]
 
 convert coverage to meters:   0%|                                                             | 0/4470 [00:00&lt;?, ?it/s]
-convert coverage to meters:   4%|█▉                                               | 172/4470 [00:00&lt;00:02, 1671.54it/s]
-convert coverage to meters:  10%|█████                                            | 466/4470 [00:00&lt;00:01, 2278.24it/s]
-convert coverage to meters:  16%|███████▌                                         | 693/4470 [00:00&lt;00:01, 2184.87it/s]
-convert coverage to meters:  20%|█████████▉                                       | 911/4470 [00:00&lt;00:01, 2104.60it/s]
-convert coverage to meters:  25%|████████████                                    | 1122/4470 [00:00&lt;00:01, 1764.79it/s]
-convert coverage to meters:  29%|██████████████                                  | 1305/4470 [00:00&lt;00:01, 1733.89it/s]
-convert coverage to meters:  33%|███████████████▉                                | 1483/4470 [00:00&lt;00:01, 1561.52it/s]
-convert coverage to meters:  37%|█████████████████▋                              | 1644/4470 [00:00&lt;00:01, 1418.38it/s]
-convert coverage to meters:  40%|███████████████████▏                            | 1790/4470 [00:01&lt;00:01, 1394.06it/s]
-convert coverage to meters:  43%|████████████████████▋                           | 1932/4470 [00:01&lt;00:01, 1286.71it/s]
-convert coverage to meters:  47%|██████████████████████▍                         | 2086/4470 [00:01&lt;00:01, 1351.09it/s]
-convert coverage to meters:  51%|████████████████████████▌                       | 2290/4470 [00:01&lt;00:01, 1534.66it/s]
-convert coverage to meters:  55%|██████████████████████████▎                     | 2448/4470 [00:01&lt;00:01, 1292.85it/s]
-convert coverage to meters:  58%|███████████████████████████▊                    | 2586/4470 [00:01&lt;00:01, 1302.00it/s]
-convert coverage to meters:  62%|█████████████████████████████▋                  | 2764/4470 [00:01&lt;00:01, 1390.67it/s]
-convert coverage to meters:  66%|███████████████████████████████▍                | 2928/4470 [00:01&lt;00:01, 1453.75it/s]
-convert coverage to meters:  69%|█████████████████████████████████▎              | 3106/4470 [00:02&lt;00:00, 1542.00it/s]
-convert coverage to meters:  74%|███████████████████████████████████▍            | 3296/4470 [00:02&lt;00:00, 1640.50it/s]
-convert coverage to meters:  78%|█████████████████████████████████████▎          | 3471/4470 [00:02&lt;00:00, 1669.57it/s]
-convert coverage to meters:  82%|███████████████████████████████████████▎        | 3665/4470 [00:02&lt;00:00, 1734.32it/s]
-convert coverage to meters:  86%|█████████████████████████████████████████▍      | 3864/4470 [00:02&lt;00:00, 1753.40it/s]
-convert coverage to meters:  91%|███████████████████████████████████████████▌    | 4053/4470 [00:02&lt;00:00, 1792.19it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 4470/4470 [00:02&lt;00:00, 1649.97it/s]
+convert coverage to meters:   3%|█▋                                               | 152/4470 [00:00&lt;00:02, 1500.23it/s]
+convert coverage to meters:   8%|███▊                                             | 351/4470 [00:00&lt;00:02, 1782.67it/s]
+convert coverage to meters:  12%|█████▉                                           | 538/4470 [00:00&lt;00:02, 1822.21it/s]
+convert coverage to meters:  16%|███████▉                                         | 721/4470 [00:00&lt;00:02, 1739.21it/s]
+convert coverage to meters:  20%|█████████▊                                       | 900/4470 [00:00&lt;00:02, 1741.83it/s]
+convert coverage to meters:  24%|███████████▌                                    | 1075/4470 [00:00&lt;00:02, 1519.84it/s]
+convert coverage to meters:  28%|█████████████▏                                  | 1232/4470 [00:00&lt;00:02, 1406.24it/s]
+convert coverage to meters:  31%|██████████████▊                                 | 1377/4470 [00:00&lt;00:02, 1271.01it/s]
+convert coverage to meters:  34%|████████████████▎                               | 1519/4470 [00:01&lt;00:02, 1295.58it/s]
+convert coverage to meters:  37%|█████████████████▋                              | 1652/4470 [00:01&lt;00:02, 1215.16it/s]
+convert coverage to meters:  40%|███████████████████                             | 1776/4470 [00:01&lt;00:02, 1191.61it/s]
+convert coverage to meters:  42%|████████████████████▎                           | 1897/4470 [00:01&lt;00:02, 1106.65it/s]
+convert coverage to meters:  45%|█████████████████████▌                          | 2010/4470 [00:01&lt;00:02, 1063.44it/s]
+convert coverage to meters:  49%|███████████████████████▍                        | 2186/4470 [00:01&lt;00:01, 1243.74it/s]
+convert coverage to meters:  52%|████████████████████████▉                       | 2324/4470 [00:01&lt;00:01, 1279.64it/s]
+convert coverage to meters:  55%|██████████████████████████▎                     | 2455/4470 [00:01&lt;00:01, 1133.76it/s]
+convert coverage to meters:  58%|███████████████████████████▋                    | 2583/4470 [00:01&lt;00:01, 1171.26it/s]
+convert coverage to meters:  62%|█████████████████████████████▌                  | 2753/4470 [00:02&lt;00:01, 1308.01it/s]
+convert coverage to meters:  65%|███████████████████████████████                 | 2888/4470 [00:02&lt;00:01, 1257.74it/s]
+convert coverage to meters:  69%|████████████████████████████████▉               | 3068/4470 [00:02&lt;00:00, 1403.05it/s]
+convert coverage to meters:  72%|██████████████████████████████████▋             | 3225/4470 [00:02&lt;00:00, 1448.81it/s]
+convert coverage to meters:  76%|████████████████████████████████████▋           | 3414/4470 [00:02&lt;00:00, 1570.15it/s]
+convert coverage to meters:  80%|██████████████████████████████████████▌         | 3595/4470 [00:02&lt;00:00, 1635.01it/s]
+convert coverage to meters:  85%|████████████████████████████████████████▋       | 3791/4470 [00:02&lt;00:00, 1727.97it/s]
+convert coverage to meters:  89%|██████████████████████████████████████████▌     | 3966/4470 [00:02&lt;00:00, 1623.21it/s]
+convert coverage to meters:  93%|████████████████████████████████████████████▊   | 4171/4470 [00:02&lt;00:00, 1738.97it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4470/4470 [00:03&lt;00:00, 1453.60it/s]
 
 Calculating damage:   0%|                                                                     | 0/4470 [00:00&lt;?, ?it/s]
-Calculating damage:  30%|████████████████▌                                      | 1346/4470 [00:00&lt;00:00, 13378.99it/s]
-Calculating damage:  63%|██████████████████████████████████▋                    | 2821/4470 [00:00&lt;00:00, 14156.20it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 4470/4470 [00:00&lt;00:00, 14126.14it/s]
-Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [05:55&lt;03:35, 71.82s/it]
+Calculating damage:  27%|██████████████▋                                        | 1195/4470 [00:00&lt;00:00, 11947.11it/s]
+Calculating damage:  54%|█████████████████████████████▋                         | 2417/4470 [00:00&lt;00:00, 12039.06it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4470/4470 [00:00&lt;00:00, 12133.70it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [07:46&lt;04:42, 94.14s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:06,  2.46it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:20,  1.27s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:19&lt;02:09,  8.61s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:20&lt;01:18,  5.64s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:24&lt;01:04,  4.99s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:24&lt;00:40,  3.40s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:38&lt;01:14,  6.77s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:44&lt;01:05,  6.58s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:50&lt;00:57,  6.36s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:58&lt;00:55,  6.91s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:59&lt;00:34,  4.95s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:00&lt;00:14,  2.84s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:04&lt;00:13,  3.30s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:05&lt;00:07,  2.60s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:06&lt;00:00,  3.69s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:10,  1.63it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:25,  1.62s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:25&lt;02:46, 11.08s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:26&lt;01:40,  7.21s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:31&lt;01:22,  6.32s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:31&lt;00:51,  4.27s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:48&lt;01:33,  8.53s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:55&lt;01:20,  8.03s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:02&lt;01:07,  7.54s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:11&lt;01:05,  8.17s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:12&lt;00:41,  5.89s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:13&lt;00:16,  3.38s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:19&lt;00:15,  3.95s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:20&lt;00:09,  3.11s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:21&lt;00:00,  4.51s/it]
 
 convert coverage to meters:   0%|                                                             | 0/4658 [00:00&lt;?, ?it/s]
-convert coverage to meters:   4%|█▉                                               | 190/4658 [00:00&lt;00:02, 1885.70it/s]
-convert coverage to meters:  10%|████▉                                            | 472/4658 [00:00&lt;00:01, 2428.52it/s]
-convert coverage to meters:  15%|███████▌                                         | 715/4658 [00:00&lt;00:01, 2109.23it/s]
-convert coverage to meters:  20%|█████████▊                                       | 931/4658 [00:00&lt;00:01, 2028.95it/s]
-convert coverage to meters:  24%|███████████▋                                    | 1137/4658 [00:00&lt;00:02, 1712.72it/s]
-convert coverage to meters:  28%|█████████████▌                                  | 1316/4658 [00:00&lt;00:02, 1611.63it/s]
-convert coverage to meters:  32%|███████████████▎                                | 1482/4658 [00:00&lt;00:02, 1470.71it/s]
-convert coverage to meters:  35%|████████████████▊                               | 1635/4658 [00:00&lt;00:02, 1442.44it/s]
-convert coverage to meters:  38%|██████████████████▎                             | 1782/4658 [00:01&lt;00:02, 1413.06it/s]
-convert coverage to meters:  41%|███████████████████▊                            | 1925/4658 [00:01&lt;00:01, 1389.84it/s]
-convert coverage to meters:  44%|█████████████████████▎                          | 2065/4658 [00:01&lt;00:01, 1329.52it/s]
-convert coverage to meters:  48%|███████████████████████                         | 2242/4658 [00:01&lt;00:01, 1432.87it/s]
-convert coverage to meters:  52%|████████████████████████▊                       | 2412/4658 [00:01&lt;00:01, 1505.01it/s]
-convert coverage to meters:  55%|██████████████████████████▍                     | 2564/4658 [00:01&lt;00:01, 1309.67it/s]
-convert coverage to meters:  59%|████████████████████████████▏                   | 2730/4658 [00:01&lt;00:01, 1386.90it/s]
-convert coverage to meters:  62%|█████████████████████████████▋                  | 2886/4658 [00:01&lt;00:01, 1429.67it/s]
-convert coverage to meters:  66%|███████████████████████████████▋                | 3070/4658 [00:01&lt;00:01, 1529.04it/s]
-convert coverage to meters:  70%|█████████████████████████████████▍              | 3241/4658 [00:02&lt;00:00, 1577.20it/s]
-convert coverage to meters:  74%|███████████████████████████████████▌            | 3453/4658 [00:02&lt;00:00, 1690.07it/s]
-convert coverage to meters:  78%|█████████████████████████████████████▎          | 3624/4658 [00:02&lt;00:00, 1690.44it/s]
-convert coverage to meters:  82%|███████████████████████████████████████▍        | 3826/4658 [00:02&lt;00:00, 1774.57it/s]
-convert coverage to meters:  86%|█████████████████████████████████████████▎      | 4005/4658 [00:02&lt;00:00, 1746.08it/s]
-convert coverage to meters:  90%|███████████████████████████████████████████▏    | 4194/4658 [00:02&lt;00:00, 1784.51it/s]
-convert coverage to meters:  94%|█████████████████████████████████████████████▎  | 4399/4658 [00:02&lt;00:00, 1861.31it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 4658/4658 [00:02&lt;00:00, 1654.86it/s]
+convert coverage to meters:   3%|█▌                                               | 148/4658 [00:00&lt;00:03, 1280.70it/s]
+convert coverage to meters:   8%|███▉                                             | 378/4658 [00:00&lt;00:02, 1836.14it/s]
+convert coverage to meters:  12%|█████▉                                           | 565/4658 [00:00&lt;00:02, 1803.98it/s]
+convert coverage to meters:  16%|███████▊                                         | 748/4658 [00:00&lt;00:02, 1734.19it/s]
+convert coverage to meters:  20%|█████████▋                                       | 923/4658 [00:00&lt;00:02, 1606.16it/s]
+convert coverage to meters:  23%|███████████▏                                    | 1086/4658 [00:00&lt;00:02, 1471.99it/s]
+convert coverage to meters:  27%|████████████▋                                   | 1236/4658 [00:00&lt;00:02, 1434.80it/s]
+convert coverage to meters:  30%|██████████████▏                                 | 1381/4658 [00:00&lt;00:02, 1202.35it/s]
+convert coverage to meters:  32%|███████████████▌                                | 1508/4658 [00:01&lt;00:02, 1085.96it/s]
+convert coverage to meters:  35%|█████████████████                                | 1622/4658 [00:01&lt;00:03, 972.32it/s]
+convert coverage to meters:  37%|█████████████████▊                              | 1734/4658 [00:01&lt;00:02, 1006.78it/s]
+convert coverage to meters:  40%|███████████████████▏                            | 1858/4658 [00:01&lt;00:02, 1063.12it/s]
+convert coverage to meters:  42%|████████████████████▋                            | 1969/4658 [00:01&lt;00:02, 998.06it/s]
+convert coverage to meters:  45%|█████████████████████▍                          | 2075/4658 [00:01&lt;00:02, 1009.35it/s]
+convert coverage to meters:  48%|███████████████████████                         | 2243/4658 [00:01&lt;00:02, 1189.39it/s]
+convert coverage to meters:  51%|████████████████████████▋                       | 2398/4658 [00:01&lt;00:01, 1289.24it/s]
+convert coverage to meters:  54%|██████████████████████████                      | 2531/4658 [00:02&lt;00:01, 1141.86it/s]
+convert coverage to meters:  57%|███████████████████████████▌                    | 2670/4658 [00:02&lt;00:01, 1202.45it/s]
+convert coverage to meters:  61%|█████████████████████████████▍                  | 2852/4658 [00:02&lt;00:01, 1369.73it/s]
+convert coverage to meters:  64%|██████████████████████████████▊                 | 2994/4658 [00:02&lt;00:01, 1288.54it/s]
+convert coverage to meters:  68%|████████████████████████████████▍               | 3150/4658 [00:02&lt;00:01, 1358.22it/s]
+convert coverage to meters:  71%|█████████████████████████████████▉              | 3290/4658 [00:02&lt;00:01, 1338.39it/s]
+convert coverage to meters:  75%|████████████████████████████████████            | 3494/4658 [00:02&lt;00:00, 1530.26it/s]
+convert coverage to meters:  78%|█████████████████████████████████████▌          | 3650/4658 [00:02&lt;00:00, 1509.45it/s]
+convert coverage to meters:  82%|███████████████████████████████████████▍        | 3825/4658 [00:02&lt;00:00, 1572.99it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████▏      | 3992/4658 [00:03&lt;00:00, 1595.15it/s]
+convert coverage to meters:  89%|██████████████████████████████████████████▊     | 4153/4658 [00:03&lt;00:00, 1579.87it/s]
+convert coverage to meters:  93%|████████████████████████████████████████████▋   | 4341/4658 [00:03&lt;00:00, 1665.98it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 4658/4658 [00:03&lt;00:00, 1383.06it/s]
 
 Calculating damage:   0%|                                                                     | 0/4658 [00:00&lt;?, ?it/s]
-Calculating damage:  26%|██████████████▌                                        | 1231/4658 [00:00&lt;00:00, 12287.60it/s]
-Calculating damage:  58%|███████████████████████████████▊                       | 2699/4658 [00:00&lt;00:00, 13626.28it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 4658/4658 [00:00&lt;00:00, 13277.72it/s]
-Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [07:08&lt;02:24, 72.16s/it]
+Calculating damage:  25%|█████████████▋                                         | 1156/4658 [00:00&lt;00:00, 11559.02it/s]
+Calculating damage:  50%|███████████████████████████▎                           | 2312/4658 [00:00&lt;00:00, 11325.08it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 4658/4658 [00:00&lt;00:00, 11866.07it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [09:15&lt;03:04, 92.34s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.36it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:19,  1.25s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;01:59,  7.97s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:13,  5.23s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:22&lt;01:00,  4.67s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.18s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:15,  6.88s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:06,  6.60s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:49&lt;00:55,  6.19s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:53,  6.72s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.84s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:03&lt;00:13,  3.26s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.59s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:07,  2.27it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:23,  1.45s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:22&lt;02:24,  9.65s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:23&lt;01:28,  6.31s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:27&lt;01:12,  5.61s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:27&lt;00:45,  3.80s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:45&lt;01:30,  8.19s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:53&lt;01:21,  8.11s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:00&lt;01:11,  8.00s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:12&lt;01:12,  9.08s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:13&lt;00:45,  6.55s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:14&lt;00:18,  3.76s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:21&lt;00:18,  4.59s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:22&lt;00:10,  3.63s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:23&lt;00:00,  4.66s/it]
 
 convert coverage to meters:   0%|                                                             | 0/5022 [00:00&lt;?, ?it/s]
-convert coverage to meters:   3%|█▋                                               | 174/5022 [00:00&lt;00:02, 1728.49it/s]
-convert coverage to meters:   9%|████▎                                            | 436/5022 [00:00&lt;00:02, 2239.65it/s]
-convert coverage to meters:  13%|██████▍                                          | 660/5022 [00:00&lt;00:02, 1891.67it/s]
-convert coverage to meters:  17%|████████▎                                        | 855/5022 [00:00&lt;00:02, 1848.87it/s]
-convert coverage to meters:  21%|█████████▉                                      | 1044/5022 [00:00&lt;00:02, 1859.60it/s]
-convert coverage to meters:  25%|███████████▊                                    | 1232/5022 [00:00&lt;00:02, 1674.78it/s]
-convert coverage to meters:  28%|█████████████▍                                  | 1404/5022 [00:00&lt;00:02, 1590.01it/s]
-convert coverage to meters:  31%|██████████████▉                                 | 1566/5022 [00:00&lt;00:02, 1385.85it/s]
-convert coverage to meters:  34%|████████████████▍                               | 1718/5022 [00:01&lt;00:02, 1403.50it/s]
-convert coverage to meters:  37%|█████████████████▊                              | 1863/5022 [00:01&lt;00:02, 1367.93it/s]
-convert coverage to meters:  40%|███████████████████▏                            | 2003/5022 [00:01&lt;00:02, 1343.40it/s]
-convert coverage to meters:  43%|████████████████████▍                           | 2139/5022 [00:01&lt;00:02, 1256.01it/s]
-convert coverage to meters:  45%|█████████████████████▋                          | 2267/5022 [00:01&lt;00:02, 1248.27it/s]
-convert coverage to meters:  50%|███████████████████████▉                        | 2499/5022 [00:01&lt;00:01, 1511.47it/s]
-convert coverage to meters:  53%|█████████████████████████▎                      | 2653/5022 [00:01&lt;00:01, 1343.45it/s]
-convert coverage to meters:  56%|██████████████████████████▊                     | 2802/5022 [00:01&lt;00:01, 1380.54it/s]
-convert coverage to meters:  59%|████████████████████████████▍                   | 2976/5022 [00:01&lt;00:01, 1441.78it/s]
-convert coverage to meters:  62%|█████████████████████████████▊                  | 3123/5022 [00:02&lt;00:01, 1421.42it/s]
-convert coverage to meters:  65%|███████████████████████████████▏                | 3267/5022 [00:02&lt;00:01, 1419.35it/s]
-convert coverage to meters:  69%|█████████████████████████████████               | 3457/5022 [00:02&lt;00:01, 1517.96it/s]
-convert coverage to meters:  72%|██████████████████████████████████▌             | 3614/5022 [00:02&lt;00:00, 1529.60it/s]
-convert coverage to meters:  76%|████████████████████████████████████▎           | 3804/5022 [00:02&lt;00:00, 1635.18it/s]
-convert coverage to meters:  79%|██████████████████████████████████████          | 3980/5022 [00:02&lt;00:00, 1669.52it/s]
-convert coverage to meters:  83%|███████████████████████████████████████▋        | 4148/5022 [00:02&lt;00:00, 1668.28it/s]
-convert coverage to meters:  87%|█████████████████████████████████████████▌      | 4348/5022 [00:02&lt;00:00, 1764.66it/s]
-convert coverage to meters:  90%|███████████████████████████████████████████▎    | 4530/5022 [00:02&lt;00:00, 1777.63it/s]
-convert coverage to meters:  95%|█████████████████████████████████████████████▎  | 4747/5022 [00:03&lt;00:00, 1891.54it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 5022/5022 [00:03&lt;00:00, 1607.45it/s]
+convert coverage to meters:   3%|█▍                                               | 151/5022 [00:00&lt;00:03, 1488.00it/s]
+convert coverage to meters:   8%|███▊                                             | 394/5022 [00:00&lt;00:02, 2034.54it/s]
+convert coverage to meters:  12%|█████▊                                           | 598/5022 [00:00&lt;00:02, 1936.37it/s]
+convert coverage to meters:  16%|███████▋                                         | 793/5022 [00:00&lt;00:02, 1846.95it/s]
+convert coverage to meters:  19%|█████████▌                                       | 979/5022 [00:00&lt;00:02, 1771.65it/s]
+convert coverage to meters:  23%|███████████                                     | 1157/5022 [00:00&lt;00:02, 1557.11it/s]
+convert coverage to meters:  26%|████████████▌                                   | 1317/5022 [00:00&lt;00:02, 1563.74it/s]
+convert coverage to meters:  29%|██████████████                                  | 1476/5022 [00:00&lt;00:02, 1359.54it/s]
+convert coverage to meters:  32%|███████████████▍                                | 1618/5022 [00:01&lt;00:02, 1346.48it/s]
+convert coverage to meters:  35%|████████████████▊                               | 1757/5022 [00:01&lt;00:02, 1113.08it/s]
+convert coverage to meters:  37%|█████████████████▉                              | 1877/5022 [00:01&lt;00:02, 1089.50it/s]
+convert coverage to meters:  40%|███████████████████                             | 1992/5022 [00:01&lt;00:02, 1087.64it/s]
+convert coverage to meters:  42%|████████████████████                            | 2105/5022 [00:01&lt;00:02, 1060.71it/s]
+convert coverage to meters:  44%|█████████████████████▏                          | 2218/5022 [00:01&lt;00:02, 1076.20it/s]
+convert coverage to meters:  46%|██████████████████████▎                         | 2328/5022 [00:01&lt;00:02, 1080.20it/s]
+convert coverage to meters:  50%|████████████████████████                        | 2518/5022 [00:01&lt;00:01, 1307.09it/s]
+convert coverage to meters:  53%|█████████████████████████▎                      | 2652/5022 [00:02&lt;00:01, 1192.30it/s]
+convert coverage to meters:  55%|██████████████████████████▌                     | 2775/5022 [00:02&lt;00:01, 1189.15it/s]
+convert coverage to meters:  58%|███████████████████████████▋                    | 2897/5022 [00:02&lt;00:01, 1169.63it/s]
+convert coverage to meters:  61%|█████████████████████████████▏                  | 3056/5022 [00:02&lt;00:01, 1269.20it/s]
+convert coverage to meters:  63%|██████████████████████████████▍                 | 3185/5022 [00:02&lt;00:01, 1170.96it/s]
+convert coverage to meters:  67%|████████████████████████████████                | 3359/5022 [00:02&lt;00:01, 1323.98it/s]
+convert coverage to meters:  70%|█████████████████████████████████▍              | 3503/5022 [00:02&lt;00:01, 1353.31it/s]
+convert coverage to meters:  73%|███████████████████████████████████             | 3664/5022 [00:02&lt;00:00, 1424.13it/s]
+convert coverage to meters:  76%|████████████████████████████████████▌           | 3827/5022 [00:02&lt;00:00, 1483.17it/s]
+convert coverage to meters:  80%|██████████████████████████████████████▎         | 4003/5022 [00:02&lt;00:00, 1561.55it/s]
+convert coverage to meters:  83%|████████████████████████████████████████        | 4185/5022 [00:03&lt;00:00, 1635.28it/s]
+convert coverage to meters:  87%|█████████████████████████████████████████▌      | 4354/5022 [00:03&lt;00:00, 1644.98it/s]
+convert coverage to meters:  90%|███████████████████████████████████████████▍    | 4540/5022 [00:03&lt;00:00, 1707.25it/s]
+convert coverage to meters:  94%|█████████████████████████████████████████████▏  | 4732/5022 [00:03&lt;00:00, 1765.31it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 5022/5022 [00:03&lt;00:00, 1437.76it/s]
 
 Calculating damage:   0%|                                                                     | 0/5022 [00:00&lt;?, ?it/s]
-Calculating damage:  28%|███████████████▍                                       | 1412/5022 [00:00&lt;00:00, 12842.08it/s]
-Calculating damage:  57%|███████████████████████████████▏                       | 2853/5022 [00:00&lt;00:00, 13000.66it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 5022/5022 [00:00&lt;00:00, 13552.66it/s]
-Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [08:19&lt;01:11, 71.91s/it]
+Calculating damage:  24%|█████████████▎                                         | 1218/5022 [00:00&lt;00:00, 12074.25it/s]
+Calculating damage:  53%|████████████████████████████▉                          | 2645/5022 [00:00&lt;00:00, 13326.41it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 5022/5022 [00:00&lt;00:00, 13223.42it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [10:47&lt;01:32, 92.17s/it]
 Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
-Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:05,  2.84it/s]
-Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:20,  1.28s/it]
-Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:18&lt;02:01,  8.12s/it]
-Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:19&lt;01:14,  5.32s/it]
-Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:23&lt;01:01,  4.71s/it]
-Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:23&lt;00:38,  3.21s/it]
-Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:37&lt;01:12,  6.63s/it]
-Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:43&lt;01:03,  6.38s/it]
-Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:48&lt;00:55,  6.18s/it]
-Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:56&lt;00:53,  6.74s/it]
-Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:57&lt;00:33,  4.85s/it]
-Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:58&lt;00:13,  2.79s/it]
-Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:02&lt;00:13,  3.25s/it]
-Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:03&lt;00:07,  2.57s/it]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:04&lt;00:00,  3.58s/it]
+Overlay raster with vector:   6%|███                                                    | 1/18 [00:00&lt;00:09,  1.85it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:02&lt;00:25,  1.57s/it]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:23&lt;02:35, 10.34s/it]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:24&lt;01:34,  6.72s/it]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:29&lt;01:16,  5.89s/it]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:29&lt;00:47,  3.99s/it]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:48&lt;01:38,  8.98s/it]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:56&lt;01:26,  8.65s/it]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [01:07&lt;01:22,  9.19s/it]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [01:23&lt;01:30, 11.37s/it]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [01:24&lt;00:57,  8.19s/it]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [01:25&lt;00:23,  4.68s/it]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [01:32&lt;00:20,  5.19s/it]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [01:33&lt;00:12,  4.03s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [01:34&lt;00:00,  5.24s/it]
 
 convert coverage to meters:   0%|                                                             | 0/5464 [00:00&lt;?, ?it/s]
-convert coverage to meters:   3%|█▍                                               | 164/5464 [00:00&lt;00:03, 1492.35it/s]
-convert coverage to meters:   8%|███▉                                             | 438/5464 [00:00&lt;00:02, 2082.03it/s]
-convert coverage to meters:  12%|█████▊                                           | 647/5464 [00:00&lt;00:02, 1997.31it/s]
-convert coverage to meters:  16%|███████▌                                         | 847/5464 [00:00&lt;00:02, 1807.19it/s]
-convert coverage to meters:  19%|█████████▎                                      | 1056/5464 [00:00&lt;00:02, 1831.02it/s]
-convert coverage to meters:  23%|██████████▉                                     | 1241/5464 [00:00&lt;00:02, 1702.78it/s]
-convert coverage to meters:  26%|████████████▍                                   | 1413/5464 [00:00&lt;00:02, 1524.34it/s]
-convert coverage to meters:  29%|█████████████▊                                  | 1569/5464 [00:00&lt;00:02, 1390.36it/s]
-convert coverage to meters:  31%|███████████████                                 | 1711/5464 [00:01&lt;00:02, 1285.81it/s]
-convert coverage to meters:  35%|████████████████▌                               | 1890/5464 [00:01&lt;00:02, 1379.47it/s]
-convert coverage to meters:  37%|█████████████████▊                              | 2031/5464 [00:01&lt;00:02, 1350.94it/s]
-convert coverage to meters:  40%|███████████████████                             | 2168/5464 [00:01&lt;00:02, 1321.58it/s]
-convert coverage to meters:  42%|████████████████████▏                           | 2302/5464 [00:01&lt;00:02, 1276.79it/s]
-convert coverage to meters:  44%|█████████████████████▎                          | 2431/5464 [00:01&lt;00:02, 1141.06it/s]
-convert coverage to meters:  49%|███████████████████████▎                        | 2653/5464 [00:01&lt;00:02, 1364.57it/s]
-convert coverage to meters:  52%|████████████████████████▉                       | 2836/5464 [00:01&lt;00:01, 1473.23it/s]
-convert coverage to meters:  55%|██████████████████████████▏                     | 2987/5464 [00:02&lt;00:01, 1305.96it/s]
-convert coverage to meters:  58%|███████████████████████████▋                    | 3149/5464 [00:02&lt;00:01, 1355.32it/s]
-convert coverage to meters:  61%|█████████████████████████████▎                  | 3336/5464 [00:02&lt;00:01, 1467.30it/s]
-convert coverage to meters:  64%|██████████████████████████████▋                 | 3487/5464 [00:02&lt;00:01, 1359.53it/s]
-convert coverage to meters:  68%|████████████████████████████████▍               | 3693/5464 [00:02&lt;00:01, 1489.03it/s]
-convert coverage to meters:  71%|██████████████████████████████████              | 3878/5464 [00:02&lt;00:01, 1536.16it/s]
-convert coverage to meters:  75%|████████████████████████████████████            | 4105/5464 [00:02&lt;00:00, 1688.68it/s]
-convert coverage to meters:  78%|█████████████████████████████████████▌          | 4277/5464 [00:02&lt;00:00, 1653.31it/s]
-convert coverage to meters:  83%|███████████████████████████████████████▋        | 4512/5464 [00:02&lt;00:00, 1770.60it/s]
-convert coverage to meters:  86%|█████████████████████████████████████████▎      | 4708/5464 [00:03&lt;00:00, 1780.70it/s]
-convert coverage to meters:  89%|██████████████████████████████████████████▉     | 4887/5464 [00:03&lt;00:00, 1760.28it/s]
-convert coverage to meters:  93%|████████████████████████████████████████████▋   | 5086/5464 [00:03&lt;00:00, 1816.84it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 5464/5464 [00:03&lt;00:00, 1567.46it/s]
+convert coverage to meters:   3%|█▏                                               | 138/5464 [00:00&lt;00:03, 1366.84it/s]
+convert coverage to meters:   5%|██▋                                              | 299/5464 [00:00&lt;00:03, 1505.34it/s]
+convert coverage to meters:  10%|████▊                                            | 534/5464 [00:00&lt;00:02, 1851.15it/s]
+convert coverage to meters:  13%|██████▍                                          | 719/5464 [00:00&lt;00:02, 1611.36it/s]
+convert coverage to meters:  16%|███████▉                                         | 884/5464 [00:00&lt;00:02, 1575.05it/s]
+convert coverage to meters:  20%|█████████▋                                      | 1105/5464 [00:00&lt;00:02, 1771.77it/s]
+convert coverage to meters:  24%|███████████▎                                    | 1286/5464 [00:00&lt;00:02, 1555.97it/s]
+convert coverage to meters:  27%|████████████▋                                   | 1448/5464 [00:00&lt;00:02, 1565.99it/s]
+convert coverage to meters:  29%|██████████████▏                                 | 1609/5464 [00:01&lt;00:02, 1358.44it/s]
+convert coverage to meters:  32%|███████████████▍                                | 1752/5464 [00:01&lt;00:02, 1257.10it/s]
+convert coverage to meters:  35%|████████████████▌                               | 1890/5464 [00:01&lt;00:02, 1271.95it/s]
+convert coverage to meters:  37%|█████████████████▊                              | 2021/5464 [00:01&lt;00:02, 1154.45it/s]
+convert coverage to meters:  39%|██████████████████▊                             | 2141/5464 [00:01&lt;00:02, 1120.47it/s]
+convert coverage to meters:  42%|███████████████████▉                            | 2275/5464 [00:01&lt;00:02, 1172.23it/s]
+convert coverage to meters:  44%|█████████████████████                           | 2395/5464 [00:01&lt;00:02, 1143.98it/s]
+convert coverage to meters:  46%|██████████████████████                          | 2511/5464 [00:01&lt;00:02, 1117.97it/s]
+convert coverage to meters:  49%|███████████████████████▌                        | 2679/5464 [00:01&lt;00:02, 1265.15it/s]
+convert coverage to meters:  52%|████████████████████████▊                       | 2827/5464 [00:02&lt;00:01, 1325.01it/s]
+convert coverage to meters:  54%|██████████████████████████                      | 2962/5464 [00:02&lt;00:02, 1112.74it/s]
+convert coverage to meters:  57%|███████████████████████████▍                    | 3125/5464 [00:02&lt;00:01, 1235.84it/s]
+convert coverage to meters:  60%|████████████████████████████▌                   | 3256/5464 [00:02&lt;00:01, 1231.15it/s]
+convert coverage to meters:  62%|█████████████████████████████▋                  | 3384/5464 [00:02&lt;00:01, 1131.37it/s]
+convert coverage to meters:  64%|██████████████████████████████▊                 | 3502/5464 [00:02&lt;00:01, 1128.27it/s]
+convert coverage to meters:  67%|████████████████████████████████                | 3656/5464 [00:02&lt;00:01, 1237.73it/s]
+convert coverage to meters:  70%|█████████████████████████████████▎              | 3798/5464 [00:02&lt;00:01, 1284.88it/s]
+convert coverage to meters:  72%|██████████████████████████████████▌             | 3930/5464 [00:03&lt;00:01, 1196.20it/s]
+convert coverage to meters:  75%|███████████████████████████████████▊            | 4080/5464 [00:03&lt;00:01, 1277.84it/s]
+convert coverage to meters:  77%|█████████████████████████████████████           | 4220/5464 [00:03&lt;00:00, 1302.55it/s]
+convert coverage to meters:  80%|██████████████████████████████████████▌         | 4394/5464 [00:03&lt;00:00, 1424.94it/s]
+convert coverage to meters:  83%|███████████████████████████████████████▊        | 4539/5464 [00:03&lt;00:00, 1398.11it/s]
+convert coverage to meters:  86%|█████████████████████████████████████████       | 4681/5464 [00:03&lt;00:00, 1360.62it/s]
+convert coverage to meters:  88%|██████████████████████████████████████████▎     | 4819/5464 [00:03&lt;00:00, 1319.18it/s]
+convert coverage to meters:  92%|███████████████████████████████████████████▉    | 5008/5464 [00:03&lt;00:00, 1479.76it/s]
+convert coverage to meters:  94%|█████████████████████████████████████████████▎  | 5162/5464 [00:03&lt;00:00, 1495.12it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 5464/5464 [00:04&lt;00:00, 1357.77it/s]
 
 Calculating damage:   0%|                                                                     | 0/5464 [00:00&lt;?, ?it/s]
-Calculating damage:  24%|█████████████                                          | 1302/5464 [00:00&lt;00:00, 11839.81it/s]
-Calculating damage:  50%|███████████████████████████▍                           | 2730/5464 [00:00&lt;00:00, 13214.82it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 5464/5464 [00:00&lt;00:00, 13514.49it/s]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [09:31&lt;00:00, 71.38s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:12&lt;00:00,  1.51s/it]
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\base.py:3805,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3804</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3805</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+Calculating damage:  23%|████████████▋                                          | 1260/5464 [00:00&lt;00:00, 12495.77it/s]
+Calculating damage:  46%|█████████████████████████▋                              | 2510/5464 [00:00&lt;00:00, 9743.77it/s]
+Calculating damage:  68%|█████████████████████████████████████▌                 | 3737/5464 [00:00&lt;00:00, 10734.29it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████| 5464/5464 [00:00&lt;00:00, 11239.07it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [12:31&lt;00:00, 93.88s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:14&lt;00:00,  1.78s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 26.77it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 34.09it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 30.32it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 33.41it/s]
 
-<span class="nn">File index.pyx:167,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1230.27it/s]
 
-<span class="nn">File index.pyx:196,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1597.15it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:09&lt;01:06,  9.44s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  11%|██████                                                 | 2/18 [00:00&lt;00:00, 17.93it/s]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:00&lt;00:01, 12.33it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 16.04it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 17.98it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 23.25it/s]
 
-<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7081,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1138.21it/s]
 
-<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7089,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 4005.06it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:20&lt;01:01, 10.17s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 19.40it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 27.17it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 24.21it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 28.54it/s]
 
-<span class="ne">KeyError</span>: &#39;damage&#39;
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 1829.10it/s]
 
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 3663.15it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:32&lt;00:55, 11.08s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 21.25it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 27.04it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 23.34it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 27.98it/s]
 
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">save_asset_risk_results</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                                        <span class="n">infrastructure_path</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                                        <span class="n">curves</span><span class="o">=</span><span class="n">damage_curves_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">],</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                                                        <span class="n">maxdam</span><span class="o">=</span><span class="n">maxdam_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">7</span>                                                            <span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="p">)</span>
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 1502.11it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\damagescanner\core.py:183,</span> in <span class="ni">DamageScanner.risk</span><span class="nt">(self, hazard_dict, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="n">largest_rp</span> <span class="o">=</span> <span class="n">df_risk</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">pd</span><span class="o">.</span><span class="n">IndexSlice</span><span class="p">[</span><span class="n">RP_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],:]]</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;multi_curves&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span>  
-<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="c1"># only keep the damage values</span>
-<span class="ne">--&gt; </span><span class="mi">183</span>     <span class="n">df_risk</span> <span class="o">=</span> <span class="n">df_risk</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">pd</span><span class="o">.</span><span class="n">IndexSlice</span><span class="p">[</span><span class="n">RP_list</span><span class="p">,</span> <span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="n">RPS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">RP_list</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">187</span>     <span class="n">risk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span>         <span class="n">df_risk</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span>             <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">RP_list</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">RPS</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span>         <span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">191</span>         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tot_risk&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="p">)</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 5493.19it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:43&lt;00:44, 11.01s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 24.97it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 30.15it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 24.82it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 20.79it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1184,</span> in <span class="ni">_LocationIndexer.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1182</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_scalar_access</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1183</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">takeable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_takeable</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1184</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_tuple</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1185</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1186</span>     <span class="c1"># we by definition only have the 0th axis</span>
-<span class="g g-Whitespace">   </span><span class="mi">1187</span>     <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axis</span> <span class="ow">or</span> <span class="mi">0</span>
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 1213.18it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1368,</span> in <span class="ni">_LocIndexer._getitem_tuple</span><span class="nt">(self, tup)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1366</span> <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">IndexingError</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1367</span>     <span class="n">tup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_ellipsis</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1368</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_lowerdim</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1370</span> <span class="c1"># no multi-index, so validate all of the indexers</span>
-<span class="g g-Whitespace">   </span><span class="mi">1371</span> <span class="n">tup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_tuple_indexer</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 2750.20it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:53&lt;00:32, 10.79s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 21.35it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 26.69it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 22.73it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 28.16it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1041,</span> in <span class="ni">_LocationIndexer._getitem_lowerdim</span><span class="nt">(self, tup)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1039</span> <span class="c1"># we may have a nested tuples indexer here</span>
-<span class="g g-Whitespace">   </span><span class="mi">1040</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_nested_tuple_indexer</span><span class="p">(</span><span class="n">tup</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1041</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_nested_tuple</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1043</span> <span class="c1"># we maybe be using a tuple to represent multiple dimensions here</span>
-<span class="g g-Whitespace">   </span><span class="mi">1044</span> <span class="n">ax0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">_get_axis</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 1099.82it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1153,</span> in <span class="ni">_LocationIndexer._getitem_nested_tuple</span><span class="nt">(self, tup)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1150</span>     <span class="n">axis</span> <span class="o">-=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1151</span>     <span class="k">continue</span>
-<span class="ne">-&gt; </span><span class="mi">1153</span> <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_getitem_axis</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1154</span> <span class="n">axis</span> <span class="o">-=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1156</span> <span class="c1"># if we have a scalar, we are done</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 4575.30it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [01:03&lt;00:20, 10.48s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 18.00it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 25.63it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 13.70it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 20.81it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexing.py:1424,</span> in <span class="ni">_LocIndexer._getitem_axis</span><span class="nt">(self, key, axis)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1422</span> <span class="c1"># nested tuple slicing</span>
-<span class="g g-Whitespace">   </span><span class="mi">1423</span> <span class="k">if</span> <span class="n">is_nested_tuple</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1424</span>     <span class="n">locs</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">get_locs</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1425</span>     <span class="n">indexer</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">slice</span> <span class="o">|</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndim</span>
-<span class="g g-Whitespace">   </span><span class="mi">1426</span>     <span class="n">indexer</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs</span>
+convert coverage to meters: 100%|█████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 994.43it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:3536,</span> in <span class="ni">MultiIndex.get_locs</span><span class="nt">(self, seq)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3532</span>     <span class="k">continue</span>
-<span class="g g-Whitespace">   </span><span class="mi">3534</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3535</span>     <span class="c1"># a slice or a single label</span>
-<span class="ne">-&gt; </span><span class="mi">3536</span>     <span class="n">lvl_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_level_indexer</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">indexer</span><span class="o">=</span><span class="n">indexer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3538</span> <span class="c1"># update indexer</span>
-<span class="g g-Whitespace">   </span><span class="mi">3539</span> <span class="n">lvl_indexer</span> <span class="o">=</span> <span class="n">_to_bool_indexer</span><span class="p">(</span><span class="n">lvl_indexer</span><span class="p">)</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 4930.78it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:14&lt;00:10, 10.72s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 26.23it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 32.44it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 29.05it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 32.62it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:3391,</span> in <span class="ni">MultiIndex._get_level_indexer</span><span class="nt">(self, key, level, indexer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3388</span>         <span class="k">return</span> <span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3390</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3391</span>     <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_loc_single_level_index</span><span class="p">(</span><span class="n">level_index</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3393</span>     <span class="k">if</span> <span class="n">level</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexsort_depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3394</span>         <span class="c1"># Desired level is not sorted</span>
-<span class="g g-Whitespace">   </span><span class="mi">3395</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3396</span>             <span class="c1"># test_get_loc_partial_timestamp_multiindex</span>
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 1300.27it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\multi.py:2980,</span> in <span class="ni">MultiIndex._get_loc_single_level_index</span><span class="nt">(self, level_index, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2978</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">2979</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2980</span>     <span class="k">return</span> <span class="n">level_index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 4784.05it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:27&lt;00:00, 10.89s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 4471.54it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:09&lt;01:03,  9.03s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 6035.33it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:18&lt;00:53,  9.00s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 7992.96it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:29&lt;00:50, 10.12s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 5934.99it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:38&lt;00:39,  9.76s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 4034.28it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:46&lt;00:27,  9.24s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 9639.31it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:55&lt;00:17,  8.95s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 5340.51it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:03&lt;00:08,  8.75s/it]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 6658.51it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:12&lt;00:00,  9.03s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 45.19it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 33.71it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 38.14it/s]
 
-<span class="nn">File ~\.conda\envs\pygis\Lib\site-packages\pandas\core\indexes\base.py:3812,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3807</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3808</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3809</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3810</span>     <span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3811</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">3812</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
-<span class="g g-Whitespace">   </span><span class="mi">3813</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3814</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3815</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3816</span>     <span class="c1">#  the TypeError.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3817</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 7986.30it/s]
 
-<span class="ne">KeyError</span>: &#39;damage&#39;
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 6287.72it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:08&lt;01:00,  8.66s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 43.20it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 30.99it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 35.85it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 16031.74it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 6431.13it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:17&lt;00:52,  8.71s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  22%|████████████▏                                          | 4/18 [00:00&lt;00:00, 38.78it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:00&lt;00:00, 41.14it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:00&lt;00:00, 33.03it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 34.87it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 8508.73it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 5316.77it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:26&lt;00:43,  8.71s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 40.04it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 32.02it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 36.02it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 17082.69it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 8488.47it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:34&lt;00:35,  8.77s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:00&lt;00:00, 54.97it/s]
+Overlay raster with vector:  67%|████████████████████████████████████                  | 12/18 [00:00&lt;00:00, 40.47it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 41.60it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 16997.18it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 6755.39it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:44&lt;00:27,  9.18s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 46.55it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 32.97it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 38.48it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 16997.18it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 6760.52it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:53&lt;00:17,  8.97s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 43.28it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 32.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 36.14it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 16997.18it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 3324.16it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:02&lt;00:08,  9.00s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 46.86it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 22.11it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 29.64it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 17013.40it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 6880.55it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:11&lt;00:00,  8.91s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 61.54it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 67.16it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 1000.07it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 1000.31it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:08&lt;00:58,  8.32s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 58.92it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 63.10it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 1003.90it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 999.36it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:16&lt;00:50,  8.38s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 66.42it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 55.84it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 1001.98it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 488.05it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:25&lt;00:41,  8.39s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 66.70it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 73.22it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 997.69it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████████| 1/1 [00:00&lt;00:00, 991.56it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:34&lt;00:35,  8.79s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 42.44it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 54.72it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2998.79it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2997.36it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:44&lt;00:27,  9.05s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 68.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 58.23it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 1498.86it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 1198.03it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:52&lt;00:17,  8.86s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:00&lt;00:00, 74.19it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 77.69it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2983.85it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2940.62it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:00&lt;00:08,  8.58s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 62.24it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 66.71it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;?, ?it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2978.91it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:09&lt;00:00,  8.64s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  5.38it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  7.32it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:01,  6.39it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:01&lt;00:01,  6.16it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:01,  6.32it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:01&lt;00:01,  5.60it/s]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:01&lt;00:00,  9.51it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:02&lt;00:00,  7.82it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 45/45 [00:00&lt;00:00, 22504.31it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 45/45 [00:00&lt;00:00, 8160.12it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:11&lt;01:20, 11.46s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:03,  4.74it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:01&lt;00:02,  4.35it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:03,  3.61it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:01&lt;00:02,  4.21it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:02&lt;00:01,  5.51it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:02&lt;00:00,  7.07it/s]
+Overlay raster with vector:  83%|█████████████████████████████████████████████         | 15/18 [00:02&lt;00:00,  6.57it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:02&lt;00:00,  6.06it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 52/52 [00:00&lt;00:00, 5444.84it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 52/52 [00:00&lt;00:00, 3430.76it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:24&lt;01:14, 12.48s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:03,  4.83it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  6.67it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:02,  5.00it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:01&lt;00:01,  5.36it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:01,  5.54it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:01&lt;00:01,  5.90it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:02&lt;00:00,  8.28it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:02&lt;00:00,  7.78it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 59/59 [00:00&lt;00:00, 14746.67it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 59/59 [00:00&lt;00:00, 6372.35it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:37&lt;01:03, 12.75s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  7.18it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  8.87it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  7.72it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00,  9.15it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 10.65it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:01&lt;00:00, 10.11it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 10.88it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 73/73 [00:00&lt;00:00, 9690.60it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 73/73 [00:00&lt;00:00, 10376.66it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:47&lt;00:46, 11.59s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  7.32it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  7.28it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:01,  6.08it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:01&lt;00:01,  6.52it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:01,  6.47it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:01&lt;00:01,  5.64it/s]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:01&lt;00:00,  8.98it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:02&lt;00:00,  7.93it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 83/83 [00:00&lt;00:00, 40555.36it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 83/83 [00:00&lt;00:00, 16563.29it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:58&lt;00:34, 11.51s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  7.36it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  9.40it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  8.04it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:00&lt;00:01,  8.19it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:01&lt;00:00,  8.85it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:01&lt;00:00, 10.32it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 10.92it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 93/93 [00:00&lt;00:00, 30987.47it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 93/93 [00:00&lt;00:00, 14023.23it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [01:08&lt;00:21, 10.79s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  7.32it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  8.45it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  7.61it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00,  9.16it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 10.68it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:01&lt;00:00, 10.39it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 11.04it/s]
+
+convert coverage to meters: 100%|█████████████████████████████████████████████████| 105/105 [00:00&lt;00:00, 20817.86it/s]
+
+Calculating damage: 100%|█████████████████████████████████████████████████████████| 105/105 [00:00&lt;00:00, 11619.18it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:17&lt;00:10, 10.25s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  6.96it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  9.00it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  7.96it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00,  9.43it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 10.92it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:01&lt;00:00, 10.49it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 11.25it/s]
+
+convert coverage to meters: 100%|█████████████████████████████████████████████████| 112/112 [00:00&lt;00:00, 17079.15it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 112/112 [00:00&lt;00:00, 6772.22it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:26&lt;00:00, 10.83s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 19.88it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 19.14it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 20.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 23.72it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 13192.83it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6634.13it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:08&lt;00:58,  8.37s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 20.38it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 16.72it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 23.24it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 23.97it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████████████| 14/14 [00:00&lt;?, ?it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 14/14 [00:00&lt;00:00, 5494.55it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:17&lt;00:51,  8.53s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 15.91it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 17.03it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 23.32it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 23.60it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 8391.57it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 5690.60it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:25&lt;00:42,  8.52s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 20.16it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 19.45it/s]
+Overlay raster with vector:  67%|████████████████████████████████████                  | 12/18 [00:00&lt;00:00, 28.34it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 25.85it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 6529.79it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 8793.09it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:33&lt;00:33,  8.46s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 19.81it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 19.46it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:00&lt;00:00, 15.80it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 21.84it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 28/28 [00:00&lt;00:00, 13705.28it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 28/28 [00:00&lt;00:00, 7982.09it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:42&lt;00:25,  8.49s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 20.30it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 19.38it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:00&lt;00:00, 25.80it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 25.65it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 29/29 [00:00&lt;00:00, 14301.57it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 29/29 [00:00&lt;00:00, 7196.47it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:50&lt;00:16,  8.44s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:00, 20.00it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 19.50it/s]
+Overlay raster with vector:  67%|████████████████████████████████████                  | 12/18 [00:00&lt;00:00, 28.21it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 25.68it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 32/32 [00:00&lt;00:00, 31061.73it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 31/31 [00:00&lt;00:00, 10528.21it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [00:59&lt;00:08,  8.53s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:01, 14.99it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:00, 16.47it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  8.66it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 12.11it/s]
+Overlay raster with vector:  78%|██████████████████████████████████████████            | 14/18 [00:01&lt;00:00, 10.63it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 12.66it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 39/39 [00:00&lt;00:00, 5985.07it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 38/38 [00:00&lt;00:00, 5002.78it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:08&lt;00:00,  8.59s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:03,  4.60it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  6.67it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  9.04it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00, 10.32it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 11.55it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 12.84it/s]
+
+convert coverage to meters:   0%|                                                              | 0/437 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 437/437 [00:00&lt;00:00, 2648.42it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 437/437 [00:00&lt;00:00, 6727.96it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:16&lt;01:54, 16.30s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  6.37it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  8.27it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:00&lt;00:00, 11.67it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 11.72it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 15.59it/s]
+
+convert coverage to meters:   0%|                                                              | 0/509 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 509/509 [00:00&lt;00:00, 3740.02it/s]
+
+Calculating damage: 100%|█████████████████████████████████████████████████████████| 509/509 [00:00&lt;00:00, 11556.31it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:28&lt;01:24, 14.11s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:04,  3.13it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:01&lt;00:02,  5.02it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:01,  6.97it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:01,  7.98it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00,  8.85it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00,  9.75it/s]
+
+convert coverage to meters:   0%|                                                              | 0/573 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 573/573 [00:00&lt;00:00, 2198.95it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 573/573 [00:00&lt;00:00, 9221.36it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:43&lt;01:11, 14.30s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:04,  3.41it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:01&lt;00:02,  5.22it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:01&lt;00:01,  7.13it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:01,  7.04it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:01&lt;00:01,  7.16it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00,  9.52it/s]
+
+convert coverage to meters:   0%|                                                              | 0/696 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 696/696 [00:00&lt;00:00, 3352.33it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 696/696 [00:00&lt;00:00, 9338.89it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:57&lt;00:56, 14.13s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  6.18it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  8.59it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:00&lt;00:00, 12.21it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 11.81it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 15.80it/s]
+
+convert coverage to meters:   0%|                                                              | 0/726 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 726/726 [00:00&lt;00:00, 2896.38it/s]
+
+Calculating damage: 100%|█████████████████████████████████████████████████████████| 726/726 [00:00&lt;00:00, 10553.21it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [01:10&lt;00:41, 13.68s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  5.30it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  7.20it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  9.41it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00, 10.33it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 11.70it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 13.55it/s]
+
+convert coverage to meters:   0%|                                                              | 0/742 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 742/742 [00:00&lt;00:00, 3695.83it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 742/742 [00:00&lt;00:00, 7429.50it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [01:23&lt;00:27, 13.67s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:02,  6.23it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:01,  8.76it/s]
+Overlay raster with vector:  44%|████████████████████████▍                              | 8/18 [00:00&lt;00:00, 12.59it/s]
+Overlay raster with vector:  56%|██████████████████████████████                        | 10/18 [00:00&lt;00:00, 12.10it/s]
+Overlay raster with vector:  72%|███████████████████████████████████████               | 13/18 [00:01&lt;00:00, 15.69it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 13.97it/s]
+
+convert coverage to meters:   0%|                                                              | 0/857 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 857/857 [00:00&lt;00:00, 3417.88it/s]
+
+Calculating damage: 100%|█████████████████████████████████████████████████████████| 857/857 [00:00&lt;00:00, 10881.76it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [01:35&lt;00:13, 13.15s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  17%|█████████▏                                             | 3/18 [00:00&lt;00:03,  4.23it/s]
+Overlay raster with vector:  28%|███████████████▎                                       | 5/18 [00:00&lt;00:02,  6.41it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:01,  8.70it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 9/18 [00:01&lt;00:00, 10.10it/s]
+Overlay raster with vector:  61%|█████████████████████████████████                     | 11/18 [00:01&lt;00:00, 10.84it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:01&lt;00:00, 12.37it/s]
+
+convert coverage to meters:   0%|                                                              | 0/917 [00:00&lt;?, ?it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 917/917 [00:00&lt;00:00, 3183.60it/s]
+
+Calculating damage: 100%|█████████████████████████████████████████████████████████| 917/917 [00:00&lt;00:00, 11122.10it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:48&lt;00:00, 13.52s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 58.92it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 62.78it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1009.82it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 989.57it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:07&lt;00:53,  7.64s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 61.00it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 65.93it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1326.68it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 2404.30it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:15&lt;00:46,  7.75s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:00&lt;00:00, 59.35it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 65.27it/s]
+
+convert coverage to meters: 100%|█████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 19065.02it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1327.10it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:23&lt;00:38,  7.77s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 67.29it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 70.37it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 3970.94it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 1333.32it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:31&lt;00:32,  8.11s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 69.78it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 71.38it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 5752.19it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 1701.77it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:40&lt;00:24,  8.19s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 67.53it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 68.45it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 6036.42it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 2994.51it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:48&lt;00:16,  8.29s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  39%|█████████████████████▍                                 | 7/18 [00:00&lt;00:00, 63.73it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 67.45it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 6000.43it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 6003.30it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [00:57&lt;00:08,  8.31s/it]
+Overlay raster with vector:   0%|                                                               | 0/18 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  33%|██████████████████▎                                    | 6/18 [00:00&lt;00:00, 56.40it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 59.52it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 1322.57it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 6011.90it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:06&lt;00:00,  8.36s/it]
 </pre></div>
 </div>
 </div>
@@ -1280,34 +1797,40 @@ Risk Calculation: 100%|███████████████████
 <h2>5. Visualising the results<a class="headerlink" href="#visualising-the-results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_damages</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_risk</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
-    <span class="n">damage_results</span> <span class="o">=</span> <span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">risk_results</span> <span class="o">=</span> <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">risk_results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">risk_results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">continue</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">collect_damages</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">damage_results</span><span class="o">.</span><span class="n">damage</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">collect_risk</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">risk_results</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#66c2a5&#39;</span><span class="p">,</span><span class="s1">&#39;#fc8d62&#39;</span><span class="p">,</span><span class="s1">&#39;#8da0cb&#39;</span><span class="p">,</span><span class="s1">&#39;#e78ac3&#39;</span><span class="p">,</span><span class="s1">&#39;#a6d854&#39;</span><span class="p">,</span><span class="s1">&#39;#ffd92f&#39;</span><span class="p">,</span><span class="s1">&#39;#e5c494&#39;</span><span class="p">,</span><span class="s1">&#39;#b3b3b3&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#8dd3c7&#39;</span><span class="p">,</span><span class="s1">&#39;#ffffb3&#39;</span><span class="p">,</span><span class="s1">&#39;#bebada&#39;</span><span class="p">,</span><span class="s1">&#39;#fb8072&#39;</span><span class="p">,</span><span class="s1">&#39;#80b1d3&#39;</span><span class="p">,</span><span class="s1">&#39;#fdb462&#39;</span><span class="p">,</span><span class="s1">&#39;#b3de69&#39;</span><span class="p">,</span><span class="s1">&#39;#fccde5&#39;</span><span class="p">,</span><span class="s1">&#39;#d9d9d9&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">collect_damages</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
-<span class="n">sizes</span> <span class="o">=</span> <span class="n">collect_damages</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">collect_risk</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="n">collect_risk</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
 <span class="n">pie</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">labeldistance</span><span class="o">=</span><span class="mf">1.15</span><span class="p">,</span> <span class="n">wedgeprops</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;linewidth&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;edgecolor&#39;</span> <span class="p">:</span> <span class="s1">&#39;white&#39;</span> <span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;River Flood Damage for </span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1"> for multiple </span><span class="se">\n</span><span class="s1"> Critical Infrastructure systems&#39;</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;River Flood Damage for Belize for multiple \n Critical Infrastructure systems&#39;)
+</pre></div>
+</div>
+<img alt="../_images/c2e08868bf52635246478d0c1183021bc842bbe0ac3cf58a0c81d0dcb3b1293d.png" src="../_images/c2e08868bf52635246478d0c1183021bc842bbe0ac3cf58a0c81d0dcb3b1293d.png" />
 </div>
 </div>
 </section>
@@ -1343,6 +1866,24 @@ Risk Calculation: 100%|███████████████████
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="all_ci_vulnerability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Country-level vulnerability assessment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multi-country.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multi-country Analysis for Transportation Infrastructure</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

@@ -194,6 +194,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_exposure.html">Country-level exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_risk.html">Country-level risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/multi-country.html">Multi-country Analysis for Transportation Infrastructure</a></li>
 </ul>
 
     </div>
@@ -511,11 +513,6 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The history saving thread hit an unexpected error (OperationalError(&#39;database is locked&#39;)).History will not be written to the database.
-</pre></div>
-</div>
-</div>
 </div>
 <section id="specify-the-country-of-interest">
 <h3>Specify the country of interest<a class="headerlink" href="#specify-the-country-of-interest" title="Permalink to this heading">#</a></h3>
@@ -562,8 +559,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 25.2 s
-Wall time: 36.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 15.3 s
+Wall time: 36.2 s
 </pre></div>
 </div>
 </div>
@@ -596,7 +593,7 @@ Wall time: 36.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "21cd7aa218584bd086cbd272de8d13d5", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8deaaf0412a04b2590f3b59535e803ae", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -988,9 +985,9 @@ Coordinates:
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
     spatial_ref  int32 4B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-58aab8ab-b82d-4e81-809c-a96dea9f1117' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-58aab8ab-b82d-4e81-809c-a96dea9f1117' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-d29ed5b2-c3bf-465b-aa68-cfa205194a45' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d29ed5b2-c3bf-465b-aa68-cfa205194a45' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-0d5cff6d-cd11-4040-8dff-c56548e95f20' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0d5cff6d-cd11-4040-8dff-c56548e95f20' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc281a5c-5f85-4aae-9467-5def04c06ead' class='xr-var-data-in' type='checkbox'><label for='data-fc281a5c-5f85-4aae-9467-5def04c06ead' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-056f3b3f-cf83-4c1c-ab8e-e45777f10f68' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-056f3b3f-cf83-4c1c-ab8e-e45777f10f68' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dad34e3f-7dba-4569-82a5-a85fcb8dff43' class='xr-var-data-in' type='checkbox'><label for='data-dad34e3f-7dba-4569-82a5-a85fcb8dff43' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-86e72ce7-a97a-41ed-9249-b74809044d4f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-86e72ce7-a97a-41ed-9249-b74809044d4f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-95f6af08-66fb-4eed-a492-f00d3535ae49' class='xr-var-data-in' type='checkbox'><label for='data-95f6af08-66fb-4eed-a492-f00d3535ae49' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-8331ff6c-afe8-48bc-8a34-72fe7f4d3fff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8331ff6c-afe8-48bc-8a34-72fe7f4d3fff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e066dc49-1eb5-4b05-ad99-7963a91f319c' class='xr-var-data-in' type='checkbox'><label for='data-e066dc49-1eb5-4b05-ad99-7963a91f319c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-62b1e9d6-baab-4921-90e7-52324c4709c7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-62b1e9d6-baab-4921-90e7-52324c4709c7' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-33ee9c58-c876-4d81-b36b-8b735697b485' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-33ee9c58-c876-4d81-b36b-8b735697b485' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-247f8931-1250-4d53-bf60-5dbec06babe5' class='xr-var-data-in' type='checkbox'><label for='data-247f8931-1250-4d53-bf60-5dbec06babe5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-26ab0a5b-09b1-44bb-9ba9-e514c970fb5d' class='xr-section-summary-in' type='checkbox'  ><label for='section-26ab0a5b-09b1-44bb-9ba9-e514c970fb5d' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-75466b34-28e3-4075-b273-502290ab3425' class='xr-index-data-in' type='checkbox'/><label for='index-75466b34-28e3-4075-b273-502290ab3425' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-aeaa1485-d869-47c4-9770-72c161b50a0a' class='xr-index-data-in' type='checkbox'/><label for='index-aeaa1485-d869-47c4-9770-72c161b50a0a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-25e2b1e8-8b6a-4dcf-8ce3-8654af9cd84b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-25e2b1e8-8b6a-4dcf-8ce3-8654af9cd84b' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-bc0238a9-3cc8-4ae4-ba93-a1811317f1d3' class='xr-section-summary-in' type='checkbox'  checked><label for='section-bc0238a9-3cc8-4ae4-ba93-a1811317f1d3' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-3e205e89-62b9-4eaf-91eb-e7b55eb3137a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3e205e89-62b9-4eaf-91eb-e7b55eb3137a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7919b99d-ed24-44e0-902f-23b1e333e9bf' class='xr-var-data-in' type='checkbox'><label for='data-7919b99d-ed24-44e0-902f-23b1e333e9bf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-2d0aa5e2-3cb9-465d-9a7c-369c587442bd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2d0aa5e2-3cb9-465d-9a7c-369c587442bd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bb36b51b-e2c8-4e34-9de7-3ae50de05866' class='xr-var-data-in' type='checkbox'><label for='data-bb36b51b-e2c8-4e34-9de7-3ae50de05866' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-c083b81e-0261-488e-b275-413da702e2b4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c083b81e-0261-488e-b275-413da702e2b4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c0805631-afe6-4c47-a686-73bc4b48c2e7' class='xr-var-data-in' type='checkbox'><label for='data-c0805631-afe6-4c47-a686-73bc4b48c2e7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-da0063a4-528e-4a8a-a0f5-04ee4c4ce3fb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-da0063a4-528e-4a8a-a0f5-04ee4c4ce3fb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b3d52abe-e342-4711-a205-fb9cb35f39bf' class='xr-var-data-in' type='checkbox'><label for='data-b3d52abe-e342-4711-a205-fb9cb35f39bf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7a1c7ec3-8f43-43e9-9139-f816c8f631a4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7a1c7ec3-8f43-43e9-9139-f816c8f631a4' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-875316ce-ce2c-41c1-81d7-b088b44c61c8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-875316ce-ce2c-41c1-81d7-b088b44c61c8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e1bc90ff-a286-4a65-9032-eb15353c2853' class='xr-var-data-in' type='checkbox'><label for='data-e1bc90ff-a286-4a65-9032-eb15353c2853' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6b8278ad-4a26-4673-86fb-30d374aa86f7' class='xr-section-summary-in' type='checkbox'  ><label for='section-6b8278ad-4a26-4673-86fb-30d374aa86f7' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-0610cf7a-26af-4b19-a11e-e9824b2a65be' class='xr-index-data-in' type='checkbox'/><label for='index-0610cf7a-26af-4b19-a11e-e9824b2a65be' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-1e798a90-4be3-4830-86f5-1d9d9d64ebfd' class='xr-index-data-in' type='checkbox'/><label for='index-1e798a90-4be3-4830-86f5-1d9d9d64ebfd' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
        -179.99708333333334,          -179.99625, -179.99541666666667,
        -179.99458333333334,          -179.99375, -179.99291666666667,
        -179.99208333333334,
@@ -999,7 +996,7 @@ Data variables:
         179.99458333333334,  179.99541666666667,           179.99625,
         179.99708333333334,  179.99791666666667,           179.99875,
         179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-31096410-1984-4e43-bece-a593fed0972d' class='xr-index-data-in' type='checkbox'/><label for='index-31096410-1984-4e43-bece-a593fed0972d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2e6ff103-03b2-4f25-85cb-4476decc7223' class='xr-index-data-in' type='checkbox'/><label for='index-2e6ff103-03b2-4f25-85cb-4476decc7223' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
         89.99708333333334,           89.99625,  89.99541666666667,
         89.99458333333334,           89.99375,  89.99291666666667,
         89.99208333333334,
@@ -1008,7 +1005,7 @@ Data variables:
        -89.99458333333334, -89.99541666666667,          -89.99625,
        -89.99708333333334, -89.99791666666667,          -89.99875,
        -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-62c4f99f-bf95-4db4-af7e-9d03ac90e2f1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-62c4f99f-bf95-4db4-af7e-9d03ac90e2f1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6f6952a5-ac52-429a-8b45-ece2d29e8123' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6f6952a5-ac52-429a-8b45-ece2d29e8123' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -1758,13 +1755,13 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.86it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5186.03it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4332.27it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.76it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 13007.15it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5158.56it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.56 s
-Wall time: 3.64 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.19 s
+Wall time: 3.71 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1781,23 +1778,23 @@ Wall time: 3.64 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  3.52it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6159.04it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  3.72it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12985.46it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6488.10it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5678.01it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6497.37it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4620.06it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4245.91it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6509.78it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4321.28it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 3669.56it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5112.61it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4296.09it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 2892.62it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5065.58it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.84 s
-Wall time: 2.95 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.14 s
+Wall time: 2.81 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1866,7 +1863,7 @@ Wall time: 2.95 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/66a13c3230acc77ce4feb826c2def7ca83e09a89a5a859debce3076acca97045.png" src="../_images/66a13c3230acc77ce4feb826c2def7ca83e09a89a5a859debce3076acca97045.png" />
+<img alt="../_images/abcc0a1b538281018bf8303eb42ae1333e2dcb217626af9c32590737f164c758.png" src="../_images/abcc0a1b538281018bf8303eb42ae1333e2dcb217626af9c32590737f164c758.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1894,7 +1891,7 @@ Wall time: 2.95 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d039f679acf54bda91539bf10950fe9d", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f74758299e8849fd978079b755fa3ef9", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1922,6 +1919,228 @@ Wall time: 2.95 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">risk_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span><span class="n">multi_curves</span><span class="o">=</span><span class="n">multi_curves</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:   0%|                                                                          | 0/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:03,  2.32it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.75it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  5.19it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  4.51it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.40it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:01&lt;00:00,  3.19it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  3.33it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 3966.24it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 2932.05it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 3776.95it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 5962.05it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 3860.97it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████████████████| 6/6 [00:00&lt;?, ?it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 6/6 [00:00&lt;00:00, 6016.21it/s]
+Risk Calculation:  12%|████████▎                                                         | 1/8 [00:03&lt;00:21,  3.12s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:04,  2.24it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.45it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  4.97it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  4.19it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.26it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:01&lt;00:00,  3.26it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  3.21it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 3621.58it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|██████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 6668.21it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 6494.17it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 7020.59it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████████████████| 7/7 [00:00&lt;?, ?it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 7002.18it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 3496.50it/s]
+Risk Calculation:  25%|████████████████▌                                                 | 2/8 [00:06&lt;00:19,  3.18s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:04,  2.25it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.87it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  4.97it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  4.31it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.20it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:01&lt;00:00,  3.19it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  3.32it/s]
+
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 2441.57it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 5302.53it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 4001.24it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 7989.15it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 8013.96it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 3996.48it/s]
+
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 5304.21it/s]
+Risk Calculation:  38%|████████████████████████▊                                         | 3/8 [00:09&lt;00:15,  3.16s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:04,  2.22it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.61it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  5.05it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  3.61it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  2.97it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:02&lt;00:01,  2.72it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.69it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 7286.38it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 4030.17it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 3664.60it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 5501.05it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 3621.46it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 3657.92it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 11/11 [00:00&lt;00:00, 11003.42it/s]
+Risk Calculation:  50%|█████████████████████████████████                                 | 4/8 [00:13&lt;00:13,  3.43s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:02,  3.35it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.84it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  5.43it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  4.25it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.12it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:01&lt;00:00,  3.21it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  3.38it/s]
+
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 25707.66it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 7071.19it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6498.15it/s]
+
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12982.37it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6498.15it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6474.23it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5167.85it/s]
+Risk Calculation:  62%|█████████████████████████████████████████▎                        | 5/8 [00:16&lt;00:09,  3.30s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:06,  1.37it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:01&lt;00:02,  3.38it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:01&lt;00:01,  4.04it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  3.88it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.06it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:02&lt;00:01,  2.82it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.93it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6498.15it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4173.44it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5791.39it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6470.39it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6290.49it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6487.32it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 5171.77it/s]
+Risk Calculation:  75%|█████████████████████████████████████████████████▌                | 6/8 [00:19&lt;00:06,  3.38s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:04,  2.09it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:01,  4.36it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:00&lt;00:01,  4.71it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  4.21it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:01&lt;00:01,  3.13it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:02&lt;00:00,  3.05it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  3.14it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 5329.48it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 2434.13it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 3965.54it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 3504.38it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 5277.10it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 5318.92it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 3193.38it/s]
+Risk Calculation:  88%|█████████████████████████████████████████████████████████▊        | 7/8 [00:23&lt;00:03,  3.36s/it]
+Overlay raster with vector:   0%|                                                               | 0/10 [00:00&lt;?, ?it/s]
+Overlay raster with vector:  10%|█████▌                                                 | 1/10 [00:00&lt;00:05,  1.77it/s]
+Overlay raster with vector:  30%|████████████████▌                                      | 3/10 [00:00&lt;00:02,  3.38it/s]
+Overlay raster with vector:  40%|██████████████████████                                 | 4/10 [00:01&lt;00:01,  3.46it/s]
+Overlay raster with vector:  50%|███████████████████████████▌                           | 5/10 [00:01&lt;00:01,  2.62it/s]
+Overlay raster with vector:  60%|█████████████████████████████████                      | 6/10 [00:02&lt;00:02,  1.92it/s]
+Overlay raster with vector:  70%|██████████████████████████████████████▌                | 7/10 [00:03&lt;00:01,  2.03it/s]
+Overlay raster with vector:  80%|████████████████████████████████████████████           | 8/10 [00:05&lt;00:02,  1.06s/it]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:05&lt;00:00,  1.79it/s]
+
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 4135.20it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple curves detected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 2609.26it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 2424.04it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 3370.03it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 5684.24it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 3441.60it/s]
+
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 17/17 [00:00&lt;00:00, 5684.70it/s]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:29&lt;00:00,  3.63s/it]
 </pre></div>
 </div>
 </div>
@@ -1985,7 +2204,7 @@ Wall time: 2.95 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1940383cb312da5fa8feb198a159334af056e3d46622e3dccc5d34f1549919ad.png" src="../_images/1940383cb312da5fa8feb198a159334af056e3d46622e3dccc5d34f1549919ad.png" />
+<img alt="../_images/42cfc71ad5d58d66a84cb853af547514b3dd9cff735c607e4597527fdb1fd8cb.png" src="../_images/42cfc71ad5d58d66a84cb853af547514b3dd9cff735c607e4597527fdb1fd8cb.png" />
 </div>
 </div>
 </section>
