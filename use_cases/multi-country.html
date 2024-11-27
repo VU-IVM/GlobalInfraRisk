@@ -185,9 +185,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Floods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquakes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Flood risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
 <ul class="current nav bd-sidenav">
@@ -1014,7 +1014,7 @@ Data variables:
 <p>Similarly to the maximum damages, specifying the vulnerability curves is complex. We generally have limited information about the quality of the assets, its level of deteriation and other asset-level characteristics. The study by Nirandjan et al. (2024) provides us with a baseline set of fragility and vulnerability curves that one can use. In the following cell, we load that data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.0.0.xlsx?download=1&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.1.0.xlsx?download=1&quot;</span>
 <span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
