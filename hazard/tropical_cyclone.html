@@ -474,10 +474,11 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b10</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
 <span class="c1">#!pip install osm-flex</span>
+<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -565,8 +566,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
   return ogr_read(
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 9s
-Wall time: 1min 29s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 50 s
+Wall time: 1min 31s
 </pre></div>
 </div>
 </div>
@@ -599,7 +600,7 @@ Wall time: 1min 29s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "718e9b8ecdcf40249dde387e8d5e4978", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d9945f92a9b744328ae795bd65f4b92d", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -620,7 +621,7 @@ Wall time: 1min 29s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1aec49dd400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1f6c04f6210&gt;
 </pre></div>
 </div>
 <img alt="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" src="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" />
@@ -989,30 +990,16 @@ Wall time: 1min 29s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:33&lt;00:00, 14.27it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 39023.73it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17301.56it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:34&lt;00:00, 14.03it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 41904.24it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 16212.79it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.1 s
-Wall time: 35.1 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.3 s
+Wall time: 35.7 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31 s
-Wall time: 36.6 s
 </pre></div>
 </div>
 </div>
@@ -1026,18 +1013,18 @@ Wall time: 36.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:34&lt;00:00, 14.02it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 39663.83it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 18187.97it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17799.10it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17996.07it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17684.65it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 16380.55it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17975.33it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:35&lt;00:00, 13.50it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 37873.79it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17275.58it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 16479.74it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 15487.88it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17030.03it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 15915.64it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17269.04it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.2 s
-Wall time: 38.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.1 s
+Wall time: 40.2 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1106,7 +1093,7 @@ Wall time: 38.6 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/6e75334b1a974cdefb77d53d148134911133d257a8e1e78728f21e08b27a7c7a.png" src="../_images/6e75334b1a974cdefb77d53d148134911133d257a8e1e78728f21e08b27a7c7a.png" />
+<img alt="../_images/bbe6234a6d753de055f23b383b808aada12faab8d79722390b6869d853819669.png" src="../_images/bbe6234a6d753de055f23b383b808aada12faab8d79722390b6869d853819669.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1134,7 +1121,7 @@ Wall time: 38.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "993c692b3aa04f5bb59cc6b2fb509eae", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4e72b27472c943b6b697006517b05408", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1167,7 +1154,7 @@ Wall time: 38.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:51&lt;00:00, 42.91s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:39&lt;00:00, 39.88s/it]
 </pre></div>
 </div>
 </div>
@@ -1202,7 +1189,7 @@ Wall time: 38.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:41&lt;00:00, 40.38s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:41&lt;00:00, 40.35s/it]
 </pre></div>
 </div>
 </div>
@@ -1296,7 +1283,7 @@ Wall time: 38.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d8bdc74081e3b2fb99b7828520183dab1c56c8cf245cfa2c24ba4b5c0295ece7.png" src="../_images/d8bdc74081e3b2fb99b7828520183dab1c56c8cf245cfa2c24ba4b5c0295ece7.png" />
+<img alt="../_images/23f6d791245ec086e5111236404a1936bdfa39bb42b98041d3bb088972c7ead9.png" src="../_images/23f6d791245ec086e5111236404a1936bdfa39bb42b98041d3bb088972c7ead9.png" />
 </div>
 </div>
 </section>
