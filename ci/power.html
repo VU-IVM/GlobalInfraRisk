@@ -1748,7 +1748,7 @@ Wall time: 1.12 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

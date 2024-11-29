@@ -1015,7 +1015,7 @@ Data variables:
 <p>Similarly to the maximum damages, specifying the vulnerability curves is complex. We generally have limited information about the quality of the assets, its level of deteriation and other asset-level characteristics. The study by Nirandjan et al. (2024) provides us with a baseline set of fragility and vulnerability curves that one can use. In the following cell, we load that data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.1.0.xlsx?download=1&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.0.0.xlsx?download=1&quot;</span>
 <span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1817,31 +1817,6 @@ Data variables:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_maxdam</span> <span class="o">=</span> <span class="n">maxdam</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">vulnerability_maxdam</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxdam</span><span class="p">[</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">maxdam</span><span class="p">[</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">vulnerability_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">vulnerability_maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span>
-
-<span class="ne">NameError</span>: name &#39;hazard_country&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="performing-the-damage-assessment">
@@ -1896,7 +1871,7 @@ Calculating damage: 100%|██████████████████�
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
 <span class="k">for</span> <span class="n">country_iso3</span><span class="p">,</span><span class="n">country_full_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">countries_iso3</span><span class="p">,</span><span class="n">countries_full_names</span><span class="p">):</span>
-    <span class="n">total_damage_results</span><span class="p">[</span><span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
+    <span class="n">total_damage_results</span><span class="p">[</span><span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

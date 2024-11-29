@@ -788,6 +788,7 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_asset_risk_results</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
         <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
                                                        <span class="n">infrastructure_path</span><span class="p">,</span> 
                                                        <span class="n">curves</span><span class="o">=</span><span class="n">damage_curves_all_ci</span><span class="p">[</span><span class="n">asset_type</span><span class="p">],</span> 
@@ -795,6 +796,8 @@ This dataset includes information on the hazard affecting the infrastructure (e.
                                                            <span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">,</span>
             <span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span>
         <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It seems that </span><span class="si">{</span><span class="n">asset_type</span><span class="si">}</span><span class="s2"> is most likely not mapped or has no exposure&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
