@@ -1,0 +1,26 @@
+name: infra-risk
+
+channels:
+    - conda-forge
+
+dependencies:
+        - python=3.12
+        - numpy
+        - geopandas
+        - rasterio
+        - matplotlib
+        - tqdm
+        - pip
+        - jupyterlab
+        - xlrd
+        - pyproj
+        - xarray
+        - rioxarray 
+        - pip:
+            - damagescanner==0.9b10
+            - exactextract
+            - contextily
+            - openpyxl 
+            - pyarrow
+            - lonboard
+
