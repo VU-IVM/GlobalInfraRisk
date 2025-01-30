@@ -175,6 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/uncertainties.html">Model Uncertainties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../howto/run_locally.html">Run locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_osm.html">Using OpenStreetMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_tailor_data.html">Using Local Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -485,32 +492,32 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">rasterio</span>
-<span class="kn">import</span> <span class="nn">shapely</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mode</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">rioxarray</span>
-<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">cx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
-<span class="kn">from</span> <span class="nn">osm_flex</span> <span class="kn">import</span> <span class="n">download</span>
-<span class="kn">from</span> <span class="nn">exactextract</span> <span class="kn">import</span> <span class="n">exact_extract</span>
-<span class="kn">from</span> <span class="nn">damagescanner.osm</span> <span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span> <span class="nn">damagescanner.core</span> <span class="kn">import</span> <span class="n">DamageScanner</span>
-<span class="kn">from</span> <span class="nn">damagescanner.base_values</span> <span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">osm_flex</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">exactextract</span><span class="w"> </span><span class="kn">import</span> <span class="n">exact_extract</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 
-<span class="kn">from</span> <span class="nn">lonboard</span> <span class="kn">import</span> <span class="n">viz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 </pre></div>
@@ -2059,7 +2066,7 @@ convert coverage to meters: 100%|███████████████�
 <p>To make things efficient, below we have written a small function to identify those assets that may or may not have damage. If they fall within a damage category, they receive a ‘1’, if they do not fall within a damage category, they receive a ‘0’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_damage_bool</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">liquefaction_results</span><span class="p">,</span><span class="n">damage_dict</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_damage_bool</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">liquefaction_results</span><span class="p">,</span><span class="n">damage_dict</span><span class="p">):</span>
 
     <span class="n">liq_value</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">liquefaction_results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">feature</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;values&#39;</span><span class="p">])</span>
 

@@ -175,6 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/uncertainties.html">Model Uncertainties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../howto/run_locally.html">Run locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_osm.html">Using OpenStreetMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_tailor_data.html">Using Local Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -479,28 +486,28 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">rasterio</span>
-<span class="kn">import</span> <span class="nn">shapely</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">rioxarray</span>
-<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">cx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
-<span class="kn">from</span> <span class="nn">osm_flex</span> <span class="kn">import</span> <span class="n">download</span>
-<span class="kn">from</span> <span class="nn">exactextract</span> <span class="kn">import</span> <span class="n">exact_extract</span>
-<span class="kn">from</span> <span class="nn">damagescanner.core</span> <span class="kn">import</span> <span class="n">DamageScanner</span>
-<span class="kn">from</span> <span class="nn">damagescanner.base_values</span> <span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">osm_flex</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">exactextract</span><span class="w"> </span><span class="kn">import</span> <span class="n">exact_extract</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 </pre></div>
@@ -512,8 +519,8 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <p>Before we continue, we should specify the country for which we want to assess the damage. We use the ISO3 code for the country to download the OpenStreetMap data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_full_name</span> <span class="o">=</span> <span class="s1">&#39;Togo&#39;</span>
-<span class="n">country_iso3</span> <span class="o">=</span> <span class="s1">&#39;TGO&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_full_name</span> <span class="o">=</span> <span class="s1">&#39;Rwanda&#39;</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s1">&#39;RWA&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -555,9 +562,7 @@ This dataset includes information on the hazard affecting the infrastructure (e.
         <span class="s2">&quot;healthcare&quot;</span><span class="p">,</span>
         <span class="s2">&quot;power&quot;</span><span class="p">,</span>
         <span class="s2">&quot;gas&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;food&quot;</span><span class="p">,</span>
         <span class="s2">&quot;oil&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wastewater&quot;</span><span class="p">,</span>
     <span class="p">]</span>
 </pre></div>
 </div>
@@ -631,28 +636,43 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [04:06&lt;00:00,  5.61s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3513/3513 [00:02&lt;00:00, 1591.38it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:13&lt;00:00,  3.33it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 325/325 [00:00&lt;00:00, 1158.95it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 57.06it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 1261.38it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 92.37it/s]
-convert coverage to meters: 1it [00:00, 784.72it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 45.21it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 5/5 [00:00&lt;00:00, 2406.37it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:01&lt;00:00, 22.63it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 9728.18it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:01&lt;00:00, 42.23it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 5/5 [00:00&lt;00:00, 5181.99it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 51.80it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 192/192 [00:00&lt;00:00, 1620.30it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 55.63it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 5/5 [00:00&lt;00:00, 2497.50it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 58.97it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 19/19 [00:00&lt;00:00, 9457.84it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:00&lt;00:00, 74.85it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 5/5 [00:00&lt;00:00, 2500.78it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [03:45&lt;00:00, 11.28s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 936/936 [00:00&lt;00:00, 2093.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:10&lt;00:00,  1.99it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 276/276 [00:00&lt;00:00, 1569.90it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 77.76it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;?, ?it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 63.83it/s]
+convert coverage to meters: 1it [00:00, 1038.45it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems that waste_water is most likely not mapped or has no exposure
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  6.97it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 2994.51it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:01&lt;00:00, 16.87it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 4117.11it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:01&lt;00:00, 10.75it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 67/67 [00:00&lt;00:00, 2331.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 35.95it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1513.10it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems that food is most likely not mapped or has no exposure
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 63.71it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1809.45it/s]
+Overlay raster with vector: 100%|█████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 112.20it/s]
+convert coverage to meters: 1it [00:00, 1006.79it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> 
 </pre></div>
 </div>
 </div>
@@ -661,7 +681,10 @@ convert coverage to meters: 100%|███████████████�
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_assets_exposed</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
-    <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">])</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -692,7 +715,7 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/754e237e437c57ec7c4de613efbbf539802756143fe09240a4946447dd23c0ce.png" src="../_images/754e237e437c57ec7c4de613efbbf539802756143fe09240a4946447dd23c0ce.png" />
+<img alt="../_images/27c3343360cb69816549fb062500bb5f6d305bf650f7e910ea9c972eaec9d58c.png" src="../_images/27c3343360cb69816549fb062500bb5f6d305bf650f7e910ea9c972eaec9d58c.png" />
 </div>
 </div>
 </section>
