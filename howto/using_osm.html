@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Using OpenStreetMap &#8212; Global Infrastructure Risk Assesments</title>
+    <title>Using OpenStreetMap (OSM) &#8212; Global Infrastructure Risk Assesments</title>
   
   
   
@@ -180,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run locally</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using OpenStreetMap</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
@@ -375,7 +375,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -386,11 +388,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Using OpenStreetMap</h1>
+    <h1>Using OpenStreetMap (OSM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-overview">Function Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-cleaning-data">Filtering and Cleaning Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -400,8 +417,108 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="using-openstreetmap">
-<h1>Using OpenStreetMap<a class="headerlink" href="#using-openstreetmap" title="Permalink to this heading">#</a></h1>
+  <section id="using-openstreetmap-osm">
+<h1>Using OpenStreetMap (OSM)<a class="headerlink" href="#using-openstreetmap-osm" title="Permalink to this heading">#</a></h1>
+<p>OpenStreetMap (OSM) is used as a basis for analysis because it provides infrastructure data globally. This enables an initial assessment, such as hotspot analysis, in relation to natural hazard risks. Data can be obtained from <a class="reference external" href="https://download.geofabrik.de/">Geofabrik</a> or extracted using the Overpass API. This notebook demonstrates how we use the <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py"><code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a> to retrieve specific assets for analysis.</p>
+<p>For further details on tailoring local and regional data, refer to <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_tailor_data.html">this page</a>.</p>
+<p>The function supports the following infrastructure systems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">asset_types</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;roads&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rail&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;air&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;telecom&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;water_supply&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;waste_solid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;waste_water&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;healthcare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;power&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;oil&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;buildings&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<section id="extracting-data-with-read-osm-data">
+<h2>Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code><a class="headerlink" href="#extracting-data-with-read-osm-data" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">read_osm_data</span></code> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.</p>
+<section id="function-overview">
+<h3>Function Overview<a class="headerlink" href="#function-overview" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">read_osm_data</span><span class="p">(</span><span class="n">osm_path</span><span class="p">,</span> <span class="n">asset_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts asset data from an OSM file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - osm_path (str or Path): Path to the `.osm.pbf` file.</span>
+<span class="sd">    - asset_type (str): Type of infrastructure to extract (e.g., &#39;roads&#39;, &#39;buildings&#39;).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - GeoDataFrame with extracted asset data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="example-retrieving-road-network-data">
+<h3>Example: Retrieving Road Network Data<a class="headerlink" href="#example-retrieving-road-network-data" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+
+<span class="c1"># Define file path and asset type</span>
+<span class="n">osm_file</span> <span class="o">=</span> <span class="s2">&quot;path/to/osm_data.osm.pbf&quot;</span>
+<span class="n">asset_type</span> <span class="o">=</span> <span class="s2">&quot;roads&quot;</span>
+
+<span class="c1"># Extract road network data</span>
+<span class="n">gdf_roads</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">osm_file</span><span class="p">,</span> <span class="n">asset_type</span><span class="p">)</span>
+
+<span class="c1"># Display first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gdf_roads</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="example-retrieving-building-footprints">
+<h3>Example: Retrieving Building Footprints<a class="headerlink" href="#example-retrieving-building-footprints" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract building footprints</span>
+<span class="n">gdf_buildings</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">osm_file</span><span class="p">,</span> <span class="s2">&quot;buildings&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gdf_buildings</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="filtering-and-cleaning-data">
+<h2>Filtering and Cleaning Data<a class="headerlink" href="#filtering-and-cleaning-data" title="Permalink to this heading">#</a></h2>
+<p>The function applies predefined OSM queries stored in <code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code>. Each infrastructure type is mapped to specific OSM tags.</p>
+<p>Example structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DICT_CIS_OSM</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;roads&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;osm_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;highway&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;maxspeed&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;osm_query&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;highway&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;motorway&quot;</span><span class="p">,</span> <span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="s2">&quot;secondary&quot;</span><span class="p">]},</span>
+    <span class="p">},</span>
+     <span class="s2">&quot;telecom&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;osm_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;man_made&quot;</span><span class="p">,</span> <span class="s2">&quot;tower_type&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;osm_query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;man_made&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;mast&quot;</span><span class="p">,</span> <span class="s2">&quot;communications_tower&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;tower_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;communication&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">},</span>    
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This filtering ensures that only relevant features are included in the output.</p>
+</section>
+<section id="visualizing-the-data">
+<h2>Visualizing the Data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">gdf_roads</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Road Networks from OSM&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This function processes and structures OSM data efficiently, enabling its integration into risk assessments. More details on the implementation are available in the <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py">DamageScanner OSM module</a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -458,6 +575,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-overview">Function Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-cleaning-data">Filtering and Cleaning Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
