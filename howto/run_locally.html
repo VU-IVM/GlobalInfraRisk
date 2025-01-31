@@ -375,7 +375,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -391,6 +393,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">Clone the Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-conda-environment">Setting Up the Conda Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks">Running the Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-contents-and-dependencies">Environment File Contents and Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-dependencies">Explanation of Dependencies</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -402,6 +419,91 @@ document.write(`
                   
   <section id="run-locally">
 <h1>Run locally<a class="headerlink" href="#run-locally" title="Permalink to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<p>Ensure you have the following installed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.conda.io/en/latest/">Miniconda/Anaconda</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/">Git</a></p></li>
+</ul>
+</section>
+<section id="clone-the-repository">
+<h2>Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this heading">#</a></h2>
+<p>To get started, clone the repository from GitHub and navigate into the project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/VU-IVM/GlobalInfraRisk.git
+<span class="nb">cd</span><span class="w"> </span>GlobalInfraRisk
+</pre></div>
+</div>
+</section>
+<section id="setting-up-the-conda-environment">
+<h2>Setting Up the Conda Environment<a class="headerlink" href="#setting-up-the-conda-environment" title="Permalink to this heading">#</a></h2>
+<p>To install all necessary dependencies, create and activate the Conda environment using the provided <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+conda<span class="w"> </span>activate<span class="w"> </span>infra-risk
+</pre></div>
+</div>
+</section>
+<section id="running-the-notebooks">
+<h2>Running the Notebooks<a class="headerlink" href="#running-the-notebooks" title="Permalink to this heading">#</a></h2>
+<p>Once the environment is activated, launch JupyterLab to interact with the notebooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab
+</pre></div>
+</div>
+<p>This will open JupyterLab in your browser. Navigate to the desired notebook and start running it!</p>
+</section>
+<section id="environment-file-contents-and-dependencies">
+<h2>Environment File Contents and Dependencies<a class="headerlink" href="#environment-file-contents-and-dependencies" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file specifies the dependencies required to run the notebooks. Below is the content of the file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infra-risk</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.12</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geopandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rasterio</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tqdm</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyterlab</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xlrd</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyproj</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xarray</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rioxarray</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">damagescanner==0.9b10</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exactextract</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contextily</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openpyxl</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyarrow</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lonboard</span>
+</pre></div>
+</div>
+<section id="explanation-of-dependencies">
+<h3>Explanation of Dependencies<a class="headerlink" href="#explanation-of-dependencies" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Python 3.12</strong>: Core programming language.</p></li>
+<li><p><strong>numpy</strong>: Essential for numerical computations.</p></li>
+<li><p><strong>geopandas</strong>: Enables spatial data handling.</p></li>
+<li><p><strong>rasterio</strong>: Supports geospatial raster data operations.</p></li>
+<li><p><strong>matplotlib</strong>: For generating plots and visualizations.</p></li>
+<li><p><strong>tqdm</strong>: Progress bar utility for data processing.</p></li>
+<li><p><strong>pip</strong>: Installs and manages Python packages.</p></li>
+<li><p><strong>jupyterlab</strong>: Web-based environment for interactive computing.</p></li>
+<li><p><strong>xlrd</strong>: Reads Excel files.</p></li>
+<li><p><strong>pyproj</strong>: Performs coordinate transformations.</p></li>
+<li><p><strong>xarray</strong>: Supports multi-dimensional labeled datasets.</p></li>
+<li><p><strong>rioxarray</strong>: Extends xarray for raster data.</p></li>
+<li><p><strong>damagescanner</strong>: Risk assessment tool.</p></li>
+<li><p><strong>exactextract</strong>: Extracts zonal statistics from raster data.</p></li>
+<li><p><strong>contextily</strong>: Adds basemaps to geospatial visualizations.</p></li>
+<li><p><strong>openpyxl</strong>: Reads and writes Excel files.</p></li>
+<li><p><strong>pyarrow</strong>: Handles in-memory columnar data.</p></li>
+<li><p><strong>lonboard</strong>: Custom package (verify availability if needed).</p></li>
+</ul>
+<p>These dependencies are crucial for geospatial data analysis, visualization, and risk assessment workflows.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -458,6 +560,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">Clone the Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-conda-environment">Setting Up the Conda Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks">Running the Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-contents-and-dependencies">Environment File Contents and Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-dependencies">Explanation of Dependencies</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
