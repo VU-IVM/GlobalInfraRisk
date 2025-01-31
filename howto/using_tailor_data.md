@@ -21,7 +21,7 @@ A local dataset of road networks may contain different road classifications. The
 ```python
 import geopandas as gpd
 
-# Load local road network data (can be any geospatial object format)
+# Load local road network data
 gdf_roads = gpd.read_file("path/to/local_roads.geojson")
 
 # Ensure 'object_type' column exists and is correctly populated
@@ -61,15 +61,23 @@ Each infrastructure type must be linked to a vulnerability curve that defines ex
 Vulnerability curves are highly hazard-specific. A curve for flooding will differ from one for earthquakes or cyclones. It is advisable to refer to published sources, such as [Nirandjan et al. (2024)](https://nhess.copernicus.org/articles/24/4341/2024/nhess-24-4341-2024-discussion.html), as a starting point to identify relevant curves. However, local validation and consultation are necessary to ensure accuracy for the specific region and hazard type.
 
 ```python
-# Example vulnerability curve dictionary
-vulnerability_curves = {
-    'primary': [(0, 0), (1, 0.2), (2, 0.5), (3, 0.8), (4, 1.0)],
-    'secondary': [(0, 0), (1, 0.3), (2, 0.6), (3, 0.9), (4, 1.0)],
-    'tertiary': [(0, 0), (1, 0.4), (2, 0.7), (3, 0.9), (4, 1.0)]
+import numpy as np
+
+# Define vulnerability curves as a DataFrame
+damage_curves_data = {
+    'primary': [0.0, 0.2, 0.5, 0.8, 1.0],
+    'secondary': [0.0, 0.3, 0.6, 0.9, 1.0],
+    'tertiary': [0.0, 0.4, 0.7, 0.9, 1.0]
 }
 
-# Retrieve curve for 'primary' roads
-print(vulnerability_curves['primary'])
+# Create DataFrame
+depth_levels = [0, 1, 2, 3, 4]
+damage_curves = pd.DataFrame(damage_curves_data, index=depth_levels)
+damage_curves.index.rename('Depth', inplace=True)
+damage_curves = damage_curves.astype(np.float32)
+
+# Display DataFrame
+print(damage_curves)
 ```
 
 ### 2. Energy Infrastructure: Power Plants
@@ -115,15 +123,21 @@ print(max_damage_df)
 Similar to road networks, vulnerability curves for power plants depend on the hazard being analyzed. These curves should be derived from domain-specific research and, where possible, validated by local stakeholders.
 
 ```python
-# Example vulnerability curve dictionary
-vulnerability_curves = {
-    'coal': [(0, 0), (1, 0.1), (2, 0.4), (3, 0.7), (4, 1.0)],
-    'gas': [(0, 0), (1, 0.2), (2, 0.5), (3, 0.8), (4, 1.0)],
-    'nuclear': [(0, 0), (1, 0.05), (2, 0.3), (3, 0.6), (4, 1.0)]
+# Define vulnerability curves as a DataFrame
+damage_curves_data = {
+    'coal': [0.0, 0.1, 0.4, 0.7, 1.0],
+    'gas': [0.0, 0.2, 0.5, 0.8, 1.0],
+    'nuclear': [0.0, 0.05, 0.3, 0.6, 1.0]
 }
 
-# Retrieve curve for 'coal' power plants
-print(vulnerability_curves['coal'])
+# Create DataFrame
+depth_levels = [0, 1, 2, 3, 4]
+damage_curves = pd.DataFrame(damage_curves_data, index=depth_levels)
+damage_curves.index.rename('Depth', inplace=True)
+damage_curves = damage_curves.astype(np.float32)
+
+# Display DataFrame
+print(damage_curves)
 ```
 
 ## Moving forward

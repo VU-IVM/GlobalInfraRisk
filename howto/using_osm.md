@@ -26,25 +26,10 @@ asset_types = [
 
 ## Extracting Data with `read_osm_data()`
 
-The [`read_osm_data()`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406) function processes `.osm.pbf` files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.
-
-### Function Overview
-
-```python
-def read_osm_data(osm_path, asset_type):
-    """
-    Extracts asset data from an OSM file.
-    
-    Parameters:
-    - osm_path (str or Path): Path to the `.osm.pbf` file.
-    - asset_type (str): Type of infrastructure to extract (e.g., 'roads', 'buildings').
-    
-    Returns:
-    - GeoDataFrame with extracted asset data.
-    """
-```
+The [`read_osm_data()`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406) function processes `.osm.pbf` files and extracts data related to predefined asset types. It applies OSM query filters stored in [`DICT_CIS_OSM`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12) to select relevant infrastructure features.
 
 ### Example: Retrieving Road Network Data
+When extracting data, OSM-based attribute columns (e.g., `highway` for roads) are automatically converted into a standardized `object_type` column. This ensures consistency when linking extracted data to vulnerability curves and maximum damage values.
 
 ```python
 from damagescanner.osm import read_osm_data
@@ -70,29 +55,51 @@ gdf_buildings = read_osm_data(osm_file, "buildings")
 print(gdf_buildings.head())
 ```
 
-## Filtering and Cleaning Data
+## Creating the Maximum Damage DataFrame
 
-The function applies predefined OSM queries stored in [`DICT_CIS_OSM`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12). Each infrastructure type is mapped to specific OSM tags.
-
-Example structure:
+To link OSM data with damage assessments, maximum reconstruction costs must be defined per infrastructure type. These values must align with the `object_type` column in the extracted OSM dataset. Maximum damage values should be validated using expert input or literature sources.
 
 ```python
-DICT_CIS_OSM = {
-    "roads": {
-        "osm_keys": ["highway", "name", "maxspeed"],
-        "osm_query": {"highway": ["motorway", "primary", "secondary"]},
-    },
-     "telecom": {
-        "osm_keys": ["man_made", "tower_type", "name"],
-        "osm_query": {
-            "man_made": ["mast", "communications_tower"],
-            "tower_type": ["communication"],
-        }
-    },    
+import pandas as pd
+
+# Define maximum reconstruction costs
+max_damage_data = {
+    'object_type': ['primary', 'secondary', 'tertiary'],
+    'max_reconstruction_cost_per_meter': [1000, 750, 500]  # Example values in currency units per meter
 }
+
+# Create DataFrame
+max_damage_df = pd.DataFrame(max_damage_data).set_index('object_type')
+
+# Display DataFrame
+print(max_damage_df)
 ```
 
-This filtering ensures that only relevant features are included in the output.
+## Linking Vulnerability Curves
+
+Each infrastructure type requires a vulnerability curve to determine expected damage based on hazard intensity. Vulnerability curves are hazard-specific and should be reviewed for accuracy. A useful reference is [Nirandjan et al. (2024)](https://nhess.copernicus.org/articles/24/4341/2024/nhess-24-4341-2024-discussion.html), but local validation is necessary.
+
+To facilitate vulnerability curve selection, a predefined dictionary linking OSM categories to damage curves is available in [`base_values.py`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/base_values.py). Users can use this as a reference and adjust as needed based on local validation.
+
+```python
+import numpy as np
+
+# Define vulnerability curves as a DataFrame
+damage_curves_data = {
+    'primary': [0.0, 0.2, 0.5, 0.8, 1.0],
+    'secondary': [0.0, 0.3, 0.6, 0.9, 1.0],
+    'tertiary': [0.0, 0.4, 0.7, 0.9, 1.0]
+}
+
+# Create DataFrame
+depth_levels = [0, 1, 2, 3, 4]
+damage_curves = pd.DataFrame(damage_curves_data, index=depth_levels)
+damage_curves.index.rename('Depth', inplace=True)
+damage_curves = damage_curves.astype(np.float32)
+
+# Display DataFrame
+print(damage_curves)
+```
 
 ## Visualizing the Data
 
@@ -105,5 +112,3 @@ plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.show()
 ```
-
-This function processes and structures OSM data efficiently, enabling its integration into risk assessments. More details on the implementation are available in the [DamageScanner OSM module](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py).
