@@ -86,4 +86,3 @@ dependencies:
 - **pyarrow**: Handles in-memory columnar data.
 - **lonboard**: Custom package (verify availability if needed).
 
-These dependencies are crucial for geospatial data analysis, visualization, and risk assessment workflows.
