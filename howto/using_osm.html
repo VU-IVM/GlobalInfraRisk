@@ -399,12 +399,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-overview">Function Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-cleaning-data">Filtering and Cleaning Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
 </ul>
             </nav>
@@ -441,25 +441,10 @@ document.write(`
 </div>
 <section id="extracting-data-with-read-osm-data">
 <h2>Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code><a class="headerlink" href="#extracting-data-with-read-osm-data" title="Permalink to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406"><code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.</p>
-<section id="function-overview">
-<h3>Function Overview<a class="headerlink" href="#function-overview" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">read_osm_data</span><span class="p">(</span><span class="n">osm_path</span><span class="p">,</span> <span class="n">asset_type</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Extracts asset data from an OSM file.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    - osm_path (str or Path): Path to the `.osm.pbf` file.</span>
-<span class="sd">    - asset_type (str): Type of infrastructure to extract (e.g., &#39;roads&#39;, &#39;buildings&#39;).</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    - GeoDataFrame with extracted asset data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</section>
+<p>The <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406"><code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It applies OSM query filters stored in <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12"><code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code></a> to select relevant infrastructure features.</p>
 <section id="example-retrieving-road-network-data">
 <h3>Example: Retrieving Road Network Data<a class="headerlink" href="#example-retrieving-road-network-data" title="Permalink to this heading">#</a></h3>
+<p>When extracting data, OSM-based attribute columns (e.g., <code class="docutils literal notranslate"><span class="pre">highway</span></code> for roads) are automatically converted into a standardized <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column. This ensures consistency when linking extracted data to vulnerability curves and maximum damage values.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
 
 <span class="c1"># Define file path and asset type</span>
@@ -485,26 +470,48 @@ document.write(`
 </div>
 </section>
 </section>
-<section id="filtering-and-cleaning-data">
-<h2>Filtering and Cleaning Data<a class="headerlink" href="#filtering-and-cleaning-data" title="Permalink to this heading">#</a></h2>
-<p>The function applies predefined OSM queries stored in <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12"><code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code></a>. Each infrastructure type is mapped to specific OSM tags.</p>
-<p>Example structure:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DICT_CIS_OSM</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;roads&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;osm_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;highway&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;maxspeed&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;osm_query&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;highway&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;motorway&quot;</span><span class="p">,</span> <span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="s2">&quot;secondary&quot;</span><span class="p">]},</span>
-    <span class="p">},</span>
-     <span class="s2">&quot;telecom&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;osm_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;man_made&quot;</span><span class="p">,</span> <span class="s2">&quot;tower_type&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;osm_query&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;man_made&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;mast&quot;</span><span class="p">,</span> <span class="s2">&quot;communications_tower&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;tower_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;communication&quot;</span><span class="p">],</span>
-        <span class="p">}</span>
-    <span class="p">},</span>    
+<section id="creating-the-maximum-damage-dataframe">
+<h2>Creating the Maximum Damage DataFrame<a class="headerlink" href="#creating-the-maximum-damage-dataframe" title="Permalink to this heading">#</a></h2>
+<p>To link OSM data with damage assessments, maximum reconstruction costs must be defined per infrastructure type. These values must align with the <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column in the extracted OSM dataset. Maximum damage values should be validated using expert input or literature sources.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Define maximum reconstruction costs</span>
+<span class="n">max_damage_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;object_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;max_reconstruction_cost_per_meter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>  <span class="c1"># Example values in currency units per meter</span>
 <span class="p">}</span>
+
+<span class="c1"># Create DataFrame</span>
+<span class="n">max_damage_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">max_damage_data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_damage_df</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This filtering ensures that only relevant features are included in the output.</p>
+</section>
+<section id="linking-vulnerability-curves">
+<h2>Linking Vulnerability Curves<a class="headerlink" href="#linking-vulnerability-curves" title="Permalink to this heading">#</a></h2>
+<p>Each infrastructure type requires a vulnerability curve to determine expected damage based on hazard intensity. Vulnerability curves are hazard-specific and should be reviewed for accuracy. A useful reference is <a class="reference external" href="https://nhess.copernicus.org/articles/24/4341/2024/nhess-24-4341-2024-discussion.html">Nirandjan et al. (2024)</a>, but local validation is necessary.</p>
+<p>To facilitate vulnerability curve selection, a predefined dictionary linking OSM categories to damage curves is available in <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/base_values.py"><code class="docutils literal notranslate"><span class="pre">base_values.py</span></code></a>. Users can use this as a reference and adjust as needed based on local validation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define vulnerability curves as a DataFrame</span>
+<span class="n">damage_curves_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;primary&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;secondary&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+    <span class="s1">&#39;tertiary&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Create DataFrame</span>
+<span class="n">depth_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">damage_curves_data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">depth_levels</span><span class="p">)</span>
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Display DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">damage_curves</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="visualizing-the-data">
 <h2>Visualizing the Data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this heading">#</a></h2>
@@ -517,7 +524,6 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This function processes and structures OSM data efficiently, enabling its integration into risk assessments. More details on the implementation are available in the <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py">DamageScanner OSM module</a>.</p>
 </section>
 </section>
 
@@ -585,12 +591,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-overview">Function Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-cleaning-data">Filtering and Cleaning Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
 </ul>
   </nav></div>
