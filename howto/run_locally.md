@@ -1,4 +1,4 @@
-# Run locally
+# Run Locally
 This guide provides step-by-step instructions for setting up and running the Jupyter notebooks included in the Global Infrastructure Risk repository. By following these instructions, you will be able to configure a reproducible computing environment using Conda and interact with the provided notebooks efficiently. 
 
 ## Prerequisites
