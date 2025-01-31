@@ -441,7 +441,7 @@ document.write(`
 </div>
 <section id="extracting-data-with-read-osm-data">
 <h2>Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code><a class="headerlink" href="#extracting-data-with-read-osm-data" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">read_osm_data</span></code> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.</p>
+<p>The <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406"><code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.</p>
 <section id="function-overview">
 <h3>Function Overview<a class="headerlink" href="#function-overview" title="Permalink to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">read_osm_data</span><span class="p">(</span><span class="n">osm_path</span><span class="p">,</span> <span class="n">asset_type</span><span class="p">):</span>
@@ -487,7 +487,7 @@ document.write(`
 </section>
 <section id="filtering-and-cleaning-data">
 <h2>Filtering and Cleaning Data<a class="headerlink" href="#filtering-and-cleaning-data" title="Permalink to this heading">#</a></h2>
-<p>The function applies predefined OSM queries stored in <code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code>. Each infrastructure type is mapped to specific OSM tags.</p>
+<p>The function applies predefined OSM queries stored in <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12"><code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code></a>. Each infrastructure type is mapped to specific OSM tags.</p>
 <p>Example structure:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DICT_CIS_OSM</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;roads&quot;</span><span class="p">:</span> <span class="p">{</span>

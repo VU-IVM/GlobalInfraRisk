@@ -26,7 +26,7 @@ asset_types = [
 
 ## Extracting Data with `read_osm_data()`
 
-The `read_osm_data` function processes `.osm.pbf` files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.
+The [`read_osm_data()`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406) function processes `.osm.pbf` files and extracts data related to predefined asset types. It uses a set of OSM keys and query filters to select relevant infrastructure features.
 
 ### Function Overview
 
@@ -72,7 +72,7 @@ print(gdf_buildings.head())
 
 ## Filtering and Cleaning Data
 
-The function applies predefined OSM queries stored in `DICT_CIS_OSM`. Each infrastructure type is mapped to specific OSM tags.
+The function applies predefined OSM queries stored in [`DICT_CIS_OSM`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12). Each infrastructure type is mapped to specific OSM tags.
 
 Example structure:
 

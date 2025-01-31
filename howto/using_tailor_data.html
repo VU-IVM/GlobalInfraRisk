@@ -375,7 +375,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -391,6 +393,30 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-specific-examples">Sector-Specific Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transportation-infrastructure-roads">1. Transportation Infrastructure: Roads</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">Preparing the Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-infrastructure-power-plants">2. Energy Infrastructure: Power Plants</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preparing the Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Linking Vulnerability Curves</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-forward">Moving forward</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -402,6 +428,134 @@ document.write(`
                   
   <section id="using-local-data">
 <h1>Using Local Data<a class="headerlink" href="#using-local-data" title="Permalink to this heading">#</a></h1>
+<p>OpenStreetMap provides global infrastructure data, but local datasets can provide more detail for risk assessments. To integrate local data with the <code class="docutils literal notranslate"><span class="pre">damagescanner</span></code> tool, the data must follow a specific structure. This guide explains how to format infrastructure datasets, link them to maximum damage estimates, and incorporate vulnerability curves for natural hazard assessments.</p>
+<section id="data-requirements">
+<h2>Data Requirements<a class="headerlink" href="#data-requirements" title="Permalink to this heading">#</a></h2>
+<p>For local data to be compatible with <code class="docutils literal notranslate"><span class="pre">damagescanner</span></code>, it must:</p>
+<ol class="arabic simple">
+<li><p><strong>Contain an <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column</strong>: This column categorizes assets (e.g., roads, buildings, power lines).</p></li>
+<li><p><strong>Match the <code class="docutils literal notranslate"><span class="pre">object_type</span></code> values in the maximum damage file</strong>: Each asset type must have a corresponding entry.</p></li>
+<li><p><strong>Be linked to vulnerability curves</strong>: These curves define how different asset types respond to specific hazards.</p></li>
+<li><p><strong>Account for geometry type</strong>: Maximum damages are often linked to some unit (e.g., full object, meters or square meters).</p></li>
+</ol>
+</section>
+<section id="sector-specific-examples">
+<h2>Sector-Specific Examples<a class="headerlink" href="#sector-specific-examples" title="Permalink to this heading">#</a></h2>
+<section id="transportation-infrastructure-roads">
+<h3>1. Transportation Infrastructure: Roads<a class="headerlink" href="#transportation-infrastructure-roads" title="Permalink to this heading">#</a></h3>
+<section id="preparing-the-data">
+<h4>Preparing the Data<a class="headerlink" href="#preparing-the-data" title="Permalink to this heading">#</a></h4>
+<p>A local dataset of road networks may contain different road classifications. The dataset must include an <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column and the geometry type must be verified.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="c1"># Load local road network data (can be any geospatial object format)</span>
+<span class="n">gdf_roads</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/local_roads.geojson&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ensure &#39;object_type&#39; column exists and is correctly populated</span>
+<span class="n">gdf_roads</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_roads</span><span class="p">[</span><span class="s1">&#39;road_type&#39;</span><span class="p">]</span>  <span class="c1"># e.g., &#39;primary&#39;, &#39;secondary&#39;, &#39;tertiary&#39;</span>
+
+<span class="c1"># Check geometry type</span>
+<span class="n">gdf_roads</span><span class="p">[</span><span class="s2">&quot;geometry_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_roads</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span>
+
+<span class="c1"># Display first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gdf_roads</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-the-maximum-damage-dataframe">
+<h4>Creating the Maximum Damage DataFrame<a class="headerlink" href="#creating-the-maximum-damage-dataframe" title="Permalink to this heading">#</a></h4>
+<p>Maximum damage values must be defined based on whether the asset is measured per meter, per object, or by another unit. It is essential to validate these values against expert knowledge or historical data. While estimates can be derived from literature, validation through local expertise is recommended.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Define maximum reconstruction costs</span>
+<span class="n">max_damage_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;object_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;max_reconstruction_cost_per_meter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>  <span class="c1"># Example costs in currency units per meter</span>
+<span class="p">}</span>
+
+<span class="c1"># Create DataFrame</span>
+<span class="n">max_damage_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">max_damage_data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_damage_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="linking-vulnerability-curves">
+<h4>Linking Vulnerability Curves<a class="headerlink" href="#linking-vulnerability-curves" title="Permalink to this heading">#</a></h4>
+<p>Each infrastructure type must be linked to a vulnerability curve that defines expected damage based on hazard intensity. Vulnerability curves represent the relationship between hazard intensity (e.g., flood depth, wind speed, ground shaking) and the proportion of damage incurred by the asset.</p>
+<p>Vulnerability curves are highly hazard-specific. A curve for flooding will differ from one for earthquakes or cyclones. It is advisable to refer to published sources, such as <a class="reference external" href="https://nhess.copernicus.org/articles/24/4341/2024/nhess-24-4341-2024-discussion.html">Nirandjan et al. (2024)</a>, as a starting point to identify relevant curves. However, local validation and consultation are necessary to ensure accuracy for the specific region and hazard type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example vulnerability curve dictionary</span>
+<span class="n">vulnerability_curves</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;primary&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span>
+    <span class="s1">&#39;secondary&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span>
+    <span class="s1">&#39;tertiary&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1"># Retrieve curve for &#39;primary&#39; roads</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vulnerability_curves</span><span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="energy-infrastructure-power-plants">
+<h3>2. Energy Infrastructure: Power Plants<a class="headerlink" href="#energy-infrastructure-power-plants" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h4>Preparing the Data<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p>A dataset of power plants must include the <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column and specify the geometry type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load local power plant data</span>
+<span class="n">gdf_power_plants</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/local_power_plants.geojson&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ensure &#39;object_type&#39; column exists and is correctly populated</span>
+<span class="n">gdf_power_plants</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_power_plants</span><span class="p">[</span><span class="s1">&#39;fuel_type&#39;</span><span class="p">]</span>  <span class="c1"># e.g., &#39;coal&#39;, &#39;gas&#39;, &#39;nuclear&#39;</span>
+
+<span class="c1"># Check geometry type</span>
+<span class="n">gdf_power_plants</span><span class="p">[</span><span class="s2">&quot;geometry_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf_power_plants</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span>
+
+<span class="c1"># Display first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gdf_power_plants</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Creating the Maximum Damage DataFrame<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<p>For power plants, maximum reconstruction cost is typically per object rather than per meter. Just like with road infrastructure, it is important to validate these values with local expertise and empirical data where available.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define maximum reconstruction costs</span>
+<span class="n">max_damage_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;object_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;coal&#39;</span><span class="p">,</span> <span class="s1">&#39;gas&#39;</span><span class="p">,</span> <span class="s1">&#39;nuclear&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;max_reconstruction_cost_per_object&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50000000</span><span class="p">,</span> <span class="mi">40000000</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">]</span>  <span class="c1"># in currency units</span>
+<span class="p">}</span>
+
+<span class="c1"># Create DataFrame</span>
+<span class="n">max_damage_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">max_damage_data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_damage_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>Linking Vulnerability Curves<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>Similar to road networks, vulnerability curves for power plants depend on the hazard being analyzed. These curves should be derived from domain-specific research and, where possible, validated by local stakeholders.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example vulnerability curve dictionary</span>
+<span class="n">vulnerability_curves</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;coal&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span>
+    <span class="s1">&#39;gas&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span>
+    <span class="s1">&#39;nuclear&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1"># Retrieve curve for &#39;coal&#39; power plants</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vulnerability_curves</span><span class="p">[</span><span class="s1">&#39;coal&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="moving-forward">
+<h2>Moving forward<a class="headerlink" href="#moving-forward" title="Permalink to this heading">#</a></h2>
+<p>Local infrastructure data must be structured correctly to be used in <code class="docutils literal notranslate"><span class="pre">damagescanner</span></code>. The <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column must align with values in the maximum damage file, and each type must be linked to an appropriate vulnerability curve. Geometry type must also be considered to determine whether damage is assessed per square meter, per meter, or per object.</p>
+<p>Both maximum damage values and vulnerability curves require validation through local consultation and expert knowledge. While literature can provide an initial reference, adjustments based on empirical observations and stakeholder input improve the accuracy of risk assessments.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -458,6 +612,36 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">Data Requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sector-specific-examples">Sector-Specific Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transportation-infrastructure-roads">1. Transportation Infrastructure: Roads</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">Preparing the Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-infrastructure-power-plants">2. Energy Infrastructure: Power Plants</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preparing the Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Creating the Maximum Damage DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Linking Vulnerability Curves</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-forward">Moving forward</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
