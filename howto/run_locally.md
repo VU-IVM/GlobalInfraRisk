@@ -53,7 +53,6 @@ dependencies:
   - tqdm
   - pip
   - jupyterlab
-  - xlrd
   - pyproj
   - xarray
   - rioxarray
