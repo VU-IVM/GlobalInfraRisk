@@ -24,6 +24,49 @@ asset_types = [
 ]
 ```
 
+## Downloading OpenStreetMap (OSM) Data
+
+### Using the `download()` Function
+
+To obtain OpenStreetMap (OSM) data for a specific country, we use the `download.get_country_geofabrik()` function from the [**DamageScanner.download**](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/download.py) module (originally developed within the [**osm-flex**](https://osm-flex.readthedocs.io/en/latest/index.html) package). This function retrieves country-specific `.osm.pbf` files from [Geofabrik](https://download.geofabrik.de/), a widely used source for regional OSM extracts.
+
+#### Example Usage:
+```python
+from damagescanner import download
+
+# Define the country code (ISO 3166-1 alpha-3)
+country_iso3 = "NLD"  # Example: Netherlands
+
+# Retrieve the OSM data file path
+features = download.get_country_geofabrik(country_iso3)
+```
+
+This function requires the **ISO3 country code**, which is used to match available datasets. The dictionary of supported country codes is found in the **DamageScanner config file**:
+
+📌 **[View the country dictionary](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/config.py#L46)**
+
+### Handling Countries Not in the Dictionary
+If a country is not listed in the dictionary, it means that a predefined extract is unavailable, and a **custom clip** is required from a larger regional or continental file. There are two primary approaches to achieving this:
+
+#### **1. Using GeoPandas with a Bounding Box (Simpler Approach)**
+The most recent `geopandas.read_file()` function allows users to clip a dataset to a specific **bounding box (bbox)**:
+
+```python
+import geopandas as gpd
+
+# Load a larger OSM dataset (e.g., Europe extract)
+osm_data = gpd.read_file("path/to/europe-latest.osm.pbf", bbox=(xmin, ymin, xmax, ymax))
+```
+
+📌 **[GeoPandas read_file Documentation](https://geopandas.org/en/stable/docs/reference/api/geopandas.read_file.html)**
+
+#### **2. Using OSM-Flex for Advanced Clipping**
+For more precise extraction based on administrative boundaries or complex geometries, the **osm-flex** package provides a tailored clipping approach:
+
+📌 **[OSM-Flex Clipping Documentation](https://osm-flex.readthedocs.io/en/latest/1_clipping_shapes.html)**
+
+This method is more advanced and allows for detailed customization of OSM extracts beyond simple bounding boxes.
+
 ## Extracting Data with `read_osm_data()`
 
 The [`read_osm_data()`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406) function processes `.osm.pbf` files and extracts data related to predefined asset types. It applies OSM query filters stored in [`DICT_CIS_OSM`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12) to select relevant infrastructure features.
