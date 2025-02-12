@@ -498,19 +498,20 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
 </pre></div>
 </div>
 </div>
@@ -560,12 +561,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\pyogrio\raw.py:196: RuntimeWarning: Non closed ring detected. To avoid accepting it, set the OGR_GEOMETRY_ACCEPT_UNCLOSED_RING configuration option to NO
-  return ogr_read(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 50 s
-Wall time: 1min 31s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 26s
+Wall time: 1min 40s
 </pre></div>
 </div>
 </div>
@@ -584,7 +581,7 @@ Wall time: 1min 31s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;school&#39;, &#39;library&#39;, &#39;kindergarten&#39;, &#39;college&#39;, &#39;university&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;school&#39;, &#39;kindergarten&#39;, &#39;library&#39;, &#39;college&#39;, &#39;university&#39;],
       dtype=object)
 </pre></div>
 </div>
@@ -598,7 +595,7 @@ Wall time: 1min 31s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d9945f92a9b744328ae795bd65f4b92d", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "efda187320b4465a9d8446932c9b11bd", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -619,10 +616,10 @@ Wall time: 1min 31s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1f6c04f6210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1f540a3fb60&gt;
 </pre></div>
 </div>
-<img alt="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" src="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" />
+<img alt="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" src="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" />
 </div>
 </div>
 </section>
@@ -658,8 +655,8 @@ Wall time: 1min 31s
 <p>Similarly to the maximum damages, specifying the vulnerability curves is complex. We generally have limited information about the quality of the assets, its level of deteriation and other asset-level characteristics.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/10203846/files/Table_D2_Multi-Hazard_Fragility_and_Vulnerability_Curves_V1.0.0.xlsx?download=1&quot;</span>
-<span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;W_Vuln_V10m&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/13889558/files/Table_D2_Hazard_Fragility_and_Vulnerability_Curves_V1.1.0.xlsx?download=1&quot;</span>
+<span class="n">vul_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;W_Vuln_V10m&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -799,12 +796,12 @@ Wall time: 1min 31s
     <tr>
       <th>W7.2</th>
       <td>Roads</td>
-      <td>Roads</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>W14.1</th>
       <td>Water treatment plant</td>
-      <td>Water treatment plant</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>W16.1</th>
@@ -814,7 +811,7 @@ Wall time: 1min 31s
     <tr>
       <th>W18.1</th>
       <td>Wastewater treatment plant</td>
-      <td>Wastewater treatment plant</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>W19.1</th>
@@ -868,22 +865,50 @@ Wall time: 1min 31s
 <p>As we do not exactly know which curves we may want to use, we can also run the analysis with all curves. To do so, we select all education-related curves from Nirandjan et al. (2024)’s database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_curves</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;W21.1&#39;</span><span class="p">,</span><span class="s1">&#39;W21.2&#39;</span><span class="p">,</span><span class="s1">&#39;W21.3&#39;</span><span class="p">,</span><span class="s1">&#39;W21.4&#39;</span><span class="p">,</span><span class="s1">&#39;W21.5&#39;</span><span class="p">,</span><span class="s1">&#39;W21.10&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;W21.2&#39;</span><span class="p">,</span><span class="s1">&#39;W21.3&#39;</span><span class="p">,</span><span class="s1">&#39;W21.4&#39;</span><span class="p">,</span><span class="s1">&#39;W21.5&#39;</span><span class="p">,</span><span class="s1">&#39;W21.10&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>And first we prepare a baseline DataFrame to be used in our analysis.</p>
+<p>The next step is to extract the curves from the database, and prepare them for proper usage into our analysis.</p>
+<p>We start by selecting the curve IDs from the larger pandas DataFrame <strong>vul_df</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;W21.1&#39;</span><span class="p">]</span>
-
-<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">selected_curves</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">selected_curves</span><span class="p">]</span>
 <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
-<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then for convenience, we rename the index name to the hazard intensity we are considering.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;WindSpeed&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>And make sure that our damage values are in floating numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And ensure that the columns of the curves link back to the different asset types we are considering:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There could be some <strong>NaN</strong> values at the tail of some of the curves. To make sure the code works, we fill up the <strong>NaN</strong> values with the last value of each of the curves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -988,13 +1013,13 @@ Wall time: 1min 31s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:34&lt;00:00, 14.03it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 41904.24it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 16212.79it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:43&lt;00:00, 10.97it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 42906.68it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18320.18it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.3 s
-Wall time: 35.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.9 s
+Wall time: 45.3 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1011,18 +1036,18 @@ Wall time: 35.7 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:35&lt;00:00, 13.50it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 37873.79it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17275.58it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 16479.74it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 15487.88it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17030.03it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 15915.64it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10001/10001 [00:00&lt;00:00, 17269.04it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:40&lt;00:00, 11.82it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 42615.38it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17331.64it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17332.01it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18343.90it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 19835.93it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17823.46it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18328.29it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.1 s
-Wall time: 40.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.3 s
+Wall time: 44.9 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1091,7 +1116,7 @@ Wall time: 40.2 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/bbe6234a6d753de055f23b383b808aada12faab8d79722390b6869d853819669.png" src="../_images/bbe6234a6d753de055f23b383b808aada12faab8d79722390b6869d853819669.png" />
+<img alt="../_images/d1d02250300d79538bcf3adc8c663e76f4b3895856aad5fb31a79a5cb1e5bb8a.png" src="../_images/d1d02250300d79538bcf3adc8c663e76f4b3895856aad5fb31a79a5cb1e5bb8a.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1109,7 +1134,7 @@ Wall time: 40.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4d4cfb0ed76e55edbcbb052f97e4f1c498fb212e1c41c7f928801cee014c25fd.png" src="../_images/4d4cfb0ed76e55edbcbb052f97e4f1c498fb212e1c41c7f928801cee014c25fd.png" />
+<img alt="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" src="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1119,7 +1144,7 @@ Wall time: 40.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4e72b27472c943b6b697006517b05408", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7c995279d90047289af3131223d0c3ce", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1152,7 +1177,7 @@ Wall time: 40.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:39&lt;00:00, 39.88s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:40&lt;00:00, 40.21s/it]
 </pre></div>
 </div>
 </div>
@@ -1187,7 +1212,7 @@ Wall time: 40.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:41&lt;00:00, 40.35s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:37&lt;00:00, 39.28s/it]
 </pre></div>
 </div>
 </div>
@@ -1281,7 +1306,7 @@ Wall time: 40.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/23f6d791245ec086e5111236404a1936bdfa39bb42b98041d3bb088972c7ead9.png" src="../_images/23f6d791245ec086e5111236404a1936bdfa39bb42b98041d3bb088972c7ead9.png" />
+<img alt="../_images/e5b248a949844ae51af87d6e9c6e31dcbba3a62c61b75375b574c9b0fba26056.png" src="../_images/e5b248a949844ae51af87d6e9c6e31dcbba3a62c61b75375b574c9b0fba26056.png" />
 </div>
 </div>
 </section>

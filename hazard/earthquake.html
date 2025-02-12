@@ -466,7 +466,7 @@ document.write(`
 <li><p><strong>Loading the necessary packages:</strong><br />
 We will import the Python libraries required for data handling, analysis, and visualization.</p></li>
 <li><p><strong>Loading the data:</strong><br />
-The infrastructure data (e.g., roads) and hazard data (e.g., flood depths) will be loaded into the notebook.</p></li>
+The infrastructure data (e.g., roads) and hazard data (e.g., PGA levels) will be loaded into the notebook.</p></li>
 <li><p><strong>Preparing the data:</strong><br />
 The infrastructure and hazard data will be processed and data gaps can be filled, if required.</p></li>
 <li><p><strong>Performing the damage assessment:</strong><br />
@@ -497,19 +497,22 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
 </pre></div>
 </div>
 </div>
@@ -542,7 +545,7 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </ol>
 <section id="infrastructure-data">
 <h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
-<p>We will perform this example analysis for Jamaica. To start the analysis, we first download the OpenStreetMap data from GeoFabrik. In case of locally available data, one can load the shapefiles through <strong>gpd.read_file()</strong>, as we show in the second cell within this section.</p>
+<p>We will perform this example analysis for Tajikistan. To start the analysis, we first download the OpenStreetMap data from GeoFabrik. In case of locally available data, one can load the shapefiles through <strong>gpd.read_file()</strong>, as we show in the second cell within this section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">infrastructure_path</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
@@ -559,8 +562,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 9.91 s
-Wall time: 9.8 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.86 s
+Wall time: 8.41 s
 </pre></div>
 </div>
 </div>
@@ -847,16 +850,6 @@ Wall time: 9.8 s
       <td>Low Voltage Substation unanchored</td>
     </tr>
     <tr>
-      <th>E3.1</th>
-      <td>Power tower</td>
-      <td>High-rise</td>
-    </tr>
-    <tr>
-      <th>E3.2</th>
-      <td>Power tower</td>
-      <td>Double circuit linear transmission tower</td>
-    </tr>
-    <tr>
       <th>E4.1</th>
       <td>Power pole</td>
       <td>Anchored/seismic components</td>
@@ -945,156 +938,6 @@ Wall time: 9.8 s
       <th>E6.2b</th>
       <td>Power lines</td>
       <td>Distribution circuit with unanchored/standard ...</td>
-    </tr>
-    <tr>
-      <th>E7.1</th>
-      <td>Roads</td>
-      <td>Highway on embankment</td>
-    </tr>
-    <tr>
-      <th>E7.1a</th>
-      <td>Roads</td>
-      <td>Highway on embankment</td>
-    </tr>
-    <tr>
-      <th>E7.1b</th>
-      <td>Roads</td>
-      <td>Highway on embankment</td>
-    </tr>
-    <tr>
-      <th>E7.6</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.6a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.6b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.7</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.7a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.7b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.8</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.8a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.8b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.9</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.9a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.9b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 2 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.10</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.10a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.10b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 4 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.11</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.11a</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.11b</th>
-      <td>Roads</td>
-      <td>Highway on embankment of 6 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E7.12</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.12a</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.12b</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E7.13</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 4 meters, soil type F</td>
-    </tr>
-    <tr>
-      <th>E7.13a</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 4 meters, soil type F</td>
-    </tr>
-    <tr>
-      <th>E7.13b</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 4 meters, soil type F</td>
-    </tr>
-    <tr>
-      <th>E7.14</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type F</td>
-    </tr>
-    <tr>
-      <th>E7.14a</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type F</td>
-    </tr>
-    <tr>
-      <th>E7.14b</th>
-      <td>Roads</td>
-      <td>Highway in cuts of 6 meters, soil type F</td>
     </tr>
     <tr>
       <th>E8.1</th>
@@ -1247,56 +1090,6 @@ Wall time: 9.8 s
       <td>Light rail DC Power substation: unanchored</td>
     </tr>
     <tr>
-      <th>E8.11</th>
-      <td>Railways</td>
-      <td>Railway on embankment</td>
-    </tr>
-    <tr>
-      <th>E8.16</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 2 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E8.17</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 4 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E8.18</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E8.19</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 2 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E8.20</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 4 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E8.21</th>
-      <td>Railways</td>
-      <td>Railway on embankment of 6 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E8.22</th>
-      <td>Railways</td>
-      <td>Railway in cuts of 6 meters, soil type C</td>
-    </tr>
-    <tr>
-      <th>E8.23</th>
-      <td>Railways</td>
-      <td>Railway in cuts of 4 meters, soil type D</td>
-    </tr>
-    <tr>
-      <th>E8.24</th>
-      <td>Railways</td>
-      <td>Railway in cuts of 6 meters, soil type D</td>
-    </tr>
-    <tr>
       <th>E9.1</th>
       <td>Airports</td>
       <td>Anchored components with backup power</td>
@@ -1355,11 +1148,6 @@ Wall time: 9.8 s
       <th>E9.4b</th>
       <td>Airports</td>
       <td>Unanchored components w/o backup power</td>
-    </tr>
-    <tr>
-      <th>E11.1</th>
-      <td>Mast</td>
-      <td>Monopole tower</td>
     </tr>
     <tr>
       <th>E12.1</th>
@@ -1802,56 +1590,6 @@ Wall time: 9.8 s
       <td>medium/large unanchored</td>
     </tr>
     <tr>
-      <th>E21.1</th>
-      <td>Educational facilities</td>
-      <td>Masonry</td>
-    </tr>
-    <tr>
-      <th>E21.2</th>
-      <td>Educational facilities</td>
-      <td>Reinforced steel frame</td>
-    </tr>
-    <tr>
-      <th>E21.3</th>
-      <td>Educational facilities</td>
-      <td>Steel frame</td>
-    </tr>
-    <tr>
-      <th>E21.4</th>
-      <td>Educational facilities</td>
-      <td>Timber frame</td>
-    </tr>
-    <tr>
-      <th>E21.5</th>
-      <td>Educational facilities</td>
-      <td>Rubber stone mud unreinforced masonry - single...</td>
-    </tr>
-    <tr>
-      <th>E21.6</th>
-      <td>Educational facilities</td>
-      <td>Rubber stone mud unreinforced masonry - two-to...</td>
-    </tr>
-    <tr>
-      <th>E21.7</th>
-      <td>Educational facilities</td>
-      <td>Brick mud unreinforced masonry - single story</td>
-    </tr>
-    <tr>
-      <th>E21.8</th>
-      <td>Educational facilities</td>
-      <td>Brick mud unreinforced masonry - two-to-four s...</td>
-    </tr>
-    <tr>
-      <th>E21.9</th>
-      <td>Educational facilities</td>
-      <td>Brick-cement unreinforced masonry - single story</td>
-    </tr>
-    <tr>
-      <th>E21.10</th>
-      <td>Educational facilities</td>
-      <td>Brick-cement unreinforced masonry - two-to-fou...</td>
-    </tr>
-    <tr>
       <th>E21.11</th>
       <td>Educational facilities</td>
       <td>Reinforced concrete four-story building</td>
@@ -1893,20 +1631,50 @@ Wall time: 9.8 s
 </div>
 </div>
 </div>
+<p>The next step is to extract the curves from the database, and prepare them for proper usage into our analysis.</p>
+<p>We start by selecting the curve IDs from the larger pandas DataFrame <strong>vul_df</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">selected_curves</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
 <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;PGA&#39;</span><span class="p">)</span>  
-<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
-<span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Make sure we set the index of the damage curves (the PGA levels) in the same metric as the hazard data.</p>
+<p>Then for convenience, we rename the index name to the hazard intensity we are considering.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;PGA&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>And make sure that our damage values are in floating numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And ensure that the columns of the curves link back to the different asset types we are considering:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There could be some <strong>NaN</strong> values at the tail of some of the curves. To make sure the code works, we fill up the <strong>NaN</strong> values with the last value of each of the curves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, make sure we set the index of the damage curves (the PGA levels) in the same metric as the hazard data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">980</span>
@@ -1967,8 +1735,8 @@ Wall time: 9.8 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:27&lt;00:00,  5.24it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 7258/7258 [00:04&lt;00:00, 1683.38it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:39&lt;00:00,  1.94s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:20&lt;00:00, 4058.84it/s]
 </pre></div>
 </div>
 </div>
@@ -1993,13 +1761,13 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:22&lt;00:00,  6.34it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 7258/7258 [00:03&lt;00:00, 1834.05it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 7258/7258 [00:00&lt;00:00, 14506.97it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:27&lt;00:00,  1.86s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:24&lt;00:00, 3403.69it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:05&lt;00:00, 14324.73it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 22.7 s
-Wall time: 27.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4min 7s
+Wall time: 5min 5s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2033,8 +1801,8 @@ Wall time: 27.7 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:13&lt;00:00,  2.17s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 83883/83883 [00:28&lt;00:00, 2995.25it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:06&lt;00:00,  2.13s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:17&lt;00:00, 4793.60it/s]
 </pre></div>
 </div>
 </div>
@@ -2080,7 +1848,7 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|██████████████████████████████████████████| 7258/7258 [00:00&lt;00:00, 10469.45it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:09&lt;00:00, 9388.17it/s]
 </pre></div>
 </div>
 </div>
@@ -2097,13 +1865,13 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:00&lt;00:00,  2.09s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 83883/83883 [00:31&lt;00:00, 2679.59it/s]
-Calculating damage: 100%|██████████████████████████████████████████████████████| 83883/83883 [00:08&lt;00:00, 9482.42it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:05&lt;00:00,  1.70s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:29&lt;00:00, 2893.04it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:06&lt;00:00, 13959.52it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 5min 16s
-Wall time: 5min 46s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 53s
+Wall time: 4min 46s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2121,7 +1889,7 @@ Wall time: 5min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 83883/83883 [00:09&lt;00:00, 8414.18it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:09&lt;00:00, 8559.39it/s]
 </pre></div>
 </div>
 </div>
@@ -2188,7 +1956,7 @@ Wall time: 5min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8ec0a3ef67c2cca5f6fde8fe495979fa78b7a136ee58187a557077ca317d96c3.png" src="../_images/8ec0a3ef67c2cca5f6fde8fe495979fa78b7a136ee58187a557077ca317d96c3.png" />
+<img alt="../_images/527139547e2d99b84c2d992feba6c74113a39b743620f3a56a457299457cb407.png" src="../_images/527139547e2d99b84c2d992feba6c74113a39b743620f3a56a457299457cb407.png" />
 </div>
 </div>
 <p>And create a distribution of the damages.</p>
@@ -2204,7 +1972,7 @@ Wall time: 5min 46s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/66a6601538321ac6fa0e98cac0bc10c78d1dff68e3c17ace2c8d5d271becd7c2.png" src="../_images/66a6601538321ac6fa0e98cac0bc10c78d1dff68e3c17ace2c8d5d271becd7c2.png" />
+<img alt="../_images/12ffb0251cd24bbfbc49242805f66af7f190e4fae50a026326af863e5aafa2d1.png" src="../_images/12ffb0251cd24bbfbc49242805f66af7f190e4fae50a026326af863e5aafa2d1.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -2222,7 +1990,7 @@ Wall time: 5min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1be40b1065cac76e9fd2081e53ae3ae331c14419dbdac5e50b2568edbf69494b.png" src="../_images/1be40b1065cac76e9fd2081e53ae3ae331c14419dbdac5e50b2568edbf69494b.png" />
+<img alt="../_images/9aba55f61756212583b6529ecdb6579f88b0e2d0036a0f41a6385206fea75969.png" src="../_images/9aba55f61756212583b6529ecdb6579f88b0e2d0036a0f41a6385206fea75969.png" />
 </div>
 </div>
 </section>

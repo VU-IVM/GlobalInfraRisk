@@ -398,6 +398,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-openstreetmap-osm-data">Downloading OpenStreetMap (OSM) Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-download-function">Using the <code class="docutils literal notranslate"><span class="pre">download()</span></code> Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-countries-not-in-the-dictionary">Handling Countries Not in the Dictionary</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-geopandas-with-a-bounding-box-simpler-approach"><strong>1. Using GeoPandas with a Bounding Box (Simpler Approach)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-osm-flex-for-advanced-clipping"><strong>2. Using OSM-Flex for Advanced Clipping</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>
@@ -439,6 +451,48 @@ document.write(`
 <span class="p">]</span>
 </pre></div>
 </div>
+<section id="downloading-openstreetmap-osm-data">
+<h2>Downloading OpenStreetMap (OSM) Data<a class="headerlink" href="#downloading-openstreetmap-osm-data" title="Permalink to this heading">#</a></h2>
+<section id="using-the-download-function">
+<h3>Using the <code class="docutils literal notranslate"><span class="pre">download()</span></code> Function<a class="headerlink" href="#using-the-download-function" title="Permalink to this heading">#</a></h3>
+<p>To obtain OpenStreetMap (OSM) data for a specific country, we use the <code class="docutils literal notranslate"><span class="pre">download.get_country_geofabrik()</span></code> function from the <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/download.py"><strong>DamageScanner.download</strong></a> module (originally developed within the <a class="reference external" href="https://osm-flex.readthedocs.io/en/latest/index.html"><strong>osm-flex</strong></a> package). This function retrieves country-specific <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files from <a class="reference external" href="https://download.geofabrik.de/">Geofabrik</a>, a widely used source for regional OSM extracts.</p>
+<section id="example-usage">
+<h4>Example Usage:<a class="headerlink" href="#example-usage" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">download</span>
+
+<span class="c1"># Define the country code (ISO 3166-1 alpha-3)</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s2">&quot;NLD&quot;</span>  <span class="c1"># Example: Netherlands</span>
+
+<span class="c1"># Retrieve the OSM data file path</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function requires the <strong>ISO3 country code</strong>, which is used to match available datasets. The dictionary of supported country codes is found in the <strong>DamageScanner config file</strong>:</p>
+<p>📌 <strong><a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/config.py#L46">View the country dictionary</a></strong></p>
+</section>
+</section>
+<section id="handling-countries-not-in-the-dictionary">
+<h3>Handling Countries Not in the Dictionary<a class="headerlink" href="#handling-countries-not-in-the-dictionary" title="Permalink to this heading">#</a></h3>
+<p>If a country is not listed in the dictionary, it means that a predefined extract is unavailable, and a <strong>custom clip</strong> is required from a larger regional or continental file. There are two primary approaches to achieving this:</p>
+<section id="using-geopandas-with-a-bounding-box-simpler-approach">
+<h4><strong>1. Using GeoPandas with a Bounding Box (Simpler Approach)</strong><a class="headerlink" href="#using-geopandas-with-a-bounding-box-simpler-approach" title="Permalink to this heading">#</a></h4>
+<p>The most recent <code class="docutils literal notranslate"><span class="pre">geopandas.read_file()</span></code> function allows users to clip a dataset to a specific <strong>bounding box (bbox)</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="c1"># Load a larger OSM dataset (e.g., Europe extract)</span>
+<span class="n">osm_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/europe-latest.osm.pbf&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>📌 <strong><a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.read_file.html">GeoPandas read_file Documentation</a></strong></p>
+</section>
+<section id="using-osm-flex-for-advanced-clipping">
+<h4><strong>2. Using OSM-Flex for Advanced Clipping</strong><a class="headerlink" href="#using-osm-flex-for-advanced-clipping" title="Permalink to this heading">#</a></h4>
+<p>For more precise extraction based on administrative boundaries or complex geometries, the <strong>osm-flex</strong> package provides a tailored clipping approach:</p>
+<p>📌 <strong><a class="reference external" href="https://osm-flex.readthedocs.io/en/latest/1_clipping_shapes.html">OSM-Flex Clipping Documentation</a></strong></p>
+<p>This method is more advanced and allows for detailed customization of OSM extracts beyond simple bounding boxes.</p>
+</section>
+</section>
+</section>
 <section id="extracting-data-with-read-osm-data">
 <h2>Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code><a class="headerlink" href="#extracting-data-with-read-osm-data" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L406"><code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a> function processes <code class="docutils literal notranslate"><span class="pre">.osm.pbf</span></code> files and extracts data related to predefined asset types. It applies OSM query filters stored in <a class="reference external" href="https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/osm.py#L12"><code class="docutils literal notranslate"><span class="pre">DICT_CIS_OSM</span></code></a> to select relevant infrastructure features.</p>
@@ -590,6 +644,18 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-openstreetmap-osm-data">Downloading OpenStreetMap (OSM) Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-download-function">Using the <code class="docutils literal notranslate"><span class="pre">download()</span></code> Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-usage">Example Usage:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-countries-not-in-the-dictionary">Handling Countries Not in the Dictionary</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-geopandas-with-a-bounding-box-simpler-approach"><strong>1. Using GeoPandas with a Bounding Box (Simpler Approach)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-osm-flex-for-advanced-clipping"><strong>2. Using OSM-Flex for Advanced Clipping</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-data-with-read-osm-data">Extracting Data with <code class="docutils literal notranslate"><span class="pre">read_osm_data()</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-road-network-data">Example: Retrieving Road Network Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-retrieving-building-footprints">Example: Retrieving Building Footprints</a></li>

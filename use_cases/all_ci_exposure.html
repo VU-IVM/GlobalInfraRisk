@@ -491,19 +491,22 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
 </pre></div>
 </div>
 </div>
@@ -629,6 +632,30 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [04:42&lt;00:00, 14.12s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 936/936 [00:00&lt;00:00, 2494.27it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:12&lt;00:00,  1.57it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 276/276 [00:00&lt;00:00, 1564.01it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 79.79it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1916.08it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 42.57it/s]
+convert coverage to meters: 1it [00:00, ?it/s]
+Overlay raster with vector: 100%|█████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 107.54it/s]
+convert coverage to meters: 1it [00:00, ?it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  9.53it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 249.22it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 27.45it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;?, ?it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  9.56it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 67/67 [00:00&lt;00:00, 4202.77it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 34.93it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 8/8 [00:00&lt;?, ?it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 44.28it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1820.05it/s]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -668,7 +695,7 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/27c3343360cb69816549fb062500bb5f6d305bf650f7e910ea9c972eaec9d58c.png" src="../_images/27c3343360cb69816549fb062500bb5f6d305bf650f7e910ea9c972eaec9d58c.png" />
+<img alt="../_images/a173d1be80fe42f05769334e9b23d02a668dabd51b1949f3ac937633a6f30715.png" src="../_images/a173d1be80fe42f05769334e9b23d02a668dabd51b1949f3ac937633a6f30715.png" />
 </div>
 </div>
 </section>
