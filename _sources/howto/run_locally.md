@@ -56,6 +56,7 @@ dependencies:
   - pyproj
   - xarray
   - rioxarray
+  - seaborn
   - pip:
       - damagescanner==0.9b12
       - exactextract
