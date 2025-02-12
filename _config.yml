@@ -45,3 +45,4 @@ parse:
     # including those that are enabled by default!
     - html_image
     - colon_fence
+    - dollarmath
