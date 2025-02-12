@@ -404,6 +404,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-bands">Hazard Intensity Bands</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publicly-available-hazard-data">Publicly Available Hazard Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-flood-hazard-data"><strong>Global Flood Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-tropical-cyclone-hazard-data"><strong>Global Tropical Cyclone Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-earthquake-hazard-data"><strong>Global Earthquake Hazard Data</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-flood-hazard-data-in-python">Example: Reading Flood Hazard Data in Python</a></li>
 </ul>
             </nav>
         </div>
@@ -443,6 +450,63 @@ document.write(`
 <h3>Hazard Intensity Bands<a class="headerlink" href="#hazard-intensity-bands" title="Permalink to this heading">#</a></h3>
 <p>Hazards are categorized into intensity bands to estimate potential damage. For example, earthquake intensity is measured by peak ground acceleration (PGA), while wind speeds are used for cyclones. Flood hazard intensity is typically measured in terms of water depth.</p>
 </section>
+</section>
+<section id="publicly-available-hazard-data">
+<h2>Publicly Available Hazard Data<a class="headerlink" href="#publicly-available-hazard-data" title="Permalink to this heading">#</a></h2>
+<p>Various global datasets provide hazard information that can be used for risk assessments. These datasets offer modeled hazard maps for different natural hazards, such as flooding, tropical cyclones, and earthquakes. Below, we provide an overview of available datasets along with links to access and process the data. All these datasets should work directly with the tools provided within the notebooks and examples.</p>
+<section id="global-flood-hazard-data">
+<h3><strong>Global Flood Hazard Data</strong><a class="headerlink" href="#global-flood-hazard-data" title="Permalink to this heading">#</a></h3>
+<p>Flood hazard data includes riverine and coastal flood models that estimate inundation depths and extents for different return periods.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://giri.unepgrid.ch/map?list=explore">CDRI - River Flooding</a></strong><br />
+The Climate and Disaster Resilience Initiative (CDRI) provides global river flood hazard maps.<br />
+📄 <a class="reference external" href="https://giri.unepgrid.ch/sites/default/files/2023-09/CIMA_GIRI_Flood_BGpaper_Supplement.pdf">Background Report</a></p></li>
+<li><p><strong><a class="reference external" href="https://data.jrc.ec.europa.eu/dataset/jrc-floods-floodmapgl_rp50y-tif">JRC Global River Flood Maps</a></strong><br />
+The Joint Research Centre (JRC) offers global flood maps based on GLOFAS, available for different return periods.<br />
+📥 <a class="reference external" href="https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/CEMS-GLOFAS/flood_hazard/">Download Data</a></p></li>
+<li><p><strong><a class="reference external" href="https://www.wri.org/data/aqueduct-floods-hazard-maps">Aqueduct Flood Hazard Maps</a></strong><br />
+Aqueduct provides river and coastal flood hazard maps with projections under different climate scenarios.<br />
+📥 <a class="reference external" href="https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/v2/index.html">Download Data</a></p></li>
+</ul>
+</section>
+<section id="global-tropical-cyclone-hazard-data">
+<h3><strong>Global Tropical Cyclone Hazard Data</strong><a class="headerlink" href="#global-tropical-cyclone-hazard-data" title="Permalink to this heading">#</a></h3>
+<p>Cyclone hazard data includes present and future projections of tropical cyclone wind speeds and storm surges.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://data.4tu.nl/datasets/0ea98bdd-5772-4da8-ae97-99735e891aff/4">STORM Tropical Cyclone Hazard Data</a></strong><br />
+Provides modeled tropical cyclone wind speeds for the present-day climate. Future projections are available <a class="reference external" href="https://data.4tu.nl/datasets/504c838e-2bd8-4d61-85a1-d495bdc560c3/4">here</a>.<br />
+📄 <a class="reference external" href="https://www.nature.com/articles/s41597-020-0381-2">Data Explanation</a></p></li>
+<li><p><strong><a class="reference external" href="https://giri.unepgrid.ch/map?list=explore">CDRI - Tropical Cyclone Maps</a></strong><br />
+CDRI provides present-day and future cyclone hazard maps.<br />
+📄 <a class="reference external" href="https://giri.unepgrid.ch/sites/default/files/2023-11/2.4-INGENIAR-CDRI-Background-Report-Risk-model.pdf">Background Report</a></p></li>
+</ul>
+</section>
+<section id="global-earthquake-hazard-data">
+<h3><strong>Global Earthquake Hazard Data</strong><a class="headerlink" href="#global-earthquake-hazard-data" title="Permalink to this heading">#</a></h3>
+<p>Earthquake hazard data includes seismic hazard maps that estimate ground shaking levels based on past earthquake records and geological modeling.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://giri.unepgrid.ch/map?list=explore">CDRI - Earthquake Hazard Maps</a></strong><br />
+The Climate and Disaster Resilience Initiative (CDRI) provides global earthquake hazard maps.<br />
+📄 <a class="reference external" href="https://giri.unepgrid.ch/sites/default/files/2023-11/2.4-INGENIAR-CDRI-Background-Report-Risk-model.pdf">Background Report</a></p></li>
+<li><p><strong><a class="reference external" href="https://www.globalquakemodel.org/product/global-seismic-hazard-map">Global Earthquake Model (GEM)</a></strong><br />
+GEM provides a probabilistic seismic hazard assessment with global coverage.<br />
+📥 <a class="reference external" href="https://cloud.openquake.org/s/6SnFk2f92JEr76H">Download Data</a></p></li>
+<li><p><strong><a class="reference external" href="https://risk.preventionweb.net/">GAR 2017 Atlas Risk Data</a></strong><br />
+The Global Assessment Report (GAR) provides earthquake hazard layers at the global level.</p></li>
+</ul>
+</section>
+</section>
+<section id="example-reading-flood-hazard-data-in-python">
+<h2>Example: Reading Flood Hazard Data in Python<a class="headerlink" href="#example-reading-flood-hazard-data-in-python" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="c1"># Load flood hazard data from UNEP-GRID</span>
+<span class="n">flood_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h100glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display dataset information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flood_ds</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -515,6 +579,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-intensity-bands">Hazard Intensity Bands</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publicly-available-hazard-data">Publicly Available Hazard Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-flood-hazard-data"><strong>Global Flood Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-tropical-cyclone-hazard-data"><strong>Global Tropical Cyclone Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-earthquake-hazard-data"><strong>Global Earthquake Hazard Data</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reading-flood-hazard-data-in-python">Example: Reading Flood Hazard Data in Python</a></li>
 </ul>
   </nav></div>
 
