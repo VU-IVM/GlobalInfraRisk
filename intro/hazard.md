@@ -36,7 +36,7 @@ Hazards are categorized into intensity bands to estimate potential damage. For e
 Various global datasets provide hazard information that can be used for risk assessments. These datasets offer modeled hazard maps for different natural hazards, such as flooding, tropical cyclones, and earthquakes. Below, we provide an overview of available datasets along with links to access and process the data. All these datasets should work directly with the tools provided within the notebooks and examples.
 
 ### **Global Flood Hazard Data**
-Flood hazard data includes riverine and coastal flood models that estimate inundation depths and extents for different return periods.
+Flood hazard data includes riverine and coastal flood models that estimate inundation depths and extents for different return periods. Pluvial flooding is generally only available through some of the commercial flood model companies (e.g. [**Fathom**](https://www.fathom.global/) & [**JBA**](https://www.jbarisk.com/products/global-flood-maps/))
 
 - **[CDRI - River Flooding](https://giri.unepgrid.ch/map?list=explore)**  
   The Climate and Disaster Resilience Initiative (CDRI) provides global river flood hazard maps.  
@@ -51,7 +51,7 @@ Flood hazard data includes riverine and coastal flood models that estimate inund
   📥 [Download Data](https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/v2/index.html)
 
 ### **Global Tropical Cyclone Hazard Data**
-Cyclone hazard data includes present and future projections of tropical cyclone wind speeds and storm surges.
+Cyclone hazard data includes present and future projections of tropical cyclone wind speeds.
 
 - **[STORM Tropical Cyclone Hazard Data](https://data.4tu.nl/datasets/0ea98bdd-5772-4da8-ae97-99735e891aff/4)**  
   Provides modeled tropical cyclone wind speeds for the present-day climate. Future projections are available [here](https://data.4tu.nl/datasets/504c838e-2bd8-4d61-85a1-d495bdc560c3/4).  
