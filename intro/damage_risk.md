@@ -2,7 +2,9 @@
 
 Damage and risk assessments are critical for understanding the potential impacts of natural hazards on infrastructure systems. In this study, damage is estimated using hazard, exposure, and vulnerability data. We define **risk** as a function of these three key components:
 
-$$Risk = Hazard \times Exposure \times Vulnerability$$
+$$
+Risk = Hazard \times Exposure \times Vulnerability
+$$
 
 This framework is applied to estimate the risks posed by natural hazards such as floods, earthquakes, tropical cyclones, and coastal flooding to infrastructure systems like roads and railways.
 
