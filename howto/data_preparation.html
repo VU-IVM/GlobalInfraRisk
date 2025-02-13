@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Specific Data Preparations &#8212; Global Infrastructure Risk Assesments</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/data_preparation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/IVM_logo_kort.jpg" class="logo__image only-light" alt="Global Infrastructure Risk Assesments - Home"/>
+    <script>document.write(`<img src="../_static/IVM_logo_kort.jpg" class="logo__image only-dark" alt="Global Infrastructure Risk Assesments - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/uncertainties.html">Model Uncertainties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run Locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_osm.html">Using OpenStreetMap (OSM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ci/transport.html">Transportation Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/power.html">Power Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/telecom.html">Telecommunication Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/healthcare.html">Healthcare Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/education.html">Education Infrastructure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Flood risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_exposure.html">Country-level exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/all_ci_risk.html">Country-level risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases/multi-country.html">Multi-country Analysis for Transportation Infrastructure</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fhowto/data_preparation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/howto/data_preparation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Specific Data Preparations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensuring-consistency-across-geometries">Ensuring Consistency Across Geometries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-checking-geometry-types"><strong>Step 1: Checking Geometry Types</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-linestrings-to-polygons"><strong>Converting LineStrings to Polygons</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-asset-types-for-conversion"><strong>Step 1: Define Asset Types for Conversion</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-relevant-assets"><strong>Step 2: Select Relevant Assets</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-convert-linestrings-to-polygons"><strong>Step 3: Convert LineStrings to Polygons</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-overwrite-the-original-geometries"><strong>Step 4: Overwrite the Original Geometries</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-points-to-polygons"><strong>Converting Points to Polygons</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-estimate-average-asset-size"><strong>Step 1: Estimate Average Asset Size</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-asset-types-for-buffering"><strong>Step 2: Define Asset Types for Buffering</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-relevant-points"><strong>Step 3: Select Relevant Points</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-apply-buffering-to-convert-points-into-polygons"><strong>Step 4: Apply Buffering to Convert Points into Polygons</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-overwrite-the-original-geometries"><strong>Step 5: Overwrite the Original Geometries</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-clean-up-temporary-data"><strong>Step 6: Clean Up Temporary Data</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-coordinate-reference-systems-crs">Checking Coordinate Reference Systems (CRS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizing-data-for-computational-efficiency">Optimizing Data for Computational Efficiency</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-clipping-hazard-data-to-the-country-of-interest"><strong>Example: Clipping Hazard Data to the Country of Interest</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="specific-data-preparations">
+<h1>Specific Data Preparations<a class="headerlink" href="#specific-data-preparations" title="Permalink to this heading">#</a></h1>
+<section id="ensuring-consistency-across-geometries">
+<h2>Ensuring Consistency Across Geometries<a class="headerlink" href="#ensuring-consistency-across-geometries" title="Permalink to this heading">#</a></h2>
+<p>When preparing infrastructure and hazard datasets for risk analysis, it is important to maintain consistency across different geometry types. Some datasets store infrastructure as <strong>points</strong>, <strong>linestrings</strong>, or <strong>polygons</strong>, and these need to be standardized to ensure proper spatial analysis.</p>
+<p>For some data, both points and polygons are available. Estimating damage using polygons simplifies the analysis. Therefore, we convert points to polygons by estimating their approximate size and applying buffers. For example, substations in a power network may be stored as lines and points, respectively. To ensure accurate exposure calculations, we convert them to <strong>polygons</strong> using buffer operations.</p>
+<section id="step-1-checking-geometry-types">
+<h3><strong>Step 1: Checking Geometry Types</strong><a class="headerlink" href="#step-1-checking-geometry-types" title="Permalink to this heading">#</a></h3>
+<p>Before making modifications, check how different assets are represented in the dataset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;geom_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">geom_type</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span> <span class="s1">&#39;geom_type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This will display the number of objects stored as <strong>Point</strong>, <strong>LineString</strong>, or <strong>Polygon</strong>, allowing us to identify which assets need conversion.</p>
+</section>
+<section id="converting-linestrings-to-polygons">
+<h3><strong>Converting LineStrings to Polygons</strong><a class="headerlink" href="#converting-linestrings-to-polygons" title="Permalink to this heading">#</a></h3>
+<p>Some assets, such as <strong>power plants, substations, and generators</strong>, are stored as LineStrings but should be polygons. We convert these using the following steps:</p>
+<section id="step-1-define-asset-types-for-conversion">
+<h4><strong>Step 1: Define Asset Types for Conversion</strong><a class="headerlink" href="#step-1-define-asset-types-for-conversion" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">linestrings_to_polygonize</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;generator&#39;</span><span class="p">,</span> <span class="s1">&#39;plant&#39;</span><span class="p">,</span> <span class="s1">&#39;substation&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This list specifies which asset types should be converted from <strong>LineStrings to Polygons</strong>.</p>
+</section>
+<section id="step-2-select-relevant-assets">
+<h4><strong>Step 2: Select Relevant Assets</strong><a class="headerlink" href="#step-2-select-relevant-assets" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">linestrings_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This extracts only the LineString geometries belonging to the asset types in our list.</p>
+</section>
+<section id="step-3-convert-linestrings-to-polygons">
+<h4><strong>Step 3: Convert LineStrings to Polygons</strong><a class="headerlink" href="#step-3-convert-linestrings-to-polygons" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">polygonize_linestring_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">shapely</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+
+<span class="n">collect_new_linestring_geometries</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">asset</span><span class="p">:</span> <span class="n">polygonize_linestring_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+<p>Here, we use <strong>Shapely</strong> to convert each <strong>LineString</strong> into a <strong>Polygon</strong>.</p>
+</section>
+<section id="step-4-overwrite-the-original-geometries">
+<h4><strong>Step 4: Overwrite the Original Geometries</strong><a class="headerlink" href="#step-4-overwrite-the-original-geometries" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">linestrings_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;geometry&#39;</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">collect_new_linestring_geometries</span>
+</pre></div>
+</div>
+<p>This replaces the existing <strong>LineString</strong> geometries with the newly created <strong>Polygon</strong> geometries.</p>
+</section>
+</section>
+<section id="converting-points-to-polygons">
+<h3><strong>Converting Points to Polygons</strong><a class="headerlink" href="#converting-points-to-polygons" title="Permalink to this heading">#</a></h3>
+<p>Some infrastructure elements, such as <strong>substations, generators, and plants</strong>, are stored as <strong>Points</strong> but should have an area representation. We use buffering to convert them into small square polygons.</p>
+<section id="step-1-estimate-average-asset-size">
+<h4><strong>Step 1: Estimate Average Asset Size</strong><a class="headerlink" href="#step-1-estimate-average-asset-size" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span> <span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+<span class="n">polygon_features</span><span class="p">[</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="o">.</span><span class="n">area</span>
+
+<span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span> <span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here, we calculate the <strong>median area</strong> of existing polygons for each asset type, which will be used to determine the buffer size for point geometries.</p>
+</section>
+<section id="step-2-define-asset-types-for-buffering">
+<h4><strong>Step 2: Define Asset Types for Buffering</strong><a class="headerlink" href="#step-2-define-asset-types-for-buffering" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">points_to_polygonize</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;generator&#39;</span><span class="p">,</span> <span class="s1">&#39;plant&#39;</span><span class="p">,</span> <span class="s1">&#39;substation&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Only these assets will be converted from <strong>Points to Polygons</strong>.</p>
+</section>
+<section id="step-3-select-relevant-points">
+<h4><strong>Step 3: Select Relevant Points</strong><a class="headerlink" href="#step-3-select-relevant-points" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This extracts the relevant point geometries and temporarily converts them to a coordinate reference system that uses <strong>meters</strong> (EPSG:3857), allowing for proper buffering.</p>
+</section>
+<section id="step-4-apply-buffering-to-convert-points-into-polygons">
+<h4><strong>Step 4: Apply Buffering to Convert Points into Polygons</strong><a class="headerlink" href="#step-4-apply-buffering-to-convert-points-into-polygons" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">):</span>
+    <span class="n">buffer_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">asset</span><span class="o">.</span><span class="n">object_type</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">buffer_length</span><span class="p">,</span> <span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+
+<span class="n">collect_new_point_geometries</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">asset</span><span class="p">:</span> <span class="n">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+<p>This function calculates the <strong>buffer distance</strong> based on the estimated asset size and applies it to each point.</p>
+</section>
+<section id="step-5-overwrite-the-original-geometries">
+<h4><strong>Step 5: Overwrite the Original Geometries</strong><a class="headerlink" href="#step-5-overwrite-the-original-geometries" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;geometry&#39;</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">collect_new_point_geometries</span>
+</pre></div>
+</div>
+<p>This replaces the original <strong>Point</strong> geometries with <strong>Polygon</strong> representations.</p>
+</section>
+<section id="step-6-clean-up-temporary-data">
+<h4><strong>Step 6: Clean Up Temporary Data</strong><a class="headerlink" href="#step-6-clean-up-temporary-data" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;geom_type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Removing unnecessary columns ensures that the dataset remains clean for further analysis.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="checking-coordinate-reference-systems-crs">
+<h2>Checking Coordinate Reference Systems (CRS)<a class="headerlink" href="#checking-coordinate-reference-systems-crs" title="Permalink to this heading">#</a></h2>
+<p>Geospatial data is often provided in different coordinate reference systems (CRS). The <strong>default CRS for most global datasets is EPSG:4326</strong> (<a class="reference external" href="https://epsg.io/4326">WGS 84</a>), which represents coordinates in degrees. However, many local datasets use <strong>projected coordinate systems</strong> (e.g., UTM or national grids), which use meters instead.</p>
+<p>To ensure consistency, all datasets should be transformed to the same CRS before running <strong>DamageScanner</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check CRS of the dataset</span>
+<span class="n">gdf_power</span><span class="o">.</span><span class="n">crs</span>
+
+<span class="c1"># Convert to EPSG:4326 if necessary</span>
+<span class="n">gdf_power</span> <span class="o">=</span> <span class="n">gdf_power</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ensuring the same CRS across all input datasets prevents misalignment issues when overlaying hazard and exposure data.</p>
+</section>
+<hr class="docutils" />
+<section id="optimizing-data-for-computational-efficiency">
+<h2>Optimizing Data for Computational Efficiency<a class="headerlink" href="#optimizing-data-for-computational-efficiency" title="Permalink to this heading">#</a></h2>
+<p>While the code is optimized, running the analysis on large datasets can be resource-intensive. To improve efficiency:</p>
+<ul class="simple">
+<li><p><strong>Use the smallest necessary spatial extent</strong></p></li>
+<li><p><strong>Clip datasets to the area of interest</strong> before running calculations</p></li>
+<li><p><strong>Resample high-resolution hazard datasets</strong> when applicable</p></li>
+</ul>
+<section id="example-clipping-hazard-data-to-the-country-of-interest">
+<h3><strong>Example: Clipping Hazard Data to the Country of Interest</strong><a class="headerlink" href="#example-clipping-hazard-data-to-the-country-of-interest" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rioxr</span>
+
+<span class="c1"># Load global hazard dataset</span>
+<span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h100glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load country boundary data</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;world_boundaries.geojson&quot;</span><span class="p">)</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s2">&quot;NLD&quot;</span>  <span class="c1"># Example: Netherlands</span>
+
+<span class="c1"># Extract country boundary</span>
+<span class="n">country_bounds</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span>
+
+<span class="c1"># Clip hazard data to country extent</span>
+<span class="n">hazard_country</span> <span class="o">=</span> <span class="n">hazard_map</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip_box</span><span class="p">(</span>
+    <span class="n">minx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">miny</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">maxx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">maxy</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>By reducing the spatial extent, we improve performance and avoid unnecessary computations on large datasets. Ensuring consistency in <strong>geometry types</strong>, <strong>coordinate systems</strong>, and <strong>data size</strong> is crucial for accurate and efficient risk assessment workflows.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./howto"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensuring-consistency-across-geometries">Ensuring Consistency Across Geometries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-checking-geometry-types"><strong>Step 1: Checking Geometry Types</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-linestrings-to-polygons"><strong>Converting LineStrings to Polygons</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-asset-types-for-conversion"><strong>Step 1: Define Asset Types for Conversion</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-select-relevant-assets"><strong>Step 2: Select Relevant Assets</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-convert-linestrings-to-polygons"><strong>Step 3: Convert LineStrings to Polygons</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-overwrite-the-original-geometries"><strong>Step 4: Overwrite the Original Geometries</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-points-to-polygons"><strong>Converting Points to Polygons</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-estimate-average-asset-size"><strong>Step 1: Estimate Average Asset Size</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-asset-types-for-buffering"><strong>Step 2: Define Asset Types for Buffering</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-relevant-points"><strong>Step 3: Select Relevant Points</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-apply-buffering-to-convert-points-into-polygons"><strong>Step 4: Apply Buffering to Convert Points into Polygons</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-overwrite-the-original-geometries"><strong>Step 5: Overwrite the Original Geometries</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-clean-up-temporary-data"><strong>Step 6: Clean Up Temporary Data</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-coordinate-reference-systems-crs">Checking Coordinate Reference Systems (CRS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizing-data-for-computational-efficiency">Optimizing Data for Computational Efficiency</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-clipping-hazard-data-to-the-country-of-interest"><strong>Example: Clipping Hazard Data to the Country of Interest</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Institute for Environmental Studies, Vrije Universiteit Amsterdam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

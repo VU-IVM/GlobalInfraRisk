@@ -142,6 +142,6 @@ print(damage_curves)
 
 ## Moving forward
 
-Local infrastructure data must be structured correctly to be used in `damagescanner`. The `object_type` column must align with values in the maximum damage file, and each type must be linked to an appropriate vulnerability curve. Geometry type must also be considered to determine whether damage is assessed per square meter, per meter, or per object. 
+Local infrastructure data must be structured correctly to be used in the `damagescanner`. The `object_type` column must align with values in the maximum damage file, and each type must be linked to an appropriate vulnerability curve. Geometry type must also be considered to determine whether impacts are assessed per square meter, per meter, or per object. 
 
 Both maximum damage values and vulnerability curves require validation through local consultation and expert knowledge. While literature can provide an initial reference, adjustments based on empirical observations and stakeholder input improve the accuracy of risk assessments.
