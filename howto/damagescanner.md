@@ -2,9 +2,6 @@
 
 `DamageScanner()` is a Python toolkit designed for **direct damage assessments of natural hazards**. Initially developed for **flood damage assessments**, it can be used for any hazard that requires a **vulnerability curve** (i.e., a one-dimensional relation between hazard intensity and damage). While the function is straightforward, **careful preparation of inputs is crucial**. 
 
-
-## How `DamageScanner()` Works
-
 The core concept behind `DamageScanner()` is **spatial intersection and damage estimation**:
 1. **Exposure Analysis** - Determines which assets overlap with a hazard layer.
 2. **Damage Calculation** - Applies vulnerability curves to estimate damage.
@@ -12,74 +9,101 @@ The core concept behind `DamageScanner()` is **spatial intersection and damage e
 
 The function is designed to work efficiently with **raster-based hazard data** and **vector-based exposure data**. However, here we will focus on **vector-based** analysis, given that most infrastructure data is available as object-based information.
 
-## Required Inputs
+---
 
-### **1. Hazard Data (Raster Format)**
-The hazard dataset represents hazard intensity, such as **flood depth maps** or **earthquake shaking intensity**. This data is usually stored in **GeoTIFF (.tif)** format.
+## The Core `DamageScanner` Class Explained
 
-```python
-import xarray as xr
+At its core, `DamageScanner()` requires **four essential inputs**:
 
-# Load a raster hazard dataset
-hazard = xr.open_dataset("path/to/hazard_data.tif", engine="rasterio")
-```
+### **1. Hazard Data**
+Hazard data represents the intensity of a natural hazard, such as flood depth, wind speed, or ground shaking. This data is typically stored in:
+- **Raster format** (`.tif`, `.tiff`, `.nc`)
+- **Path objects** pointing to hazard datasets
 
-### **2. Exposure Data (Vector Format)**
-Exposure data includes infrastructure assets that may be affected by the hazard. This is stored in a **shapefile (.shp), GeoJSON (.geojson), or Geopackage (.gpkg)**.
+If provided as a string, it is automatically converted into a `Path` object.
 
-```python
-import geopandas as gpd
+### **2. Exposure Data (Referred to as Feature Data)**
+Exposure data, referred to as **feature data** in the `DamageScanner` class to avoid confusion with the `exposure()` function, contains infrastructure assets at risk, such as roads, buildings, or power plants. It can be provided as:
+- **Vector format** (`.shp`, `.gpkg`, `.pbf`, `.geoparquet`, `.geofeather`)
+- **Raster format** (`.tif`, `.tiff`, `.nc`) for grid-based exposure data
+- **GeoDataFrames (`geopandas.GeoDataFrame`)**
+- **Pandas DataFrames (`pandas.DataFrame`)**
 
-# Load exposure dataset
-gdf_exposure = gpd.read_file("path/to/exposure_data.shp")
-```
-The dataset should include an `object_type` column that categorizes asset types (e.g., roads, power plants, buildings).
+If a string path is provided, `DamageScanner` checks the file extension to determine if it's vector or raster-based feature data.
 
 ### **3. Vulnerability Curves**
-Vulnerability curves translate hazard intensity (e.g., flood depth) into expected damage levels.
+Vulnerability curves describe the relationship between hazard intensity and expected damage. These can be provided as:
+- **Pandas DataFrame (`pandas.DataFrame`)**
+- **CSV file (`.csv`)**
+- **Path object pointing to a CSV file**
 
-```python
-import pandas as pd
-
-# Load vulnerability curves
-curves = pd.read_csv("path/to/vulnerability_curves.csv")
-```
-Each asset type should have an assigned vulnerability curve.
+If provided as a string, it is converted into a `Path` object.
 
 ### **4. Maximum Damage Values**
-Maximum damage (`maxdam`) represents the total reconstruction cost per asset type.
+Maximum damage (`maxdam`) represents the total potential loss for each asset type. It can be provided as:
+- **Pandas DataFrame (`pandas.DataFrame`)**
+- **CSV file (`.csv`)**
+- **Path object pointing to a CSV file**
 
-```python
-maxdam = pd.read_csv("path/to/maxdam.csv")
-```
+As with vulnerability curves, `maxdam` is converted into a `Path` object if provided as a string.
 
-## Running `DamageScanner()`
+Before running `DamageScanner()`, users should ensure that **data formats are correct and consistent**. More details on data preparation can be found in:
+- [Using Local Data](https://vu-ivm.github.io/GlobalInfraRisk/howto/using_tailor_data.html)
+- [Using OpenStreetMap](https://vu-ivm.github.io/GlobalInfraRisk/howto/using_osm.html)
+- [Vulnerability Curves](https://vu-ivm.github.io/GlobalInfraRisk/intro/vulnerability.html)
+- [Data Preparation](https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html)
+- [Running `DamageScanner()` Locally](https://vu-ivm.github.io/GlobalInfraRisk/howto/run_locally.html)
 
-Once the inputs are prepared, we can run an exposure analysis and estimate damages.
+---
 
-### **Step 1: Initialize `DamageScanner`**
+## Understanding the Three Key Functions
+
+To use `DamageScanner()`, the four required inputs **must be specified first** before running any of its core functions.
+
 ```python
 from damagescanner import DamageScanner
+import pandas as pd
 
-scanner = DamageScanner(hazard, gdf_exposure, curves, maxdam)
+# Define the required inputs
+hazard = "path/to/hazard_data.tif"
+feature_data = "path/to/exposure_data.shp"
+curves = "path/to/vulnerability_curves.csv"
+maxdam = "path/to/maxdam.csv"
+
+# Initialize DamageScanner
+scanner = DamageScanner(hazard, feature_data, curves, maxdam)
 ```
 
-### **Step 2: Extract Exposure Data**
+### **1. Exposure Analysis (`exposure()`)**
+This function identifies which assets intersect with the hazard area.
+
 ```python
+# When running exposure analysis alone, curves and maxdam should be empty DataFrames
+curves = pd.DataFrame()
+maxdam = pd.DataFrame()
+
+scanner = DamageScanner(hazard, feature_data, curves, maxdam)
 exposed_assets = scanner.exposure()
 print(exposed_assets.head())
 ```
-This function identifies which infrastructure assets are exposed to the hazard.
+- **For raster-based feature data**: Reads `GeoTIFF` or `NetCDF` exposure layers.
+- **For vector-based feature data**: Reads shapefiles (`.shp`), geopackages (`.gpkg`), and OpenStreetMap (`.pbf`).
+- The `curves` and `maxdam` arguments **must be provided as `pd.DataFrame()` placeholders** when running `exposure()` alone.
 
-### **Step 3: Calculate Direct Damages**
+### **2. Damage Calculation (`calculate()`)**
+Once initialized with the required inputs, `calculate()` applies the vulnerability curves to estimate damage.
+
 ```python
 damage_results = scanner.calculate()
 print(damage_results.head())
 ```
-This function applies vulnerability curves to estimate direct damages for each exposed asset.
+- Uses vulnerability curves stored as `.csv` or a **pandas DataFrame**.
+- Uses maximum damage values stored in the same format.
+- Supports **multiple vulnerability curves** for different asset types.
+- Outputs estimated direct damages per asset.
 
-### **Step 4: Perform a Risk Assessment**
-For multiple hazard events, such as **flood return periods**, use:
+### **3. Risk Assessment (`risk()`)**
+For long-term risk evaluation across multiple hazard return periods:
 
 ```python
 hazard_dict = {
@@ -91,17 +115,14 @@ hazard_dict = {
 risk_results = scanner.risk(hazard_dict)
 print(risk_results.head())
 ```
-This function integrates damages across different hazard return periods to assess long-term risk.
+- Computes expected annual damages by integrating multiple hazard scenarios.
+- Supports **multiple vulnerability curves** for different asset types.
+
+---
 
 ## Key Considerations
-- **Ensure coordinate system consistency** - Both hazard and exposure data should use **EPSG:4326** unless transformed.
-- **Check exposure geometries** - Convert points/lines to polygons if needed.
+- **Ensure coordinate system consistency** - Both hazard and feature data should use **EPSG:4326** unless transformed.
+- **Check feature geometries** - Convert points/lines to polygons if needed.
 - **Use validated vulnerability and max damage values** for accurate results.
-
-For more details on input preparation, refer to:
-- [Using Local Data](https://vu-ivm.github.io/GlobalInfraRisk/howto/using_local_asset_data.html)
-- [Using OpenStreetMap](https://vu-ivm.github.io/GlobalInfraRisk/howto/using_openstreetmap.html)
-- [Vulnerability Curves](https://vu-ivm.github.io/GlobalInfraRisk/intro/vulnerability.html)
-- [Data Preparation](https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html)
 
 With well-prepared data, `DamageScanner()` provides a flexible and powerful framework for impact and risk assessments.
