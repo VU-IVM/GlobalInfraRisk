@@ -12,7 +12,7 @@ parts:
     - file: intro/exposure.md
     - file: intro/vulnerability.md
     - file: intro/damage_risk.md
-    - file: intro/uncertainties.md
+  #  - file: intro/uncertainties.md
   - caption: How it works
     chapters:
     - file: howto/damagescanner.md
