@@ -399,13 +399,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-three-key-functions">Understanding the Three Key Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-damagescanner-functions">Running the <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis-exposure"><strong>1. Exposure Analysis (<code class="docutils literal notranslate"><span class="pre">exposure()</span></code>)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damage-calculation-calculate"><strong>2. Damage Calculation (<code class="docutils literal notranslate"><span class="pre">calculate()</span></code>)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment-risk"><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
 </ul>
             </nav>
         </div>
@@ -427,7 +426,6 @@ document.write(`
 <li><p><strong>Risk Assessment</strong> - Aggregates damage across different hazard return periods.</p></li>
 </ol>
 <p>The function is designed to work efficiently with <strong>raster-based hazard data</strong> and <strong>vector-based exposure data</strong>. However, here we will focus on <strong>vector-based</strong> analysis, given that most infrastructure data is available as object-based information.</p>
-<hr class="docutils" />
 <section id="the-core-damagescanner-class-explained">
 <h2>The Core <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Class Explained<a class="headerlink" href="#the-core-damagescanner-class-explained" title="Permalink to this heading">#</a></h2>
 <p>At its core, <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> requires <strong>four essential inputs</strong>:</p>
@@ -480,9 +478,8 @@ document.write(`
 </ul>
 </section>
 </section>
-<hr class="docutils" />
-<section id="understanding-the-three-key-functions">
-<h2>Understanding the Three Key Functions<a class="headerlink" href="#understanding-the-three-key-functions" title="Permalink to this heading">#</a></h2>
+<section id="running-the-damagescanner-functions">
+<h2>Running the <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Functions<a class="headerlink" href="#running-the-damagescanner-functions" title="Permalink to this heading">#</a></h2>
 <p>To use <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code>, the four required inputs <strong>must be specified first</strong> before running any of its core functions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -547,16 +544,6 @@ document.write(`
 <li><p>Supports <strong>multiple vulnerability curves</strong> for different asset types.</p></li>
 </ul>
 </section>
-</section>
-<hr class="docutils" />
-<section id="key-considerations">
-<h2>Key Considerations<a class="headerlink" href="#key-considerations" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Ensure coordinate system consistency</strong> - Both hazard and feature data should use <strong>EPSG:4326</strong> unless transformed.</p></li>
-<li><p><strong>Check feature geometries</strong> - Convert points/lines to polygons if needed.</p></li>
-<li><p><strong>Use validated vulnerability and max damage values</strong> for accurate results.</p></li>
-</ul>
-<p>With well-prepared data, <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> provides a flexible and powerful framework for impact and risk assessments.</p>
 </section>
 </section>
 
@@ -630,13 +617,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-three-key-functions">Understanding the Three Key Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-damagescanner-functions">Running the <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis-exposure"><strong>1. Exposure Analysis (<code class="docutils literal notranslate"><span class="pre">exposure()</span></code>)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damage-calculation-calculate"><strong>2. Damage Calculation (<code class="docutils literal notranslate"><span class="pre">calculate()</span></code>)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment-risk"><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
 </ul>
   </nav></div>
 

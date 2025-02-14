@@ -9,7 +9,6 @@ The core concept behind `DamageScanner()` is **spatial intersection and damage e
 
 The function is designed to work efficiently with **raster-based hazard data** and **vector-based exposure data**. However, here we will focus on **vector-based** analysis, given that most infrastructure data is available as object-based information.
 
----
 
 ## The Core `DamageScanner` Class Explained
 
@@ -54,9 +53,8 @@ Before running `DamageScanner()`, users should ensure that **data formats are co
 - [Data Preparation](https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html)
 - [Running `DamageScanner()` Locally](https://vu-ivm.github.io/GlobalInfraRisk/howto/run_locally.html)
 
----
 
-## Understanding the Three Key Functions
+## Running the `DamageScanner` Functions
 
 To use `DamageScanner()`, the four required inputs **must be specified first** before running any of its core functions.
 
@@ -117,12 +115,3 @@ print(risk_results.head())
 ```
 - Computes expected annual damages by integrating multiple hazard scenarios.
 - Supports **multiple vulnerability curves** for different asset types.
-
----
-
-## Key Considerations
-- **Ensure coordinate system consistency** - Both hazard and feature data should use **EPSG:4326** unless transformed.
-- **Check feature geometries** - Convert points/lines to polygons if needed.
-- **Use validated vulnerability and max damage values** for accurate results.
-
-With well-prepared data, `DamageScanner()` provides a flexible and powerful framework for impact and risk assessments.
