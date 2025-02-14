@@ -122,7 +122,7 @@ print(max_damage_df)
 
 Each infrastructure type requires a vulnerability curve to determine expected damage based on hazard intensity. Vulnerability curves are hazard-specific and should be reviewed for accuracy. A useful reference is [Nirandjan et al. (2024)](https://nhess.copernicus.org/articles/24/4341/2024/nhess-24-4341-2024-discussion.html), but local validation is necessary.
 
-To facilitate vulnerability curve selection, a predefined dictionary linking OSM categories to damage curves is available in [`base_values.py`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/base_values.py). Users can use this as a reference and adjust as needed based on local validation.
+To facilitate vulnerability curve selection, a predefined dictionary linking OSM categories to damage curves is available in [`base_values.py`](https://github.com/VU-IVM/DamageScanner/blob/DS1.0/src/damagescanner/base_values.py). Users can use this as a reference and adjust as needed based on local validation. The code below provides an example how one could add their own defined curves.
 
 ```python
 import numpy as np
