@@ -434,9 +434,8 @@ document.write(`
 <p>Hazard data represents the intensity of a natural hazard, such as flood depth, wind speed, or ground shaking. This data is typically stored in:</p>
 <ul class="simple">
 <li><p><strong>Raster format</strong> (<code class="docutils literal notranslate"><span class="pre">.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">.tiff</span></code>, <code class="docutils literal notranslate"><span class="pre">.nc</span></code>)</p></li>
-<li><p><strong>Path objects</strong> pointing to hazard datasets</p></li>
+<li><p><strong>Path objects</strong> pointing to hazard datasets. If provided as a string, it is automatically converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p></li>
 </ul>
-<p>If provided as a string, it is automatically converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p>
 </section>
 <section id="exposure-data-referred-to-as-feature-data">
 <h3><strong>2. Exposure Data (Referred to as Feature Data)</strong><a class="headerlink" href="#exposure-data-referred-to-as-feature-data" title="Permalink to this heading">#</a></h3>
@@ -455,9 +454,8 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
 <li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
-<li><p><strong>Path object pointing to a CSV file</strong></p></li>
+<li><p><strong>Path object pointing to a CSV file</strong> If provided as a string, it is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p></li>
 </ul>
-<p>If provided as a string, it is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p>
 </section>
 <section id="maximum-damage-values">
 <h3><strong>4. Maximum Damage Values</strong><a class="headerlink" href="#maximum-damage-values" title="Permalink to this heading">#</a></h3>
@@ -465,9 +463,8 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
 <li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
-<li><p><strong>Path object pointing to a CSV file</strong></p></li>
+<li><p><strong>Path object pointing to a CSV file</strong> As with vulnerability curves, <code class="docutils literal notranslate"><span class="pre">maxdam</span></code> is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object if provided as a string.</p></li>
 </ul>
-<p>As with vulnerability curves, <code class="docutils literal notranslate"><span class="pre">maxdam</span></code> is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object if provided as a string.</p>
 <p>Before running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code>, users should ensure that <strong>data formats are correct and consistent</strong>. More details on data preparation can be found in:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_tailor_data.html">Using Local Data</a></p></li>
