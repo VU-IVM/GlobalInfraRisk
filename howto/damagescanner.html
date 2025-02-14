@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Run Locally &#8212; Global Infrastructure Risk Assesments</title>
+    <title>Introducing DamageScanner() &#8212; Global Infrastructure Risk Assesments</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/run_locally';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/damagescanner';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Using OpenStreetMap (OSM)" href="using_osm.html" />
-    <link rel="prev" title="Introducing DamageScanner()" href="damagescanner.html" />
+    <link rel="next" title="Run Locally" href="run_locally.html" />
+    <link rel="prev" title="Model Uncertainties" href="../intro/uncertainties.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,8 +179,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="damagescanner.html">Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Run Locally</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_osm.html">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_preparation.html">Specific Data Preparations</a></li>
@@ -276,7 +276,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fhowto/run_locally.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fhowto/damagescanner.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -306,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/howto/run_locally.md" target="_blank"
+      <li><a href="../_sources/howto/damagescanner.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -390,7 +390,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Run Locally</h1>
+    <h1>Introducing DamageScanner()</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -400,14 +400,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">Clone the Repository</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-conda-environment">Setting Up the Conda Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks">Running the Notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-contents-and-dependencies">Environment File Contents and Dependencies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-dependencies">Explanation of Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-damagescanner-works">How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required Inputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data-raster-format"><strong>1. Hazard Data (Raster Format)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-vector-format"><strong>2. Exposure Data (Vector Format)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-curves"><strong>3. Vulnerability Curves</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-damagescanner">Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-damagescanner"><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-extract-exposure-data"><strong>Step 2: Extract Exposure Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-direct-damages"><strong>Step 3: Calculate Direct Damages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-perform-a-risk-assessment"><strong>Step 4: Perform a Risk Assessment</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
 </ul>
             </nav>
         </div>
@@ -419,92 +427,119 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="run-locally">
-<h1>Run Locally<a class="headerlink" href="#run-locally" title="Permalink to this heading">#</a></h1>
-<p>This guide provides step-by-step instructions for setting up and running the Jupyter notebooks included in the Global Infrastructure Risk repository. By following these instructions, you will be able to configure a reproducible computing environment using Conda and interact with the provided notebooks efficiently.</p>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
-<p>Ensure you have the following installed:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="introducing-damagescanner">
+<h1>Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code><a class="headerlink" href="#introducing-damagescanner" title="Permalink to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> is a Python toolkit designed for <strong>direct damage assessments of natural hazards</strong>. Initially developed for <strong>flood damage assessments</strong>, it can be used for any hazard that requires a <strong>vulnerability curve</strong> (i.e., a one-dimensional relation between hazard intensity and damage). While the function is straightforward, <strong>careful preparation of inputs is crucial</strong>.</p>
+<section id="how-damagescanner-works">
+<h2>How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works<a class="headerlink" href="#how-damagescanner-works" title="Permalink to this heading">#</a></h2>
+<p>The core concept behind <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> is <strong>spatial intersection and damage estimation</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Exposure Analysis</strong> - Determines which assets overlap with a hazard layer.</p></li>
+<li><p><strong>Damage Calculation</strong> - Applies vulnerability curves to estimate damage.</p></li>
+<li><p><strong>Risk Assessment</strong> - Aggregates damage across different hazard return periods.</p></li>
+</ol>
+<p>The function is designed to work efficiently with <strong>raster-based hazard data</strong> and <strong>vector-based exposure data</strong>. However, here we will focus on <strong>vector-based</strong> analysis, given that most infrastructure data is available as object-based information.</p>
+</section>
+<section id="required-inputs">
+<h2>Required Inputs<a class="headerlink" href="#required-inputs" title="Permalink to this heading">#</a></h2>
+<section id="hazard-data-raster-format">
+<h3><strong>1. Hazard Data (Raster Format)</strong><a class="headerlink" href="#hazard-data-raster-format" title="Permalink to this heading">#</a></h3>
+<p>The hazard dataset represents hazard intensity, such as <strong>flood depth maps</strong> or <strong>earthquake shaking intensity</strong>. This data is usually stored in <strong>GeoTIFF (.tif)</strong> format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="c1"># Load a raster hazard dataset</span>
+<span class="n">hazard</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;path/to/hazard_data.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="exposure-data-vector-format">
+<h3><strong>2. Exposure Data (Vector Format)</strong><a class="headerlink" href="#exposure-data-vector-format" title="Permalink to this heading">#</a></h3>
+<p>Exposure data includes infrastructure assets that may be affected by the hazard. This is stored in a <strong>shapefile (.shp), GeoJSON (.geojson), or Geopackage (.gpkg)</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="c1"># Load exposure dataset</span>
+<span class="n">gdf_exposure</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/exposure_data.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The dataset should include an <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column that categorizes asset types (e.g., roads, power plants, buildings).</p>
+</section>
+<section id="vulnerability-curves">
+<h3><strong>3. Vulnerability Curves</strong><a class="headerlink" href="#vulnerability-curves" title="Permalink to this heading">#</a></h3>
+<p>Vulnerability curves translate hazard intensity (e.g., flood depth) into expected damage levels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load vulnerability curves</span>
+<span class="n">curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;path/to/vulnerability_curves.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each asset type should have an assigned vulnerability curve.</p>
+</section>
+<section id="maximum-damage-values">
+<h3><strong>4. Maximum Damage Values</strong><a class="headerlink" href="#maximum-damage-values" title="Permalink to this heading">#</a></h3>
+<p>Maximum damage (<code class="docutils literal notranslate"><span class="pre">maxdam</span></code>) represents the total reconstruction cost per asset type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;path/to/maxdam.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-damagescanner">
+<h2>Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code><a class="headerlink" href="#running-damagescanner" title="Permalink to this heading">#</a></h2>
+<p>Once the inputs are prepared, we can run an exposure analysis and estimate damages.</p>
+<section id="step-1-initialize-damagescanner">
+<h3><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong><a class="headerlink" href="#step-1-initialize-damagescanner" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+
+<span class="n">scanner</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard</span><span class="p">,</span> <span class="n">gdf_exposure</span><span class="p">,</span> <span class="n">curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-2-extract-exposure-data">
+<h3><strong>Step 2: Extract Exposure Data</strong><a class="headerlink" href="#step-2-extract-exposure-data" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exposed_assets</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exposed_assets</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This function identifies which infrastructure assets are exposed to the hazard.</p>
+</section>
+<section id="step-3-calculate-direct-damages">
+<h3><strong>Step 3: Calculate Direct Damages</strong><a class="headerlink" href="#step-3-calculate-direct-damages" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">damage_results</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This function applies vulnerability curves to estimate direct damages for each exposed asset.</p>
+</section>
+<section id="step-4-perform-a-risk-assessment">
+<h3><strong>Step 4: Perform a Risk Assessment</strong><a class="headerlink" href="#step-4-perform-a-risk-assessment" title="Permalink to this heading">#</a></h3>
+<p>For multiple hazard events, such as <strong>flood return periods</strong>, use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;hazard_10_year.tif&quot;</span><span class="p">,</span>
+    <span class="mi">50</span><span class="p">:</span> <span class="s2">&quot;hazard_50_year.tif&quot;</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">:</span> <span class="s2">&quot;hazard_100_year.tif&quot;</span>
+<span class="p">}</span>
+
+<span class="n">risk_results</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">risk_results</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This function integrates damages across different hazard return periods to assess long-term risk.</p>
+</section>
+</section>
+<section id="key-considerations">
+<h2>Key Considerations<a class="headerlink" href="#key-considerations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.conda.io/en/latest/">Miniconda/Anaconda</a></p></li>
-<li><p><a class="reference external" href="https://git-scm.com/">Git</a></p></li>
+<li><p><strong>Ensure coordinate system consistency</strong> - Both hazard and exposure data should use <strong>EPSG:4326</strong> unless transformed.</p></li>
+<li><p><strong>Check exposure geometries</strong> - Convert points/lines to polygons if needed.</p></li>
+<li><p><strong>Use validated vulnerability and max damage values</strong> for accurate results.</p></li>
 </ul>
-</section>
-<section id="clone-the-repository">
-<h2>Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this heading">#</a></h2>
-<p>To get started, clone the repository from GitHub and navigate into the project directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/VU-IVM/GlobalInfraRisk.git
-<span class="nb">cd</span><span class="w"> </span>GlobalInfraRisk
-</pre></div>
-</div>
-</section>
-<section id="setting-up-the-conda-environment">
-<h2>Setting Up the Conda Environment<a class="headerlink" href="#setting-up-the-conda-environment" title="Permalink to this heading">#</a></h2>
-<p>To install all necessary dependencies, create and activate the Conda environment using the provided <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
-conda<span class="w"> </span>activate<span class="w"> </span>infra-risk
-</pre></div>
-</div>
-</section>
-<section id="running-the-notebooks">
-<h2>Running the Notebooks<a class="headerlink" href="#running-the-notebooks" title="Permalink to this heading">#</a></h2>
-<p>Once the environment is activated, launch JupyterLab to interact with the notebooks:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab
-</pre></div>
-</div>
-<p>This will open JupyterLab in your browser. Navigate to the desired notebook and start running it!</p>
-</section>
-<section id="environment-file-contents-and-dependencies">
-<h2>Environment File Contents and Dependencies<a class="headerlink" href="#environment-file-contents-and-dependencies" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file specifies the dependencies required to run the notebooks. Below is the content of the file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infra-risk</span>
-<span class="nt">channels</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-<span class="nt">dependencies</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.12</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geopandas</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rasterio</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tqdm</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyterlab</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyproj</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xarray</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rioxarray</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seaborn</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">damagescanner==0.9b12</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exactextract</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contextily</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openpyxl</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyarrow</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lonboard</span>
-</pre></div>
-</div>
-<section id="explanation-of-dependencies">
-<h3>Explanation of Dependencies<a class="headerlink" href="#explanation-of-dependencies" title="Permalink to this heading">#</a></h3>
+<p>For more details on input preparation, refer to:</p>
 <ul class="simple">
-<li><p><strong>Python 3.12</strong>: Core programming language.</p></li>
-<li><p><strong>numpy</strong>: Essential for numerical computations.</p></li>
-<li><p><strong>geopandas</strong>: Enables spatial data handling.</p></li>
-<li><p><strong>rasterio</strong>: Supports geospatial raster data operations.</p></li>
-<li><p><strong>matplotlib</strong>: For generating plots and visualizations.</p></li>
-<li><p><strong>tqdm</strong>: Progress bar utility for data processing.</p></li>
-<li><p><strong>pip</strong>: Installs and manages Python packages.</p></li>
-<li><p><strong>jupyterlab</strong>: Web-based environment for interactive computing.</p></li>
-<li><p><strong>xlrd</strong>: Reads Excel files.</p></li>
-<li><p><strong>pyproj</strong>: Performs coordinate transformations.</p></li>
-<li><p><strong>xarray</strong>: Supports multi-dimensional labeled datasets.</p></li>
-<li><p><strong>rioxarray</strong>: Extends xarray for raster data.</p></li>
-<li><p><strong>damagescanner</strong>: Risk assessment tool.</p></li>
-<li><p><strong>exactextract</strong>: Extracts zonal statistics from raster data.</p></li>
-<li><p><strong>contextily</strong>: Adds basemaps to geospatial visualizations.</p></li>
-<li><p><strong>openpyxl</strong>: Reads and writes Excel files.</p></li>
-<li><p><strong>pyarrow</strong>: Handles in-memory columnar data.</p></li>
-<li><p><strong>lonboard</strong>: Custom package (verify availability if needed).</p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_local_asset_data.html">Using Local Data</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_openstreetmap.html">Using OpenStreetMap</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/intro/vulnerability.html">Vulnerability Curves</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html">Data Preparation</a></p></li>
 </ul>
-</section>
+<p>With well-prepared data, <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> provides a flexible and powerful framework for impact and risk assessments.</p>
 </section>
 </section>
 
@@ -539,20 +574,20 @@ conda<span class="w"> </span>activate<span class="w"> </span>infra-risk
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="damagescanner.html"
+       href="../intro/uncertainties.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></p>
+        <p class="prev-next-title">Model Uncertainties</p>
       </div>
     </a>
     <a class="right-next"
-       href="using_osm.html"
+       href="run_locally.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Using OpenStreetMap (OSM)</p>
+        <p class="prev-next-title">Run Locally</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -571,14 +606,22 @@ conda<span class="w"> </span>activate<span class="w"> </span>infra-risk
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-the-repository">Clone the Repository</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-conda-environment">Setting Up the Conda Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks">Running the Notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-contents-and-dependencies">Environment File Contents and Dependencies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-dependencies">Explanation of Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-damagescanner-works">How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required Inputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data-raster-format"><strong>1. Hazard Data (Raster Format)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-vector-format"><strong>2. Exposure Data (Vector Format)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-curves"><strong>3. Vulnerability Curves</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-damagescanner">Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-damagescanner"><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-extract-exposure-data"><strong>Step 2: Extract Exposure Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-direct-damages"><strong>Step 3: Calculate Direct Damages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-perform-a-risk-assessment"><strong>Step 4: Perform a Risk Assessment</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
 </ul>
   </nav></div>
 
