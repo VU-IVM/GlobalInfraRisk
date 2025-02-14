@@ -15,6 +15,7 @@ parts:
     - file: intro/uncertainties.md
   - caption: How it works
     chapters:
+    - file: howto/damagescanner.md
     - file: howto/run_locally.md
     - file: howto/using_osm.md
     - file: howto/using_tailor_data.md
