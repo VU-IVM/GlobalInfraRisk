@@ -392,19 +392,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-damagescanner-works">How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required Inputs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data-raster-format"><strong>1. Hazard Data (Raster Format)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-vector-format"><strong>2. Exposure Data (Vector Format)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-damagescanner-class-explained">The Core <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Class Explained</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data"><strong>1. Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-referred-to-as-feature-data"><strong>2. Exposure Data (Referred to as Feature Data)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-curves"><strong>3. Vulnerability Curves</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-damagescanner">Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-damagescanner"><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-extract-exposure-data"><strong>Step 2: Extract Exposure Data</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-direct-damages"><strong>Step 3: Calculate Direct Damages</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-perform-a-risk-assessment"><strong>Step 4: Perform a Risk Assessment</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-three-key-functions">Understanding the Three Key Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis-exposure"><strong>1. Exposure Analysis (<code class="docutils literal notranslate"><span class="pre">exposure()</span></code>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damage-calculation-calculate"><strong>2. Damage Calculation (<code class="docutils literal notranslate"><span class="pre">calculate()</span></code>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment-risk"><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
@@ -422,8 +420,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="introducing-damagescanner">
 <h1>Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code><a class="headerlink" href="#introducing-damagescanner" title="Permalink to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> is a Python toolkit designed for <strong>direct damage assessments of natural hazards</strong>. Initially developed for <strong>flood damage assessments</strong>, it can be used for any hazard that requires a <strong>vulnerability curve</strong> (i.e., a one-dimensional relation between hazard intensity and damage). While the function is straightforward, <strong>careful preparation of inputs is crucial</strong>.</p>
-<section id="how-damagescanner-works">
-<h2>How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works<a class="headerlink" href="#how-damagescanner-works" title="Permalink to this heading">#</a></h2>
 <p>The core concept behind <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> is <strong>spatial intersection and damage estimation</strong>:</p>
 <ol class="arabic simple">
 <li><p><strong>Exposure Analysis</strong> - Determines which assets overlap with a hazard layer.</p></li>
@@ -431,79 +427,111 @@ document.write(`
 <li><p><strong>Risk Assessment</strong> - Aggregates damage across different hazard return periods.</p></li>
 </ol>
 <p>The function is designed to work efficiently with <strong>raster-based hazard data</strong> and <strong>vector-based exposure data</strong>. However, here we will focus on <strong>vector-based</strong> analysis, given that most infrastructure data is available as object-based information.</p>
+<hr class="docutils" />
+<section id="the-core-damagescanner-class-explained">
+<h2>The Core <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Class Explained<a class="headerlink" href="#the-core-damagescanner-class-explained" title="Permalink to this heading">#</a></h2>
+<p>At its core, <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> requires <strong>four essential inputs</strong>:</p>
+<section id="hazard-data">
+<h3><strong>1. Hazard Data</strong><a class="headerlink" href="#hazard-data" title="Permalink to this heading">#</a></h3>
+<p>Hazard data represents the intensity of a natural hazard, such as flood depth, wind speed, or ground shaking. This data is typically stored in:</p>
+<ul class="simple">
+<li><p><strong>Raster format</strong> (<code class="docutils literal notranslate"><span class="pre">.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">.tiff</span></code>, <code class="docutils literal notranslate"><span class="pre">.nc</span></code>)</p></li>
+<li><p><strong>Path objects</strong> pointing to hazard datasets</p></li>
+</ul>
+<p>If provided as a string, it is automatically converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p>
 </section>
-<section id="required-inputs">
-<h2>Required Inputs<a class="headerlink" href="#required-inputs" title="Permalink to this heading">#</a></h2>
-<section id="hazard-data-raster-format">
-<h3><strong>1. Hazard Data (Raster Format)</strong><a class="headerlink" href="#hazard-data-raster-format" title="Permalink to this heading">#</a></h3>
-<p>The hazard dataset represents hazard intensity, such as <strong>flood depth maps</strong> or <strong>earthquake shaking intensity</strong>. This data is usually stored in <strong>GeoTIFF (.tif)</strong> format.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-
-<span class="c1"># Load a raster hazard dataset</span>
-<span class="n">hazard</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;path/to/hazard_data.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="exposure-data-vector-format">
-<h3><strong>2. Exposure Data (Vector Format)</strong><a class="headerlink" href="#exposure-data-vector-format" title="Permalink to this heading">#</a></h3>
-<p>Exposure data includes infrastructure assets that may be affected by the hazard. This is stored in a <strong>shapefile (.shp), GeoJSON (.geojson), or Geopackage (.gpkg)</strong>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-
-<span class="c1"># Load exposure dataset</span>
-<span class="n">gdf_exposure</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/exposure_data.shp&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The dataset should include an <code class="docutils literal notranslate"><span class="pre">object_type</span></code> column that categorizes asset types (e.g., roads, power plants, buildings).</p>
+<section id="exposure-data-referred-to-as-feature-data">
+<h3><strong>2. Exposure Data (Referred to as Feature Data)</strong><a class="headerlink" href="#exposure-data-referred-to-as-feature-data" title="Permalink to this heading">#</a></h3>
+<p>Exposure data, referred to as <strong>feature data</strong> in the <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> class to avoid confusion with the <code class="docutils literal notranslate"><span class="pre">exposure()</span></code> function, contains infrastructure assets at risk, such as roads, buildings, or power plants. It can be provided as:</p>
+<ul class="simple">
+<li><p><strong>Vector format</strong> (<code class="docutils literal notranslate"><span class="pre">.shp</span></code>, <code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>, <code class="docutils literal notranslate"><span class="pre">.pbf</span></code>, <code class="docutils literal notranslate"><span class="pre">.geoparquet</span></code>, <code class="docutils literal notranslate"><span class="pre">.geofeather</span></code>)</p></li>
+<li><p><strong>Raster format</strong> (<code class="docutils literal notranslate"><span class="pre">.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">.tiff</span></code>, <code class="docutils literal notranslate"><span class="pre">.nc</span></code>) for grid-based exposure data</p></li>
+<li><p><strong>GeoDataFrames (<code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code>)</strong></p></li>
+<li><p><strong>Pandas DataFrames (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
+</ul>
+<p>If a string path is provided, <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> checks the file extension to determine if it’s vector or raster-based feature data.</p>
 </section>
 <section id="vulnerability-curves">
 <h3><strong>3. Vulnerability Curves</strong><a class="headerlink" href="#vulnerability-curves" title="Permalink to this heading">#</a></h3>
-<p>Vulnerability curves translate hazard intensity (e.g., flood depth) into expected damage levels.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="c1"># Load vulnerability curves</span>
-<span class="n">curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;path/to/vulnerability_curves.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Each asset type should have an assigned vulnerability curve.</p>
+<p>Vulnerability curves describe the relationship between hazard intensity and expected damage. These can be provided as:</p>
+<ul class="simple">
+<li><p><strong>Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
+<li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
+<li><p><strong>Path object pointing to a CSV file</strong></p></li>
+</ul>
+<p>If provided as a string, it is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p>
 </section>
 <section id="maximum-damage-values">
 <h3><strong>4. Maximum Damage Values</strong><a class="headerlink" href="#maximum-damage-values" title="Permalink to this heading">#</a></h3>
-<p>Maximum damage (<code class="docutils literal notranslate"><span class="pre">maxdam</span></code>) represents the total reconstruction cost per asset type.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;path/to/maxdam.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Maximum damage (<code class="docutils literal notranslate"><span class="pre">maxdam</span></code>) represents the total potential loss for each asset type. It can be provided as:</p>
+<ul class="simple">
+<li><p><strong>Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
+<li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
+<li><p><strong>Path object pointing to a CSV file</strong></p></li>
+</ul>
+<p>As with vulnerability curves, <code class="docutils literal notranslate"><span class="pre">maxdam</span></code> is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object if provided as a string.</p>
+<p>Before running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code>, users should ensure that <strong>data formats are correct and consistent</strong>. More details on data preparation can be found in:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_tailor_data.html">Using Local Data</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_osm.html">Using OpenStreetMap</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/intro/vulnerability.html">Vulnerability Curves</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html">Data Preparation</a></p></li>
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/run_locally.html">Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Locally</a></p></li>
+</ul>
 </section>
 </section>
-<section id="running-damagescanner">
-<h2>Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code><a class="headerlink" href="#running-damagescanner" title="Permalink to this heading">#</a></h2>
-<p>Once the inputs are prepared, we can run an exposure analysis and estimate damages.</p>
-<section id="step-1-initialize-damagescanner">
-<h3><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong><a class="headerlink" href="#step-1-initialize-damagescanner" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="understanding-the-three-key-functions">
+<h2>Understanding the Three Key Functions<a class="headerlink" href="#understanding-the-three-key-functions" title="Permalink to this heading">#</a></h2>
+<p>To use <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code>, the four required inputs <strong>must be specified first</strong> before running any of its core functions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">scanner</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard</span><span class="p">,</span> <span class="n">gdf_exposure</span><span class="p">,</span> <span class="n">curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span>
+<span class="c1"># Define the required inputs</span>
+<span class="n">hazard</span> <span class="o">=</span> <span class="s2">&quot;path/to/hazard_data.tif&quot;</span>
+<span class="n">feature_data</span> <span class="o">=</span> <span class="s2">&quot;path/to/exposure_data.shp&quot;</span>
+<span class="n">curves</span> <span class="o">=</span> <span class="s2">&quot;path/to/vulnerability_curves.csv&quot;</span>
+<span class="n">maxdam</span> <span class="o">=</span> <span class="s2">&quot;path/to/maxdam.csv&quot;</span>
+
+<span class="c1"># Initialize DamageScanner</span>
+<span class="n">scanner</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard</span><span class="p">,</span> <span class="n">feature_data</span><span class="p">,</span> <span class="n">curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="step-2-extract-exposure-data">
-<h3><strong>Step 2: Extract Exposure Data</strong><a class="headerlink" href="#step-2-extract-exposure-data" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exposed_assets</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
+<section id="exposure-analysis-exposure">
+<h3><strong>1. Exposure Analysis (<code class="docutils literal notranslate"><span class="pre">exposure()</span></code>)</strong><a class="headerlink" href="#exposure-analysis-exposure" title="Permalink to this heading">#</a></h3>
+<p>This function identifies which assets intersect with the hazard area.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># When running exposure analysis alone, curves and maxdam should be empty DataFrames</span>
+<span class="n">curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="n">scanner</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard</span><span class="p">,</span> <span class="n">feature_data</span><span class="p">,</span> <span class="n">curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span>
+<span class="n">exposed_assets</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">exposed_assets</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>This function identifies which infrastructure assets are exposed to the hazard.</p>
+<ul class="simple">
+<li><p><strong>For raster-based feature data</strong>: Reads <code class="docutils literal notranslate"><span class="pre">GeoTIFF</span></code> or <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> exposure layers.</p></li>
+<li><p><strong>For vector-based feature data</strong>: Reads shapefiles (<code class="docutils literal notranslate"><span class="pre">.shp</span></code>), geopackages (<code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>), and OpenStreetMap (<code class="docutils literal notranslate"><span class="pre">.pbf</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">curves</span></code> and <code class="docutils literal notranslate"><span class="pre">maxdam</span></code> arguments <strong>must be provided as <code class="docutils literal notranslate"><span class="pre">pd.DataFrame()</span></code> placeholders</strong> when running <code class="docutils literal notranslate"><span class="pre">exposure()</span></code> alone.</p></li>
+</ul>
 </section>
-<section id="step-3-calculate-direct-damages">
-<h3><strong>Step 3: Calculate Direct Damages</strong><a class="headerlink" href="#step-3-calculate-direct-damages" title="Permalink to this heading">#</a></h3>
+<section id="damage-calculation-calculate">
+<h3><strong>2. Damage Calculation (<code class="docutils literal notranslate"><span class="pre">calculate()</span></code>)</strong><a class="headerlink" href="#damage-calculation-calculate" title="Permalink to this heading">#</a></h3>
+<p>Once initialized with the required inputs, <code class="docutils literal notranslate"><span class="pre">calculate()</span></code> applies the vulnerability curves to estimate damage.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">damage_results</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>This function applies vulnerability curves to estimate direct damages for each exposed asset.</p>
+<ul class="simple">
+<li><p>Uses vulnerability curves stored as <code class="docutils literal notranslate"><span class="pre">.csv</span></code> or a <strong>pandas DataFrame</strong>.</p></li>
+<li><p>Uses maximum damage values stored in the same format.</p></li>
+<li><p>Supports <strong>multiple vulnerability curves</strong> for different asset types.</p></li>
+<li><p>Outputs estimated direct damages per asset.</p></li>
+</ul>
 </section>
-<section id="step-4-perform-a-risk-assessment">
-<h3><strong>Step 4: Perform a Risk Assessment</strong><a class="headerlink" href="#step-4-perform-a-risk-assessment" title="Permalink to this heading">#</a></h3>
-<p>For multiple hazard events, such as <strong>flood return periods</strong>, use:</p>
+<section id="risk-assessment-risk">
+<h3><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong><a class="headerlink" href="#risk-assessment-risk" title="Permalink to this heading">#</a></h3>
+<p>For long-term risk evaluation across multiple hazard return periods:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;hazard_10_year.tif&quot;</span><span class="p">,</span>
     <span class="mi">50</span><span class="p">:</span> <span class="s2">&quot;hazard_50_year.tif&quot;</span><span class="p">,</span>
@@ -514,22 +542,19 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="n">risk_results</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>This function integrates damages across different hazard return periods to assess long-term risk.</p>
+<ul class="simple">
+<li><p>Computes expected annual damages by integrating multiple hazard scenarios.</p></li>
+<li><p>Supports <strong>multiple vulnerability curves</strong> for different asset types.</p></li>
+</ul>
 </section>
 </section>
+<hr class="docutils" />
 <section id="key-considerations">
 <h2>Key Considerations<a class="headerlink" href="#key-considerations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Ensure coordinate system consistency</strong> - Both hazard and exposure data should use <strong>EPSG:4326</strong> unless transformed.</p></li>
-<li><p><strong>Check exposure geometries</strong> - Convert points/lines to polygons if needed.</p></li>
+<li><p><strong>Ensure coordinate system consistency</strong> - Both hazard and feature data should use <strong>EPSG:4326</strong> unless transformed.</p></li>
+<li><p><strong>Check feature geometries</strong> - Convert points/lines to polygons if needed.</p></li>
 <li><p><strong>Use validated vulnerability and max damage values</strong> for accurate results.</p></li>
-</ul>
-<p>For more details on input preparation, refer to:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_local_asset_data.html">Using Local Data</a></p></li>
-<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/using_openstreetmap.html">Using OpenStreetMap</a></p></li>
-<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/intro/vulnerability.html">Vulnerability Curves</a></p></li>
-<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html">Data Preparation</a></p></li>
 </ul>
 <p>With well-prepared data, <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> provides a flexible and powerful framework for impact and risk assessments.</p>
 </section>
@@ -598,19 +623,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-damagescanner-works">How <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code> Works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required Inputs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data-raster-format"><strong>1. Hazard Data (Raster Format)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-vector-format"><strong>2. Exposure Data (Vector Format)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-damagescanner-class-explained">The Core <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code> Class Explained</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data"><strong>1. Hazard Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-data-referred-to-as-feature-data"><strong>2. Exposure Data (Referred to as Feature Data)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-curves"><strong>3. Vulnerability Curves</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-values"><strong>4. Maximum Damage Values</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-damagescanner">Running <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-damagescanner"><strong>Step 1: Initialize <code class="docutils literal notranslate"><span class="pre">DamageScanner</span></code></strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-extract-exposure-data"><strong>Step 2: Extract Exposure Data</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-direct-damages"><strong>Step 3: Calculate Direct Damages</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-perform-a-risk-assessment"><strong>Step 4: Perform a Risk Assessment</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-three-key-functions">Understanding the Three Key Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis-exposure"><strong>1. Exposure Analysis (<code class="docutils literal notranslate"><span class="pre">exposure()</span></code>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damage-calculation-calculate"><strong>2. Damage Calculation (<code class="docutils literal notranslate"><span class="pre">calculate()</span></code>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment-risk"><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
