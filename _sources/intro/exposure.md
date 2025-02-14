@@ -10,6 +10,6 @@ Geographical features in OSM are projected in the form of nodes, ways, and relat
 An example of unprocessed OSM data, including a breakdown of the basic datatypes, is shown in **Figure 2**. Each georeferenced element in OSM has an ID number that uniquely identifies it, along with details such as the user who modified the element and the time of last modification. Elements can be further specified by a list of attribute tags in the form of key-value pairs, whereby the value provides more detail to the key identifier. For example, primary roads that often link larger towns are specified under the key ‘highway’ in combination with the value ‘primary’.
 
 ![OSM Data Types](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41597-022-01218-4/MediaObjects/41597_2022_1218_Fig2_HTML.png?as=webp)
-*Figure 2: Visualization of raw OpenStreetMap data of a given area, with a breakdown by the datatypes (Nirandjan et al., 2022).*
+*Figure 1: Visualization of raw OpenStreetMap data of a given area, with a breakdown by the datatypes (Nirandjan et al., 2022).*
 
 

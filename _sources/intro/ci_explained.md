@@ -2,7 +2,7 @@
 
 Critical Infrastructure (CI) refers to the essential services and assets that form the backbone of a functioning society and economy. These infrastructure systems are vital for public health, safety, and economic well-being, supporting various activities ranging from transportation to energy distribution. CI systems are susceptible to a wide range of threats, both natural and human-made, including natural disasters, terrorism, and poor maintenance. We categorize critical infrastructure (CI) network into seven overarching systems: transportation, energy, water, waste, telecommunication, education, and health. This classification aligns with widely accepted frameworks in the literature (Hallegatte et al., 2019; Hall et al., 2019; Thacker et al., 2019; United Nations Office for Disaster Risk Reduction, 2015), and highlights the growing recognition of the importance of educational and health-related infrastructure (United Nations Office for Disaster Risk Reduction, 2015). 
 
-Each of these seven CI systems is further subdivided into ten subsystems, with each subsystem containing two or more specific types of infrastructure. For example, the telecommunication subsystem encompasses communication towers and masts. To represent the global landscape of CI, a total of 81 OpenStreetMap (OSM) tags were selected to identify 39 different infrastructure types (Popescu & Simion, 2011). This breakdown of critical infrastructure types enables a more granular approach to risk and damage assessments by providing detailed categorizations and geospatial data on the global infrastructure network.
+ To represent the global landscape of CI, a total of 81 OpenStreetMap (OSM) tags were selected to identify 39 different infrastructure types (Popescu & Simion, 2011). This breakdown of critical infrastructure types enables a more granular approach to risk and damage assessments by providing detailed categorizations and geospatial data on the global infrastructure network.
 
 ![Distribution and statistics of unique CI assets extracted from OSM](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41597-022-01218-4/MediaObjects/41597_2022_1218_Fig3_HTML.png?as=webp)
 *Figure 1: Distribution and statistics of unique CI assets extracted from OSM (Nirandjan et al., 2022).*
@@ -66,4 +66,4 @@ More specifically, we categorize CI into the following types and subtypes:
    - Kindergartens
    - Libraries
 
-As part of our damage and risk assessments, understanding these infrastructure types and their vulnerabilities is crucial. In the sections that follow, we will explore how each CI system can be assessed for risks and damages caused by natural or human-made threats.
+As part of our damage and risk assessments, understanding these infrastructure types and their vulnerabilities is crucial. In the sections that follow, we will explore how each CI system can be assessed for risks and damages caused by natural threats.
