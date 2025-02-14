@@ -4,7 +4,8 @@
 title           : Global Infrastructure Risk Assesments
 author          : Institute for Environmental Studies, Vrije Universiteit Amsterdam
 logo            : _static/images/IVM_logo_kort.jpg
-announcement    : "This Jupyter Book is work in progress!" # A banner announcement at the top of the site.
+copyright       : "2025"
+
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -37,6 +38,8 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  home_page_in_navbar       : false  # Whether to include your home page in the left Navigation Bar
+
 
 # add parsing
 parse:
