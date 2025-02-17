@@ -144,14 +144,15 @@ damage_curves = damage_curves.astype(np.float32)
 print(damage_curves)
 ```
 
-## Visualizing the Data
+## A Note On OSM Completeness
 
-```python
-import matplotlib.pyplot as plt
+OpenStreetMap (OSM) completeness refers to the extent and accuracy of geographic data coverage across various regions. Being aware of the level of completeness is essential for using OSM as a reliable source for exposure analysis in risk assessments. OSM completeness directly affects the quality of damage and risk models. Incomplete datasets can lead to underestimation of exposure, particularly in regions with limited mapping activity. Users should therefore always be careful with using OSM for their area of interest and, if necessary, supplement with local or proprietary data sources. While checking for completeness can be difficult, even qualitative checks (e.g. visually comparing OSM data with satelite imagery) can already help to judge whether data is largely complete or whether parts are missing.  
 
-gdf_roads.plot()
-plt.title("Road Networks from OSM")
-plt.xlabel("Longitude")
-plt.ylabel("Latitude")
-plt.show()
-```
+
+### **Some Current Insights on OSM Completeness**
+- The [isOSMComplete](https://wvanderp.github.io/isOsmComplete/) tool provides visualizations of global OSM coverage, highlighting areas of high and low completeness.
+- [Barrington-Leigh & Millard-Ball, 2019](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180698) found that OSM completeness for road networks exceeds 80% globally, though rural and developing regions show significant gaps.
+- [Herfort et al., 2023](https://www.nature.com/articles/s41467-023-39698-6) evaluated OSM coverage for infrastructure networks and emphasized completeness variations across regions and asset types. For 1,848 urban centres (16% of the urban population), OSM building footprint data exceeds 80% completeness, but completeness remains lower than 20% for 9,163 cities (48% of the urban population). 
+- The [OSM Wiki on Completeness](https://wiki.openstreetmap.org/wiki/Completeness) outlines methodologies for evaluating coverage and identifying areas needing improvement.
+
+

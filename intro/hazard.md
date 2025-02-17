@@ -1,4 +1,4 @@
-# Hazard
+# Hazard & Hazard Data
 
 Hazards refer to potentially damaging physical events, phenomena, or human activities that can lead to the destruction or degradation of critical infrastructure (CI). These hazards can be natural, such as floods and earthquakes, or human-made, such as industrial accidents and cyber-attacks. Understanding the range and intensity of hazards that infrastructure is exposed to is a crucial step in assessing risks and ensuring resilience.
 

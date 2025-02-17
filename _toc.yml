@@ -19,7 +19,9 @@ parts:
     - file: howto/run_locally.md
     - file: howto/using_osm.md
     - file: howto/using_tailor_data.md
+    - file: howto/maximum_damages.md
     - file: howto/data_preparation.md
+    - file: howto/example_overview.md
   - caption: By Infrastructure System
     chapters:
     - file: ci/transport

@@ -115,7 +115,7 @@ Removing unnecessary columns ensures that the dataset remains clean for further 
 
 ## Checking Coordinate Reference Systems (CRS)
 
-Geospatial data is often provided in different coordinate reference systems (CRS). The **default CRS for most global datasets is EPSG:4326** ([WGS 84](https://epsg.io/4326)), which represents coordinates in degrees. However, many local datasets use **projected coordinate systems** (e.g., UTM or national grids), which use meters instead.
+Geospatial data is often provided in different coordinate reference systems (CRS). The **default CRS for most global datasets is EPSG:4326** ([WGS 84](https://epsg.io/4326)), which represents coordinates in degrees. However, many local datasets use **projected coordinate systems** (e.g., UTM or national grids), which use meters instead. *This is particularly the case when using regional-specific/case study-specific generated hazard data*. This data is often created based on regional/national **projected coordinate systems**.
 
 To ensure consistency, all datasets should be transformed to the same CRS before running **DamageScanner**.
 
