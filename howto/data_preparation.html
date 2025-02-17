@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/data_preparation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Transportation Infrastructure" href="../ci/transport.html" />
-    <link rel="prev" title="Using Local Data" href="using_tailor_data.html" />
+    <link rel="next" title="Overview of Examples" href="example_overview.html" />
+    <link rel="prev" title="Maximum Damages Explained" href="maximum_damages.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard &amp; Hazard Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
@@ -175,7 +175,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_osm.html">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maximum_damages.html">Maximum Damages Explained</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Specific Data Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_overview.html">Overview of Examples</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -554,7 +556,7 @@ document.write(`
 <hr class="docutils" />
 <section id="checking-coordinate-reference-systems-crs">
 <h2>Checking Coordinate Reference Systems (CRS)<a class="headerlink" href="#checking-coordinate-reference-systems-crs" title="Permalink to this heading">#</a></h2>
-<p>Geospatial data is often provided in different coordinate reference systems (CRS). The <strong>default CRS for most global datasets is EPSG:4326</strong> (<a class="reference external" href="https://epsg.io/4326">WGS 84</a>), which represents coordinates in degrees. However, many local datasets use <strong>projected coordinate systems</strong> (e.g., UTM or national grids), which use meters instead.</p>
+<p>Geospatial data is often provided in different coordinate reference systems (CRS). The <strong>default CRS for most global datasets is EPSG:4326</strong> (<a class="reference external" href="https://epsg.io/4326">WGS 84</a>), which represents coordinates in degrees. However, many local datasets use <strong>projected coordinate systems</strong> (e.g., UTM or national grids), which use meters instead. <em>This is particularly the case when using regional-specific/case study-specific generated hazard data</em>. This data is often created based on regional/national <strong>projected coordinate systems</strong>.</p>
 <p>To ensure consistency, all datasets should be transformed to the same CRS before running <strong>DamageScanner</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check CRS of the dataset</span>
 <span class="n">gdf_power</span><span class="o">.</span><span class="n">crs</span>
@@ -634,20 +636,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="using_tailor_data.html"
+       href="maximum_damages.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using Local Data</p>
+        <p class="prev-next-title">Maximum Damages Explained</p>
       </div>
     </a>
     <a class="right-next"
-       href="../ci/transport.html"
+       href="example_overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Transportation Infrastructure</p>
+        <p class="prev-next-title">Overview of Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

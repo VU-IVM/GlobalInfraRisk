@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard &amp; Hazard Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
@@ -175,7 +175,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_osm.html">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maximum_damages.html">Maximum Damages Explained</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_preparation.html">Specific Data Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_overview.html">Overview of Examples</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -461,6 +463,7 @@ document.write(`
 <h3><strong>4. Maximum Damage Values</strong><a class="headerlink" href="#maximum-damage-values" title="Permalink to this heading">#</a></h3>
 <p>Maximum damage (<code class="docutils literal notranslate"><span class="pre">maxdam</span></code>) represents the total potential loss for each asset type. It can be provided as:</p>
 <ul class="simple">
+<li><p><strong>Dictionary</strong> (<code class="docutils literal notranslate"><span class="pre">dict()</span></code>)</p></li>
 <li><p><strong>Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>)</strong></p></li>
 <li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
 <li><p><strong>Path object pointing to a CSV file</strong> As with vulnerability curves, <code class="docutils literal notranslate"><span class="pre">maxdam</span></code> is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object if provided as a string.</p></li>

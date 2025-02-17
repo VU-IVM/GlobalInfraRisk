@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard &amp; Hazard Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
@@ -175,7 +175,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../howto/run_locally.html">Run Locally</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howto/using_osm.html">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howto/using_tailor_data.html">Using Local Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/maximum_damages.html">Maximum Damages Explained</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howto/data_preparation.html">Specific Data Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/example_overview.html">Overview of Examples</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -555,7 +557,7 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 26s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 18s
 Wall time: 1min 40s
 </pre></div>
 </div>
@@ -589,7 +591,7 @@ Wall time: 1min 40s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "efda187320b4465a9d8446932c9b11bd", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8b5db1e2f1f74efeba37694dd10100f3", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -610,7 +612,7 @@ Wall time: 1min 40s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1f540a3fb60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1d4c0ffde80&gt;
 </pre></div>
 </div>
 <img alt="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" src="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" />
@@ -924,6 +926,19 @@ Wall time: 1min 40s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">multi_curves</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">unique_curve</span> <span class="ow">in</span> <span class="n">unique_curves</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">curve_creation</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">get_curve_values</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[</span><span class="n">unique_curve</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="ne">NameError</span>: name &#39;unique_curves&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="ancilliary-data-for-processing">
@@ -1006,45 +1021,12 @@ Wall time: 1min 40s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:43&lt;00:00, 10.97it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 42906.68it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18320.18it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.9 s
-Wall time: 45.3 s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>And run this also with the range of vulnerability curves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">all_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">multi_curves</span><span class="o">=</span><span class="n">multi_curves</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:40&lt;00:00, 11.82it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 42615.38it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17331.64it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17332.01it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18343.90it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 19835.93it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17823.46it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18328.29it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.3 s
-Wall time: 44.9 s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1106,12 +1088,6 @@ Wall time: 44.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/d1d02250300d79538bcf3adc8c663e76f4b3895856aad5fb31a79a5cb1e5bb8a.png" src="../_images/d1d02250300d79538bcf3adc8c663e76f4b3895856aad5fb31a79a5cb1e5bb8a.png" />
-</div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
 <div class="cell docutils container">
@@ -1127,9 +1103,6 @@ Wall time: 44.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" src="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1137,8 +1110,6 @@ Wall time: 44.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7c995279d90047289af3131223d0c3ce", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1170,11 +1141,6 @@ Wall time: 44.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:40&lt;00:00, 40.21s/it]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="performing-the-risk-assessment-under-climate-change">
@@ -1202,11 +1168,6 @@ Wall time: 44.9 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">risk_results_future</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict_future</span><span class="p">,</span><span class="n">multi_curves</span><span class="o">=</span><span class="n">multi_curves</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:37&lt;00:00, 39.28s/it]
 </pre></div>
 </div>
 </div>
@@ -1298,9 +1259,6 @@ Wall time: 44.9 s
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e5b248a949844ae51af87d6e9c6e31dcbba3a62c61b75375b574c9b0fba26056.png" src="../_images/e5b248a949844ae51af87d6e9c6e31dcbba3a62c61b75375b574c9b0fba26056.png" />
 </div>
 </div>
 </section>

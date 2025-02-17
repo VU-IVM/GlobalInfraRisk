@@ -36,6 +36,7 @@ Vulnerability curves describe the relationship between hazard intensity and expe
 
 ### **4. Maximum Damage Values**
 Maximum damage (`maxdam`) represents the total potential loss for each asset type. It can be provided as:
+- **Dictionary** (`dict()`)
 - **Pandas DataFrame (`pandas.DataFrame`)**
 - **CSV file (`.csv`)**
 - **Path object pointing to a CSV file** As with vulnerability curves, `maxdam` is converted into a `Path` object if provided as a string.

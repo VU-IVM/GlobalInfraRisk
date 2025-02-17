@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard &amp; Hazard Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
@@ -175,7 +175,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="run_locally.html">Run Locally</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Using OpenStreetMap (OSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_tailor_data.html">Using Local Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maximum_damages.html">Maximum Damages Explained</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_preparation.html">Specific Data Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_overview.html">Overview of Examples</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
 <ul class="nav bd-sidenav">
@@ -411,7 +413,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-osm-completeness">A Note On OSM Completeness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-current-insights-on-osm-completeness"><strong>Some Current Insights on OSM Completeness</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -561,17 +566,18 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="visualizing-the-data">
-<h2>Visualizing the Data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">gdf_roads</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Road Networks from OSM&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
+<section id="a-note-on-osm-completeness">
+<h2>A Note On OSM Completeness<a class="headerlink" href="#a-note-on-osm-completeness" title="Permalink to this heading">#</a></h2>
+<p>OpenStreetMap (OSM) completeness refers to the extent and accuracy of geographic data coverage across various regions. Being aware of the level of completeness is essential for using OSM as a reliable source for exposure analysis in risk assessments. OSM completeness directly affects the quality of damage and risk models. Incomplete datasets can lead to underestimation of exposure, particularly in regions with limited mapping activity. Users should therefore always be careful with using OSM for their area of interest and, if necessary, supplement with local or proprietary data sources. While checking for completeness can be difficult, even qualitative checks (e.g. visually comparing OSM data with satelite imagery) can already help to judge whether data is largely complete or whether parts are missing.</p>
+<section id="some-current-insights-on-osm-completeness">
+<h3><strong>Some Current Insights on OSM Completeness</strong><a class="headerlink" href="#some-current-insights-on-osm-completeness" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://wvanderp.github.io/isOsmComplete/">isOSMComplete</a> tool provides visualizations of global OSM coverage, highlighting areas of high and low completeness.</p></li>
+<li><p><a class="reference external" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180698">Barrington-Leigh &amp; Millard-Ball, 2019</a> found that OSM completeness for road networks exceeds 80% globally, though rural and developing regions show significant gaps.</p></li>
+<li><p><a class="reference external" href="https://www.nature.com/articles/s41467-023-39698-6">Herfort et al., 2023</a> evaluated OSM coverage for infrastructure networks and emphasized completeness variations across regions and asset types. For 1,848 urban centres (16% of the urban population), OSM building footprint data exceeds 80% completeness, but completeness remains lower than 20% for 9,163 cities (48% of the urban population).</p></li>
+<li><p>The <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Completeness">OSM Wiki on Completeness</a> outlines methodologies for evaluating coverage and identifying areas needing improvement.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -657,7 +663,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-maximum-damage-dataframe">Creating the Maximum Damage DataFrame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-vulnerability-curves">Linking Vulnerability Curves</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-data">Visualizing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-osm-completeness">A Note On OSM Completeness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-current-insights-on-osm-completeness"><strong>Some Current Insights on OSM Completeness</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
