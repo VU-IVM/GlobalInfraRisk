@@ -498,7 +498,7 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span><span class="p">,</span> <span class="n">DICT_CIS_OSM</span><span class="p">,</span> <span class="n">extract</span><span class="p">,</span><span class="n">_extract_value</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
@@ -559,120 +559,6 @@ Wall time: 29.7 s
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>osm_id</th>
-      <th>geometry</th>
-      <th>name</th>
-      <th>object_type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2883935897</td>
-      <td>POINT (-77.60597 17.90885)</td>
-      <td>Dr. Michael Brown</td>
-      <td>dentist</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>3777162942</td>
-      <td>POINT (-77.03152 18.14151)</td>
-      <td>Bickens Pharmacy</td>
-      <td>pharmacy</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3785029357</td>
-      <td>POINT (-76.95765 17.99765)</td>
-      <td>None</td>
-      <td>dentist</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2904626244</td>
-      <td>POINT (-77.60512 17.90812)</td>
-      <td>Mid Island Medical Laboratories</td>
-      <td>laboratory</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3777253338</td>
-      <td>POINT (-77.03174 18.13502)</td>
-      <td>Total Wellness Centre</td>
-      <td>clinic</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>311</th>
-      <td>None</td>
-      <td>MULTIPOLYGON (((-77.50972 18.04377, -77.50892 ...</td>
-      <td>Mandeville Memorial Hospital</td>
-      <td>hospital</td>
-    </tr>
-    <tr>
-      <th>312</th>
-      <td>None</td>
-      <td>MULTIPOLYGON (((-76.76723 17.97267, -76.76733 ...</td>
-      <td>Eastern Pharmacy</td>
-      <td>pharmacy</td>
-    </tr>
-    <tr>
-      <th>313</th>
-      <td>None</td>
-      <td>MULTIPOLYGON (((-76.82738 18.01631, -76.82738 ...</td>
-      <td>Olympic Garden Health Centre</td>
-      <td>clinic</td>
-    </tr>
-    <tr>
-      <th>314</th>
-      <td>None</td>
-      <td>MULTIPOLYGON (((-77.261 17.97422, -77.26097 17...</td>
-      <td>May Pen Hospital</td>
-      <td>hospital</td>
-    </tr>
-    <tr>
-      <th>315</th>
-      <td>None</td>
-      <td>MULTIPOLYGON (((-77.92086 18.46966, -77.92095 ...</td>
-      <td>St James Pharmacy</td>
-      <td>pharmacy</td>
-    </tr>
-  </tbody>
-</table>
-<p>316 rows × 4 columns</p>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

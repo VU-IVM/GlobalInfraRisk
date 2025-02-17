@@ -371,9 +371,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -389,22 +387,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-damage-and-risk-assessment"><strong>1. Vulnerability, Damage, and Risk Assessment</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-linestrings-and-points-to-polygons"><strong>2. Processing LineStrings and Points to Polygons</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-multi-curve-assessments"><strong>3. Applying Multi-Curve Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-with-additional-hazard-layers"><strong>4. Post-Processing with Additional Hazard Layers</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-day-and-future-risk-assessments"><strong>5. Present-Day and Future Risk Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-exposure-assessments"><strong>6. Country-Wide Exposure Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-vulnerability-assessments"><strong>7. Country-Wide Vulnerability Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-risk-assessments"><strong>8. Country-Wide Risk Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-country-risk-assessment-for-a-single-infrastructure-type"><strong>9. Multi-Country Risk Assessment for a Single Infrastructure Type</strong></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -417,42 +399,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="overview-of-examples">
 <h1>Overview of Examples<a class="headerlink" href="#overview-of-examples" title="Permalink to this heading">#</a></h1>
 <p>This page highlights unique calculations and processing techniques applied in the example notebooks, with links for further exploration.</p>
-<section id="vulnerability-damage-and-risk-assessment">
-<h2><strong>1. Vulnerability, Damage, and Risk Assessment</strong><a class="headerlink" href="#vulnerability-damage-and-risk-assessment" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/transport.html">Transport Infrastructure</a>: A comprehensive example of assessing vulnerability, damage, and risk for transport systems.</p>
-</section>
-<section id="processing-linestrings-and-points-to-polygons">
-<h2><strong>2. Processing LineStrings and Points to Polygons</strong><a class="headerlink" href="#processing-linestrings-and-points-to-polygons" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/power.html">Power Infrastructure</a>: Emphasizes that within a single assessment, each object type must use the same geometry type (e.g., polygons, lines) for consistent maximum damage values. If mixed geometries are needed, separate runs with unique maximum damage values per geometry type are required.</p>
-</section>
-<section id="applying-multi-curve-assessments">
-<h2><strong>3. Applying Multi-Curve Assessments</strong><a class="headerlink" href="#applying-multi-curve-assessments" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/education.html#performing-the-damage-assessment">Education Infrastructure</a>: Demonstrates the use of multiple vulnerability curves for all object types, rather than selecting a single curve per type.</p>
-</section>
-<section id="post-processing-with-additional-hazard-layers">
-<h2><strong>4. Post-Processing with Additional Hazard Layers</strong><a class="headerlink" href="#post-processing-with-additional-hazard-layers" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/hazard/earthquake.html">Earthquake Impact</a>: Shows how to refine damage assessments using liquefaction hazard data for post-event corrections.</p>
-</section>
-<section id="present-day-and-future-risk-assessments">
-<h2><strong>5. Present-Day and Future Risk Assessments</strong><a class="headerlink" href="#present-day-and-future-risk-assessments" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/hazard/tropical_cyclone.html">Tropical Cyclones</a>: Provides a method for comparing current and projected risks due to climate change.</p>
-</section>
-<section id="country-wide-exposure-assessments">
-<h2><strong>6. Country-Wide Exposure Assessments</strong><a class="headerlink" href="#country-wide-exposure-assessments" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_exposure.html">All Infrastructure Types</a>: Performs exposure assessments for all infrastructure types within a country.</p>
-</section>
-<section id="country-wide-vulnerability-assessments">
-<h2><strong>7. Country-Wide Vulnerability Assessments</strong><a class="headerlink" href="#country-wide-vulnerability-assessments" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_vulnerability.html">All Infrastructure Types</a>: Evaluates vulnerabilities across multiple infrastructure categories.</p>
-</section>
-<section id="country-wide-risk-assessments">
-<h2><strong>8. Country-Wide Risk Assessments</strong><a class="headerlink" href="#country-wide-risk-assessments" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_risk.html">All Infrastructure Types</a>: Conducts comprehensive risk assessments for all infrastructure types.</p>
-</section>
-<section id="multi-country-risk-assessment-for-a-single-infrastructure-type">
-<h2><strong>9. Multi-Country Risk Assessment for a Single Infrastructure Type</strong><a class="headerlink" href="#multi-country-risk-assessment-for-a-single-infrastructure-type" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/multi-country.html">Multi-Country Analysis</a>: Analyzes risk across multiple countries for a single type of infrastructure.</p>
-</section>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Vulnerability, Damage, and Risk Assessment:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/transport.html">Transport Infrastructure</a> – Demonstrates transport system risk analysis.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>LineString and Point Processing:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/power.html">Power Infrastructure</a> – Highlights geometry consistency and multiple runs for mixed types.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Multi-Curve Assessment:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/education.html#performing-the-damage-assessment">Education Infrastructure</a> – Shows applying multiple vulnerability curves.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Post-Processing with Hazard Layers:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/hazard/earthquake.html">Earthquake Impact</a></p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> Corrects results using liquefaction data.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Future and Present Risk Assessment:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/hazard/tropical_cyclone.html">Tropical Cyclones</a> – Compares current and future risk scenarios.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Country-Wide Exposure Analysis:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_exposure.html">All Infrastructure Types</a>.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Country-Wide Vulnerability Analysis:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_vulnerability.html">All Infrastructure Types</a>.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Country-Wide Risk Analysis:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/all_ci_risk.html">All Infrastructure Types</a>.</p>
+<p><svg version="4.0.0.63c5cb3" width="2.0em" height="2.0em" class="sd-material-icon sd-material-icon-data_exploration" viewBox="0 0 24 24" aria-hidden="true"><rect fill="none" height="24" width="24"></rect><path d="M12,2C6.48,2,2,6.48,2,12c0,1.33,0.26,2.61,0.74,3.77L8,10.5l3.3,2.78L14.58,10H13V8h5v5h-2v-1.58L11.41,16l-3.29-2.79 l-4.4,4.4C5.52,20.26,8.56,22,12,22h8c1.1,0,2-0.9,2-2v-8C22,6.48,17.52,2,12,2z M19.5,20.5c-0.55,0-1-0.45-1-1s0.45-1,1-1 s1,0.45,1,1S20.05,20.5,19.5,20.5z"></path></svg> <strong>Multi-Country Risk Comparison:</strong> <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/use_cases/multi-country.html">Single Infrastructure Type</a>.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -509,28 +465,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-damage-and-risk-assessment"><strong>1. Vulnerability, Damage, and Risk Assessment</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-linestrings-and-points-to-polygons"><strong>2. Processing LineStrings and Points to Polygons</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-multi-curve-assessments"><strong>3. Applying Multi-Curve Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-with-additional-hazard-layers"><strong>4. Post-Processing with Additional Hazard Layers</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-day-and-future-risk-assessments"><strong>5. Present-Day and Future Risk Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-exposure-assessments"><strong>6. Country-Wide Exposure Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-vulnerability-assessments"><strong>7. Country-Wide Vulnerability Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#country-wide-risk-assessments"><strong>8. Country-Wide Risk Assessments</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-country-risk-assessment-for-a-single-infrastructure-type"><strong>9. Multi-Country Risk Assessment for a Single Infrastructure Type</strong></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
