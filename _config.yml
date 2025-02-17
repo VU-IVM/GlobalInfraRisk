@@ -44,7 +44,6 @@ html:
 sphinx:
   extra_extensions:
     - sphinx_design
-    - myst_parser
 
 # add parsing
 parse:
