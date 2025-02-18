@@ -10,5 +10,7 @@ Check out the content pages bundled with this book to see more.
 ```{tableofcontents}
 ```
 
+&nbsp;
+&nbsp;
 
 ![](_static/images/GFDRR_WB-WBG-CMYK.png?h=750&w=1260)
