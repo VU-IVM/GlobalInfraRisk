@@ -5,8 +5,6 @@ This JupyterBook provides an open-source framework for assessing the risk of cri
 
 This work was supported by the [**Global Facility for Disaster Reduction and Recovery**](https://www.gfdrr.org/en).
 
-Check out the content pages bundled with this book to see more.
-
 ```{tableofcontents}
 ```
 
