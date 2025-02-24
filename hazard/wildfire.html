@@ -63,11 +63,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'hazard/wildfire';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extreme Heat" href="heatwaves.html" />
+    <link rel="prev" title="Earthquake Risk Assessment" href="earthquake.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -188,9 +188,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../ci/education.html">Education Infrastructure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="flood.html">Flood risk assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wildfires</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatwaves.html">Extreme Heat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
@@ -425,9 +427,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-notebooks">Markdown + notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#myst-markdown">MyST markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-blocks-and-outputs">Code blocks and outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -441,72 +449,478 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="wildfires">
 <h1>Wildfires<a class="headerlink" href="#wildfires" title="Permalink to this heading">#</a></h1>
-<p>You can also create content with Jupyter Notebooks. This means that you can include
-code blocks and their outputs in your book.</p>
-<section id="markdown-notebooks">
-<h2>Markdown + notebooks<a class="headerlink" href="#markdown-notebooks" title="Permalink to this heading">#</a></h2>
-<p>As it is markdown, you can embed images, HTML, etc into your posts!</p>
-<p>You can also <span class="math notranslate nohighlight">\(add_{math}\)</span> and</p>
-<div class="math notranslate nohighlight">
-\[
-math^{blocks}
-\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\mbox{mean} la_{tex} \\ \\
-math blocks
-\end{aligned}
-\end{split}\]</div>
-<p>But make sure you $Escape $your $dollar signs $you want to keep!</p>
-</section>
-<section id="myst-markdown">
-<h2>MyST markdown<a class="headerlink" href="#myst-markdown" title="Permalink to this heading">#</a></h2>
-<p>MyST markdown works in Jupyter Notebooks as well. For more information about MyST markdown, check
-out <a class="reference external" href="https://jupyterbook.org/content/myst.html">the MyST guide in Jupyter Book</a>,
-or see <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">the MyST markdown documentation</a>.</p>
-</section>
-<section id="code-blocks-and-outputs">
-<h2>Code blocks and outputs<a class="headerlink" href="#code-blocks-and-outputs" title="Permalink to this heading">#</a></h2>
-<p>Jupyter Book will also embed your code blocks and output in your book.
-For example, here’s some sample Matplotlib code:</p>
+<p>In this notebook, we will perform a <strong>wildfire exposure assessment</strong> for transportation infrastructure, specifically focusing on roads. The assessment is based on combining hazard data (e.g., historical footprints of wildfires) with spatial information on road infrastructure to understand how wildfires could impact road infrastructure.</p>
+<p>We will follow the steps outlined below to conduct the assessment:</p>
+<ol class="arabic simple">
+<li><p><strong>Loading the necessary packages:</strong><br />
+We will import the Python libraries required for data handling, analysis, and visualization.</p></li>
+<li><p><strong>Loading the data:</strong><br />
+The infrastructure data (e.g., roads) and hazard data (e.g., fire footprints) will be loaded into the notebook.</p></li>
+<li><p><strong>Preparing the data:</strong><br />
+The infrastructure and hazard data will be processed and data gaps can be filled, if required.</p></li>
+<li><p><strong>Performing the exposure assessment:</strong><br />
+We will overlay the road infrastructure data with data on historical wildfire footprints.</p></li>
+<li><p><strong>Visualizing the results:</strong><br />
+Finally, we will visualize the estimated damage using graphs and maps to illustrate the impact on railway infrastructure.</p></li>
+</ol>
+<section id="loading-the-necessary-packages">
+<h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
+<p>To perform the assessment, we are going to make use of several <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">python packages</a>.</p>
+<p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rcParams</span><span class="p">,</span> <span class="n">cycler</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b13</span>
+<span class="c1">#!pip install contextily</span>
+<span class="c1">#!pip install exactextract</span>
+<span class="c1">#!pip install lonboard</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rasterio</span><span class="w"> </span><span class="kn">import</span> <span class="n">features</span> <span class="k">as</span> <span class="n">rasterization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">affine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affine</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">zipfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zipfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>  <span class="c1"># registers the rio accessor</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="specify-the-country-of-interest">
+<h3>Specify the country of interest<a class="headerlink" href="#specify-the-country-of-interest" title="Permalink to this heading">#</a></h3>
+<p>Before we continue, we should specify the country for which we want to assess the damage. We use the ISO3 code for the country to download the OpenStreetMap data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_full_name</span> <span class="o">=</span> <span class="s1">&#39;Togo&#39;</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s1">&#39;TGO&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="loading-the-data">
+<h2>2. Loading the Data<a class="headerlink" href="#loading-the-data" title="Permalink to this heading">#</a></h2>
+<p>In this step, we will load four key datasets:</p>
+<ol class="arabic simple">
+<li><p><strong>Infrastructure data:</strong><br />
+This dataset contains information on the location and type of transportation infrastructure (e.g., roads). Each asset may have attributes such as type, length, and replacement cost.</p></li>
+<li><p><strong>Hazard data:</strong><br />
+This dataset includes information on the hazard affecting the infrastructure (e.g., flood depth at various locations).</p></li>
+<li><p><strong>Vulnerability curves:</strong><br />
+Vulnerability curves define how the infrastructure’s damage increases with the intensity of the hazard. For example, flood depth-damage curves specify how much damage occurs for different flood depths.</p></li>
+<li><p><strong>Maximum damage values:</strong><br />
+This dataset contains the maximum possible damage (in monetary terms) that can be incurred by individual infrastructure assets. This is crucial for calculating total damage based on the vulnerability curves.</p></li>
+</ol>
+<section id="infrastructure-data">
+<h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
+<p>We will perform this example analysis for Tajikistan. To start the analysis, we first download the OpenStreetMap data from GeoFabrik. In case of locally available data, one can load the shapefiles through <strong>gpd.read_file()</strong>, as we show in the second cell within this section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">infrastructure_path</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we load the data and read only the road data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="s1">&#39;main_roads&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 7.69 s
+Wall time: 9.58 s
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixing random state for reproducibility</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
-
-<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)))</span>
-
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
-<span class="n">custom_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">0.</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
-                <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">.5</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
-                <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">1.</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Cold&#39;</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;Hot&#39;</span><span class="p">]);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>There is a lot more that you can do with outputs (such as including interactive outputs)
-with your book. For more information about this, see <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
+<span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_1_states_provinces.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hazard-data">
+<h3>Hazard Data<a class="headerlink" href="#hazard-data" title="Permalink to this heading">#</a></h3>
+<p>Wildfire hazard data is exceptionally challenging to work with. The difficulty arises not only from the wide variation in extreme temperatures globally, but also from the myriad factors—such as local vegetation, fuel moisture, and differing infrastructure—that influence fire behavior in each region. Given the complexity of wildfire modelling, there are very few global datasets available to perform such an analysis.</p>
+<p>Here we use the GlobFire Fire Perimeters dataset. It offers a comprehensive global record of individual fire events from 2002 to 2023, provided in ESRI shapefile format. This dataset is derived from the MCD64A1 burned area product, a satellite-based product developed by NASA’s MODIS team. MCD64A1 detects burned areas by analyzing changes in surface reflectance and thermal anomalies, which provides a consistent and high-resolution view of wildfire activity around the world. Each fire perimeter in the dataset is documented with a unique fire identification code, along with metadata that includes the initial and final dates, the spatial geometry, and the final burned area in hectares. For a detailed explanation of the methodologies and applications behind this dataset, please see <a class="reference external" href="https://www.nature.com/articles/s41597-019-0312-2">Artes et al. (2019)</a>. The full dataset is available for download from the <a class="reference external" href="https://gwis.jrc.ec.europa.eu/apps/country.profile/downloads">JRC Global Wildfire Information System</a>.</p>
+<p><strong>Please note:</strong> we require quite a lot of data-specific steps to get this analysis working. As such, different to the other hazards, this approach might be more difficult to quickly re-do with other wildfire data.</p>
+<p>We will start by downloading all the wildfire data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## this is the link to the 1/100 flood map for Europe</span>
+<span class="n">zipurl</span> <span class="o">=</span> <span class="s1">&#39;https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/GLOBFIRE_burned_area_full_dataset_2002_2023.zip&#39;</span>
+
+<span class="c1"># and now we open and extract the data</span>
+<span class="k">with</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">zipurl</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipresp</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">zipresp</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span> <span class="k">as</span> <span class="n">zfile</span><span class="p">:</span>
+        <span class="n">zfile</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>All data is stored as shapefiles. We can directly read them for our area by performing a clip during the reading process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bbox</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">minx</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">miny</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">maxx</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                    <span class="n">maxy</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rasterized_wildfire_map</span></code> function converts vector-based wildfire hazard data into a rasterized format, making it compatible with GIS-based hazard and impact assessment models. This step is essential for integrating wildfire risk with other geospatial datasets, ensuring uniform resolution and analysis precision.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rasterized_wildfire_map</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="p">):</span>
+
+    <span class="n">country_yearly_wildfires</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">)</span>
+        
+    <span class="c1"># List of geometries from the GeoDataFrame</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="p">[</span><span class="n">shape</span> <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">country_yearly_wildfires</span><span class="o">.</span><span class="n">geometry</span><span class="p">]</span>
+    
+    <span class="c1"># Define resolution</span>
+    <span class="n">resolution</span> <span class="o">=</span> <span class="mf">0.004</span> 
+    
+    <span class="c1"># Extract bounds (make sure bbox.bounds is correctly defined)</span>
+    <span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">bounds</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">maxx</span> <span class="o">-</span> <span class="n">minx</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">maxy</span> <span class="o">-</span> <span class="n">miny</span>
+    
+    <span class="c1"># Define the number of rows and columns (note the ordering: rows=y, cols=x)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">)</span>
+    
+    <span class="c1"># Create an affine transform (upper-left corner is (minx, maxy))</span>
+    <span class="n">transform</span> <span class="o">=</span> <span class="n">Affine</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="n">minx</span><span class="p">,</span> <span class="n">maxy</span><span class="p">)</span> <span class="o">*</span> <span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="o">-</span><span class="n">resolution</span><span class="p">)</span>
+    
+    <span class="c1"># Rasterize using the shape and coordinate system defined by the transform</span>
+    <span class="n">rasterized</span> <span class="o">=</span> <span class="n">rasterization</span><span class="o">.</span><span class="n">rasterize</span><span class="p">(</span>
+        <span class="n">geom</span><span class="p">,</span>
+        <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span>
+        <span class="n">fill</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
+        <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Assume rasterized is your NumPy array from the rasterio.features.rasterize() call</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">rasterized</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="c1"># Create coordinate arrays for the pixel centers:</span>
+    <span class="n">x_coords</span> <span class="o">=</span> <span class="n">minx</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">resolution</span>
+    <span class="n">y_coords</span> <span class="o">=</span> <span class="n">maxy</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">resolution</span>
+    
+    <span class="c1"># Create the DataArray and name it &#39;band_data&#39;</span>
+    <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span>
+        <span class="n">rasterized</span><span class="p">,</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">),</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">x_coords</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_coords</span><span class="p">},</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;band_data&quot;</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Set the affine transform and CRS (adjust the CRS if needed)</span>
+    <span class="n">da</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_transform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">da</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Optionally, convert to a Dataset if you want to store multiple variables:</span>
+    <span class="k">return</span> <span class="n">da</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">shp_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">current_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.shp&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wildfires_per_year</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">shp_files</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">shp_files</span><span class="p">)):</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">wildfires_per_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">rasterized_wildfire_map</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [05:33&lt;00:00, 15.18s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_per_year</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="p">)):</span>
+    <span class="n">country_hazard_data</span> <span class="o">=</span> <span class="n">wildfires_per_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span>
+    <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
+    
+    <span class="n">exposed_features</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposed_features</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;coverage&#39;</span><span class="p">]]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">exposure_per_year</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exposed_features</span><span class="p">[</span><span class="n">year</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [04:04&lt;00:00, 11.12s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3587</span><span class="p">)</span><span class="o">.</span><span class="n">length</span>
+<span class="n">base_length</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_exposed_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[[</span><span class="s1">&#39;osm_id&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;object_type&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+                                    <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">exposure_per_year</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                    <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_by_type</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_by_type</span><span class="p">[</span><span class="s1">&#39;2004&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">base_length</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.14654591772290174
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove &#39;_link&#39; from the index names and group by the base type (summing the values)</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_by_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Ensure the order of the rows (which will become columns after transposing)</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">]</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+<span class="c1"># Define colors for each type:</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#5f0f40&quot;</span><span class="p">,</span> <span class="s2">&quot;#9a031e&quot;</span><span class="p">,</span> <span class="s2">&quot;#e36414&quot;</span><span class="p">,</span> <span class="s2">&quot;#fb8b24&quot;</span><span class="p">]</span>
+
+<span class="c1"># Transpose the DataFrame so that years become the x-axis</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Exposure (in km)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exposure by Type per Year (</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Capitalize legend labels</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Object Type&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> 
+          <span class="n">title_fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" src="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Assume exposure_by_type is your DataFrame (with index like &#39;primary&#39;, &#39;primary_link&#39;, etc.)</span>
+<span class="c1"># and base_length is your pd.Series of baseline lengths.</span>
+
+<span class="c1"># --- Group exposure_by_type by removing the &#39;_link&#39; suffix and summing ---</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_by_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># --- Group base_length in a similar fashion ---</span>
+<span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">base_length_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Define a consistent order</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">]</span>
+<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+<span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+<span class="c1"># --- Compute the total baseline length (a scalar) ---</span>
+<span class="n">total_baseline</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># --- Compute relative exposure per type for each year ---</span>
+<span class="c1"># This gives, for each object type and year:</span>
+<span class="c1"># (exposure for type in year) / (total baseline length) * 100</span>
+<span class="n">relative_exposure</span> <span class="o">=</span> <span class="p">(</span><span class="n">exposure_grouped</span> <span class="o">/</span> <span class="n">total_baseline</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Now, for each year, the total relative exposure is:</span>
+<span class="c1"># relative_exposure.sum(axis=0) = (total exposure for that year) / total_baseline * 100</span>
+<span class="c1"># For example, in 2004, this sum should be around 14% (if that is what your data imply).</span>
+
+<span class="c1"># --- Define your colors for each type ---</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#5f0f40&quot;</span><span class="p">,</span> <span class="s2">&quot;#9a031e&quot;</span><span class="p">,</span> <span class="s2">&quot;#e36414&quot;</span><span class="p">,</span> <span class="s2">&quot;#fb8b24&quot;</span><span class="p">]</span>
+
+<span class="c1"># --- Plot the stacked bar chart ---</span>
+<span class="c1"># Transpose so that years become the x-axis</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">relative_exposure</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Exposure (in km)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative Exposure by Type per Year (</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">) </span><span class="se">\n</span><span class="s2">(Percentage of Baseline Length)&quot;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Capitalize legend labels</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Object Type&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> 
+          <span class="n">title_fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" src="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure the GeoDataFrame &#39;all_exposed_features&#39; is in EPSG:3857 (required for Contextily)</span>
+<span class="k">if</span> <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;EPSG:3857&#39;</span><span class="p">:</span>
+    <span class="n">all_exposed_features</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span>
+
+<span class="c1"># Create a new column &#39;base_type&#39; that removes the &#39;_link&#39; suffix so that _link roads become part of their base type</span>
+<span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;base_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define the years to plot</span>
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2004</span><span class="p">,</span> <span class="mi">2005</span><span class="p">,</span> <span class="mi">2006</span><span class="p">,</span> <span class="mi">2010</span><span class="p">]</span>
+
+<span class="c1"># Define the color mapping for the four road types</span>
+<span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;trunk&#39;</span><span class="p">:</span> <span class="s1">&#39;#5f0f40&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;primary&#39;</span><span class="p">:</span> <span class="s1">&#39;#9a031e&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;secondary&#39;</span><span class="p">:</span> <span class="s1">&#39;#e36414&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tertiary&#39;</span><span class="p">:</span> <span class="s1">&#39;#fb8b24&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Create a 2x2 subplot layout</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+    <span class="c1"># Plot all roads in light grey as the background</span>
+    <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Filter for roads affected in this year (non-null value in the year&#39;s column)</span>
+    <span class="n">affected</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="p">[</span><span class="n">all_exposed_features</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+    
+    <span class="c1"># Limit to the four main road types using the &#39;base_type&#39; column</span>
+    <span class="n">affected</span> <span class="o">=</span> <span class="n">affected</span><span class="p">[</span><span class="n">affected</span><span class="p">[</span><span class="s1">&#39;base_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">color_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+    
+    <span class="c1"># Plot each road type with its specified color</span>
+    <span class="k">for</span> <span class="n">road_type</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">color_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">sub</span> <span class="o">=</span> <span class="n">affected</span><span class="p">[</span><span class="n">affected</span><span class="p">[</span><span class="s1">&#39;base_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">road_type</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">sub</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">road_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+    
+    <span class="c1"># Add basemap using Contextily with a partially transparent CartoDB Positron layer</span>
+    <span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Roads affected in </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+<span class="c1"># Create a consolidated legend using the labels from the first axis</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">unique</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">handles</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">unique</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">unique</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Road Type&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" src="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -540,6 +954,24 @@ with your book. For more information about this, see <a class="reference externa
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="earthquake.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Earthquake Risk Assessment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="heatwaves.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Extreme Heat</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -555,9 +987,15 @@ with your book. For more information about this, see <a class="reference externa
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-notebooks">Markdown + notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#myst-markdown">MyST markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-blocks-and-outputs">Code blocks and outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
