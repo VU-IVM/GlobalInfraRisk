@@ -53,6 +53,10 @@ Before running `DamageScanner()`, users should ensure that **data formats are co
 
 To use `DamageScanner()`, the four required inputs **must be specified first** before running any of its core functions.
 
+```{important}
+Each unique infrastructure type should be represented by a single geometry type (e.g., Polygon or Point). The maximum damage values you specify per infrastructure type are represented by, for example, damage per square meter or per asset (but never both). At least three routes are possible: [(i) convert all geometries into the same geometry](https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html#step-1-checking-geometry-types), (ii) split up the damage assessment by geometry type for that specific infrastructure object, or (iii) give the the infrastructure different and unique object type names for each geometry type (e.g., substation_point, substation_polygon), and ensure these are included in the maximum damage and vulnerability curves accordingly.   
+```
+
 ```python
 from damagescanner import DamageScanner
 import pandas as pd
