@@ -38,6 +38,10 @@ Various global datasets provide hazard information that can be used for risk ass
 ### **Global Flood Hazard Data**
 Flood hazard data includes riverine and coastal flood models that estimate inundation depths and extents for different return periods. Pluvial flooding is generally only available through some of the commercial flood model companies (e.g. [**Fathom**](https://www.fathom.global/) & [**JBA**](https://www.jbarisk.com/products/global-flood-maps/))
 
+```{important}
+The list provided below is specifically focused on global datasets. These datasets are often characterized by coarser resolulations and model simplifications. Only use them when regionally refined information is unavailable, and interpret the results with this data cautiously.
+```
+
 - **[CDRI - River Flooding](https://giri.unepgrid.ch/map?list=explore)**  
   The Climate and Disaster Resilience Initiative (CDRI) provides global river flood hazard maps.  
   📄 [Background Report](https://giri.unepgrid.ch/sites/default/files/2023-09/CIMA_GIRI_Flood_BGpaper_Supplement.pdf)
