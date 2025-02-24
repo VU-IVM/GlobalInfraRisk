@@ -5,6 +5,10 @@ Setting maximum damage values is often complex, as it depends on multiple factor
 ### **Defining Maximum Damages**
 Maximum damages should be provided in a format that aligns with the expected input for `DamageScanner()`. The input should be a **pandas DataFrame** or a **dictionary** that maps object types to their corresponding maximum damage values. Each object type must have a defined value to ensure compatibility with the `DamageScanner()`.
 
+```{important}
+Maximum damages should be defined per unique infrastructure object type. And each object type should have only one geometry type, because the maximum damage has to be defined differently for Points than for Polygons. Check out the [**Introducing `DamageScanner()`](https://vu-ivm.github.io/GlobalInfraRisk/howto/damagescanner.html) page for more information and solutions.
+```
+
 **Example:**
 ```python
 import pandas as pd
