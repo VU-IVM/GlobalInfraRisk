@@ -36,8 +36,8 @@ parts:
     - file: hazard/flood
     - file: hazard/earthquake
     # - file: hazard/landslide
-    # - file: hazard/wildfire
-    # - file: hazard/heatwaves
+    - file: hazard/wildfire
+    - file: hazard/heatwaves
     - file: hazard/tropical_cyclone
   - caption: Specific Use Cases
     chapters:
