@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Wildfires &#8212; Global Infrastructure Risk Assesments</title>
+    <title>Wildfire exposure assessment &#8212; Global Infrastructure Risk Assesments</title>
   
   
   
@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="flood.html">Flood risk assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="earthquake.html">Earthquake Risk Assessment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wildfires</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wildfire exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heatwaves.html">Extreme Heat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
 </ul>
@@ -417,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Wildfires</h1>
+    <h1>Wildfire exposure assessment</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -447,8 +447,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="wildfires">
-<h1>Wildfires<a class="headerlink" href="#wildfires" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="wildfire-exposure-assessment">
+<h1>Wildfire exposure assessment<a class="headerlink" href="#wildfire-exposure-assessment" title="Permalink to this heading">#</a></h1>
 <p>In this notebook, we will perform a <strong>wildfire exposure assessment</strong> for transportation infrastructure, specifically focusing on roads. The assessment is based on combining hazard data (e.g., historical footprints of wildfires) with spatial information on road infrastructure to understand how wildfires could impact road infrastructure.</p>
 <p>We will follow the steps outlined below to conduct the assessment:</p>
 <ol class="arabic simple">
@@ -501,6 +501,7 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Patch</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
@@ -860,6 +861,7 @@ Wall time: 9.58 s
 <img alt="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" src="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" />
 </div>
 </div>
+<p>Now that we have an idea on the years that show the highest level of exposure, let’s spatially plot the four years that show the largest exposure values. This will help us to understand where in the country roads can be affected.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure the GeoDataFrame &#39;all_exposed_features&#39; is in EPSG:3857 (required for Contextily)</span>
@@ -918,6 +920,59 @@ Wall time: 9.58 s
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" src="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" />
+</div>
+</div>
+<p>As a final figure, we may want to plot how often certain roads are exposed to wildfires across the time series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the list of year columns (assumes columns 2002 through 2023 exist)</span>
+<span class="n">year_columns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="mi">2024</span><span class="p">)]</span>
+
+<span class="c1"># Count, for each road, in how many years exposure occurred (non-null values)</span>
+<span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;exposure_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="p">[</span><span class="n">year_columns</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Define bins and corresponding labels for categorization.</span>
+<span class="c1"># These bins categorize roads as:</span>
+<span class="c1"># &#39;0&#39; (no exposure), &#39;1-5&#39;, &#39;6-10&#39;, &#39;11-15&#39;, and &#39;16+&#39; (16 or more years of exposure)</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1-5&#39;</span><span class="p">,</span> <span class="s1">&#39;6-10&#39;</span><span class="p">,</span> <span class="s1">&#39;11-15&#39;</span><span class="p">,</span> <span class="s1">&#39;16+&#39;</span><span class="p">]</span>
+<span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;exposure_cat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;exposure_count&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># Define the color mapping for the five categories using your provided color scheme.</span>
+<span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;#fee5d9&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;1-5&#39;</span><span class="p">:</span> <span class="s1">&#39;#fcae91&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;6-10&#39;</span><span class="p">:</span> <span class="s1">&#39;#fb6a4a&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;11-15&#39;</span><span class="p">:</span> <span class="s1">&#39;#de2d26&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;16+&#39;</span><span class="p">:</span> <span class="s1">&#39;#a50f15&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Map the categories to colors</span>
+<span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;plot_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;exposure_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">color_map</span><span class="p">)</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Plot roads using the assigned color for each exposure category</span>
+<span class="n">all_exposed_features</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;plot_color&#39;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="c1"># Add the CartoDB Positron basemap with partial transparency</span>
+<span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Frequency of Wildfire Exposure Across the Time Series&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+<span class="c1"># Create a custom legend using matplotlib.patches.Patch</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">Patch</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">color_map</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_handles</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Years with Exposure&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ca52c6470e326e5c1d15e3ec67d8aed627654f46ea8631e0969a2c38e09803ca.png" src="../_images/ca52c6470e326e5c1d15e3ec67d8aed627654f46ea8631e0969a2c38e09803ca.png" />
 </div>
 </div>
 </section>
