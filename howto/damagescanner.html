@@ -483,7 +483,12 @@ document.write(`
 <p>To use <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code>, the four required inputs <strong>must be specified first</strong> before running any of its core functions.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Each unique infrastructure type should be represented by a single geometry type (e.g., Polygon or Point). The maximum damage values you specify per infrastructure type are represented by, for example, damage per square meter or per asset (but never both). At least three routes are possible: <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html#step-1-checking-geometry-types">(i) convert all geometries into the same geometry</a>, (ii) split up the damage assessment by geometry type for that specific infrastructure object, or (iii) give the the infrastructure different and unique object type names for each geometry type (e.g., substation_point, substation_polygon), and ensure these are included in the maximum damage and vulnerability curves accordingly.</p>
+<p>Each unique infrastructure type should be represented by a single geometry type (e.g., Polygon or Point). The maximum damage values you specify per infrastructure type are represented by, for example, damage per square meter or per asset (but never both). At least three routes are possible:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html#step-1-checking-geometry-types">Convert all geometries into the same geometry</a>,</p></li>
+<li><p>Split up the damage assessment by geometry type for that specific infrastructure object</p></li>
+<li><p>Give the the infrastructure different and unique object type names for each geometry type (e.g., substation_point, substation_polygon), and ensure these are included in the maximum damage and vulnerability curves accordingly.</p></li>
+</ol>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
