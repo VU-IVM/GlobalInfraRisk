@@ -44,4 +44,4 @@ parts:
     - file: use_cases/all_ci_vulnerability
     - file: use_cases/all_ci_risk
     - file: use_cases/multi-country
-    - file: use_cases/multi-hazard
+    - file: use_cases/multi-hazard-risk
