@@ -1,0 +1,1347 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Multi-hazard risk assessment &#8212; Global Infrastructure Risk Assesments</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'use_cases/multi-hazard-risk';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/IVM_logo_kort.jpg" class="logo__image only-light" alt="Global Infrastructure Risk Assesments - Home"/>
+    <script>document.write(`<img src="../_static/IVM_logo_kort.jpg" class="logo__image only-dark" alt="Global Infrastructure Risk Assesments - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro/ci_explained.html">Critical Infrastructure Explained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/hazard.html">Hazard &amp; Hazard Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/exposure.html">Exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/vulnerability.html">Vulnerability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/damage_risk.html">Damage &amp; Risk</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">How it works</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../howto/damagescanner.html">Introducing <code class="docutils literal notranslate"><span class="pre">DamageScanner()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/run_locally.html">Run Locally</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_osm.html">Using OpenStreetMap (OSM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/using_tailor_data.html">Using Local Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/maximum_damages.html">Maximum Damages Explained</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/data_preparation.html">Specific Data Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/example_overview.html">Overview of Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Infrastructure System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ci/transport.html">Transportation Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/power.html">Power Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/telecom.html">Telecommunication Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/healthcare.html">Healthcare Infrastructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ci/education.html">Education Infrastructure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Flood risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/wildfire.html">Wildfire exposure assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/heatwaves.html">Extreme Heat exposure assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Specific Use Cases</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="all_ci_exposure.html">Country-level exposure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_ci_vulnerability.html">Country-level vulnerability assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_ci_risk.html">Country-level risk assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-country.html">Multi-country Analysis for Transportation Infrastructure</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/VU-IVM/GlobalInfraRisk/blob/main/use_cases/multi-hazard-risk.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/VU-IVM/GlobalInfraRisk/issues/new?title=Issue%20on%20page%20%2Fuse_cases/multi-hazard-risk.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/use_cases/multi-hazard-risk.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Multi-hazard risk assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-hazards-of-interest">Specify the hazards of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-results">6. Visualising the results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multi-hazard-risk-assessment">
+<h1>Multi-hazard risk assessment<a class="headerlink" href="#multi-hazard-risk-assessment" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we will perform a <strong>multi-hazard risk assessmente</strong> for education infrastructure data within a country. The assessment is based on combining hazard data (e.g., flood depths) with OpenStreetMap feature data.</p>
+<p>We will follow the steps outlined below to conduct the assessment:</p>
+<ol class="arabic simple">
+<li><p><strong>Loading the necessary packages:</strong><br />
+We will import the Python libraries required for data handling, analysis, and visualization.</p></li>
+<li><p><strong>Loading the data:</strong><br />
+The infrastructure data (e.g., hospitals) and hazard data (e.g., flood depths) will be loaded into the notebook.</p></li>
+<li><p><strong>Preparing the data:</strong><br />
+The infrastructure and hazard data will be processed and data gaps can be filled, if required.</p></li>
+<li><p><strong>Performing the risk assessment:</strong><br />
+We will overlay the hazard data with the feature information.</p></li>
+<li><p><strong>Visualizing the results:</strong><br />
+Finally, we will visualize the estimated exposure using graphs and maps.</p></li>
+</ol>
+<section id="loading-the-necessary-packages">
+<h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
+<p>To perform the assessment, we are going to make use of several <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">python packages</a>.</p>
+<p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b13</span>
+<span class="c1">#!pip install contextily</span>
+<span class="c1">#!pip install exactextract</span>
+<span class="c1">#!pip install lonboard</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this step, we will import all the required Python libraries for data manipulation, spatial analysis, and visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="specify-the-country-of-interest">
+<h3>Specify the country of interest<a class="headerlink" href="#specify-the-country-of-interest" title="Permalink to this heading">#</a></h3>
+<p>Before we continue, we should specify the country for which we want to assess the damage. We use the ISO3 code for the country to download the OpenStreetMap data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_full_name</span> <span class="o">=</span> <span class="s1">&#39;Haiti&#39;</span>
+<span class="n">country_iso3</span> <span class="o">=</span> <span class="s1">&#39;HTI&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="specify-the-hazards-of-interest">
+<h3>Specify the hazards of interest<a class="headerlink" href="#specify-the-hazards-of-interest" title="Permalink to this heading">#</a></h3>
+<p>To help us performing a consistent analysis on which hazards we include, its most convenient to provide a list of the hazards at the start of our analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazards</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">,</span><span class="s1">&#39;Flood&#39;</span><span class="p">,</span><span class="s1">&#39;Tropical_Cyclone&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="loading-the-data">
+<h2>2. Loading the Data<a class="headerlink" href="#loading-the-data" title="Permalink to this heading">#</a></h2>
+<p>In this step, we will prepare and load two key datasets:</p>
+<ol class="arabic simple">
+<li><p><strong>Infrastructure data:</strong><br />
+This dataset contains information on the location and type of infrastructure (e.g., roads). Each asset may have attributes such as type, length, and replacement cost.</p></li>
+<li><p><strong>Hazard data:</strong><br />
+This dataset includes information on the hazard affecting the infrastructure (e.g., flood depth at various locations).</p></li>
+</ol>
+<section id="infrastructure-data">
+<h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
+<p>We will perform this example analysis for Jamaica. To start the analysis, we first download the OpenStreetMap data from GeoFabrik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">infrastructure_path</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we load the data and read only the education data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="s1">&#39;education&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 36.4 s
+Wall time: 45.6 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;school&#39;, &#39;library&#39;, &#39;college&#39;, &#39;kindergarten&#39;, &#39;university&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vulnerability-data">
+<h3>Vulnerability data<a class="headerlink" href="#vulnerability-data" title="Permalink to this heading">#</a></h3>
+<p>We will collect all the vulnerability curves for each of the asset types and for each of the hazards. Important to note is that national or local-scale analysis requires a thorough check which curves can and should be used!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vulnerability_path</span> <span class="o">=</span> <span class="s2">&quot;https://zenodo.org/records/13889558/files/Table_D2_Hazard_Fragility_and_Vulnerability_Curves_V1.1.0.xlsx?download=1&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_vulnerability_dataframes</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="n">hazards</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Earthquake&#39;</span><span class="p">:</span>
+        <span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;E_Vuln_PGA &#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Flood&#39;</span><span class="p">:</span>
+        <span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;F_Vuln_Depth&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Tropical_Cyclone&#39;</span><span class="p">:</span>
+        <span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">vulnerability_path</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;W_Vuln_V10m&#39;</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID number</th>
+      <th>E1.1</th>
+      <th>E1.1a</th>
+      <th>E1.1b</th>
+      <th>E1.2</th>
+      <th>E1.2a</th>
+      <th>E1.2b</th>
+      <th>E1.3</th>
+      <th>E1.3a</th>
+      <th>E1.3b</th>
+      <th>...</th>
+      <th>E20.2b</th>
+      <th>E20.3</th>
+      <th>E20.3a</th>
+      <th>E20.3b</th>
+      <th>E20.4</th>
+      <th>E20.4a</th>
+      <th>E20.4b</th>
+      <th>E21.11</th>
+      <th>E21.11a</th>
+      <th>E21.11b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Infrastructure type</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>Power plant</td>
+      <td>...</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Others</td>
+      <td>Educational facilities</td>
+      <td>Educational facilities</td>
+      <td>Educational facilities</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Infrastructure type details</td>
+      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with unanchored co...</td>
+      <td>Small generation facilities with unanchored co...</td>
+      <td>Small generation facilities with unanchored co...</td>
+      <td>Medium/large power with anchored components</td>
+      <td>Medium/large power with anchored components</td>
+      <td>Medium/large power with anchored components</td>
+      <td>...</td>
+      <td>small lift - unanchored</td>
+      <td>medium/large lift - anchored</td>
+      <td>medium/large lift - anchored</td>
+      <td>medium/large lift - anchored</td>
+      <td>medium/large unanchored</td>
+      <td>medium/large unanchored</td>
+      <td>medium/large unanchored</td>
+      <td>Reinforced concrete four-story building</td>
+      <td>Reinforced concrete four-story building</td>
+      <td>Reinforced concrete four-story building</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Peak Ground Acceleration (g)</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>...</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+      <td>Damage factor</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>3.8</td>
+      <td>0.999778</td>
+      <td>0.799687</td>
+      <td>0.999839</td>
+      <td>0.99991</td>
+      <td>0.799872</td>
+      <td>0.999935</td>
+      <td>0.998556</td>
+      <td>0.79798</td>
+      <td>0.998948</td>
+      <td>...</td>
+      <td>0.974057</td>
+      <td>0.972474</td>
+      <td>0.74917</td>
+      <td>0.972626</td>
+      <td>0.972522</td>
+      <td>0.74919</td>
+      <td>0.972663</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>3.85</td>
+      <td>0.999797</td>
+      <td>0.799715</td>
+      <td>0.999853</td>
+      <td>0.999917</td>
+      <td>0.799883</td>
+      <td>0.99994</td>
+      <td>0.998654</td>
+      <td>0.798115</td>
+      <td>0.99902</td>
+      <td>...</td>
+      <td>0.974798</td>
+      <td>0.973297</td>
+      <td>0.750582</td>
+      <td>0.973439</td>
+      <td>0.973341</td>
+      <td>0.750601</td>
+      <td>0.973474</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>3.9</td>
+      <td>0.999815</td>
+      <td>0.799739</td>
+      <td>0.999866</td>
+      <td>0.999924</td>
+      <td>0.799893</td>
+      <td>0.999945</td>
+      <td>0.998744</td>
+      <td>0.798241</td>
+      <td>0.999086</td>
+      <td>...</td>
+      <td>0.975512</td>
+      <td>0.974088</td>
+      <td>0.751947</td>
+      <td>0.974223</td>
+      <td>0.974129</td>
+      <td>0.751964</td>
+      <td>0.974255</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>3.95</td>
+      <td>0.999831</td>
+      <td>0.799761</td>
+      <td>0.999877</td>
+      <td>0.999931</td>
+      <td>0.799902</td>
+      <td>0.99995</td>
+      <td>0.998828</td>
+      <td>0.798358</td>
+      <td>0.999147</td>
+      <td>...</td>
+      <td>0.976202</td>
+      <td>0.97485</td>
+      <td>0.753266</td>
+      <td>0.974977</td>
+      <td>0.974888</td>
+      <td>0.753282</td>
+      <td>0.975007</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>4.0</td>
+      <td>0.999845</td>
+      <td>0.799782</td>
+      <td>0.999888</td>
+      <td>0.999936</td>
+      <td>0.79991</td>
+      <td>0.999954</td>
+      <td>0.998906</td>
+      <td>0.798466</td>
+      <td>0.999204</td>
+      <td>...</td>
+      <td>0.976867</td>
+      <td>0.975584</td>
+      <td>0.754542</td>
+      <td>0.975704</td>
+      <td>0.975619</td>
+      <td>0.754557</td>
+      <td>0.975732</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>85 rows × 185 columns</p>
+</div></div></div>
+</div>
+<p>And now select a curve to use for each different subtype we are analysing for each of the hazards</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">selected_curves_dict</span><span class="p">[</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;E21.11&#39;</span><span class="p">,</span><span class="s1">&#39;E21.11&#39;</span><span class="p">,</span><span class="s1">&#39;E21.11&#39;</span><span class="p">,</span><span class="s1">&#39;E21.11&#39;</span><span class="p">,</span><span class="s1">&#39;E21.11&#39;</span><span class="p">]))</span>
+<span class="n">selected_curves_dict</span><span class="p">[</span><span class="s1">&#39;Flood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.11&#39;</span><span class="p">,</span><span class="s1">&#39;F21.10&#39;</span><span class="p">,</span><span class="s1">&#39;F21.10&#39;</span><span class="p">,</span><span class="s1">&#39;F21.10&#39;</span><span class="p">,</span><span class="s1">&#39;F21.10&#39;</span><span class="p">]))</span>
+<span class="n">selected_curves_dict</span><span class="p">[</span><span class="s1">&#39;Tropical_Cyclone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;W21.2&#39;</span><span class="p">,</span><span class="s1">&#39;W21.3&#39;</span><span class="p">,</span><span class="s1">&#39;W21.4&#39;</span><span class="p">,</span><span class="s1">&#39;W21.5&#39;</span><span class="p">,</span><span class="s1">&#39;W21.10&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to ensure that we correctly name the index of our <strong>damage_curves</strong> <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, and that we convert the index values to the same unit as the hazard data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_intensity_metric</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">:</span> <span class="s1">&#39;PGA&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;Flood&#39;</span> <span class="p">:</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;Tropical_Cyclone&#39;</span> <span class="p">:</span> <span class="s1">&#39;WindSpeed&#39;</span><span class="p">}</span>
+
+<span class="n">aligning_curve_and_hazard_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">:</span> <span class="mi">980</span><span class="p">,</span>
+                        <span class="s1">&#39;Flood&#39;</span> <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                        <span class="s1">&#39;Tropical_Cyclone&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then we can populate a <code class="docutils literal notranslate"><span class="pre">dict()</span></code> with the <strong>damage curves</strong> for each hazard included in our analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves_all_hazards</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="n">hazards</span><span class="p">:</span>
+    <span class="n">vul_df</span> <span class="o">=</span> <span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">vul_df</span><span class="p">[[</span><span class="s1">&#39;ID number&#39;</span><span class="p">]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">selected_curves_dict</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">125</span><span class="p">,:]</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ID number&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">hazard_intensity_metric</span><span class="p">[</span><span class="n">hazard</span><span class="p">])</span>  
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sub_types</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+    <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="n">aligning_curve_and_hazard_data</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span>
+
+    <span class="n">damage_curves_all_hazards</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">damage_curves</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-damages">
+<h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
+<p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. Here we provide a baseline set of values, but these should be updated through national consultations.</p>
+<p>Locations of education facilities are (somewhat randomly) geotagged as either points or polygons. This matters quite a lot for the maximum damages. For polygons, we would use damage per square meter, whereas for points, we would estimate the damage to the entire asset at once. Here we take the approach of converting the points to polygons, and there define our maximum damages in dollar per square meter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;community_centre&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;school&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;kindergarten&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;university&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;college&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+               <span class="s1">&#39;library&#39;</span> <span class="p">:</span> <span class="mi">1000</span>
+              <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ancilliary-data-for-processing">
+<h3>Ancilliary data for processing<a class="headerlink" href="#ancilliary-data-for-processing" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
+<span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_1_states_provinces.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="preparing-the-data">
+<h2>3. Preparing the Data<a class="headerlink" href="#preparing-the-data" title="Permalink to this heading">#</a></h2>
+<p>Clip the hazard data to the country of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_bounds</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">country_geom</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_box</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="hazard-data">
+<h3>Hazard Data<a class="headerlink" href="#hazard-data" title="Permalink to this heading">#</a></h3>
+<p>For this example, we make use of the flood, earthquake and tropical cyclone data provided by <a class="reference external" href="https://giri.unepgrid.ch/map?list=explore">CDRI</a>.</p>
+<p>For our risk assessment, we will need to define a set of return periods for each of the hazards, and create a hazard_dict for each of the hazards well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_return_periods</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span><span class="mi">475</span><span class="p">,</span><span class="mi">975</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2475</span><span class="p">],</span>
+                        <span class="s1">&#39;Flood&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span>
+                        <span class="s1">&#39;Tropical_Cyclone&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">250</span><span class="p">]</span>    
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_dict_per_hazard</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="n">hazards</span><span class="p">:</span>
+    <span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">return_period</span> <span class="ow">in</span> <span class="n">hazard_return_periods</span><span class="p">[</span><span class="n">hazard</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Earthquake&#39;</span><span class="p">:</span>
+            <span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/PGA_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s2">y.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Flood&#39;</span><span class="p">:</span>
+            <span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/global_pc_h</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s2">glob.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hazard</span> <span class="o">==</span> <span class="s1">&#39;Tropical_Cyclone&#39;</span><span class="p">:</span>
+            <span class="n">hazard_map</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://hazards-data.unepgrid.ch/Wind_T</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s2">.tif&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;rasterio&quot;</span><span class="p">)</span>
+    
+        <span class="n">hazard_dict</span><span class="p">[</span><span class="n">return_period</span><span class="p">]</span> <span class="o">=</span> <span class="n">hazard_map</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip_box</span><span class="p">(</span><span class="n">minx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                         <span class="n">miny</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                         <span class="n">maxx</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                         <span class="n">maxy</span><span class="o">=</span><span class="n">country_bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="p">)</span>
+    <span class="n">hazard_dict_per_hazard</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">hazard_dict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set the return periods and download the hazard data</p>
+</section>
+</section>
+<section id="performing-the-risk-assessment">
+<h2>4. Performing the Risk Assessment<a class="headerlink" href="#performing-the-risk-assessment" title="Permalink to this heading">#</a></h2>
+<p>We will use the DamageScanner approach. This is a fully optimised exposure, vulnerability damage and risk calculation method, that can capture a wide range of inputs to perform such an assessment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_asset_risk_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="n">hazards</span><span class="p">:</span>
+  <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_dict_per_hazard</span><span class="p">[</span><span class="n">hazard</span><span class="p">],</span> 
+                                                   <span class="n">features</span><span class="p">,</span> 
+                                                   <span class="n">curves</span><span class="o">=</span><span class="n">damage_curves_all_hazards</span><span class="p">[</span><span class="n">hazard</span><span class="p">],</span> 
+                                                   <span class="n">maxdam</span><span class="o">=</span><span class="n">maxdam</span>
+                                                       <span class="p">)</span><span class="o">.</span><span class="n">risk</span><span class="p">(</span><span class="n">hazard_dict_per_hazard</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 5/5 [00:33&lt;00:00,  6.68s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:56&lt;00:00,  7.03s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:30&lt;00:00,  7.73s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combine_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">hazard</span> <span class="ow">in</span> <span class="n">hazards</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">save_asset_risk_results</span><span class="p">[</span><span class="n">hazard</span><span class="p">]</span>
+    <span class="n">combine_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;risk&#39;</span><span class="p">:</span> <span class="n">hazard</span><span class="p">})[</span><span class="n">hazard</span><span class="p">]))</span>
+
+<span class="n">risk_outcomes</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">combine_results</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-the-results">
+<h2>5. Save the Results<a class="headerlink" href="#save-the-results" title="Permalink to this heading">#</a></h2>
+<p>For further analysis, we can save the results in their full detail, or save summary estimates per subnational unit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">risk_outcomes</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Healthcare_Multi_Risk_</span><span class="si">{</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hazards</span><span class="p">)</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_country</span> <span class="o">=</span> <span class="n">admin1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">admin1</span><span class="o">.</span><span class="n">sov_a3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">risk_outcomes</span> <span class="o">=</span> <span class="n">risk_outcomes</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">admin1_country</span><span class="p">[[</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">risk_outcomes</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">hazards</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                                     <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">hazards</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Healthcare_Multi_Risk_</span><span class="si">{</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hazards</span><span class="p">)</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising-the-results">
+<h2>6. Visualising the results<a class="headerlink" href="#visualising-the-results" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Filter relevant columns</span>
+<span class="n">hazard_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">,</span> <span class="s1">&#39;Flood&#39;</span><span class="p">,</span> <span class="s1">&#39;Tropical_Cyclone&#39;</span><span class="p">]</span>
+
+<span class="c1"># Convert to long format for Seaborn</span>
+<span class="n">risk_long</span> <span class="o">=</span> <span class="n">risk_outcomes</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">hazard_columns</span><span class="p">,</span> 
+                               <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Risk_Level&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove NaN values</span>
+<span class="n">risk_long</span> <span class="o">=</span> <span class="n">risk_long</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Separate schools from other object types</span>
+<span class="n">schools</span> <span class="o">=</span> <span class="n">risk_long</span><span class="p">[</span><span class="n">risk_long</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;school&#39;</span><span class="p">]</span>
+<span class="n">others</span> <span class="o">=</span> <span class="n">risk_long</span><span class="p">[</span><span class="n">risk_long</span><span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;school&#39;</span><span class="p">]</span>
+
+<span class="c1"># Set figure size</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Create a boxplot for schools</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">schools</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Risk_Level&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Hazard Risks for Schools&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Object Type&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Expected Annual Damages&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a boxplot for other object types</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">others</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Risk_Level&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">showfliers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Hazard Risks for Other Object Types&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Object Type&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hazard&#39;</span><span class="p">)</span>
+
+<span class="c1"># Improve readability</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Use log scale for better visualization if values vary widely</span>
+
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/62f5fef2c1f7809d02580e0a4a5313496d7630e0375974f0ea8076f92032408d.png" src="../_images/62f5fef2c1f7809d02580e0a4a5313496d7630e0375974f0ea8076f92032408d.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./use_cases"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-necessary-packages">1. Loading the Necessary Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-country-of-interest">Specify the country of interest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-hazards-of-interest">Specify the hazards of interest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-results">6. Visualising the results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Institute for Environmental Studies, Vrije Universiteit Amsterdam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
