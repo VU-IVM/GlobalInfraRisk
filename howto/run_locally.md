@@ -58,7 +58,7 @@ dependencies:
   - rioxarray
   - seaborn
   - pip:
-      - damagescanner==0.9b12
+      - damagescanner==0.9b13
       - exactextract
       - contextily
       - openpyxl
