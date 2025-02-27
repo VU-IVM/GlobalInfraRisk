@@ -79,6 +79,46 @@ Earthquake hazard data includes seismic hazard maps that estimate ground shaking
 - **[GAR 2017 Atlas Risk Data](https://risk.preventionweb.net/)**  
   The Global Assessment Report (GAR) provides earthquake hazard layers at the global level.
 
+### **Global Landslide Hazard Data**
+For Landslides, there is limited information available and are generally more difficult to be used directly in any damage or risk assessment. 
+
+- **[CDRI - Landslide Hazard Data](https://giri.unepgrid.ch/map?list=explore)**  
+  The Climate and Disaster Resilience Initiative (CDRI) provides global landslide hazard maps for both rainfall-triggered and earthquake-triggered landslides. Rainfall-induced landslide models are available for both present and future climate conditions.  
+  📄 [Background Report](https://giri.unepgrid.ch/sites/default/files/2023-06/20230615-NGI_manuscript_GIRI_landlside_hazard_model.pdf)
+
+- **[World Bank Global Landslide Hazard Maps](https://jkan.riskdatalibrary.org/datasets/global-landslide-hazard-maps/)**  
+  Provides median and mean hazard maps for landslides triggered by both heavy rainfall and earthquakes.  
+  📥 [Median Rainfall Landslide Hazard (1980-2018)](https://datacatalogfiles.worldbank.org/ddh-published/0037584/DR0045414/ls_rf_median_1980-2018.zip)  
+  📥 [Mean Rainfall Landslide Hazard (1980-2018)](https://datacatalogfiles.worldbank.org/ddh-published/0037584/DR0045413/ls_rf_mean_1980-2018.zip)  
+  📥 [Median Earthquake-Triggered Landslide Hazard](https://datacatalogfiles.worldbank.org/ddh-published/0037584/DR0045412/ls_eq.zip)
+
+### **Global Wildfire Hazard Data**
+For wildfires, there are no globally available hazard maps with specific return periods. Most wildfire hazard modeling is done on a case-by-case basis. The dataset used in the examples is:
+
+- **[GlobFire Fire Perimeters (2002 - 2023)](https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/GLOBFIRE_burned_area_full_dataset_2002_2023.zip)**  
+  A global dataset of individual fire perimeters from 2002-2023, derived from the MCD64A1 burned area product. The dataset includes unique fire identification codes, initial and final dates, fire geometry, and final area in hectares.  
+  📄 [Data Description](https://doi.org/10.1038/s41597-019-0312-2)
+
+### **Global Temperature Data**
+
+Temperature data is crucial for understanding climate change impacts on infrastructure systems. Various global sources provide temperature datasets, with the **latest climate change projections** developed under the [CMIP6](https://wcrp-cmip.org/cmip6/) initiative. This data has been downscaled through multiple initiatives to improve regional applicability. 
+
+```{note}
+A key challenge with temperature datasets is the **large volume of data** generated, particularly for high-resolution daily records.
+```
+
+#### **High-Resolution Daily Global Climate Dataset**
+- **[CEDA High-Resolution Climate Data](https://catalogue.ceda.ac.uk/uuid/c107618f1db34801bb88a1e927b82317/)**  
+  Provides **daily global climate data** at a **0.25-degree horizontal resolution** for both **historical (1981-2014)** and **future (2015-2100)** climate projections. The dataset includes climate simulations under three Shared Socioeconomic Pathways (**SSP2-4.5, SSP5-3.4OS, and SSP5-8.5**).  
+  📄 [Dataset Description](https://www.nature.com/articles/s41597-023-02528-x)
+
+#### **CHC-CMIP6: Climate Projection Data with a Focus on Heat-Related Extremes**
+- **[CHC-CMIP6 Climate Data](https://www.chc.ucsb.edu/data/chc-cmip6)**  
+  A **high-resolution global climate dataset** specifically designed for analyzing **heat-related hydroclimatic extremes**. This dataset includes **daily gridded data (0.05° resolution)** for both **observational (1983-2016)** and **projection periods (2030 and 2050)**.  
+  📄 [Dataset Details](https://www.nature.com/articles/s41597-024-03074-w)  
+  📥 [Download Data](https://www.chc.ucsb.edu/data/chc-cmip6)
+
+
 ## Example: Reading Flood Hazard Data in Python
 ```python
 import xarray as xr

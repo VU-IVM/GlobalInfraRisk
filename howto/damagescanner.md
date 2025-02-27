@@ -34,6 +34,10 @@ Vulnerability curves describe the relationship between hazard intensity and expe
 - **CSV file (`.csv`)**
 - **Path object pointing to a CSV file** If provided as a string, it is converted into a `Path` object.
 
+```{important} 
+It is important to emphasize that the first column (or index in the case of a `pd.DataFrame()`) of the vulnerability curve should be **exactly** the same unit as the hazard data (e.g., both meters, both m/s). 
+```
+
 ### **4. Maximum Damage Values**
 Maximum damage (`maxdam`) represents the total potential loss for each asset type. It can be provided as:
 - **Dictionary** (`dict()`)
@@ -104,7 +108,7 @@ print(damage_results.head())
 - Outputs estimated direct damages per asset.
 
 ### **3. Risk Assessment (`risk()`)**
-For long-term risk evaluation across multiple hazard return periods:
+For long-term risk evaluation across multiple hazard return periods. To be able to run the risk assessment, we have to create a dictionary, with the path specification to each of the hazard file. We have chosen to take this dictionary approach, to ensure we accurately set the return period that corresponds to each hazard file. A more elaborate example can also be found [here](https://vu-ivm.github.io/GlobalInfraRisk/ci/transport.html#performing-the-risk-assessment)
 
 ```python
 hazard_dict = {
