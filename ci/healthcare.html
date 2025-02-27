@@ -556,10 +556,30 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 49.6 s
+Wall time: 1min 3s
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;pharmacy&#39;, &#39;clinic&#39;, &#39;doctors&#39;, &#39;dentist&#39;, &#39;laboratory&#39;,
+       &#39;hospital&#39;, &#39;alternative&#39;, &#39;physiotherapist&#39;, &#39;rehabilitation&#39;],
+      dtype=object)
 </pre></div>
 </div>
 </div>
@@ -571,6 +591,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "41c9989e73c2478a8f4d58cdf71fce45", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -590,6 +612,399 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 747GB
+Dimensions:      (band: 1, x: 432000, y: 216000)
+Coordinates:
+  * band         (band) int32 4B 1
+  * x            (x) float64 3MB -180.0 -180.0 -180.0 ... 180.0 180.0 180.0
+  * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
+    spatial_ref  int32 4B ...
+Data variables:
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-24ca8448-4eee-49fb-ae46-77bbb91cc5c8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-24ca8448-4eee-49fb-ae46-77bbb91cc5c8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-afc620fd-497b-457d-89e2-08ce1de98ce1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-afc620fd-497b-457d-89e2-08ce1de98ce1' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-788b68b3-139e-4962-a17f-712f3a9ba42e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-788b68b3-139e-4962-a17f-712f3a9ba42e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-af867eb9-1e04-4aec-a631-6345c0e42125' class='xr-var-data-in' type='checkbox'><label for='data-af867eb9-1e04-4aec-a631-6345c0e42125' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-a01a7d0e-8e2c-42fd-896e-1911875d7c81' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a01a7d0e-8e2c-42fd-896e-1911875d7c81' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-68bdf692-7d34-427c-857f-2f1749c15b7f' class='xr-var-data-in' type='checkbox'><label for='data-68bdf692-7d34-427c-857f-2f1749c15b7f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-f0e727bf-93b3-4f2c-805d-7ab05088d241' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f0e727bf-93b3-4f2c-805d-7ab05088d241' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-60615eeb-9ce5-49de-b44c-9762cb39036d' class='xr-var-data-in' type='checkbox'><label for='data-60615eeb-9ce5-49de-b44c-9762cb39036d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-41079864-3495-410f-b747-07c54983c17f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-41079864-3495-410f-b747-07c54983c17f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2fb56069-8a0c-4928-b509-26a80d60cb2f' class='xr-var-data-in' type='checkbox'><label for='data-2fb56069-8a0c-4928-b509-26a80d60cb2f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-884f9cd3-fc3d-40fa-a0de-b0ca9a9350f0' class='xr-section-summary-in' type='checkbox'  checked><label for='section-884f9cd3-fc3d-40fa-a0de-b0ca9a9350f0' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-47cb3e73-7a0f-4449-9da6-59f05b49bbdf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-47cb3e73-7a0f-4449-9da6-59f05b49bbdf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-abf742b2-18df-4a54-bd21-c97446c23508' class='xr-var-data-in' type='checkbox'><label for='data-abf742b2-18df-4a54-bd21-c97446c23508' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9a0e026c-3dc5-4a25-9277-e1873061f4ec' class='xr-section-summary-in' type='checkbox'  ><label for='section-9a0e026c-3dc5-4a25-9277-e1873061f4ec' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7e3511d4-facd-44a2-b3f3-7681f413e5d5' class='xr-index-data-in' type='checkbox'/><label for='index-7e3511d4-facd-44a2-b3f3-7681f413e5d5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-0a5ce585-eabe-4957-a130-8f589e4b000c' class='xr-index-data-in' type='checkbox'/><label for='index-0a5ce585-eabe-4957-a130-8f589e4b000c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+       -179.99708333333334,          -179.99625, -179.99541666666667,
+       -179.99458333333334,          -179.99375, -179.99291666666667,
+       -179.99208333333334,
+       ...
+        179.99208333333334,  179.99291666666667,           179.99375,
+        179.99458333333334,  179.99541666666667,           179.99625,
+        179.99708333333334,  179.99791666666667,           179.99875,
+        179.99958333333333],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-8953ebc9-25fe-4834-bfd0-793280767de9' class='xr-index-data-in' type='checkbox'/><label for='index-8953ebc9-25fe-4834-bfd0-793280767de9' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+        89.99708333333334,           89.99625,  89.99541666666667,
+        89.99458333333334,           89.99375,  89.99291666666667,
+        89.99208333333334,
+       ...
+       -89.99208333333334, -89.99291666666667,          -89.99375,
+       -89.99458333333334, -89.99541666666667,          -89.99625,
+       -89.99708333333334, -89.99791666666667,          -89.99875,
+       -89.99958333333333],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9910a84c-1382-445c-a508-037ea259c15b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9910a84c-1382-445c-a508-037ea259c15b' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -604,7 +1019,10 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
                <span class="s1">&#39;doctors&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
                <span class="s1">&#39;pharmacy&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
                <span class="s1">&#39;hospital&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mi">1000</span> <span class="p">}</span>
+               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+              <span class="s1">&#39;physiotherapist&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                <span class="s1">&#39;rehabilitation&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -614,6 +1032,17 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -633,11 +1062,553 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 <p>And let’s have a look at all the available options</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">display</span><span class="p">(</span><span class="n">vul_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ID number</th>
+      <td>Infrastructure description</td>
+      <td>Additional characteristics</td>
+    </tr>
+    <tr>
+      <th>F1.1</th>
+      <td>plant</td>
+      <td>Small power plants, capacity &lt;100 MW</td>
+    </tr>
+    <tr>
+      <th>F1.2</th>
+      <td>plant</td>
+      <td>Medium power plants, capacity 100-500 MW</td>
+    </tr>
+    <tr>
+      <th>F1.3</th>
+      <td>plant</td>
+      <td>Large power plants, &gt;500 MW</td>
+    </tr>
+    <tr>
+      <th>F1.4</th>
+      <td>plant</td>
+      <td>thermal plant</td>
+    </tr>
+    <tr>
+      <th>F1.5</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F1.6</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F1.7</th>
+      <td>plant</td>
+      <td>wind turbine</td>
+    </tr>
+    <tr>
+      <th>F2.1</th>
+      <td>substation</td>
+      <td>Low Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F2.2</th>
+      <td>substation</td>
+      <td>Medium Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F2.3</th>
+      <td>substation</td>
+      <td>High Voltage Substation</td>
+    </tr>
+    <tr>
+      <th>F5.1</th>
+      <td>cable</td>
+      <td>Distribution circuits buried crossings</td>
+    </tr>
+    <tr>
+      <th>F6.1</th>
+      <td>Power (minor) line</td>
+      <td>Distribution circuits (non-crossings)</td>
+    </tr>
+    <tr>
+      <th>F6.2</th>
+      <td>cable</td>
+      <td>Distribution circuits elevated crossings</td>
+    </tr>
+    <tr>
+      <th>F6.3</th>
+      <td>Energy system</td>
+      <td>Generalized curve for energy assets in diked areas</td>
+    </tr>
+    <tr>
+      <th>F7.1</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2a (lower boundary)</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.2b (upper boundary)</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.3</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.4</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - sophisticated accessories - low flow</td>
+    </tr>
+    <tr>
+      <th>F7.5</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - sophisticated accessories - high flow</td>
+    </tr>
+    <tr>
+      <th>F7.6</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - low flow</td>
+    </tr>
+    <tr>
+      <th>F7.7</th>
+      <td>Roads</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - high flow</td>
+    </tr>
+    <tr>
+      <th>F7.8</th>
+      <td>Roads</td>
+      <td>Other roads - low flow</td>
+    </tr>
+    <tr>
+      <th>F7.9</th>
+      <td>Roads</td>
+      <td>Other roads - high flow</td>
+    </tr>
+    <tr>
+      <th>F7.10</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.11</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.12</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F7.13</th>
+      <td>Roads</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.1</th>
+      <td>Railways</td>
+      <td>Double-tracked railway</td>
+    </tr>
+    <tr>
+      <th>F8.2</th>
+      <td>Railways</td>
+      <td>Double-tracked railway</td>
+    </tr>
+    <tr>
+      <th>F8.3</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.4</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.5</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6a (lower boundary)</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.6b (upper boundary)</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.7</th>
+      <td>Railways</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F8.8</th>
+      <td>Railways</td>
+      <td>Railway station</td>
+    </tr>
+    <tr>
+      <th>F9.1</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F9.2</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F9.3</th>
+      <td>Airports</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F10.1</th>
+      <td>Telecommunication</td>
+      <td>Communication tower</td>
+    </tr>
+    <tr>
+      <th>F12.1</th>
+      <td>Telecommunication</td>
+      <td>Communication system</td>
+    </tr>
+    <tr>
+      <th>F13.1</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade concrete</td>
+    </tr>
+    <tr>
+      <th>F13.2</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade steel</td>
+    </tr>
+    <tr>
+      <th>F13.3</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks at grade wood</td>
+    </tr>
+    <tr>
+      <th>F13.4</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks elevated</td>
+    </tr>
+    <tr>
+      <th>F13.5</th>
+      <td>water storage tanks</td>
+      <td>Water storage tanks below grade</td>
+    </tr>
+    <tr>
+      <th>F14.1</th>
+      <td>Water treatment plants</td>
+      <td>Small water treatment plants open/gravity - average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.2</th>
+      <td>Water treatment plants</td>
+      <td>Medium water treatment plants open/gravity - average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.3</th>
+      <td>Water treatment plants</td>
+      <td>Large water treatment plants open/gravity - average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.4</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants open/gravity - above average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.5</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants open/gravity - below average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.6</th>
+      <td>Water treatment plants</td>
+      <td>Small water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.7</th>
+      <td>Water treatment plants</td>
+      <td>Medium water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.8</th>
+      <td>Water treatment plants</td>
+      <td>Large water treatment plants closed/pressure</td>
+    </tr>
+    <tr>
+      <th>F14.9</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants closed/pressure - above average flood design</td>
+    </tr>
+    <tr>
+      <th>F14.10</th>
+      <td>Water treatment plants</td>
+      <td>small/medium/large water treatment plants closed/pressure - below average flood design</td>
+    </tr>
+    <tr>
+      <th>F15.1</th>
+      <td>Water well</td>
+      <td>Wells</td>
+    </tr>
+    <tr>
+      <th>F16.1</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Exposed transmission pipeline crossing</td>
+    </tr>
+    <tr>
+      <th>F16.2</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Buried transmission pipeline crossing</td>
+    </tr>
+    <tr>
+      <th>F16.3</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Pipelines (non-crossing)</td>
+    </tr>
+    <tr>
+      <th>F17.1</th>
+      <td>Others</td>
+      <td>Pumping plants (small) below grade</td>
+    </tr>
+    <tr>
+      <th>F17.2</th>
+      <td>Others</td>
+      <td>Pumping plants (medium/large) below grade</td>
+    </tr>
+    <tr>
+      <th>F17.3</th>
+      <td>Others</td>
+      <td>Pumping plants (small) above grade</td>
+    </tr>
+    <tr>
+      <th>F17.4</th>
+      <td>Others</td>
+      <td>Pumping plants (medium/large) above grade</td>
+    </tr>
+    <tr>
+      <th>F17.5</th>
+      <td>Others</td>
+      <td>Pumping plants</td>
+    </tr>
+    <tr>
+      <th>F17.6</th>
+      <td>Others</td>
+      <td>Control vaults and stations</td>
+    </tr>
+    <tr>
+      <th>F18.1</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.2</th>
+      <td>Wastewater treatment plant</td>
+      <td>Medium wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.3</th>
+      <td>Wastewater treatment plant</td>
+      <td>Large wastewater treatment plants</td>
+    </tr>
+    <tr>
+      <th>F18.4</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small, medium, large Wastewater treatment plants - above average flood design</td>
+    </tr>
+    <tr>
+      <th>F18.5</th>
+      <td>Wastewater treatment plant</td>
+      <td>Small, medium, large Wastewater treatment plants- below average flood design</td>
+    </tr>
+    <tr>
+      <th>F18.6</th>
+      <td>Wastewater treatment plant</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F19.1</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Exposed collector river crossings</td>
+    </tr>
+    <tr>
+      <th>F19.2</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Buried collector river crossings</td>
+    </tr>
+    <tr>
+      <th>F19.3</th>
+      <td>Transmission and distribution pipelines</td>
+      <td>Sewers &amp; Interceptors: Pipes (non-crossings)</td>
+    </tr>
+    <tr>
+      <th>F20.1</th>
+      <td>Others</td>
+      <td>Control vaults and control stations</td>
+    </tr>
+    <tr>
+      <th>F20.2</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (small), wet well/dry well</td>
+    </tr>
+    <tr>
+      <th>F20.3</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (medium large), wet well/dry well</td>
+    </tr>
+    <tr>
+      <th>F20.4</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (small), submersible</td>
+    </tr>
+    <tr>
+      <th>F20.5</th>
+      <td>Others</td>
+      <td>Lift stations: lift station (medium large), submersible</td>
+    </tr>
+    <tr>
+      <th>F21.1</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.2</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.3</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.3a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.3b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.4</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.4a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.4b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.5</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.5a (lower boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.5b (upper boundary)</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.6</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
+    </tr>
+    <tr>
+      <th>F21.7</th>
+      <td>School buildings</td>
+      <td>Generalized curve for companies (incl. government)</td>
+    </tr>
+    <tr>
+      <th>F21.8</th>
+      <td>Health &amp; education</td>
+      <td>Generalized curve for offices in diked areas</td>
+    </tr>
+    <tr>
+      <th>F21.9</th>
+      <td>Education &amp; Health</td>
+      <td>Generalized function for industry</td>
+    </tr>
+    <tr>
+      <th>F21.10</th>
+      <td>School buildings</td>
+      <td>Generalized curve for buildings</td>
+    </tr>
+    <tr>
+      <th>F21.11</th>
+      <td>School buildings</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F21.12</th>
+      <td>Health buildings</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>F21.13</th>
+      <td>Education buildings</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>And select a curve to use for each different subtype we are analysing.</p>
 <div class="cell docutils container">
@@ -646,10 +1617,17 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;pharmacy&#39;, &#39;clinic&#39;, &#39;doctors&#39;, &#39;dentist&#39;, &#39;laboratory&#39;,
+       &#39;hospital&#39;, &#39;alternative&#39;, &#39;physiotherapist&#39;, &#39;rehabilitation&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.3&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_curves</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sub_types</span><span class="p">,[</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.2&#39;</span><span class="p">,</span><span class="s1">&#39;F21.3&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">,</span><span class="s1">&#39;F21.1&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -770,6 +1748,64 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>square_m2</th>
+    </tr>
+    <tr>
+      <th>object_type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>clinic</th>
+      <td>2017.302160</td>
+    </tr>
+    <tr>
+      <th>dentist</th>
+      <td>528.305487</td>
+    </tr>
+    <tr>
+      <th>doctors</th>
+      <td>516.195585</td>
+    </tr>
+    <tr>
+      <th>hospital</th>
+      <td>11035.428707</td>
+    </tr>
+    <tr>
+      <th>laboratory</th>
+      <td>18643.785496</td>
+    </tr>
+    <tr>
+      <th>pharmacy</th>
+      <td>260.948255</td>
+    </tr>
+    <tr>
+      <th>rehabilitation</th>
+      <td>626.453636</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>It seems we are missing some features. Let’s check which one:</p>
 <div class="cell docutils container">
@@ -778,11 +1814,17 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;physiotherapist&#39;, &#39;alternative&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now we can add this to our list. Let’s use pharmacy as the square_m2 size.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;laboratory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;alternative&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
+<span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;physiotherapist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -809,13 +1851,368 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 56/56 [00:08&lt;00:00,  6.80it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████████████| 28/28 [00:00&lt;?, ?it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████████████████████| 28/28 [00:00&lt;?, ?it/s]
+</pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4.55 s
+Wall time: 8.37 s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>osm_id</th>
+      <th>geometry</th>
+      <th>name</th>
+      <th>object_type</th>
+      <th>coverage</th>
+      <th>values</th>
+      <th>maximum_damage</th>
+      <th>damage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>36</th>
+      <td>9272020517</td>
+      <td>POLYGON ((28.70342 48.02978, 28.70342 48.02958...</td>
+      <td>Вивафарм</td>
+      <td>pharmacy</td>
+      <td>[0.05577028915286064, 0.025343626737594604]</td>
+      <td>[639.0, 696.0]</td>
+      <td>1000</td>
+      <td>6.961757e+05</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>3528734254</td>
+      <td>POLYGON ((28.69802 48.03052, 28.69802 48.03033...</td>
+      <td>Аптека</td>
+      <td>pharmacy</td>
+      <td>[0.08111274242401123]</td>
+      <td>[630.0]</td>
+      <td>1000</td>
+      <td>6.961657e+05</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>6544507969</td>
+      <td>POLYGON ((28.70041 48.03141, 28.70041 48.03121...</td>
+      <td>Провизор</td>
+      <td>pharmacy</td>
+      <td>[0.0811113491654396]</td>
+      <td>[460.0]</td>
+      <td>1000</td>
+      <td>6.683075e+05</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>3574849564</td>
+      <td>POLYGON ((28.70347 48.03044, 28.70347 48.03024...</td>
+      <td>Аптека</td>
+      <td>pharmacy</td>
+      <td>[0.044310811907052994, 0.03680206462740898]</td>
+      <td>[478.0, 679.0]</td>
+      <td>1000</td>
+      <td>6.878001e+05</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>3589310865</td>
+      <td>POLYGON ((28.6972 48.03231, 28.6972 48.03212, ...</td>
+      <td>Аптека</td>
+      <td>pharmacy</td>
+      <td>[0.0811099261045456]</td>
+      <td>[523.0]</td>
+      <td>1000</td>
+      <td>6.961415e+05</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>9704223438</td>
+      <td>POLYGON ((27.79258 48.44594, 27.79258 48.44575...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.011612683534622192, 0.02686905674636364]</td>
+      <td>[172.0, 265.0]</td>
+      <td>1000</td>
+      <td>2.060500e+05</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>9704223440</td>
+      <td>POLYGON ((27.79271 48.44616, 27.79271 48.44597...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.05844156816601753]</td>
+      <td>[172.0]</td>
+      <td>1000</td>
+      <td>2.477835e+05</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>4644233679</td>
+      <td>POLYGON ((28.98909 47.7607, 28.98909 47.76051,...</td>
+      <td>Вивафарм</td>
+      <td>pharmacy</td>
+      <td>[0.08153653144836426]</td>
+      <td>[254.0]</td>
+      <td>1000</td>
+      <td>4.604703e+05</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>3680177537</td>
+      <td>POLYGON ((28.99061 47.7568, 28.99061 47.75661,...</td>
+      <td>Темиус</td>
+      <td>pharmacy</td>
+      <td>[0.05666636675596237, 0.024876272305846214]</td>
+      <td>[372.0, 376.0]</td>
+      <td>1000</td>
+      <td>6.017569e+05</td>
+    </tr>
+    <tr>
+      <th>167</th>
+      <td>3689599900</td>
+      <td>POLYGON ((28.693 48.03215, 28.693 48.03196, 28...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.08111017197370529]</td>
+      <td>[397.0]</td>
+      <td>1000</td>
+      <td>6.233966e+05</td>
+    </tr>
+    <tr>
+      <th>173</th>
+      <td>3697156982</td>
+      <td>POLYGON ((28.98894 47.76251, 28.98894 47.76231...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.00231770146638155, 0.07921600341796875]</td>
+      <td>[115.0, 126.0]</td>
+      <td>1000</td>
+      <td>2.638599e+05</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>3709735779</td>
+      <td>POLYGON ((28.9922 47.75566, 28.9922 47.75547, ...</td>
+      <td>Аптечный киоск</td>
+      <td>pharmacy</td>
+      <td>[0.081544429063797]</td>
+      <td>[382.0]</td>
+      <td>1000</td>
+      <td>6.109871e+05</td>
+    </tr>
+    <tr>
+      <th>224</th>
+      <td>3747750488</td>
+      <td>POLYGON ((28.98965 47.75847, 28.98965 47.75827...</td>
+      <td>Фармакон</td>
+      <td>pharmacy</td>
+      <td>[0.055090878158807755, 0.026449155062437057]</td>
+      <td>[163.0, 27.0]</td>
+      <td>1000</td>
+      <td>2.434535e+05</td>
+    </tr>
+    <tr>
+      <th>674</th>
+      <td>10760437776</td>
+      <td>POLYGON ((28.86171 47.02549, 28.86171 47.02529...</td>
+      <td>Elody</td>
+      <td>pharmacy</td>
+      <td>[0.07087450474500656, 0.011807563714683056]</td>
+      <td>[2.0, 132.0]</td>
+      <td>1000</td>
+      <td>4.378067e+04</td>
+    </tr>
+    <tr>
+      <th>749</th>
+      <td>4987463225</td>
+      <td>POLYGON ((27.78949 48.4417, 27.78949 48.44151,...</td>
+      <td>Farmacie</td>
+      <td>pharmacy</td>
+      <td>[0.014250691048800945]</td>
+      <td>[85.0]</td>
+      <td>1000</td>
+      <td>3.118887e+04</td>
+    </tr>
+    <tr>
+      <th>885</th>
+      <td>4347132594</td>
+      <td>POLYGON ((28.70356 48.03073, 28.70356 48.03054...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.01871015690267086, 0.062402255833148956]</td>
+      <td>[478.0, 679.0]</td>
+      <td>1000</td>
+      <td>6.926300e+05</td>
+    </tr>
+    <tr>
+      <th>891</th>
+      <td>4347206894</td>
+      <td>POLYGON ((28.70279 48.02922, 28.70279 48.02903...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.024230413138866425, 0.05688437074422836]</td>
+      <td>[639.0, 761.0]</td>
+      <td>1000</td>
+      <td>6.961832e+05</td>
+    </tr>
+    <tr>
+      <th>892</th>
+      <td>4347211091</td>
+      <td>POLYGON ((28.69991 48.031, 28.69991 48.03081, ...</td>
+      <td>None</td>
+      <td>pharmacy</td>
+      <td>[0.07159385830163956, 0.009518124163150787]</td>
+      <td>[528.0, 748.0]</td>
+      <td>1000</td>
+      <td>6.961591e+05</td>
+    </tr>
+    <tr>
+      <th>1301</th>
+      <td>10250086784</td>
+      <td>POLYGON ((28.84184 47.03672, 28.84184 47.03617...</td>
+      <td>Invitro</td>
+      <td>clinic</td>
+      <td>[0.048635903745889664, 0.013429696671664715]</td>
+      <td>[537.0, 542.0]</td>
+      <td>1000</td>
+      <td>5.326899e+05</td>
+    </tr>
+    <tr>
+      <th>1303</th>
+      <td>10250086785</td>
+      <td>POLYGON ((28.8414 47.03667, 28.8414 47.03647, ...</td>
+      <td>Felicia</td>
+      <td>pharmacy</td>
+      <td>[0.0023120574187487364]</td>
+      <td>[537.0]</td>
+      <td>1000</td>
+      <td>1.984368e+04</td>
+    </tr>
+    <tr>
+      <th>1436</th>
+      <td>702502095</td>
+      <td>MULTIPOLYGON (((29.00278 47.80296, 29.003 47.8...</td>
+      <td>Недостроенная, заброшенная больница. Ныне выку...</td>
+      <td>hospital</td>
+      <td>[0.02773427404463291, 0.19649264216423035, 0.0...</td>
+      <td>[272.0, 282.0, 482.0, 302.0]</td>
+      <td>1000</td>
+      <td>2.175662e+06</td>
+    </tr>
+    <tr>
+      <th>1468</th>
+      <td>156024156</td>
+      <td>MULTIPOLYGON (((28.30322 48.15509, 28.30326 48...</td>
+      <td>Spitalul Raional Soroca „A. Prisacari“</td>
+      <td>hospital</td>
+      <td>[0.051024824380874634, 0.48129481077194214, 0....</td>
+      <td>[475.0, 399.0, 403.0]</td>
+      <td>1000</td>
+      <td>5.473175e+06</td>
+    </tr>
+    <tr>
+      <th>1496</th>
+      <td>184483676</td>
+      <td>MULTIPOLYGON (((28.70662 48.03309, 28.70354 48...</td>
+      <td>Каменская центраьная районная больница</td>
+      <td>hospital</td>
+      <td>[0.32479339838027954, 0.4659941494464874, 0.19...</td>
+      <td>[152.0, 219.0, 462.0, 630.0, 289.0, 292.0, 375...</td>
+      <td>1000</td>
+      <td>7.436810e+07</td>
+    </tr>
+    <tr>
+      <th>1502</th>
+      <td>762358008</td>
+      <td>MULTIPOLYGON (((28.55464 48.04902, 28.5545 48....</td>
+      <td>Medpunct Zăluceni</td>
+      <td>clinic</td>
+      <td>[0.0357695072889328]</td>
+      <td>[28.0]</td>
+      <td>1000</td>
+      <td>2.578789e+04</td>
+    </tr>
+    <tr>
+      <th>1581</th>
+      <td>10058306</td>
+      <td>MULTIPOLYGON (((28.98892 47.76629, 28.98891 47...</td>
+      <td>Детская поликлиника</td>
+      <td>clinic</td>
+      <td>[0.024738356471061707, 0.2209341824054718, 0.1...</td>
+      <td>[293.0, 443.0, 395.0, 355.0]</td>
+      <td>1000</td>
+      <td>4.129644e+06</td>
+    </tr>
+    <tr>
+      <th>1612</th>
+      <td>174339391</td>
+      <td>MULTIPOLYGON (((28.9888 47.76696, 28.98816 47....</td>
+      <td>Морг</td>
+      <td>hospital</td>
+      <td>[0.0870068222284317, 0.139858677983284]</td>
+      <td>[423.0, 293.0]</td>
+      <td>1000</td>
+      <td>1.946442e+06</td>
+    </tr>
+    <tr>
+      <th>1643</th>
+      <td>662942615</td>
+      <td>MULTIPOLYGON (((29.6148 46.8344, 29.61487 46.8...</td>
+      <td>Центр Микрохирургии глаза</td>
+      <td>clinic</td>
+      <td>[0.03987538814544678]</td>
+      <td>[141.0]</td>
+      <td>1000</td>
+      <td>1.447667e+05</td>
+    </tr>
+    <tr>
+      <th>1699</th>
+      <td>519337668</td>
+      <td>MULTIPOLYGON (((28.99679 47.65854, 28.99779 47...</td>
+      <td>Психоневрологическая больница</td>
+      <td>hospital</td>
+      <td>[0.03943768888711929]</td>
+      <td>[359.0]</td>
+      <td>1000</td>
+      <td>3.384815e+05</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="save-the-results">
@@ -874,6 +2271,12 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/4b5fd7587ce978effa614afbdae7566a0de2716066f535103ea962f0fccf1167.png" src="../_images/4b5fd7587ce978effa614afbdae7566a0de2716066f535103ea962f0fccf1167.png" />
+</div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
 <div class="cell docutils container">
@@ -889,6 +2292,9 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/65a8cf86c3155fd40519d7d23a4621529ed11ad5e8acd2a9dd0b4b39ceb6c0bf.png" src="../_images/65a8cf86c3155fd40519d7d23a4621529ed11ad5e8acd2a9dd0b4b39ceb6c0bf.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -896,6 +2302,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "eef4714d60af4649bd4d5c71e9bf6c20", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 </section>

@@ -440,7 +440,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-point-data-to-polygons">Convert point data to polygons.</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
@@ -558,8 +561,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 26 s
-Wall time: 28.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 25 s
+Wall time: 32.7 s
 </pre></div>
 </div>
 </div>
@@ -592,7 +595,7 @@ Wall time: 28.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cf04ab4965b240e6ba26a4f139c41b04", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9af46301616f40cc9f985e99ccb90c6a", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -643,14 +646,13 @@ Wall time: 28.2 s
   --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
 }
 
-html[theme="dark"],
-html[data-theme="dark"],
-body[data-theme="dark"],
+html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
   --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1f1f1f;
+  --xr-border-color: #1F1F1F;
   --xr-disabled-color: #515151;
   --xr-background-color: #111111;
   --xr-background-color-row-even: #111111;
@@ -695,7 +697,7 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
 }
 
 .xr-section-item {
@@ -703,9 +705,7 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: inline-block;
-  opacity: 0;
-  height: 0;
+  display: none;
 }
 
 .xr-section-item input + label {
@@ -715,10 +715,6 @@ body.vscode-dark {
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
-}
-
-.xr-section-item input:focus + label {
-  border: 2px solid var(--xr-font-color0);
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -742,7 +738,7 @@ body.vscode-dark {
 
 .xr-section-summary-in + label:before {
   display: inline-block;
-  content: "►";
+  content: '►';
   font-size: 11px;
   width: 15px;
   text-align: center;
@@ -753,7 +749,7 @@ body.vscode-dark {
 }
 
 .xr-section-summary-in:checked + label:before {
-  content: "▼";
+  content: '▼';
 }
 
 .xr-section-summary-in:checked + label > span {
@@ -825,15 +821,15 @@ body.vscode-dark {
 }
 
 .xr-dim-list:before {
-  content: "(";
+  content: '(';
 }
 
 .xr-dim-list:after {
-  content: ")";
+  content: ')';
 }
 
 .xr-dim-list li:not(:last-child):after {
-  content: ",";
+  content: ',';
   padding-right: 5px;
 }
 
@@ -986,14 +982,14 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 747GB
 Dimensions:      (band: 1, x: 432000, y: 216000)
 Coordinates:
-  * band         (band) int64 8B 1
+  * band         (band) int32 4B 1
   * x            (x) float64 3MB -180.0 -180.0 -180.0 ... 180.0 180.0 180.0
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
-    spatial_ref  int64 8B ...
+    spatial_ref  int32 4B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2ef0270b-da1f-42a3-87a7-1635ed66717e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2ef0270b-da1f-42a3-87a7-1635ed66717e' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1b9c0c76-b7dd-47f5-add0-35fcef6c4c68' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1b9c0c76-b7dd-47f5-add0-35fcef6c4c68' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-5a3f1fe5-5819-4e97-a0fc-a3b48876ec9e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5a3f1fe5-5819-4e97-a0fc-a3b48876ec9e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-71a5f512-6624-44a7-b7c1-e6371a95feda' class='xr-var-data-in' type='checkbox'><label for='data-71a5f512-6624-44a7-b7c1-e6371a95feda' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-454dfa25-f7fb-4d6e-b528-b1a849b6f9b8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-454dfa25-f7fb-4d6e-b528-b1a849b6f9b8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8d3ed1b2-9655-4a61-ab62-b880f5ea857f' class='xr-var-data-in' type='checkbox'><label for='data-8d3ed1b2-9655-4a61-ab62-b880f5ea857f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583], shape=(432000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-23b41b39-8b3f-4068-b5ca-1906198bde4d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-23b41b39-8b3f-4068-b5ca-1906198bde4d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8a897b4a-585e-4aa1-ba4f-ba94d317c04b' class='xr-var-data-in' type='checkbox'><label for='data-8a897b4a-585e-4aa1-ba4f-ba94d317c04b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583], shape=(216000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-778e0d1a-5b5b-4050-8b0a-7947e768397c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-778e0d1a-5b5b-4050-8b0a-7947e768397c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2572b90a-e019-4432-82f5-8c4bc2a1d47e' class='xr-var-data-in' type='checkbox'><label for='data-2572b90a-e019-4432-82f5-8c4bc2a1d47e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3419483e-a82a-4f6b-91df-2f9f56ee855c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3419483e-a82a-4f6b-91df-2f9f56ee855c' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b500f258-3b6f-4e45-b70d-9bcbcb2fbdc7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b500f258-3b6f-4e45-b70d-9bcbcb2fbdc7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f459e836-9c4d-43da-a549-4ddc85e91212' class='xr-var-data-in' type='checkbox'><label for='data-f459e836-9c4d-43da-a549-4ddc85e91212' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-dc4c5e30-984a-4595-8ca9-c1ee7e6edb04' class='xr-section-summary-in' type='checkbox'  ><label for='section-dc4c5e30-984a-4595-8ca9-c1ee7e6edb04' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-9d849797-103a-41c4-bbb3-457757209a2f' class='xr-index-data-in' type='checkbox'/><label for='index-9d849797-103a-41c4-bbb3-457757209a2f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-c9f20cbf-13c2-493a-a80f-4879965a8957' class='xr-index-data-in' type='checkbox'/><label for='index-c9f20cbf-13c2-493a-a80f-4879965a8957' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2fd3bb8f-cc61-4cc7-a61d-ae7dbe3a602c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2fd3bb8f-cc61-4cc7-a61d-ae7dbe3a602c' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-d59b762f-cb3d-4c87-9a5a-9ba0c1067ff3' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d59b762f-cb3d-4c87-9a5a-9ba0c1067ff3' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-694dd471-06eb-4394-abaa-0aa81f93ab3e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-694dd471-06eb-4394-abaa-0aa81f93ab3e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-021aeca2-5fdc-477e-a6f1-dee5575bd246' class='xr-var-data-in' type='checkbox'><label for='data-021aeca2-5fdc-477e-a6f1-dee5575bd246' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-34e01267-8d7d-44af-8905-73d21055abce' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-34e01267-8d7d-44af-8905-73d21055abce' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e462776d-aedb-40f7-bb4a-1980312039df' class='xr-var-data-in' type='checkbox'><label for='data-e462776d-aedb-40f7-bb4a-1980312039df' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-9976fb71-2db9-4fe9-b119-e6348d68f996' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9976fb71-2db9-4fe9-b119-e6348d68f996' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-47a9e8a5-5dd0-4917-b2e3-d9fe371d5269' class='xr-var-data-in' type='checkbox'><label for='data-47a9e8a5-5dd0-4917-b2e3-d9fe371d5269' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-695534e5-94a7-4be9-8760-f947b3184c0b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-695534e5-94a7-4be9-8760-f947b3184c0b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1edc66ca-5b68-411a-bed1-0a8f151a21c5' class='xr-var-data-in' type='checkbox'><label for='data-1edc66ca-5b68-411a-bed1-0a8f151a21c5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-18079f7a-8064-40bf-9667-616a503a320a' class='xr-section-summary-in' type='checkbox'  checked><label for='section-18079f7a-8064-40bf-9667-616a503a320a' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-c6fbf7c0-7a22-4db0-945f-d9808d8d8397' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c6fbf7c0-7a22-4db0-945f-d9808d8d8397' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-21cae484-1c54-40cd-b3b0-a2ca5315d932' class='xr-var-data-in' type='checkbox'><label for='data-21cae484-1c54-40cd-b3b0-a2ca5315d932' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-edb411a8-477d-4376-aaf0-0c7dddda105f' class='xr-section-summary-in' type='checkbox'  ><label for='section-edb411a8-477d-4376-aaf0-0c7dddda105f' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4756d17f-4261-4f58-a3c5-1a3f43b29821' class='xr-index-data-in' type='checkbox'/><label for='index-4756d17f-4261-4f58-a3c5-1a3f43b29821' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-25947dec-5633-432f-a96d-d0b6edab2f6c' class='xr-index-data-in' type='checkbox'/><label for='index-25947dec-5633-432f-a96d-d0b6edab2f6c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
        -179.99708333333334,          -179.99625, -179.99541666666667,
        -179.99458333333334,          -179.99375, -179.99291666666667,
        -179.99208333333334,
@@ -1002,7 +998,7 @@ Data variables:
         179.99458333333334,  179.99541666666667,           179.99625,
         179.99708333333334,  179.99791666666667,           179.99875,
         179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-5295dd8a-3267-4aff-82f1-a8a5d0a88e8e' class='xr-index-data-in' type='checkbox'/><label for='index-5295dd8a-3267-4aff-82f1-a8a5d0a88e8e' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-170a50a0-8c13-4c19-8045-82c3fd5c4c08' class='xr-index-data-in' type='checkbox'/><label for='index-170a50a0-8c13-4c19-8045-82c3fd5c4c08' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
         89.99708333333334,           89.99625,  89.99541666666667,
         89.99458333333334,           89.99375,  89.99291666666667,
         89.99208333333334,
@@ -1011,7 +1007,7 @@ Data variables:
        -89.99458333333334, -89.99541666666667,          -89.99625,
        -89.99708333333334, -89.99791666666667,          -89.99875,
        -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-08853368-b484-401c-97fa-a45e2d8c1b79' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-08853368-b484-401c-97fa-a45e2d8c1b79' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-30780bd3-e3e2-4d2b-a1b6-7b1b2ae159f8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-30780bd3-e3e2-4d2b-a1b6-7b1b2ae159f8' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -1040,6 +1036,17 @@ Data variables:
 </div>
 </div>
 </div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="vulnerability-data">
 <h3>Vulnerability data<a class="headerlink" href="#vulnerability-data" title="Permalink to this heading">#</a></h3>
@@ -1055,7 +1062,7 @@ Data variables:
 <p>And let’s have a look at all the available options</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">display</span><span class="p">(</span><span class="n">vul_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1157,7 +1164,7 @@ Data variables:
     <tr>
       <th>F6.3</th>
       <td>Energy system</td>
-      <td>Generalized curve for energy assets in diked a...</td>
+      <td>Generalized curve for energy assets in diked areas</td>
     </tr>
     <tr>
       <th>F7.1</th>
@@ -1187,22 +1194,22 @@ Data variables:
     <tr>
       <th>F7.4</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - sophisticated acce...</td>
+      <td>Motorways and trunk roads - sophisticated accessories - low flow</td>
     </tr>
     <tr>
       <th>F7.5</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - sophisticated acce...</td>
+      <td>Motorways and trunk roads - sophisticated accessories - high flow</td>
     </tr>
     <tr>
       <th>F7.6</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - without sophistica...</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - low flow</td>
     </tr>
     <tr>
       <th>F7.7</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - without sophistica...</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - high flow</td>
     </tr>
     <tr>
       <th>F7.8</th>
@@ -1337,27 +1344,27 @@ Data variables:
     <tr>
       <th>F14.1</th>
       <td>Water treatment plants</td>
-      <td>Small water treatment plants open/gravity - av...</td>
+      <td>Small water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.2</th>
       <td>Water treatment plants</td>
-      <td>Medium water treatment plants open/gravity - a...</td>
+      <td>Medium water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.3</th>
       <td>Water treatment plants</td>
-      <td>Large water treatment plants open/gravity - av...</td>
+      <td>Large water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.4</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants open...</td>
+      <td>small/medium/large water treatment plants open/gravity - above average flood design</td>
     </tr>
     <tr>
       <th>F14.5</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants open...</td>
+      <td>small/medium/large water treatment plants open/gravity - below average flood design</td>
     </tr>
     <tr>
       <th>F14.6</th>
@@ -1377,12 +1384,12 @@ Data variables:
     <tr>
       <th>F14.9</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants clos...</td>
+      <td>small/medium/large water treatment plants closed/pressure - above average flood design</td>
     </tr>
     <tr>
       <th>F14.10</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants clos...</td>
+      <td>small/medium/large water treatment plants closed/pressure - below average flood design</td>
     </tr>
     <tr>
       <th>F15.1</th>
@@ -1452,12 +1459,12 @@ Data variables:
     <tr>
       <th>F18.4</th>
       <td>Wastewater treatment plant</td>
-      <td>Small, medium, large Wastewater treatment plan...</td>
+      <td>Small, medium, large Wastewater treatment plants - above average flood design</td>
     </tr>
     <tr>
       <th>F18.5</th>
       <td>Wastewater treatment plant</td>
-      <td>Small, medium, large Wastewater treatment plan...</td>
+      <td>Small, medium, large Wastewater treatment plants- below average flood design</td>
     </tr>
     <tr>
       <th>F18.6</th>
@@ -1467,12 +1474,12 @@ Data variables:
     <tr>
       <th>F19.1</th>
       <td>Transmission and distribution pipelines</td>
-      <td>Sewers &amp; Interceptors: Exposed collector river...</td>
+      <td>Sewers &amp; Interceptors: Exposed collector river crossings</td>
     </tr>
     <tr>
       <th>F19.2</th>
       <td>Transmission and distribution pipelines</td>
-      <td>Sewers &amp; Interceptors: Buried collector river ...</td>
+      <td>Sewers &amp; Interceptors: Buried collector river crossings</td>
     </tr>
     <tr>
       <th>F19.3</th>
@@ -1487,12 +1494,12 @@ Data variables:
     <tr>
       <th>F20.2</th>
       <td>Others</td>
-      <td>Lift stations: lift station (small), wet well/...</td>
+      <td>Lift stations: lift station (small), wet well/dry well</td>
     </tr>
     <tr>
       <th>F20.3</th>
       <td>Others</td>
-      <td>Lift stations: lift station (medium large), we...</td>
+      <td>Lift stations: lift station (medium large), wet well/dry well</td>
     </tr>
     <tr>
       <th>F20.4</th>
@@ -1502,72 +1509,72 @@ Data variables:
     <tr>
       <th>F20.5</th>
       <td>Others</td>
-      <td>Lift stations: lift station (medium large), su...</td>
+      <td>Lift stations: lift station (medium large), submersible</td>
     </tr>
     <tr>
       <th>F21.1</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.2</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.6</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.7</th>
       <td>School buildings</td>
-      <td>Generalized curve for companies (incl. governm...</td>
+      <td>Generalized curve for companies (incl. government)</td>
     </tr>
     <tr>
       <th>F21.8</th>
@@ -1743,43 +1750,195 @@ Data variables:
 </div>
 </div>
 </div>
-<p>Convert the point data to polygons. We first try to estimate an average size of each building based on each subtype.</p>
-<p>To do so, let’s first grab the polygon data and estimate their size:</p>
+<section id="convert-point-data-to-polygons">
+<h3>Convert point data to polygons.<a class="headerlink" href="#convert-point-data-to-polygons" title="Permalink to this heading">#</a></h3>
+<p>For some data, there are both points and polygons available. It makes life easier to estimate the damage using polygons. Therefore, we convert those points to Polygons below.</p>
+<p>Let’s first get an overview of the different geometry types for all the assets we are considering in this analysis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;geom_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">geom_type</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;geom_type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object_type   geom_type   
+college       MultiPolygon     13
+              Point             8
+kindergarten  MultiPolygon      4
+              Point            12
+library       MultiPolygon     14
+              Point             4
+school        MultiPolygon    457
+              Point           128
+university    MultiPolygon     20
+              Point             2
+Name: geometry, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The results above indicate that several asset types that are expected to be <em>Polygons</em> are stored as <em>Points</em> as well. It would be preferably to convert them all to polygons. For the <em>Points</em>, we will have to estimate a the average size, so we can use that to create a <code class="docutils literal notranslate"><span class="pre">buffer</span></code> around the assets.</p>
+<p>To do so, let’s grab the polygon data and estimate their size. We grab the median so we are not too much influenced by extreme outliers. If preferred, please change <code class="docutils literal notranslate"><span class="pre">.median()</span></code> to <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> (or any other metric).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
 <span class="n">polygon_features</span><span class="p">[</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="o">.</span><span class="n">area</span>
+
+<span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">square_m2_object_type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>square_m2</th>
+    </tr>
+    <tr>
+      <th>object_type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>college</th>
+      <td>57920.460301</td>
+    </tr>
+    <tr>
+      <th>kindergarten</th>
+      <td>849.080034</td>
+    </tr>
+    <tr>
+      <th>library</th>
+      <td>521.562639</td>
+    </tr>
+    <tr>
+      <th>school</th>
+      <td>1164.782393</td>
+    </tr>
+    <tr>
+      <th>university</th>
+      <td>418.091453</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we create a list in which we define the assets we want to “polygonize”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points_to_polygonize</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;college&#39;</span><span class="p">,</span><span class="s1">&#39;kindergarten&#39;</span><span class="p">,</span><span class="s1">&#39;library&#39;</span><span class="p">,</span><span class="s1">&#39;school&#39;</span><span class="p">,</span><span class="s1">&#39;university&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And take them from our data again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When performing a buffer, it is always best to do this in meters. As such, we will briefly convert the point data into a <strong>crs</strong> system in meters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">):</span>
+
+    <span class="c1"># we first need to set a buffer length. This is half of width/length of an asset.</span>
+    <span class="n">buffer_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">asset</span><span class="o">.</span><span class="n">object_type</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="c1"># then we can buffer the asset</span>
+    <span class="k">return</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">buffer_length</span><span class="p">,</span><span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+
+<span class="n">collect_new_point_geometries</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">asset</span><span class="p">:</span>  <span class="n">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>It seems we are missing some features. Let’s check which one:</p>
-<p>Now we can add this to our list. Let’s use pharmacy as the square_m2 size.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;community_centre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;library&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">),</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collect_new_point_geometries</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>And now we can use this to create polygons, using this square meters as the average size for each point.</p>
+<p>And check if any “undesired” <em>Points</em> are still left:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> 
-                                                                    <span class="n">shapely</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> 
-                                                                    <span class="n">distance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">object_type</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]),</span>
-                                                                    <span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>osm_id</th>
+      <th>geometry</th>
+      <th>object_type</th>
+      <th>geom_type</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And remove the ‘geom_type’ column again, as we do not need it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;geom_type&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="performing-the-damage-assessment">
 <h2>5. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
@@ -1792,13 +1951,13 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.02it/s]
-convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12465.92it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6676.37it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  3.22it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 13543.46it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4116.41it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.67 s
-Wall time: 2.53 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.44 s
+Wall time: 3.19 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1815,18 +1974,18 @@ Wall time: 2.53 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.85it/s]
-convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12443.17it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12997.84it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6511.34it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 9492.68it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.39it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12261.29it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 4810.41it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6509.01it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 8554.43it/s]
 Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6499.70it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6495.82it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6498.92it/s]
+Calculating damage: 100%|███████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 12517.44it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████████| 13/13 [00:00&lt;00:00, 6567.81it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.69 s
-Wall time: 2.15 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.94 s
+Wall time: 2.37 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1842,7 +2001,7 @@ Wall time: 2.15 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Education_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Education_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1873,7 +2032,7 @@ Wall time: 2.15 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Eduation_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Eduation_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1895,7 +2054,7 @@ Wall time: 2.15 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/a15ac82663b672c1dfd0f8127e12cb734712b8ea144957133532ffc43de91686.png" src="../_images/a15ac82663b672c1dfd0f8127e12cb734712b8ea144957133532ffc43de91686.png" />
+<img alt="../_images/83383c9ba2bcce1692f9803495fd18abda33c2bc74d6327c61bbc4d20c611b78.png" src="../_images/83383c9ba2bcce1692f9803495fd18abda33c2bc74d6327c61bbc4d20c611b78.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1913,7 +2072,7 @@ Wall time: 2.15 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/651e627b18032b76692dd67391b536d923b9f41b6d0338d3f7eae0ed6bc1006f.png" src="../_images/651e627b18032b76692dd67391b536d923b9f41b6d0338d3f7eae0ed6bc1006f.png" />
+<img alt="../_images/d349acf192802b46330461c34b50adebddeb28e5ab21b591f78979adbcbb08d8.png" src="../_images/d349acf192802b46330461c34b50adebddeb28e5ab21b591f78979adbcbb08d8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1923,7 +2082,7 @@ Wall time: 2.15 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "67c1dcf01f2a4617b5fa9cedde121033", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "296950f8733e4cfb8c812f3bf602c5c9", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1955,7 +2114,7 @@ Wall time: 2.15 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:19&lt;00:00,  2.45s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:21&lt;00:00,  2.72s/it]
 </pre></div>
 </div>
 </div>
@@ -2019,7 +2178,7 @@ Wall time: 2.15 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c81237942746638b1fa10db8fabaa6345fe1275a2075de76ed633f36a4bc7307.png" src="../_images/c81237942746638b1fa10db8fabaa6345fe1275a2075de76ed633f36a4bc7307.png" />
+<img alt="../_images/404ea4777eae9addb9f045031a07b9b14f8c5743e31179ca590e301be199b7de.png" src="../_images/404ea4777eae9addb9f045031a07b9b14f8c5743e31179ca590e301be199b7de.png" />
 </div>
 </div>
 </section>
@@ -2100,7 +2259,10 @@ Wall time: 2.15 s
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-point-data-to-polygons">Convert point data to polygons.</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>

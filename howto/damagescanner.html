@@ -461,6 +461,10 @@ document.write(`
 <li><p><strong>CSV file (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</strong></p></li>
 <li><p><strong>Path object pointing to a CSV file</strong> If provided as a string, it is converted into a <code class="docutils literal notranslate"><span class="pre">Path</span></code> object.</p></li>
 </ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It is important to emphasize that the first column (or index in the case of a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame()</span></code>) of the vulnerability curve should be <strong>exactly</strong> the same unit as the hazard data (e.g., both meters, both m/s).</p>
+</div>
 </section>
 <section id="maximum-damage-values">
 <h3><strong>4. Maximum Damage Values</strong><a class="headerlink" href="#maximum-damage-values" title="Permalink to this heading">#</a></h3>
@@ -540,7 +544,7 @@ document.write(`
 </section>
 <section id="risk-assessment-risk">
 <h3><strong>3. Risk Assessment (<code class="docutils literal notranslate"><span class="pre">risk()</span></code>)</strong><a class="headerlink" href="#risk-assessment-risk" title="Permalink to this heading">#</a></h3>
-<p>For long-term risk evaluation across multiple hazard return periods:</p>
+<p>For long-term risk evaluation across multiple hazard return periods. To be able to run the risk assessment, we have to create a dictionary, with the path specification to each of the hazard file. We have chosen to take this dictionary approach, to ensure we accurately set the return period that corresponds to each hazard file. A more elaborate example can also be found <a class="reference external" href="https://vu-ivm.github.io/GlobalInfraRisk/ci/transport.html#performing-the-risk-assessment">here</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;hazard_10_year.tif&quot;</span><span class="p">,</span>
     <span class="mi">50</span><span class="p">:</span> <span class="s2">&quot;hazard_50_year.tif&quot;</span><span class="p">,</span>

@@ -480,56 +480,10 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">damagescanner</span><span class="o">==</span><span class="m">0</span>.9b13
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b13</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
 <span class="c1">#!pip install lonboard</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting damagescanner==0.9b13
-  Downloading damagescanner-0.9b13-py3-none-any.whl.metadata (5.9 kB)
-Requirement already satisfied: geopandas in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (1.0.1)
-Requirement already satisfied: matplotlib in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (3.8.4)
-Requirement already satisfied: numpy in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (1.26.4)
-Requirement already satisfied: pyproj in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (3.6.1)
-Requirement already satisfied: rasterio in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (1.3.10)
-Requirement already satisfied: xarray in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (2024.5.0)
-Requirement already satisfied: rioxarray in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (0.15.5)
-Requirement already satisfied: packaging in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (24.0)
-Requirement already satisfied: pandas in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (2.2.2)
-Requirement already satisfied: shapely&gt;=2.0 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (2.0.4)
-Requirement already satisfied: tqdm in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (4.66.4)
-Requirement already satisfied: pyyaml in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (6.0.1)
-Requirement already satisfied: exactextract in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from damagescanner==0.9b13) (0.2.0)
-Requirement already satisfied: pyogrio&gt;=0.7.2 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from geopandas-&gt;damagescanner==0.9b13) (0.9.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from pandas-&gt;damagescanner==0.9b13) (2.9.0)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from pandas-&gt;damagescanner==0.9b13) (2024.1)
-Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from pandas-&gt;damagescanner==0.9b13) (2024.1)
-Requirement already satisfied: certifi in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from pyproj-&gt;damagescanner==0.9b13) (2025.1.31)
-Requirement already satisfied: contourpy&gt;=1.0.1 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (1.2.1)
-Requirement already satisfied: cycler&gt;=0.10 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (4.53.0)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (1.4.5)
-Requirement already satisfied: pillow&gt;=8 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (10.3.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from matplotlib-&gt;damagescanner==0.9b13) (3.1.2)
-Requirement already satisfied: affine in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (2.4.0)
-Requirement already satisfied: attrs in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (23.2.0)
-Requirement already satisfied: click&gt;=4.0 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (8.1.7)
-Requirement already satisfied: cligj&gt;=0.5 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (0.7.2)
-Requirement already satisfied: snuggs&gt;=1.4.1 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (1.4.7)
-Requirement already satisfied: click-plugins in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (1.1.1)
-Requirement already satisfied: setuptools in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from rasterio-&gt;damagescanner==0.9b13) (70.0.0)
-Requirement already satisfied: colorama in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from tqdm-&gt;damagescanner==0.9b13) (0.4.6)
-Requirement already satisfied: six&gt;=1.5 in c:\users\eks510\.conda\envs\pygis\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;damagescanner==0.9b13) (1.16.0)
-Downloading damagescanner-0.9b13-py3-none-any.whl (33 kB)
-Installing collected packages: damagescanner
-  Attempting uninstall: damagescanner
-    Found existing installation: damagescanner 0.9b5
-    Uninstalling damagescanner-0.9b5:
-      Successfully uninstalled damagescanner-0.9b5
-Successfully installed damagescanner-0.9b13
 </pre></div>
 </div>
 </div>
@@ -609,8 +563,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 24.4 s
-Wall time: 27.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 35.3 s
+Wall time: 47.9 s
 </pre></div>
 </div>
 </div>
@@ -630,7 +584,7 @@ Wall time: 27.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0263967fe4364838bdeaf907ee9f63c6", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a59d7f5d01984c38838eba2b1b98e6c6", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -1022,9 +976,9 @@ Coordinates:
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
     spatial_ref  int32 4B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ed0163dc-0cc6-4a64-9c81-53d3986cf0f8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ed0163dc-0cc6-4a64-9c81-53d3986cf0f8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a2e336c4-4e72-4682-aac0-8780c71a9aea' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a2e336c4-4e72-4682-aac0-8780c71a9aea' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-f07fc283-ad91-46dd-a500-e19601ca13f1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f07fc283-ad91-46dd-a500-e19601ca13f1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dba94256-270c-4753-b9f0-2f9b81dab86a' class='xr-var-data-in' type='checkbox'><label for='data-dba94256-270c-4753-b9f0-2f9b81dab86a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-8e9166f1-e762-4e9b-9549-63ae362047cd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8e9166f1-e762-4e9b-9549-63ae362047cd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0a4dde40-ee99-44da-8a6e-68b66308f651' class='xr-var-data-in' type='checkbox'><label for='data-0a4dde40-ee99-44da-8a6e-68b66308f651' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-79c66593-61ce-481a-844a-098fdb4594cd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-79c66593-61ce-481a-844a-098fdb4594cd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6994e319-4545-4f57-bf3a-e535257bcdce' class='xr-var-data-in' type='checkbox'><label for='data-6994e319-4545-4f57-bf3a-e535257bcdce' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f926d000-8c46-4461-948e-f45b1974c2ff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f926d000-8c46-4461-948e-f45b1974c2ff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3c09bec0-aee5-4b24-a554-9fa4af40c17e' class='xr-var-data-in' type='checkbox'><label for='data-3c09bec0-aee5-4b24-a554-9fa4af40c17e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-582ab3e0-ac60-4a45-8443-39b323629eda' class='xr-section-summary-in' type='checkbox'  checked><label for='section-582ab3e0-ac60-4a45-8443-39b323629eda' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5a233e75-0373-4e14-9365-413d49b25c03' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5a233e75-0373-4e14-9365-413d49b25c03' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d0d6d884-0992-498e-8be2-06d04cc97d7d' class='xr-var-data-in' type='checkbox'><label for='data-d0d6d884-0992-498e-8be2-06d04cc97d7d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-545544ee-0cd8-4d45-a4cc-c90ce05d9646' class='xr-section-summary-in' type='checkbox'  ><label for='section-545544ee-0cd8-4d45-a4cc-c90ce05d9646' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c425ee5c-7820-433c-9308-0932d39794c9' class='xr-index-data-in' type='checkbox'/><label for='index-c425ee5c-7820-433c-9308-0932d39794c9' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b12e883e-d823-4127-ae2e-5de5dc2b7ba8' class='xr-index-data-in' type='checkbox'/><label for='index-b12e883e-d823-4127-ae2e-5de5dc2b7ba8' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-5420cea9-8ba8-4c11-b56d-8e20cb5b5ad8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-5420cea9-8ba8-4c11-b56d-8e20cb5b5ad8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1d3a091a-a85e-4999-81b0-439e7c7afaa7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1d3a091a-a85e-4999-81b0-439e7c7afaa7' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-cc4ce0bc-76b2-42e2-9605-9bfe9657c2cd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cc4ce0bc-76b2-42e2-9605-9bfe9657c2cd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bfb20ef9-f6c5-44c2-a274-a31b8ace09d9' class='xr-var-data-in' type='checkbox'><label for='data-bfb20ef9-f6c5-44c2-a274-a31b8ace09d9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-400816d1-010b-40cb-a821-8ac086b30cbf' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-400816d1-010b-40cb-a821-8ac086b30cbf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4bb1643b-a31f-433a-92b6-8836afc82403' class='xr-var-data-in' type='checkbox'><label for='data-4bb1643b-a31f-433a-92b6-8836afc82403' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-3630fe29-ee15-42f1-a4e2-7b61dd169792' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3630fe29-ee15-42f1-a4e2-7b61dd169792' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8891a7b7-97d2-44b0-99cd-7d85b54c7f9c' class='xr-var-data-in' type='checkbox'><label for='data-8891a7b7-97d2-44b0-99cd-7d85b54c7f9c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-42e14ae6-dc2f-4d97-88d2-e68f7b355c78' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-42e14ae6-dc2f-4d97-88d2-e68f7b355c78' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cb9eed24-7508-413e-a28b-635412e967bf' class='xr-var-data-in' type='checkbox'><label for='data-cb9eed24-7508-413e-a28b-635412e967bf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f9ad9f3c-712f-47da-850a-d63eb5288802' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f9ad9f3c-712f-47da-850a-d63eb5288802' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-92c857a8-7f2e-4ba4-acac-647d725eb2c4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-92c857a8-7f2e-4ba4-acac-647d725eb2c4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3c2240a6-dd8e-47cf-96a4-b5df2d963a9f' class='xr-var-data-in' type='checkbox'><label for='data-3c2240a6-dd8e-47cf-96a4-b5df2d963a9f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5fc91c66-c524-45e7-a337-c162926ea319' class='xr-section-summary-in' type='checkbox'  ><label for='section-5fc91c66-c524-45e7-a337-c162926ea319' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-06b8a22c-0dc9-4fb6-9336-2847f2ffdc77' class='xr-index-data-in' type='checkbox'/><label for='index-06b8a22c-0dc9-4fb6-9336-2847f2ffdc77' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-ad4c6c72-254c-4fda-904b-8cd03cfdb4a7' class='xr-index-data-in' type='checkbox'/><label for='index-ad4c6c72-254c-4fda-904b-8cd03cfdb4a7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
        -179.99708333333334,          -179.99625, -179.99541666666667,
        -179.99458333333334,          -179.99375, -179.99291666666667,
        -179.99208333333334,
@@ -1033,7 +987,7 @@ Data variables:
         179.99458333333334,  179.99541666666667,           179.99625,
         179.99708333333334,  179.99791666666667,           179.99875,
         179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7cd6c9be-7ce8-490a-b750-0f65cf274eed' class='xr-index-data-in' type='checkbox'/><label for='index-7cd6c9be-7ce8-490a-b750-0f65cf274eed' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-33f1e943-df6c-4be1-8d13-c2f3040f2c88' class='xr-index-data-in' type='checkbox'/><label for='index-33f1e943-df6c-4be1-8d13-c2f3040f2c88' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
         89.99708333333334,           89.99625,  89.99541666666667,
         89.99458333333334,           89.99375,  89.99291666666667,
         89.99208333333334,
@@ -1042,7 +996,7 @@ Data variables:
        -89.99458333333334, -89.99541666666667,          -89.99625,
        -89.99708333333334, -89.99791666666667,          -89.99875,
        -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ec50005f-c2a6-4696-bdc9-c8e3686c3ff3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ec50005f-c2a6-4696-bdc9-c8e3686c3ff3' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9d7b3dd8-1316-4415-9edd-7d5f41193241' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9d7b3dd8-1316-4415-9edd-7d5f41193241' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -1077,6 +1031,22 @@ Data variables:
 </div>
 </div>
 </div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Missing object types in maxdam: <span class=" -Color -Color-Bold">terminal</span>. Please add them before you continue.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="vulnerability-data">
 <h3>Vulnerability data<a class="headerlink" href="#vulnerability-data" title="Permalink to this heading">#</a></h3>
@@ -1092,7 +1062,7 @@ Data variables:
 <p>And let’s have a look at all the available options</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">display</span><span class="p">(</span><span class="n">vul_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1194,7 +1164,7 @@ Data variables:
     <tr>
       <th>F6.3</th>
       <td>Energy system</td>
-      <td>Generalized curve for energy assets in diked a...</td>
+      <td>Generalized curve for energy assets in diked areas</td>
     </tr>
     <tr>
       <th>F7.1</th>
@@ -1224,22 +1194,22 @@ Data variables:
     <tr>
       <th>F7.4</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - sophisticated acce...</td>
+      <td>Motorways and trunk roads - sophisticated accessories - low flow</td>
     </tr>
     <tr>
       <th>F7.5</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - sophisticated acce...</td>
+      <td>Motorways and trunk roads - sophisticated accessories - high flow</td>
     </tr>
     <tr>
       <th>F7.6</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - without sophistica...</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - low flow</td>
     </tr>
     <tr>
       <th>F7.7</th>
       <td>Roads</td>
-      <td>Motorways and trunk roads - without sophistica...</td>
+      <td>Motorways and trunk roads - without sophisticated accessories - high flow</td>
     </tr>
     <tr>
       <th>F7.8</th>
@@ -1374,27 +1344,27 @@ Data variables:
     <tr>
       <th>F14.1</th>
       <td>Water treatment plants</td>
-      <td>Small water treatment plants open/gravity - av...</td>
+      <td>Small water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.2</th>
       <td>Water treatment plants</td>
-      <td>Medium water treatment plants open/gravity - a...</td>
+      <td>Medium water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.3</th>
       <td>Water treatment plants</td>
-      <td>Large water treatment plants open/gravity - av...</td>
+      <td>Large water treatment plants open/gravity - average flood design</td>
     </tr>
     <tr>
       <th>F14.4</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants open...</td>
+      <td>small/medium/large water treatment plants open/gravity - above average flood design</td>
     </tr>
     <tr>
       <th>F14.5</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants open...</td>
+      <td>small/medium/large water treatment plants open/gravity - below average flood design</td>
     </tr>
     <tr>
       <th>F14.6</th>
@@ -1414,12 +1384,12 @@ Data variables:
     <tr>
       <th>F14.9</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants clos...</td>
+      <td>small/medium/large water treatment plants closed/pressure - above average flood design</td>
     </tr>
     <tr>
       <th>F14.10</th>
       <td>Water treatment plants</td>
-      <td>small/medium/large water treatment plants clos...</td>
+      <td>small/medium/large water treatment plants closed/pressure - below average flood design</td>
     </tr>
     <tr>
       <th>F15.1</th>
@@ -1489,12 +1459,12 @@ Data variables:
     <tr>
       <th>F18.4</th>
       <td>Wastewater treatment plant</td>
-      <td>Small, medium, large Wastewater treatment plan...</td>
+      <td>Small, medium, large Wastewater treatment plants - above average flood design</td>
     </tr>
     <tr>
       <th>F18.5</th>
       <td>Wastewater treatment plant</td>
-      <td>Small, medium, large Wastewater treatment plan...</td>
+      <td>Small, medium, large Wastewater treatment plants- below average flood design</td>
     </tr>
     <tr>
       <th>F18.6</th>
@@ -1504,12 +1474,12 @@ Data variables:
     <tr>
       <th>F19.1</th>
       <td>Transmission and distribution pipelines</td>
-      <td>Sewers &amp; Interceptors: Exposed collector river...</td>
+      <td>Sewers &amp; Interceptors: Exposed collector river crossings</td>
     </tr>
     <tr>
       <th>F19.2</th>
       <td>Transmission and distribution pipelines</td>
-      <td>Sewers &amp; Interceptors: Buried collector river ...</td>
+      <td>Sewers &amp; Interceptors: Buried collector river crossings</td>
     </tr>
     <tr>
       <th>F19.3</th>
@@ -1524,12 +1494,12 @@ Data variables:
     <tr>
       <th>F20.2</th>
       <td>Others</td>
-      <td>Lift stations: lift station (small), wet well/...</td>
+      <td>Lift stations: lift station (small), wet well/dry well</td>
     </tr>
     <tr>
       <th>F20.3</th>
       <td>Others</td>
-      <td>Lift stations: lift station (medium large), we...</td>
+      <td>Lift stations: lift station (medium large), wet well/dry well</td>
     </tr>
     <tr>
       <th>F20.4</th>
@@ -1539,72 +1509,72 @@ Data variables:
     <tr>
       <th>F20.5</th>
       <td>Others</td>
-      <td>Lift stations: lift station (medium large), su...</td>
+      <td>Lift stations: lift station (medium large), submersible</td>
     </tr>
     <tr>
       <th>F21.1</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.2</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.3b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.4b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5a (lower boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.5b (upper boundary)</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.6</th>
       <td>Education &amp; Health</td>
-      <td>Generalized curve for commercial buildings, wh...</td>
+      <td>Generalized curve for commercial buildings, which also includes schools and hospitals</td>
     </tr>
     <tr>
       <th>F21.7</th>
       <td>School buildings</td>
-      <td>Generalized curve for companies (incl. governm...</td>
+      <td>Generalized curve for companies (incl. government)</td>
     </tr>
     <tr>
       <th>F21.8</th>
@@ -1807,7 +1777,7 @@ Name: geometry, dtype: int64
 </div>
 </div>
 </div>
-<p>The results above indicate that several asset types that are expected to be <em>Polygons</em> (such as <strong>substations</strong> and <strong>plants</strong>) are stored as <em>LineStrings</em> and points. It would be preferably to convert them all to polygons. For LineStrings, we can convert them to a <em>Polygon</em>, but for the <em>Points</em>, we will have to estimate a the average size, so we can use that to create a <code class="docutils literal notranslate"><span class="pre">buffer</span></code> around the assets.</p>
+<p>The results above indicate that several asset types that are expected to be <em>Polygons</em> (such as <strong>substations</strong> and <strong>plants</strong>) are stored as <em>LineStrings</em> and <em>Points</em>. It would be preferably to convert them all to polygons. For LineStrings, we can convert them to a <em>Polygon</em>, but for the <em>Points</em>, we will have to estimate a the average size, so we can use that to create a <code class="docutils literal notranslate"><span class="pre">buffer</span></code> around the assets.</p>
 <p>Let’s start with all the <em>LineStrings</em>. As we do not want to convert all LineStrings, we have to specify which assets we should “polygonize”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1875,7 +1845,7 @@ Name: geometry, dtype: int64
 </div></div></div>
 </div>
 <p>Now, the next step is to create a small buffer around the point data. We first estimate an average size of each building based on each subtype.</p>
-<p>To do so, let’s grab the polygon data and estimate their size. We grab the median so we are not too much influenced by extreme outliers:</p>
+<p>To do so, let’s grab the polygon data and estimate their size. We grab the median so we are not too much influenced by extreme outliers. If preferred, please change <code class="docutils literal notranslate"><span class="pre">.median()</span></code> to <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> (or any other metric).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
@@ -2074,13 +2044,13 @@ Name: geometry, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:07&lt;00:00, 19.96it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 476/476 [00:00&lt;00:00, 3161.83it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████████| 476/476 [00:00&lt;00:00, 13429.63it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:14&lt;00:00, 10.28it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 476/476 [00:00&lt;00:00, 1560.77it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████████| 476/476 [00:00&lt;00:00, 6666.96it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.48 s
-Wall time: 10.5 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 9.78 s
+Wall time: 18.1 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2096,7 +2066,7 @@ Wall time: 10.5 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2127,7 +2097,7 @@ Wall time: 10.5 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Power_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
