@@ -107,14 +107,12 @@ Temperature data is crucial for understanding climate change impacts on infrastr
 A key challenge with temperature datasets is the **large volume of data** generated, particularly for high-resolution daily records.
 ```
 
-#### **High-Resolution Daily Global Climate Dataset**
 - **[CEDA High-Resolution Climate Data](https://catalogue.ceda.ac.uk/uuid/c107618f1db34801bb88a1e927b82317/)**  
-  Provides **daily global climate data** at a **0.25-degree horizontal resolution** for both **historical (1981-2014)** and **future (2015-2100)** climate projections. The dataset includes climate simulations under three Shared Socioeconomic Pathways (**SSP2-4.5, SSP5-3.4OS, and SSP5-8.5**).  
+  Provides daily global climate dataat a 0.25-degree horizontal resolution for both historical (1981-2014) and future (2015-2100) climate projections. The dataset includes climate simulations under three Shared Socioeconomic Pathways (SSP2-4.5, SSP5-3.4OS, and SSP5-8.5).  
   📄 [Dataset Description](https://www.nature.com/articles/s41597-023-02528-x)
 
-#### **CHC-CMIP6: Climate Projection Data with a Focus on Heat-Related Extremes**
 - **[CHC-CMIP6 Climate Data](https://www.chc.ucsb.edu/data/chc-cmip6)**  
-  A **high-resolution global climate dataset** specifically designed for analyzing **heat-related hydroclimatic extremes**. This dataset includes **daily gridded data (0.05° resolution)** for both **observational (1983-2016)** and **projection periods (2030 and 2050)**.  
+  A high-resolution global climate dataset specifically designed for analyzing heat-related hydroclimatic extremes. This dataset includes daily gridded data (0.05° resolution) for both observational (1983-2016) and projection periods (2030 and 2050).  
   📄 [Dataset Details](https://www.nature.com/articles/s41597-024-03074-w)  
   📥 [Download Data](https://www.chc.ucsb.edu/data/chc-cmip6)
 
