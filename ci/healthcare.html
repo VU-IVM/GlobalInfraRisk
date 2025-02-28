@@ -435,13 +435,20 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-by-geometry-type">Split data by geometry type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-per-square-meter">Maximum damage per square meter</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-per-facility">Maximum damage per facility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">4. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>
@@ -457,7 +464,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="healthcare-infrastructure">
 <h1>Healthcare Infrastructure<a class="headerlink" href="#healthcare-infrastructure" title="Permalink to this heading">#</a></h1>
-<p>In this notebook, we will perform a <strong>damage and risk assessment</strong> for healthcare infrastructure, specifically focusing on hospitals and clinics. The assessment is based on combining hazard data (e.g., flood depths) with vulnerability curves to estimate the potential damage to infrastructure.</p>
+<p>In this notebook, we will perform a <strong>damage and risk assessment</strong> for healthcare infrastructure. The assessment is based on combining hazard data (e.g., flood depths) with vulnerability curves to estimate the potential damage to infrastructure.</p>
 <p>We will follow the steps outlined below to conduct the assessment:</p>
 <ol class="arabic simple">
 <li><p><strong>Loading the necessary packages:</strong><br />
@@ -535,8 +542,6 @@ This dataset contains information on the location and type of healthcare infrast
 This dataset includes information on the hazard affecting the infrastructure (e.g., flood depth at various locations).</p></li>
 <li><p><strong>Vulnerability curves:</strong><br />
 Vulnerability curves define how the infrastructure’s damage increases with the intensity of the hazard. For example, flood depth-damage curves specify how much damage occurs for different flood depths.</p></li>
-<li><p><strong>Maximum damage values:</strong><br />
-This dataset contains the maximum possible damage (in monetary terms) that can be incurred by individual infrastructure assets. This is crucial for calculating total damage based on the vulnerability curves.</p></li>
 </ol>
 <section id="infrastructure-data">
 <h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
@@ -1005,47 +1010,6 @@ Data variables:
        -89.99708333333334, -89.99791666666667,          -89.99875,
        -89.99958333333333],
       dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9910a84c-1382-445c-a508-037ea259c15b' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9910a84c-1382-445c-a508-037ea259c15b' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
-</div>
-</section>
-<section id="maximum-damages">
-<h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
-<p>One of the most difficult parts of the assessment is to define the maximum reconstruction cost of particular assets. Here we provide a baseline set of values, but these should be updated through national consultations.</p>
-<p>Locations of healthcare facilities are (somewhat randomly) geotagged as either points or polygons. This matters quite a lot for the maximum damages. For polygons, we would use damage per square meter, whereas for points, we would estimate the damage to the entire asset at once. Here we take the approach of converting the points to polygons, and there define our maximum damages in dollar per square meter.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;clinic&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;dentist&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;laboratory&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;doctors&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-               <span class="s1">&#39;pharmacy&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-               <span class="s1">&#39;hospital&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
-              <span class="s1">&#39;physiotherapist&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-                <span class="s1">&#39;rehabilitation&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
- <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>To be used in our damage assessment, we convert this to a Pandas DataFrame</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>And check if any of the objects are missing from the dataframe.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="vulnerability-data">
@@ -1725,140 +1689,182 @@ Data variables:
 </div>
 </div>
 </div>
-<p>Convert the point data to polygons. We first try to estimate an average size of each building based on each subtype.</p>
-<p>To do so, let’s first grab the polygon data and estimate their size:</p>
+<section id="split-data-by-geometry-type">
+<h3>Split data by geometry type<a class="headerlink" href="#split-data-by-geometry-type" title="Permalink to this heading">#</a></h3>
+<p>Similarly to some of the <strong>power</strong> and <strong>education</strong> object data, the healthcare data also contains multiple geometry types per unique object type. Instead of converting all data into the same geometry type, here we split the analysis into performing it for <em>Point</em> data, and for <em>Polygon</em> data. To do so, we need to take several steps:</p>
+<ol class="arabic simple">
+<li><p>Split the data by geometry type.</p></li>
+<li><p>Define our maximum damages by geometry type.</p></li>
+</ol>
+<p>Let’s first get an overview of the different geometry types for all the assets we are considering in this analysis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
-<span class="n">polygon_features</span><span class="p">[</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="o">.</span><span class="n">area</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;geom_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">geom_type</span>
+<span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;geom_type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>square_m2</th>
-    </tr>
-    <tr>
-      <th>object_type</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>clinic</th>
-      <td>2017.302160</td>
-    </tr>
-    <tr>
-      <th>dentist</th>
-      <td>528.305487</td>
-    </tr>
-    <tr>
-      <th>doctors</th>
-      <td>516.195585</td>
-    </tr>
-    <tr>
-      <th>hospital</th>
-      <td>11035.428707</td>
-    </tr>
-    <tr>
-      <th>laboratory</th>
-      <td>18643.785496</td>
-    </tr>
-    <tr>
-      <th>pharmacy</th>
-      <td>260.948255</td>
-    </tr>
-    <tr>
-      <th>rehabilitation</th>
-      <td>626.453636</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>It seems we are missing some features. Let’s check which one:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;physiotherapist&#39;, &#39;alternative&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object_type      geom_type   
+alternative      Point             2
+clinic           MultiPolygon     62
+                 Point           196
+dentist          MultiPolygon      6
+                 Point           201
+doctors          MultiPolygon     14
+                 Point            86
+hospital         MultiPolygon    277
+                 Point            64
+                 Polygon           1
+laboratory       MultiPolygon      1
+                 Point            25
+pharmacy         MultiPolygon     37
+                 Point           818
+physiotherapist  Point             1
+rehabilitation   MultiPolygon      2
+Name: geometry, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now we can add this to our list. Let’s use pharmacy as the square_m2 size.</p>
+<p>Now we will create a dictionary, where we store the data by geometry type.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;alternative&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
-<span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;physiotherapist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;pharmacy&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_split</span> <span class="o">=</span> <span class="p">{}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>And now we can use this to create polygons, using this square meters as the average size for each point.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> 
-                                                                    <span class="n">shapely</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> 
-                                                                    <span class="n">distance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">object_type</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]),</span>
-                                                                    <span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_split</span><span class="p">[</span><span class="s1">&#39;Polygons&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span>
+<span class="n">feature_split</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Point&#39;</span><span class="p">])]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="maximum-damages">
+<h3>Maximum damages<a class="headerlink" href="#maximum-damages" title="Permalink to this heading">#</a></h3>
+<p>We just identified that locations of healthcare facilities are (somewhat randomly) geotagged as either <em>Points</em> or <em>Polygons</em>. This matters quite a lot for the maximum damages. For <em>Polygons</em>, we would use damage per square meter, whereas for <em>Points</em>, we would estimate the damage to the entire asset at once. As such, we will create two maximum damages dataframes: One with damage per square meter, and one per facility.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_by_geom_type</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="maximum-damage-per-square-meter">
+<h4>Maximum damage per square meter<a class="headerlink" href="#maximum-damage-per-square-meter" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;clinic&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;dentist&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;laboratory&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;doctors&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+               <span class="s1">&#39;pharmacy&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+               <span class="s1">&#39;hospital&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> 
+              <span class="s1">&#39;physiotherapist&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                <span class="s1">&#39;rehabilitation&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To be used in our damage assessment, we convert this to a Pandas DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_by_geom_type</span><span class="p">[</span><span class="s1">&#39;Polygons&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxdam</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-damage-per-facility">
+<h4>Maximum damage per facility<a class="headerlink" href="#maximum-damage-per-facility" title="Permalink to this heading">#</a></h4>
+<p>And now we define the maximum damages per facility. Please note that these are arbitrary values again, just for the sake of this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;clinic&#39;</span> <span class="p">:</span> <span class="mf">1e6</span><span class="p">,</span> 
+               <span class="s1">&#39;dentist&#39;</span> <span class="p">:</span> <span class="mf">5e5</span><span class="p">,</span> 
+               <span class="s1">&#39;laboratory&#39;</span> <span class="p">:</span> <span class="mf">2e6</span><span class="p">,</span> 
+               <span class="s1">&#39;doctors&#39;</span> <span class="p">:</span> <span class="mf">5e5</span><span class="p">,</span> 
+               <span class="s1">&#39;pharmacy&#39;</span> <span class="p">:</span> <span class="mf">1e6</span><span class="p">,</span>
+               <span class="s1">&#39;hospital&#39;</span> <span class="p">:</span> <span class="mf">10e6</span><span class="p">,</span>
+               <span class="s1">&#39;alternative&#39;</span> <span class="p">:</span> <span class="mf">2.5e5</span><span class="p">,</span> 
+              <span class="s1">&#39;physiotherapist&#39;</span><span class="p">:</span> <span class="mf">2.5e5</span><span class="p">,</span>
+                <span class="s1">&#39;rehabilitation&#39;</span><span class="p">:</span> <span class="mf">1e6</span><span class="p">,</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To be used in our damage assessment, we convert this to a Pandas DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">maxdam_dict</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">maxdam</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxdam_by_geom_type</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxdam</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
 <section id="performing-the-damage-assessment">
-<h2>5. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
-<p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment.</p>
+<h2>4. Performing the Damage Assessment<a class="headerlink" href="#performing-the-damage-assessment" title="Permalink to this heading">#</a></h2>
+<p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment. Here we will run the analysis twice. Once with the <em>Polygon</em> data, and once with the <em>Point</em> data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+<span class="n">damage_results_points</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">feature_split</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">],</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam_by_geom_type</span><span class="p">[</span><span class="s1">&#39;Points&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 56/56 [00:08&lt;00:00,  6.80it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████████████| 28/28 [00:00&lt;?, ?it/s]
-Calculating damage: 100%|██████████████████████████████████████████████████████████████████████| 28/28 [00:00&lt;?, ?it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating damage: 100%|███████████████████████████████████████████████████████| 1393/1393 [00:00&lt;00:00, 11789.91it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4.55 s
-Wall time: 8.37 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 375 ms
+Wall time: 1.48 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1868,351 +1874,33 @@ Wall time: 8.37 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">damage_results_polygons</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">feature_split</span><span class="p">[</span><span class="s1">&#39;Polygons&#39;</span><span class="p">],</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam_by_geom_type</span><span class="p">[</span><span class="s1">&#39;Polygons&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>osm_id</th>
-      <th>geometry</th>
-      <th>name</th>
-      <th>object_type</th>
-      <th>coverage</th>
-      <th>values</th>
-      <th>maximum_damage</th>
-      <th>damage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>36</th>
-      <td>9272020517</td>
-      <td>POLYGON ((28.70342 48.02978, 28.70342 48.02958...</td>
-      <td>Вивафарм</td>
-      <td>pharmacy</td>
-      <td>[0.05577028915286064, 0.025343626737594604]</td>
-      <td>[639.0, 696.0]</td>
-      <td>1000</td>
-      <td>6.961757e+05</td>
-    </tr>
-    <tr>
-      <th>73</th>
-      <td>3528734254</td>
-      <td>POLYGON ((28.69802 48.03052, 28.69802 48.03033...</td>
-      <td>Аптека</td>
-      <td>pharmacy</td>
-      <td>[0.08111274242401123]</td>
-      <td>[630.0]</td>
-      <td>1000</td>
-      <td>6.961657e+05</td>
-    </tr>
-    <tr>
-      <th>82</th>
-      <td>6544507969</td>
-      <td>POLYGON ((28.70041 48.03141, 28.70041 48.03121...</td>
-      <td>Провизор</td>
-      <td>pharmacy</td>
-      <td>[0.0811113491654396]</td>
-      <td>[460.0]</td>
-      <td>1000</td>
-      <td>6.683075e+05</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>3574849564</td>
-      <td>POLYGON ((28.70347 48.03044, 28.70347 48.03024...</td>
-      <td>Аптека</td>
-      <td>pharmacy</td>
-      <td>[0.044310811907052994, 0.03680206462740898]</td>
-      <td>[478.0, 679.0]</td>
-      <td>1000</td>
-      <td>6.878001e+05</td>
-    </tr>
-    <tr>
-      <th>120</th>
-      <td>3589310865</td>
-      <td>POLYGON ((28.6972 48.03231, 28.6972 48.03212, ...</td>
-      <td>Аптека</td>
-      <td>pharmacy</td>
-      <td>[0.0811099261045456]</td>
-      <td>[523.0]</td>
-      <td>1000</td>
-      <td>6.961415e+05</td>
-    </tr>
-    <tr>
-      <th>122</th>
-      <td>9704223438</td>
-      <td>POLYGON ((27.79258 48.44594, 27.79258 48.44575...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.011612683534622192, 0.02686905674636364]</td>
-      <td>[172.0, 265.0]</td>
-      <td>1000</td>
-      <td>2.060500e+05</td>
-    </tr>
-    <tr>
-      <th>124</th>
-      <td>9704223440</td>
-      <td>POLYGON ((27.79271 48.44616, 27.79271 48.44597...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.05844156816601753]</td>
-      <td>[172.0]</td>
-      <td>1000</td>
-      <td>2.477835e+05</td>
-    </tr>
-    <tr>
-      <th>127</th>
-      <td>4644233679</td>
-      <td>POLYGON ((28.98909 47.7607, 28.98909 47.76051,...</td>
-      <td>Вивафарм</td>
-      <td>pharmacy</td>
-      <td>[0.08153653144836426]</td>
-      <td>[254.0]</td>
-      <td>1000</td>
-      <td>4.604703e+05</td>
-    </tr>
-    <tr>
-      <th>152</th>
-      <td>3680177537</td>
-      <td>POLYGON ((28.99061 47.7568, 28.99061 47.75661,...</td>
-      <td>Темиус</td>
-      <td>pharmacy</td>
-      <td>[0.05666636675596237, 0.024876272305846214]</td>
-      <td>[372.0, 376.0]</td>
-      <td>1000</td>
-      <td>6.017569e+05</td>
-    </tr>
-    <tr>
-      <th>167</th>
-      <td>3689599900</td>
-      <td>POLYGON ((28.693 48.03215, 28.693 48.03196, 28...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.08111017197370529]</td>
-      <td>[397.0]</td>
-      <td>1000</td>
-      <td>6.233966e+05</td>
-    </tr>
-    <tr>
-      <th>173</th>
-      <td>3697156982</td>
-      <td>POLYGON ((28.98894 47.76251, 28.98894 47.76231...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.00231770146638155, 0.07921600341796875]</td>
-      <td>[115.0, 126.0]</td>
-      <td>1000</td>
-      <td>2.638599e+05</td>
-    </tr>
-    <tr>
-      <th>185</th>
-      <td>3709735779</td>
-      <td>POLYGON ((28.9922 47.75566, 28.9922 47.75547, ...</td>
-      <td>Аптечный киоск</td>
-      <td>pharmacy</td>
-      <td>[0.081544429063797]</td>
-      <td>[382.0]</td>
-      <td>1000</td>
-      <td>6.109871e+05</td>
-    </tr>
-    <tr>
-      <th>224</th>
-      <td>3747750488</td>
-      <td>POLYGON ((28.98965 47.75847, 28.98965 47.75827...</td>
-      <td>Фармакон</td>
-      <td>pharmacy</td>
-      <td>[0.055090878158807755, 0.026449155062437057]</td>
-      <td>[163.0, 27.0]</td>
-      <td>1000</td>
-      <td>2.434535e+05</td>
-    </tr>
-    <tr>
-      <th>674</th>
-      <td>10760437776</td>
-      <td>POLYGON ((28.86171 47.02549, 28.86171 47.02529...</td>
-      <td>Elody</td>
-      <td>pharmacy</td>
-      <td>[0.07087450474500656, 0.011807563714683056]</td>
-      <td>[2.0, 132.0]</td>
-      <td>1000</td>
-      <td>4.378067e+04</td>
-    </tr>
-    <tr>
-      <th>749</th>
-      <td>4987463225</td>
-      <td>POLYGON ((27.78949 48.4417, 27.78949 48.44151,...</td>
-      <td>Farmacie</td>
-      <td>pharmacy</td>
-      <td>[0.014250691048800945]</td>
-      <td>[85.0]</td>
-      <td>1000</td>
-      <td>3.118887e+04</td>
-    </tr>
-    <tr>
-      <th>885</th>
-      <td>4347132594</td>
-      <td>POLYGON ((28.70356 48.03073, 28.70356 48.03054...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.01871015690267086, 0.062402255833148956]</td>
-      <td>[478.0, 679.0]</td>
-      <td>1000</td>
-      <td>6.926300e+05</td>
-    </tr>
-    <tr>
-      <th>891</th>
-      <td>4347206894</td>
-      <td>POLYGON ((28.70279 48.02922, 28.70279 48.02903...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.024230413138866425, 0.05688437074422836]</td>
-      <td>[639.0, 761.0]</td>
-      <td>1000</td>
-      <td>6.961832e+05</td>
-    </tr>
-    <tr>
-      <th>892</th>
-      <td>4347211091</td>
-      <td>POLYGON ((28.69991 48.031, 28.69991 48.03081, ...</td>
-      <td>None</td>
-      <td>pharmacy</td>
-      <td>[0.07159385830163956, 0.009518124163150787]</td>
-      <td>[528.0, 748.0]</td>
-      <td>1000</td>
-      <td>6.961591e+05</td>
-    </tr>
-    <tr>
-      <th>1301</th>
-      <td>10250086784</td>
-      <td>POLYGON ((28.84184 47.03672, 28.84184 47.03617...</td>
-      <td>Invitro</td>
-      <td>clinic</td>
-      <td>[0.048635903745889664, 0.013429696671664715]</td>
-      <td>[537.0, 542.0]</td>
-      <td>1000</td>
-      <td>5.326899e+05</td>
-    </tr>
-    <tr>
-      <th>1303</th>
-      <td>10250086785</td>
-      <td>POLYGON ((28.8414 47.03667, 28.8414 47.03647, ...</td>
-      <td>Felicia</td>
-      <td>pharmacy</td>
-      <td>[0.0023120574187487364]</td>
-      <td>[537.0]</td>
-      <td>1000</td>
-      <td>1.984368e+04</td>
-    </tr>
-    <tr>
-      <th>1436</th>
-      <td>702502095</td>
-      <td>MULTIPOLYGON (((29.00278 47.80296, 29.003 47.8...</td>
-      <td>Недостроенная, заброшенная больница. Ныне выку...</td>
-      <td>hospital</td>
-      <td>[0.02773427404463291, 0.19649264216423035, 0.0...</td>
-      <td>[272.0, 282.0, 482.0, 302.0]</td>
-      <td>1000</td>
-      <td>2.175662e+06</td>
-    </tr>
-    <tr>
-      <th>1468</th>
-      <td>156024156</td>
-      <td>MULTIPOLYGON (((28.30322 48.15509, 28.30326 48...</td>
-      <td>Spitalul Raional Soroca „A. Prisacari“</td>
-      <td>hospital</td>
-      <td>[0.051024824380874634, 0.48129481077194214, 0....</td>
-      <td>[475.0, 399.0, 403.0]</td>
-      <td>1000</td>
-      <td>5.473175e+06</td>
-    </tr>
-    <tr>
-      <th>1496</th>
-      <td>184483676</td>
-      <td>MULTIPOLYGON (((28.70662 48.03309, 28.70354 48...</td>
-      <td>Каменская центраьная районная больница</td>
-      <td>hospital</td>
-      <td>[0.32479339838027954, 0.4659941494464874, 0.19...</td>
-      <td>[152.0, 219.0, 462.0, 630.0, 289.0, 292.0, 375...</td>
-      <td>1000</td>
-      <td>7.436810e+07</td>
-    </tr>
-    <tr>
-      <th>1502</th>
-      <td>762358008</td>
-      <td>MULTIPOLYGON (((28.55464 48.04902, 28.5545 48....</td>
-      <td>Medpunct Zăluceni</td>
-      <td>clinic</td>
-      <td>[0.0357695072889328]</td>
-      <td>[28.0]</td>
-      <td>1000</td>
-      <td>2.578789e+04</td>
-    </tr>
-    <tr>
-      <th>1581</th>
-      <td>10058306</td>
-      <td>MULTIPOLYGON (((28.98892 47.76629, 28.98891 47...</td>
-      <td>Детская поликлиника</td>
-      <td>clinic</td>
-      <td>[0.024738356471061707, 0.2209341824054718, 0.1...</td>
-      <td>[293.0, 443.0, 395.0, 355.0]</td>
-      <td>1000</td>
-      <td>4.129644e+06</td>
-    </tr>
-    <tr>
-      <th>1612</th>
-      <td>174339391</td>
-      <td>MULTIPOLYGON (((28.9888 47.76696, 28.98816 47....</td>
-      <td>Морг</td>
-      <td>hospital</td>
-      <td>[0.0870068222284317, 0.139858677983284]</td>
-      <td>[423.0, 293.0]</td>
-      <td>1000</td>
-      <td>1.946442e+06</td>
-    </tr>
-    <tr>
-      <th>1643</th>
-      <td>662942615</td>
-      <td>MULTIPOLYGON (((29.6148 46.8344, 29.61487 46.8...</td>
-      <td>Центр Микрохирургии глаза</td>
-      <td>clinic</td>
-      <td>[0.03987538814544678]</td>
-      <td>[141.0]</td>
-      <td>1000</td>
-      <td>1.447667e+05</td>
-    </tr>
-    <tr>
-      <th>1699</th>
-      <td>519337668</td>
-      <td>MULTIPOLYGON (((28.99679 47.65854, 28.99779 47...</td>
-      <td>Психоневрологическая больница</td>
-      <td>hospital</td>
-      <td>[0.03943768888711929]</td>
-      <td>[359.0]</td>
-      <td>1000</td>
-      <td>3.384815e+05</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 56/56 [00:02&lt;00:00, 27.42it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 931.24it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 7743.93it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1.42 s
+Wall time: 2.09 s
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now merge all the objects with damage. The <em>Points</em> damage estimates works slightly different, and returns all assets, also the non-damaged onces. Here we are mostly interested in all the damaged assets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">damage_results_polygons</span><span class="p">,</span><span class="n">damage_results_points</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">damage_results_points</span><span class="o">.</span><span class="n">damage</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="save-the-results">
@@ -2222,7 +1910,7 @@ Wall time: 8.37 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;river_flood&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_100&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Healthcare_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Healthcare_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2253,7 +1941,7 @@ Wall time: 8.37 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2275,7 +1963,7 @@ Wall time: 8.37 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/4b5fd7587ce978effa614afbdae7566a0de2716066f535103ea962f0fccf1167.png" src="../_images/4b5fd7587ce978effa614afbdae7566a0de2716066f535103ea962f0fccf1167.png" />
+<img alt="../_images/7cd756f42a34fad14c5b62ac2dedb9567b3fdb11882428926ddce2c374824d55.png" src="../_images/7cd756f42a34fad14c5b62ac2dedb9567b3fdb11882428926ddce2c374824d55.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -2293,7 +1981,7 @@ Wall time: 8.37 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/65a8cf86c3155fd40519d7d23a4621529ed11ad5e8acd2a9dd0b4b39ceb6c0bf.png" src="../_images/65a8cf86c3155fd40519d7d23a4621529ed11ad5e8acd2a9dd0b4b39ceb6c0bf.png" />
+<img alt="../_images/d794decd6d848f742ebb326ef88008bdd4a5158c85cd81db083dbb11eb00c679.png" src="../_images/d794decd6d848f742ebb326ef88008bdd4a5158c85cd81db083dbb11eb00c679.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2303,7 +1991,7 @@ Wall time: 8.37 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "eef4714d60af4649bd4d5c71e9bf6c20", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "50ccf12e089344b1a828dbd0842abc2c", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 </section>
@@ -2378,13 +2066,20 @@ Wall time: 8.37 s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vulnerability-data">Vulnerability data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">5. Performing the Damage Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-by-geometry-type">Split data by geometry type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damages">Maximum damages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-per-square-meter">Maximum damage per square meter</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-damage-per-facility">Maximum damage per facility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-damage-assessment">4. Performing the Damage Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">5. Save the Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>

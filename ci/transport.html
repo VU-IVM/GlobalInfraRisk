@@ -1963,7 +1963,215 @@ Wall time: 5min 25s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:  62%|████████████████████████████████████████▋                        | 5/8 [29:44&lt;17:56, 358.98s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:  88%|████████████████████████████████████████████████████████▉        | 7/8 [40:53&lt;05:46, 346.52s/it]Traceback (most recent call last):
+  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
+  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
+  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 847, Y offset 375: TIFFReadEncodedTile() failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
+    values_and_coverage_per_area_and_line_object = exact_extract(
+                                                   ^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
+    processor.process()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
+    ret = self.ds.sel(**selection).to_numpy()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
+    return self.variable.to_numpy()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
+    return to_numpy(self._data)
+           ^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
+    data = data.get_duck_array()  # type: ignore[no-untyped-call]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
+    self._ensure_cached()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
+    self.array = as_indexable(self.array.get_duck_array())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
+    array = self.array[self.key]
+            ~~~~~~~~~~^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
+    return indexing.explicit_indexing_adapter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
+    result = raw_indexing_method(raw_key.tuple)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
+    out = riods.read(band_key, window=window, masked=self.masked)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
+  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
+rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 847, Y offset 375: TIFFReadEncodedTile() failed.
+Traceback (most recent call last):
+  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
+  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
+  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 378: TIFFReadEncodedTile() failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
+    values_and_coverage_per_area_and_line_object = exact_extract(
+                                                   ^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
+    processor.process()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
+    ret = self.ds.sel(**selection).to_numpy()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
+    return self.variable.to_numpy()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
+    return to_numpy(self._data)
+           ^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
+    data = data.get_duck_array()  # type: ignore[no-untyped-call]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
+    self._ensure_cached()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
+    self.array = as_indexable(self.array.get_duck_array())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
+    array = self.array[self.key]
+            ~~~~~~~~~~^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
+    return indexing.explicit_indexing_adapter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
+    result = raw_indexing_method(raw_key.tuple)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
+    out = riods.read(band_key, window=window, masked=self.masked)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
+  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
+rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 378: TIFFReadEncodedTile() failed.
+Traceback (most recent call last):
+  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
+  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
+  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
+    values_and_coverage_per_area_and_line_object = exact_extract(
+                                                   ^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
+    processor.process()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
+    ret = self.ds.sel(**selection).to_numpy()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
+    return self.variable.to_numpy()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
+    return to_numpy(self._data)
+           ^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
+    data = data.get_duck_array()  # type: ignore[no-untyped-call]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
+    self._ensure_cached()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
+    self.array = as_indexable(self.array.get_duck_array())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
+    array = self.array[self.key]
+            ~~~~~~~~~~^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
+    return indexing.explicit_indexing_adapter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
+    result = raw_indexing_method(raw_key.tuple)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
+    out = riods.read(band_key, window=window, masked=self.masked)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
+  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
+rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
+Traceback (most recent call last):
+  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
+  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
+  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
+    values_and_coverage_per_area_and_line_object = exact_extract(
+                                                   ^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
+    processor.process()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
+    ret = self.ds.sel(**selection).to_numpy()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
+    return self.variable.to_numpy()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
+    return to_numpy(self._data)
+           ^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
+    data = data.get_duck_array()  # type: ignore[no-untyped-call]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
+    self._ensure_cached()
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
+    self.array = as_indexable(self.array.get_duck_array())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
+    return self.array.get_duck_array()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
+    array = self.array[self.key]
+            ~~~~~~~~~~^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
+    return indexing.explicit_indexing_adapter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
+    result = raw_indexing_method(raw_key.tuple)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
+    out = riods.read(band_key, window=window, masked=self.masked)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
+  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
+rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
+Risk Calculation: 100%|█████████████████████████████████████████████████████████████| 8/8 [12:14:42&lt;00:00, 5510.34s/it]
 </pre></div>
 </div>
 </div>
@@ -1998,6 +2206,12 @@ Wall time: 5min 25s
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;River Flood Risk for </span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;River Flood Risk for Togo&#39;)
+</pre></div>
+</div>
+<img alt="../_images/403e42f63898df74fd918a626160937d86ca111b293393f080873723aabf746b.png" src="../_images/403e42f63898df74fd918a626160937d86ca111b293393f080873723aabf746b.png" />
 </div>
 </div>
 </section>
