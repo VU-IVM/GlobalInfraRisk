@@ -435,6 +435,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis">3. Exposure analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">4. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-exposure-levels">Absolute exposure levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-exposure-levels">Relative exposure levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-visualisation">Spatial visualisation</a></li>
 </ul>
 </li>
 </ul>
@@ -499,7 +508,6 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">zipfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZipFile</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Patch</span>
@@ -544,7 +552,7 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </ol>
 <section id="infrastructure-data">
 <h3>Infrastructure Data<a class="headerlink" href="#infrastructure-data" title="Permalink to this heading">#</a></h3>
-<p>We will perform this example analysis for Tajikistan. To start the analysis, we first download the OpenStreetMap data from GeoFabrik. In case of locally available data, one can load the shapefiles through <strong>gpd.read_file()</strong>, as we show in the second cell within this section.</p>
+<p>We will perform this example analysis for Togo. To start the analysis, we first download the OpenStreetMap data from GeoFabrik. In case of locally available data, one can load the shapefiles through <strong>gpd.read_file()</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">infrastructure_path</span> <span class="o">=</span> <span class="n">download</span><span class="o">.</span><span class="n">get_country_geofabrik</span><span class="p">(</span><span class="n">country_iso3</span><span class="p">)</span>
@@ -561,8 +569,8 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 7.69 s
-Wall time: 9.58 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 9.05 s
+Wall time: 16 s
 </pre></div>
 </div>
 </div>
@@ -570,21 +578,6 @@ Wall time: 9.58 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_types</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
-<span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_1_states_provinces.shp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -605,6 +598,11 @@ Wall time: 9.58 s
 <span class="k">with</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">zipurl</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipresp</span><span class="p">:</span>
     <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">zipresp</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span> <span class="k">as</span> <span class="n">zfile</span><span class="p">:</span>
         <span class="n">zfile</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KeyboardInterrupt
 </pre></div>
 </div>
 </div>
@@ -699,11 +697,35 @@ Wall time: 9.58 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [05:33&lt;00:00, 15.18s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [08:51&lt;00:00, 24.15s/it]
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="ancilliary-data-for-processing">
+<h3>Ancilliary data for processing<a class="headerlink" href="#ancilliary-data-for-processing" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>
+<span class="n">world_plot</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/nvkelso/natural-earth-vector/raw/master/10m_cultural/ne_10m_admin_1_states_provinces.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exposure-analysis">
+<h2>3. Exposure analysis<a class="headerlink" href="#exposure-analysis" title="Permalink to this heading">#</a></h2>
+<p>Because the hazard information provides only the possible extent of wildfires and does not provide us with any indication of intensity, we focus on performing an exposure analysis within this example.</p>
+<p>We will first run the exposure analyse by year, as the hazard data provides a yearly timeseries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_per_year</span> <span class="o">=</span> <span class="p">[]</span>
@@ -720,19 +742,12 @@ Wall time: 9.58 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [04:04&lt;00:00, 11.12s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [04:03&lt;00:00, 11.05s/it]
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3587</span><span class="p">)</span><span class="o">.</span><span class="n">length</span>
-<span class="n">base_length</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>And then we can merge the results of all years into a single <code class="docutils literal notranslate"><span class="pre">pd.Dataframe()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_exposed_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[[</span><span class="s1">&#39;osm_id&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;object_type&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
@@ -744,6 +759,38 @@ Wall time: 9.58 s
 </div>
 </div>
 </div>
+</section>
+<section id="save-the-results">
+<h2>4. Save the Results<a class="headerlink" href="#save-the-results" title="Permalink to this heading">#</a></h2>
+<p>For further analysis, we can save the results in their full detail, or save summary estimates per subnational unit. We show how to do this using the exposure results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_exposed_features</span><span class="p">[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3587</span><span class="p">)</span><span class="o">.</span><span class="n">length</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_exposed_features</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wildfire_Exposure_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-results">
+<h2>5. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
+<p>The results of the exposure assessment can be visualized using charts and maps. This will provide a clear representation of which infrastructure is most affected by the hazard and the expected exposure levels.</p>
+<p>To also assess the relative impacts, we estimate the total length of each segment before we continue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3587</span><span class="p">)</span><span class="o">.</span><span class="n">length</span>
+<span class="n">base_length</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)[</span><span class="s1">&#39;total_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And get the exposure by type.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_by_type</span> <span class="o">=</span> <span class="n">all_exposed_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -751,26 +798,21 @@ Wall time: 9.58 s
 </div>
 </div>
 </div>
+<p>And Remove ‘_link’ from the index names and group by the base type (summing the values). This will ensure that we only keep the “base” classes (e.g., primary, secondary, tertiary), making visualisation more convenient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_by_type</span><span class="p">[</span><span class="s1">&#39;2004&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">base_length</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.14654591772290174
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove &#39;_link&#39; from the index names and group by the base type (summing the values)</span>
-<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_by_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_by_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-
-<span class="c1"># Ensure the order of the rows (which will become columns after transposing)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="absolute-exposure-levels">
+<h3>Absolute exposure levels<a class="headerlink" href="#absolute-exposure-levels" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure the order of the rows (which will become columns after transposing)</span>
 <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">]</span>
 <span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 
@@ -798,66 +840,74 @@ Wall time: 9.58 s
 <img alt="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" src="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" />
 </div>
 </div>
+</section>
+<section id="relative-exposure-levels">
+<h3>Relative exposure levels<a class="headerlink" href="#relative-exposure-levels" title="Permalink to this heading">#</a></h3>
+<p>We first need to make sure that we have the total lengths per object type as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="c1"># Assume exposure_by_type is your DataFrame (with index like &#39;primary&#39;, &#39;primary_link&#39;, etc.)</span>
-<span class="c1"># and base_length is your pd.Series of baseline lengths.</span>
-
-<span class="c1"># --- Group exposure_by_type by removing the &#39;_link&#39; suffix and summing ---</span>
-<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_by_type</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-
-<span class="c1"># --- Group base_length in a similar fashion ---</span>
-<span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_link&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-
-<span class="c1"># Define a consistent order</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then we can plot the relative exposure results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure the object types are in the correct order</span>
 <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trunk&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary&#39;</span><span class="p">,</span> <span class="s1">&#39;tertiary&#39;</span><span class="p">]</span>
 <span class="n">exposure_grouped</span> <span class="o">=</span> <span class="n">exposure_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 <span class="n">base_length_grouped</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 
-<span class="c1"># --- Compute the total baseline length (a scalar) ---</span>
-<span class="n">total_baseline</span> <span class="o">=</span> <span class="n">base_length_grouped</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="c1"># Compute the relative exposure for each object type and year:</span>
+<span class="c1"># Relative Exposure (%) = (Exposure / Baseline Length) * 100</span>
+<span class="n">relative_exposure</span> <span class="o">=</span> <span class="p">(</span><span class="n">exposure_grouped</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">base_length_grouped</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="c1"># --- Compute relative exposure per type for each year ---</span>
-<span class="c1"># This gives, for each object type and year:</span>
-<span class="c1"># (exposure for type in year) / (total baseline length) * 100</span>
-<span class="n">relative_exposure</span> <span class="o">=</span> <span class="p">(</span><span class="n">exposure_grouped</span> <span class="o">/</span> <span class="n">total_baseline</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-
-<span class="c1"># Now, for each year, the total relative exposure is:</span>
-<span class="c1"># relative_exposure.sum(axis=0) = (total exposure for that year) / total_baseline * 100</span>
-<span class="c1"># For example, in 2004, this sum should be around 14% (if that is what your data imply).</span>
-
-<span class="c1"># --- Define your colors for each type ---</span>
+<span class="c1"># Define colors for each object type</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#5f0f40&quot;</span><span class="p">,</span> <span class="s2">&quot;#9a031e&quot;</span><span class="p">,</span> <span class="s2">&quot;#e36414&quot;</span><span class="p">,</span> <span class="s2">&quot;#fb8b24&quot;</span><span class="p">]</span>
 
-<span class="c1"># --- Plot the stacked bar chart ---</span>
-<span class="c1"># Transpose so that years become the x-axis</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">relative_exposure</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Exposure (in percentage)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative Exposure by Type per Year (</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">) </span><span class="se">\n</span><span class="s2">(Percentage of Baseline Length)&quot;</span><span class="p">,</span>
-             <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="c1"># Extract years and object types for plotting</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">relative_exposure</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">object_types</span> <span class="o">=</span> <span class="n">relative_exposure</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-<span class="c1"># Capitalize legend labels</span>
-<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Object Type&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> 
-          <span class="n">title_fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
+<span class="c1"># Set up positions for grouped bars</span>
+<span class="n">n_years</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+<span class="n">n_types</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">object_types</span><span class="p">)</span>
+<span class="n">bar_width</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_years</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot each object type&#39;s bar for every year, shifting the positions appropriately.</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">obj_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">object_types</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">relative_exposure</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># relative exposure values for this object type</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">bar_width</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">bar_width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">obj_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Labeling the axes and the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Relative Exposure (%)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative Exposure by Object Type per Year (</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust x-ticks so they appear centered under the groups of bars</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_types</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">bar_width</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># Add legend and layout adjustments</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Object Type&#39;</span><span class="p">,</span> <span class="n">title_fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" src="../_images/9183081190d8eebf7f42dc9607cba7dc4aced611e4f3e27562f03abf961efb42.png" />
+<img alt="../_images/ce553995d2595991a52fc5a4e8d3d02c5b90fd4687d1631fa89fda8d9f5aadeb.png" src="../_images/ce553995d2595991a52fc5a4e8d3d02c5b90fd4687d1631fa89fda8d9f5aadeb.png" />
 </div>
 </div>
+</section>
+<section id="spatial-visualisation">
+<h3>Spatial visualisation<a class="headerlink" href="#spatial-visualisation" title="Permalink to this heading">#</a></h3>
 <p>Now that we have an idea on the years that show the highest level of exposure, let’s spatially plot the four years that show the largest exposure values. This will help us to understand where in the country roads can be affected.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -919,7 +969,7 @@ Wall time: 9.58 s
 <img alt="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" src="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" />
 </div>
 </div>
-<p>As a final figure, we may want to plot how often certain roads are exposed to wildfires across the time series.</p>
+<p>And as a final figure, we may want to plot how often certain roads are exposed to wildfires across the time series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the list of year columns (assumes columns 2002 through 2023 exist)</span>
@@ -956,7 +1006,7 @@ Wall time: 9.58 s
 <span class="c1"># Add the CartoDB Positron basemap with partial transparency</span>
 <span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Frequency of Wildfire Exposure Across the Time Series&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Frequency of Wildfire Exposure Across the Time Series&quot;</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 
 <span class="c1"># Create a custom legend using matplotlib.patches.Patch</span>
@@ -969,7 +1019,7 @@ Wall time: 9.58 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ca52c6470e326e5c1d15e3ec67d8aed627654f46ea8631e0969a2c38e09803ca.png" src="../_images/ca52c6470e326e5c1d15e3ec67d8aed627654f46ea8631e0969a2c38e09803ca.png" />
+<img alt="../_images/6d39fd0c8e5691739d8a244a8bea05c0c4462e6c293f4e80cc495de4dcd70950.png" src="../_images/6d39fd0c8e5691739d8a244a8bea05c0c4462e6c293f4e80cc495de4dcd70950.png" />
 </div>
 </div>
 </section>
@@ -1046,6 +1096,15 @@ Wall time: 9.58 s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">2. Loading the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-data">Infrastructure Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ancilliary-data-for-processing">Ancilliary data for processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-analysis">3. Exposure analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-results">4. Save the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">5. Visualizing the Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absolute-exposure-levels">Absolute exposure levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-exposure-levels">Relative exposure levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-visualisation">Spatial visualisation</a></li>
 </ul>
 </li>
 </ul>
