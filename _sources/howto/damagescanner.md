@@ -61,7 +61,7 @@ To use `DamageScanner()`, the four required inputs **must be specified first** b
 Each unique infrastructure type should be represented by a single geometry type (e.g., Polygon or Point). The maximum damage values you specify per infrastructure type are represented by, for example, damage per square meter or per asset (but never both). At least three routes are possible: 
 
 1. [Convert all geometries into the same geometry](https://vu-ivm.github.io/GlobalInfraRisk/howto/data_preparation.html#step-1-checking-geometry-types);
-2. Split up the damage assessment by geometry type for that specific infrastructure object;
+2. [Split up the damage assessment by geometry type for that specific infrastructure object](https://vu-ivm.github.io/GlobalInfraRisk/ci/healthcare.html#split-data-by-geometry-type);
 3. Give the the infrastructure different and unique object type names for each geometry type (e.g., substation_point, substation_polygon), and ensure these are included in the maximum damage and vulnerability curves accordingly.   
 ```
 
