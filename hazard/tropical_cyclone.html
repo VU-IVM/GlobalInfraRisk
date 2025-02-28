@@ -483,7 +483,7 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b13</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
 <span class="c1">#!pip install lonboard</span>
@@ -563,8 +563,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 15s
-Wall time: 2min
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 1min 12s
+Wall time: 1min 42s
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ Wall time: 2min
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5a4ea003417d44d1aa8a72d693b9620d", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "56ea0bd4c72740f09015740cc3f9cf6a", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="hazard-data">
@@ -618,10 +618,10 @@ Wall time: 2min
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1ab40254320&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x253b4d54830&gt;
 </pre></div>
 </div>
-<img alt="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" src="../_images/2a71a9266e88c5650f465f01bbc53041aac07ce33702d55b1c6ef0083ffb9741.png" />
+<img alt="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" src="../_images/1c7242122564ccf32af03dcf662e4c0ba511199d285e27fe3868c3b7aa268681.png" />
 </div>
 </div>
 </section>
@@ -1189,13 +1189,13 @@ Name: geometry, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:44&lt;00:00, 10.83it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 35284.34it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 11862.20it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:36&lt;00:00, 13.25it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 46556.23it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18207.04it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 28.8 s
-Wall time: 46.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 32.1 s
+Wall time: 37.7 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1212,18 +1212,18 @@ Wall time: 46.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:45&lt;00:00, 10.62it/s]
-convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 24391.82it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 12031.71it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 13765.76it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 13130.67it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 13132.08it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 13651.39it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 13362.19it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 480/480 [00:40&lt;00:00, 11.95it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 46681.80it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17841.70it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18249.98it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17728.10it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17904.47it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 17590.38it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 10073/10073 [00:00&lt;00:00, 18474.86it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.2 s
-Wall time: 51.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 31.7 s
+Wall time: 44.5 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1292,7 +1292,7 @@ Wall time: 51.2 s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/517780c5fd2c23ec5bca8af6ee8ed333703bc7f13311fd44dc98db1d571d8015.png" src="../_images/517780c5fd2c23ec5bca8af6ee8ed333703bc7f13311fd44dc98db1d571d8015.png" />
+<img alt="../_images/1d524c9390e66d018060bf002d561898126dffe2dbb45c6a7103877936d48717.png" src="../_images/1d524c9390e66d018060bf002d561898126dffe2dbb45c6a7103877936d48717.png" />
 </div>
 </div>
 <p>Plot location of most damaged healthcare facilities</p>
@@ -1310,7 +1310,7 @@ Wall time: 51.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e9cf0fbba3c6197f65bad7129e3dead411f602213ce51023fc22b2f2e2590c09.png" src="../_images/e9cf0fbba3c6197f65bad7129e3dead411f602213ce51023fc22b2f2e2590c09.png" />
+<img alt="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" src="../_images/c1f9545c74d94cc821df74737e4523e3f97161116e25f64f5606a28a69aae5e4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1320,7 +1320,7 @@ Wall time: 51.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ec73c73221944fd1b7511e11d992e5a7", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "df3ce31f30a54b3fbc0ea751e950c2ce", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1353,7 +1353,7 @@ Wall time: 51.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [03:19&lt;00:00, 49.80s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:53&lt;00:00, 43.30s/it]
 </pre></div>
 </div>
 </div>
@@ -1388,7 +1388,7 @@ Wall time: 51.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [03:39&lt;00:00, 54.94s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [02:47&lt;00:00, 41.75s/it]
 </pre></div>
 </div>
 </div>
@@ -1482,7 +1482,7 @@ Wall time: 51.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d91ad8fef6db918ae6e16ea088f8b3b15cf4775a8c607f8f1ebe218fb00ca7a8.png" src="../_images/d91ad8fef6db918ae6e16ea088f8b3b15cf4775a8c607f8f1ebe218fb00ca7a8.png" />
+<img alt="../_images/8c35220b89e829bc032ad41487a021c6bac5fd6368a20862caf2b630436f138a.png" src="../_images/8c35220b89e829bc032ad41487a021c6bac5fd6368a20862caf2b630436f138a.png" />
 </div>
 </div>
 </section>
