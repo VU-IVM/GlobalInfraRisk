@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Extreme Heat exposure assessment" href="heatwaves.html" />
-    <link rel="prev" title="Earthquake Risk Assessment" href="earthquake.html" />
+    <link rel="prev" title="Earthquake Damage Assessment" href="earthquake.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="flood.html">Flood risk assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="earthquake.html">Earthquake Damage Assessment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Wildfire exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heatwaves.html">Extreme Heat exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
@@ -679,6 +679,7 @@ Wall time: 16 s
 </div>
 </div>
 </div>
+<p>As we have saved all data in the current working directory, below we identify the Path towards that directory and collect all shapefiles in this directory. We now assume that no other shapefiles are in this directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
@@ -687,6 +688,7 @@ Wall time: 16 s
 </div>
 </div>
 </div>
+<p>And then rasterize all shapefiles to use them efficiently in our exposure analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wildfires_per_year</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1062,7 +1064,7 @@ Wall time: 16 s
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Earthquake Risk Assessment</p>
+        <p class="prev-next-title">Earthquake Damage Assessment</p>
       </div>
     </a>
     <a class="right-next"

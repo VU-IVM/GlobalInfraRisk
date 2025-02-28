@@ -190,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Flood risk assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Damage Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/wildfire.html">Wildfire exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/heatwaves.html">Extreme Heat exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
@@ -440,6 +440,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-exposure-assessment">4. Performing the Exposure Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>
             </nav>
         </div>
@@ -632,26 +633,45 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [04:21&lt;00:00, 13.08s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 936/936 [00:00&lt;00:00, 2406.73it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [05:09&lt;00:00, 15.46s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 936/936 [00:00&lt;00:00, 1576.08it/s]
 Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:12&lt;00:00,  1.54it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 276/276 [00:00&lt;00:00, 1251.55it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 84.49it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 2003.49it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 50.02it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 276/276 [00:00&lt;00:00, 1311.62it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 71.88it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1000.31it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 45.13it/s]
+convert coverage to meters: 1it [00:00, 546.63it/s]
+Overlay raster with vector: 100%|█████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 102.31it/s]
 convert coverage to meters: 1it [00:00, ?it/s]
-Overlay raster with vector: 100%|█████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 115.13it/s]
-convert coverage to meters: 1it [00:00, ?it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:01&lt;00:00, 10.00it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 3133.98it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 24.18it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 4018.49it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  8.93it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 67/67 [00:00&lt;00:00, 4173.00it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 27.32it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1999.55it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 58.05it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1979.26it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  7.65it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 1921.64it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 24.49it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;?, ?it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  8.61it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 67/67 [00:00&lt;00:00, 2731.09it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 24.21it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1143.21it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 50.85it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 11320.66it/s]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-results">
+<h2>6. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
+<p>The results of the exposure assessment can be visualized using charts and maps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_assets_per_type</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">asset_types</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">asset_types</span><span class="p">)):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span><span class="p">)</span>
+    <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 13/13 [07:48&lt;00:00, 36.04s/it]
 </pre></div>
 </div>
 </div>
@@ -670,31 +690,50 @@ convert coverage to meters: 100%|███████████████�
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update data keys for improved readability</span>
-<span class="n">formatted_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">():</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">number_of_assets_exposed</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute percentage of assets exposed per infrastructure system.</span>
+<span class="n">percentage_exposed</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">total_assets_per_type</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+    <span class="c1"># Check if we have exposed count for the asset type; otherwise, assume 0</span>
+    <span class="n">exposed</span> <span class="o">=</span> <span class="n">number_of_assets_exposed</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">asset_type</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Avoid division by zero by checking if total is zero.</span>
+    <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">percentage_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">percentage_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">exposed</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="c1"># Create figure with updated title and formatted categories</span>
+<span class="c1"># Update data keys for improved readability.</span>
+<span class="n">formatted_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">():</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">percentage_exposed</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="c1"># Create figure with updated title and formatted categories.</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">formatted_data</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">formatted_data</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-<span class="c1"># Add labels and enhance aesthetics</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Infrastructure Exposure per System for </span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Categories&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="c1"># Add labels and enhance aesthetics.</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Infrastructure Exposure Percentage per System for </span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Percentage (%)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Infrastructure Systems&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
-<span class="c1"># Show figure</span>
+<span class="c1"># Annotate bars with percentage values.</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">height</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> 
+                <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span>
+                <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> 
+                <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a173d1be80fe42f05769334e9b23d02a668dabd51b1949f3ac937633a6f30715.png" src="../_images/a173d1be80fe42f05769334e9b23d02a668dabd51b1949f3ac937633a6f30715.png" />
+<img alt="../_images/c41c6eaf25cb27c975faab73097d67be1cd5ab818a4346ee06ad34af530ecd0c.png" src="../_images/c41c6eaf25cb27c975faab73097d67be1cd5ab818a4346ee06ad34af530ecd0c.png" />
 </div>
 </div>
 </section>
@@ -775,6 +814,7 @@ convert coverage to meters: 100%|███████████████�
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-exposure-assessment">4. Performing the Exposure Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-results">6. Visualizing the Results</a></li>
 </ul>
   </nav></div>
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Earthquake Risk Assessment &#8212; Global Infrastructure Risk Assesments</title>
+    <title>Earthquake Damage Assessment &#8212; Global Infrastructure Risk Assesments</title>
   
   
   
@@ -190,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="flood.html">Flood risk assessment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Earthquake Damage Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wildfire.html">Wildfire exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heatwaves.html">Extreme Heat exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
@@ -418,7 +418,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Earthquake Risk Assessment</h1>
+    <h1>Earthquake Damage Assessment</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -457,8 +457,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="earthquake-risk-assessment">
-<h1>Earthquake Risk Assessment<a class="headerlink" href="#earthquake-risk-assessment" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="earthquake-damage-assessment">
+<h1>Earthquake Damage Assessment<a class="headerlink" href="#earthquake-damage-assessment" title="Permalink to this heading">#</a></h1>
 <p>In this notebook, we will perform an <strong>earthquake damage and risk assessment</strong> for transportation infrastructure, specifically focusing on roads. The assessment is based on combining hazard data (e.g., PGA levels) with vulnerability curves to estimate the potential damage to infrastructure.</p>
 <p>We will follow the steps outlined below to conduct the assessment:</p>
 <ol class="arabic simple">
@@ -561,8 +561,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.86 s
-Wall time: 8.41 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.8 s
+Wall time: 10.1 s
 </pre></div>
 </div>
 </div>
@@ -634,6 +634,17 @@ Wall time: 8.41 s
 </div>
 </div>
 </div>
+<p>And check if any of the objects are missing from the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">maxdam</span><span class="o">.</span><span class="n">object_type</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing object types in maxdam: </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m. Please add them before you continue.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="vulnerability-data">
 <h3>Vulnerability data<a class="headerlink" href="#vulnerability-data" title="Permalink to this heading">#</a></h3>
@@ -649,7 +660,7 @@ Wall time: 8.41 s
 <p>And let’s have a look at all the available options</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">display</span><span class="p">(</span><span class="n">vul_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -686,32 +697,32 @@ Wall time: 8.41 s
     <tr>
       <th>E1.1</th>
       <td>Power plant</td>
-      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with anchored components</td>
     </tr>
     <tr>
       <th>E1.1a</th>
       <td>Power plant</td>
-      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with anchored components</td>
     </tr>
     <tr>
       <th>E1.1b</th>
       <td>Power plant</td>
-      <td>Small generation facilities with anchored comp...</td>
+      <td>Small generation facilities with anchored components</td>
     </tr>
     <tr>
       <th>E1.2</th>
       <td>Power plant</td>
-      <td>Small generation facilities with unanchored co...</td>
+      <td>Small generation facilities with unanchored components</td>
     </tr>
     <tr>
       <th>E1.2a</th>
       <td>Power plant</td>
-      <td>Small generation facilities with unanchored co...</td>
+      <td>Small generation facilities with unanchored components</td>
     </tr>
     <tr>
       <th>E1.2b</th>
       <td>Power plant</td>
-      <td>Small generation facilities with unanchored co...</td>
+      <td>Small generation facilities with unanchored components</td>
     </tr>
     <tr>
       <th>E1.3</th>
@@ -896,17 +907,17 @@ Wall time: 8.41 s
     <tr>
       <th>E5.2</th>
       <td>Cable</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E5.2a</th>
       <td>Cable</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E5.2b</th>
       <td>Cable</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E6.1</th>
@@ -926,137 +937,137 @@ Wall time: 8.41 s
     <tr>
       <th>E6.2</th>
       <td>Power lines</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E6.2a</th>
       <td>Power lines</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E6.2b</th>
       <td>Power lines</td>
-      <td>Distribution circuit with unanchored/standard ...</td>
+      <td>Distribution circuit with unanchored/standard components</td>
     </tr>
     <tr>
       <th>E8.1</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components with backup...</td>
+      <td>Fuel facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.1a</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components with backup...</td>
+      <td>Fuel facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.1b</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components with backup...</td>
+      <td>Fuel facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.2</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components w/o backup ...</td>
+      <td>Fuel facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.2a</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components w/o backup ...</td>
+      <td>Fuel facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.2b</th>
       <td>Railway</td>
-      <td>Fuel facility: Anchored components w/o backup ...</td>
+      <td>Fuel facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.3</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components with back...</td>
+      <td>Fuel facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.3a</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components with back...</td>
+      <td>Fuel facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.3b</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components with back...</td>
+      <td>Fuel facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.4</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components w/o backu...</td>
+      <td>Fuel facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.4a</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components w/o backu...</td>
+      <td>Fuel facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.4b</th>
       <td>Railway</td>
-      <td>Fuel facility: Unanchored components w/o backu...</td>
+      <td>Fuel facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.5</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components with ba...</td>
+      <td>Dispatch facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.5a</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components with ba...</td>
+      <td>Dispatch facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.5b</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components with ba...</td>
+      <td>Dispatch facility: Anchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.6</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components w/o bac...</td>
+      <td>Dispatch facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.6a</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components w/o bac...</td>
+      <td>Dispatch facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.6b</th>
       <td>Railway</td>
-      <td>Dispatch facility: Anchored components w/o bac...</td>
+      <td>Dispatch facility: Anchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.7</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components with ...</td>
+      <td>Dispatch facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.7a</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components with ...</td>
+      <td>Dispatch facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.7b</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components with ...</td>
+      <td>Dispatch facility: Unanchored components with backup power</td>
     </tr>
     <tr>
       <th>E8.8</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components w/o b...</td>
+      <td>Dispatch facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.8a</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components w/o b...</td>
+      <td>Dispatch facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.8b</th>
       <td>Railway</td>
-      <td>Dispatch facility: Unanchored components w/o b...</td>
+      <td>Dispatch facility: Unanchored components w/o backup power</td>
     </tr>
     <tr>
       <th>E8.9</th>
@@ -1151,92 +1162,92 @@ Wall time: 8.41 s
     <tr>
       <th>E12.1</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations with anchored components</td>
     </tr>
     <tr>
       <th>E12.1a</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations with anchored components</td>
     </tr>
     <tr>
       <th>E12.1b</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations with anchored components</td>
     </tr>
     <tr>
       <th>E12.2</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations without anchored components</td>
     </tr>
     <tr>
       <th>E12.2a</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations without anchored components</td>
     </tr>
     <tr>
       <th>E12.2b</th>
       <td>Others</td>
-      <td>Central offices and broadcasting stations with...</td>
+      <td>Central offices and broadcasting stations without anchored components</td>
     </tr>
     <tr>
       <th>E13.1</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, a...</td>
+      <td>Water storage tanks On-ground concrete tank, anchored</td>
     </tr>
     <tr>
       <th>E13.1a</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, a...</td>
+      <td>Water storage tanks On-ground concrete tank, anchored</td>
     </tr>
     <tr>
       <th>E13.1b</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, a...</td>
+      <td>Water storage tanks On-ground concrete tank, anchored</td>
     </tr>
     <tr>
       <th>E13.2</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, u...</td>
+      <td>Water storage tanks On-ground concrete tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.2a</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, u...</td>
+      <td>Water storage tanks On-ground concrete tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.2b</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground concrete tank, u...</td>
+      <td>Water storage tanks On-ground concrete tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.3</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, anch...</td>
+      <td>Water storage tanks On-ground steel tank, anchored</td>
     </tr>
     <tr>
       <th>E13.3a</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, anch...</td>
+      <td>Water storage tanks On-ground steel tank, anchored</td>
     </tr>
     <tr>
       <th>E13.3b</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, anch...</td>
+      <td>Water storage tanks On-ground steel tank, anchored</td>
     </tr>
     <tr>
       <th>E13.4</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, unan...</td>
+      <td>Water storage tanks On-ground steel tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.4a</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, unan...</td>
+      <td>Water storage tanks On-ground steel tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.4b</th>
       <td>Reservoir covered</td>
-      <td>Water storage tanks On-ground steel tank, unan...</td>
+      <td>Water storage tanks On-ground steel tank, unanchored</td>
     </tr>
     <tr>
       <th>E13.5</th>
@@ -1376,7 +1387,7 @@ Wall time: 8.41 s
     <tr>
       <th>E16.24</th>
       <td>Transmission and distribution pipelines</td>
-      <td>PVC, continious joint type continuous (i.e., d...</td>
+      <td>PVC, continious joint type continuous (i.e., different parts of pipes are connected with each other using glue and heating), diameter 25-500 mm</td>
     </tr>
     <tr>
       <th>E17.1</th>
@@ -1734,8 +1745,8 @@ Wall time: 8.41 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:39&lt;00:00,  1.94s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:20&lt;00:00, 4058.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:43&lt;00:00,  2.39s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:32&lt;00:00, 2631.72it/s]
 </pre></div>
 </div>
 </div>
@@ -1760,13 +1771,13 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:27&lt;00:00,  1.86s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:24&lt;00:00, 3403.69it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:05&lt;00:00, 14324.73it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:59&lt;00:00,  2.08s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:34&lt;00:00, 2483.88it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:07&lt;00:00, 11445.86it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4min 7s
-Wall time: 5min 5s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 46s
+Wall time: 5min 48s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1800,8 +1811,8 @@ Wall time: 5min 5s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:06&lt;00:00,  2.13s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:17&lt;00:00, 4793.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:56&lt;00:00,  2.47s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:26&lt;00:00, 3147.53it/s]
 </pre></div>
 </div>
 </div>
@@ -1847,7 +1858,7 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:09&lt;00:00, 9388.17it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:10&lt;00:00, 8110.59it/s]
 </pre></div>
 </div>
 </div>
@@ -1864,13 +1875,13 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:05&lt;00:00,  1.70s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:29&lt;00:00, 2893.04it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:06&lt;00:00, 13959.52it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:23&lt;00:00,  2.25s/it]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:37&lt;00:00, 2253.00it/s]
+Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:08&lt;00:00, 10110.22it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 53s
-Wall time: 4min 46s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 54s
+Wall time: 6min 17s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1888,7 +1899,7 @@ Wall time: 4min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:09&lt;00:00, 8559.39it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:11&lt;00:00, 7487.68it/s]
 </pre></div>
 </div>
 </div>
@@ -1901,7 +1912,7 @@ Wall time: 4min 46s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="s1">&#39;earthquake&#39;</span>
 <span class="n">return_period</span> <span class="o">=</span> <span class="s1">&#39;1_475&#39;</span>
-<span class="n">damage_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<span class="n">damage_results</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1932,7 +1943,7 @@ Wall time: 4min 46s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1955,7 +1966,7 @@ Wall time: 4min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/527139547e2d99b84c2d992feba6c74113a39b743620f3a56a457299457cb407.png" src="../_images/527139547e2d99b84c2d992feba6c74113a39b743620f3a56a457299457cb407.png" />
+<img alt="../_images/77982d63754b0055e9861dbeac38f23296464ccf9277e4773be94e5eee446e70.png" src="../_images/77982d63754b0055e9861dbeac38f23296464ccf9277e4773be94e5eee446e70.png" />
 </div>
 </div>
 <p>And create a distribution of the damages.</p>
@@ -1971,7 +1982,7 @@ Wall time: 4min 46s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/12ffb0251cd24bbfbc49242805f66af7f190e4fae50a026326af863e5aafa2d1.png" src="../_images/12ffb0251cd24bbfbc49242805f66af7f190e4fae50a026326af863e5aafa2d1.png" />
+<img alt="../_images/98d3caa90c0d9332bb7425c2690274a96616e61e1858d8aed47ccd9c7194df60.png" src="../_images/98d3caa90c0d9332bb7425c2690274a96616e61e1858d8aed47ccd9c7194df60.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -1989,7 +2000,7 @@ Wall time: 4min 46s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9aba55f61756212583b6529ecdb6579f88b0e2d0036a0f41a6385206fea75969.png" src="../_images/9aba55f61756212583b6529ecdb6579f88b0e2d0036a0f41a6385206fea75969.png" />
+<img alt="../_images/835741667a530af81a7d5e6992d34862ff346fe63c66bc996c6c8c29d9f3a5db.png" src="../_images/835741667a530af81a7d5e6992d34862ff346fe63c66bc996c6c8c29d9f3a5db.png" />
 </div>
 </div>
 </section>

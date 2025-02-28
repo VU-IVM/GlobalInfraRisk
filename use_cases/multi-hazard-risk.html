@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">By Natural Hazard</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../hazard/flood.html">Flood risk assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Risk Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hazard/earthquake.html">Earthquake Damage Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/wildfire.html">Wildfire exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/heatwaves.html">Extreme Heat exposure assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hazard/tropical_cyclone.html">Tropical Cyclone Risk Assessment</a></li>
@@ -441,6 +441,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-point-data-to-polygons">Convert point data to polygons.</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
@@ -568,8 +569,8 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 36.4 s
-Wall time: 45.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 39.8 s
+Wall time: 1min 3s
 </pre></div>
 </div>
 </div>
@@ -612,324 +613,6 @@ Wall time: 45.6 s
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collect_vulnerability_dataframes</span><span class="p">[</span><span class="s1">&#39;Earthquake&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>ID number</th>
-      <th>E1.1</th>
-      <th>E1.1a</th>
-      <th>E1.1b</th>
-      <th>E1.2</th>
-      <th>E1.2a</th>
-      <th>E1.2b</th>
-      <th>E1.3</th>
-      <th>E1.3a</th>
-      <th>E1.3b</th>
-      <th>...</th>
-      <th>E20.2b</th>
-      <th>E20.3</th>
-      <th>E20.3a</th>
-      <th>E20.3b</th>
-      <th>E20.4</th>
-      <th>E20.4a</th>
-      <th>E20.4b</th>
-      <th>E21.11</th>
-      <th>E21.11a</th>
-      <th>E21.11b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Infrastructure type</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>Power plant</td>
-      <td>...</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Others</td>
-      <td>Educational facilities</td>
-      <td>Educational facilities</td>
-      <td>Educational facilities</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Infrastructure type details</td>
-      <td>Small generation facilities with anchored comp...</td>
-      <td>Small generation facilities with anchored comp...</td>
-      <td>Small generation facilities with anchored comp...</td>
-      <td>Small generation facilities with unanchored co...</td>
-      <td>Small generation facilities with unanchored co...</td>
-      <td>Small generation facilities with unanchored co...</td>
-      <td>Medium/large power with anchored components</td>
-      <td>Medium/large power with anchored components</td>
-      <td>Medium/large power with anchored components</td>
-      <td>...</td>
-      <td>small lift - unanchored</td>
-      <td>medium/large lift - anchored</td>
-      <td>medium/large lift - anchored</td>
-      <td>medium/large lift - anchored</td>
-      <td>medium/large unanchored</td>
-      <td>medium/large unanchored</td>
-      <td>medium/large unanchored</td>
-      <td>Reinforced concrete four-story building</td>
-      <td>Reinforced concrete four-story building</td>
-      <td>Reinforced concrete four-story building</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Peak Ground Acceleration (g)</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>...</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-      <td>Damage factor</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>80</th>
-      <td>3.8</td>
-      <td>0.999778</td>
-      <td>0.799687</td>
-      <td>0.999839</td>
-      <td>0.99991</td>
-      <td>0.799872</td>
-      <td>0.999935</td>
-      <td>0.998556</td>
-      <td>0.79798</td>
-      <td>0.998948</td>
-      <td>...</td>
-      <td>0.974057</td>
-      <td>0.972474</td>
-      <td>0.74917</td>
-      <td>0.972626</td>
-      <td>0.972522</td>
-      <td>0.74919</td>
-      <td>0.972663</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>81</th>
-      <td>3.85</td>
-      <td>0.999797</td>
-      <td>0.799715</td>
-      <td>0.999853</td>
-      <td>0.999917</td>
-      <td>0.799883</td>
-      <td>0.99994</td>
-      <td>0.998654</td>
-      <td>0.798115</td>
-      <td>0.99902</td>
-      <td>...</td>
-      <td>0.974798</td>
-      <td>0.973297</td>
-      <td>0.750582</td>
-      <td>0.973439</td>
-      <td>0.973341</td>
-      <td>0.750601</td>
-      <td>0.973474</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>82</th>
-      <td>3.9</td>
-      <td>0.999815</td>
-      <td>0.799739</td>
-      <td>0.999866</td>
-      <td>0.999924</td>
-      <td>0.799893</td>
-      <td>0.999945</td>
-      <td>0.998744</td>
-      <td>0.798241</td>
-      <td>0.999086</td>
-      <td>...</td>
-      <td>0.975512</td>
-      <td>0.974088</td>
-      <td>0.751947</td>
-      <td>0.974223</td>
-      <td>0.974129</td>
-      <td>0.751964</td>
-      <td>0.974255</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>83</th>
-      <td>3.95</td>
-      <td>0.999831</td>
-      <td>0.799761</td>
-      <td>0.999877</td>
-      <td>0.999931</td>
-      <td>0.799902</td>
-      <td>0.99995</td>
-      <td>0.998828</td>
-      <td>0.798358</td>
-      <td>0.999147</td>
-      <td>...</td>
-      <td>0.976202</td>
-      <td>0.97485</td>
-      <td>0.753266</td>
-      <td>0.974977</td>
-      <td>0.974888</td>
-      <td>0.753282</td>
-      <td>0.975007</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>84</th>
-      <td>4.0</td>
-      <td>0.999845</td>
-      <td>0.799782</td>
-      <td>0.999888</td>
-      <td>0.999936</td>
-      <td>0.79991</td>
-      <td>0.999954</td>
-      <td>0.998906</td>
-      <td>0.798466</td>
-      <td>0.999204</td>
-      <td>...</td>
-      <td>0.976867</td>
-      <td>0.975584</td>
-      <td>0.754542</td>
-      <td>0.975704</td>
-      <td>0.975619</td>
-      <td>0.754557</td>
-      <td>0.975732</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>85 rows × 185 columns</p>
-</div></div></div>
 </div>
 <p>And now select a curve to use for each different subtype we are analysing for each of the hazards</p>
 <div class="cell docutils container">
@@ -1066,6 +749,7 @@ Wall time: 45.6 s
 </div>
 </div>
 </div>
+<p>And now we can download the hazard data and directly clip this to our country of interest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hazard_dict_per_hazard</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1090,7 +774,195 @@ Wall time: 45.6 s
 </div>
 </div>
 </div>
-<p>Set the return periods and download the hazard data</p>
+</section>
+<section id="convert-point-data-to-polygons">
+<h3>Convert point data to polygons.<a class="headerlink" href="#convert-point-data-to-polygons" title="Permalink to this heading">#</a></h3>
+<p>For some data, there are both points and polygons available. It makes life easier to estimate the damage using polygons. Therefore, we convert those points to Polygons below.</p>
+<p>Let’s first get an overview of the different geometry types for all the assets we are considering in this analysis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="p">[</span><span class="s1">&#39;geom_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">geom_type</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;geom_type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object_type   geom_type   
+college       MultiPolygon     102
+              Point            188
+kindergarten  MultiPolygon      39
+              Point            258
+library       MultiPolygon      16
+              Point             64
+school        MultiPolygon    2954
+              Point           4453
+university    MultiPolygon      89
+              Point             72
+Name: geometry, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The results above indicate that several asset types that are expected to be <em>Polygons</em> are stored as <em>Points</em> as well. It would be preferably to convert them all to polygons. For the <em>Points</em>, we will have to estimate a the average size, so we can use that to create a <code class="docutils literal notranslate"><span class="pre">buffer</span></code> around the assets.</p>
+<p>To do so, let’s grab the polygon data and estimate their size. We grab the median so we are not too much influenced by extreme outliers. If preferred, please change <code class="docutils literal notranslate"><span class="pre">.median()</span></code> to <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> (or any other metric).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon_features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Polygon&#39;</span><span class="p">,</span><span class="s1">&#39;MultiPolygon&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+<span class="n">polygon_features</span><span class="p">[</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="o">.</span><span class="n">area</span>
+
+<span class="n">square_m2_object_type</span> <span class="o">=</span> <span class="n">polygon_features</span><span class="p">[[</span><span class="s1">&#39;object_type&#39;</span><span class="p">,</span><span class="s1">&#39;square_m2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;object_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">square_m2_object_type</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>square_m2</th>
+    </tr>
+    <tr>
+      <th>object_type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>college</th>
+      <td>3716.906521</td>
+    </tr>
+    <tr>
+      <th>kindergarten</th>
+      <td>379.732851</td>
+    </tr>
+    <tr>
+      <th>library</th>
+      <td>276.930508</td>
+    </tr>
+    <tr>
+      <th>school</th>
+      <td>372.298692</td>
+    </tr>
+    <tr>
+      <th>university</th>
+      <td>9414.634906</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we create a list in which we define the assets we want to “polygonize”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points_to_polygonize</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;college&#39;</span><span class="p">,</span><span class="s1">&#39;kindergarten&#39;</span><span class="p">,</span><span class="s1">&#39;library&#39;</span><span class="p">,</span><span class="s1">&#39;school&#39;</span><span class="p">,</span><span class="s1">&#39;university&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And take them from our data again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When performing a buffer, it is always best to do this in meters. As such, we will briefly convert the point data into a <strong>crs</strong> system in meters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_assets_to_polygonize</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">):</span>
+
+    <span class="c1"># we first need to set a buffer length. This is half of width/length of an asset.</span>
+    <span class="n">buffer_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square_m2_object_type</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">asset</span><span class="o">.</span><span class="n">object_type</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="c1"># then we can buffer the asset</span>
+    <span class="k">return</span> <span class="n">asset</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">buffer_length</span><span class="p">,</span><span class="n">cap_style</span><span class="o">=</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+
+<span class="n">collect_new_point_geometries</span> <span class="o">=</span> <span class="n">all_assets_to_polygonize</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">asset</span><span class="p">:</span>  <span class="n">polygonize_point_per_asset</span><span class="p">(</span><span class="n">asset</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">),</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collect_new_point_geometries</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And check if any “undesired” <em>Points</em> are still left:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">features</span><span class="o">.</span><span class="n">object_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">points_to_polygonize</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>osm_id</th>
+      <th>geometry</th>
+      <th>object_type</th>
+      <th>geom_type</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And remove the ‘geom_type’ column again, as we do not need it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;geom_type&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1110,9 +982,9 @@ Wall time: 45.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 5/5 [00:33&lt;00:00,  6.68s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:56&lt;00:00,  7.03s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:30&lt;00:00,  7.73s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 5/5 [02:21&lt;00:00, 28.29s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [03:32&lt;00:00, 26.58s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 4/4 [01:46&lt;00:00, 26.69s/it]
 </pre></div>
 </div>
 </div>
@@ -1217,12 +1089,11 @@ Risk Calculation: 100%|███████████████████
 
 <span class="c1"># Show plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/62f5fef2c1f7809d02580e0a4a5313496d7630e0375974f0ea8076f92032408d.png" src="../_images/62f5fef2c1f7809d02580e0a4a5313496d7630e0375974f0ea8076f92032408d.png" />
+<img alt="../_images/c3e7db951625352e6e71609d208be811f03c864dd712ba39656ddd7cfe777daa.png" src="../_images/c3e7db951625352e6e71609d208be811f03c864dd712ba39656ddd7cfe777daa.png" />
 </div>
 </div>
 </section>
@@ -1296,6 +1167,7 @@ Risk Calculation: 100%|███████████████████
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-data">3. Preparing the Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazard-data">Hazard Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-point-data-to-polygons">Convert point data to polygons.</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-the-risk-assessment">4. Performing the Risk Assessment</a></li>
