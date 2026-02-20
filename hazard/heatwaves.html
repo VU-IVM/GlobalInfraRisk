@@ -477,10 +477,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -504,10 +503,8 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -556,8 +553,8 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 25.9 s
-Wall time: 34.1 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 27 s
+Wall time: 57.8 s
 </pre></div>
 </div>
 </div>
@@ -611,8 +608,8 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:23&lt;00:00,  1.42it/s]
-08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:22&lt;00:00,  1.50it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:24&lt;00:00,  1.41it/s]
+08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:22&lt;00:00,  1.51it/s]
 </pre></div>
 </div>
 </div>
@@ -635,8 +632,8 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:22&lt;00:00,  1.50it/s]
-08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:22&lt;00:00,  1.52it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:24&lt;00:00,  1.37it/s]
+08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [00:24&lt;00:00,  1.41it/s]
 </pre></div>
 </div>
 </div>
@@ -671,7 +668,7 @@ Wall time: 34.1 s
 <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">years</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">),</span><span class="n">desc</span><span class="o">=</span><span class="n">month</span><span class="p">):</span>
         <span class="n">country_hazard_data</span> <span class="o">=</span> <span class="n">collect_country_data</span><span class="p">[(</span><span class="n">month</span><span class="p">,</span><span class="n">year</span><span class="p">)]</span>
-        <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
+        <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
         <span class="n">exposed_features</span><span class="p">[</span><span class="s1">&#39;max_exposure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposed_features</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
         <span class="p">)</span>
@@ -681,15 +678,15 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [13:43&lt;00:00, 24.21s/it]
-08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [13:30&lt;00:00, 23.85s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [03:17&lt;00:00,  5.81s/it]
+08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [03:05&lt;00:00,  5.46s/it]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baseline</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_exposure_historic</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baseline</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_exposure_historic</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -701,7 +698,7 @@ Wall time: 34.1 s
 <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">years</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">),</span><span class="n">desc</span><span class="o">=</span><span class="n">month</span><span class="p">):</span>
         <span class="n">country_hazard_data</span> <span class="o">=</span> <span class="n">collect_country_data_2050_SSP585</span><span class="p">[(</span><span class="n">month</span><span class="p">,</span><span class="n">year</span><span class="p">)]</span>
-        <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
+        <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
         <span class="n">exposed_features</span><span class="p">[</span><span class="s1">&#39;max_exposure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposed_features</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">feature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
         <span class="p">)</span>
@@ -711,15 +708,15 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [16:52&lt;00:00, 29.77s/it]
-08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [18:05&lt;00:00, 31.91s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [03:09&lt;00:00,  5.57s/it]
+08: 100%|██████████████████████████████████████████████████████████████████████████████| 34/34 [03:15&lt;00:00,  5.75s/it]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_future</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_exposure_2050_SSP585</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_future</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">collect_exposure_2050_SSP585</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -785,7 +782,7 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/78f606ae37ca331d30f7c7afa651de5cf79b6d0fe855c9ea578f0d5a75a58b78.png" src="../_images/78f606ae37ca331d30f7c7afa651de5cf79b6d0fe855c9ea578f0d5a75a58b78.png" />
+<img alt="../_images/5e329708344f939a61b8c56811bbc5f22bc18bfdbf4be31965ee8110e1f1bd23.png" src="../_images/5e329708344f939a61b8c56811bbc5f22bc18bfdbf4be31965ee8110e1f1bd23.png" />
 </div>
 </div>
 <section id="spatial-visualisation">
@@ -883,7 +880,7 @@ Wall time: 34.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0b88d093c93e0aad0235626a96f6eda5edc9a4270606380450be1d4410a46e8b.png" src="../_images/0b88d093c93e0aad0235626a96f6eda5edc9a4270606380450be1d4410a46e8b.png" />
+<img alt="../_images/50abfed5e75bd95a1b0851f82db1e3ede87363ed0d1e671632d205f48f4cd0d2.png" src="../_images/50abfed5e75bd95a1b0851f82db1e3ede87363ed0d1e671632d205f48f4cd0d2.png" />
 </div>
 </div>
 </section>

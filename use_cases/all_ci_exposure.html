@@ -474,10 +474,9 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -500,10 +499,8 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -547,7 +544,6 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset_types</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;roads&quot;</span><span class="p">,</span>
         <span class="s2">&quot;main_roads&quot;</span><span class="p">,</span>
         <span class="s2">&quot;rail&quot;</span><span class="p">,</span>
         <span class="s2">&quot;air&quot;</span><span class="p">,</span>
@@ -633,29 +629,200 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [04:31&lt;00:00, 13.55s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 936/936 [00:00&lt;00:00, 2393.44it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:11&lt;00:00,  1.69it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████| 276/276 [00:00&lt;00:00, 1755.57it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 72.44it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;?, ?it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 59.68it/s]
-convert coverage to meters: 1it [00:00, 1501.72it/s]
-Overlay raster with vector: 100%|█████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 122.21it/s]
-convert coverage to meters: 1it [00:00, 973.38it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  9.57it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;?, ?it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 28.68it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;?, ?it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:02&lt;00:00,  8.50it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████| 67/67 [00:00&lt;00:00, 2717.12it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 39.05it/s]
-convert coverage to meters: 100%|████████████████████████████████████████████████████████████████| 8/8 [00:00&lt;?, ?it/s]
-Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 61.72it/s]
-convert coverage to meters: 100%|██████████████████████████████████████████████████████| 8/8 [00:00&lt;00:00, 1727.03it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:03&lt;00:00,  5.58it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3311/3311 [00:00&lt;00:00, 6764.57it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 51.02it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████████| 16/16 [00:00&lt;00:00, 4488.89it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 83/83 [00:00&lt;00:00, 15073.05it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 46.89it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████████| 81/81 [00:00&lt;00:00, 20980.59it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 89.68it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 1322.29it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 37.96it/s]
+convert coverage to meters: 100%|█████████████████████████████████████████████████| 559/559 [00:00&lt;00:00, 25267.16it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 45.73it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████| 1322/1322 [00:00&lt;00:00, 27376.40it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 30.01it/s]
+convert coverage to meters: 100%|███████████████████████████████████████████████| 5397/5397 [00:00&lt;00:00, 22463.93it/s]
+Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 20/20 [00:00&lt;00:00, 48.76it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████████| 141/141 [00:00&lt;00:00, 5607.68it/s]
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_asset_results</span><span class="p">[</span><span class="s1">&#39;main_roads&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>osm_id</th>
+      <th>geometry</th>
+      <th>object_type</th>
+      <th>name</th>
+      <th>maxspeed</th>
+      <th>lanes</th>
+      <th>surface</th>
+      <th>coverage</th>
+      <th>values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>368197648</td>
+      <td>LINESTRING (29.83259 -1.4214, 29.83266 -1.42158)</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>unpaved</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>265602822</td>
+      <td>LINESTRING (30.13876 -1.99237, 30.13877 -1.992...</td>
+      <td>secondary</td>
+      <td>KK 231 Street</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>asphalt</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>368197649</td>
+      <td>LINESTRING (29.84381 -1.41415, 29.84389 -1.4142)</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>unpaved</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>368197650</td>
+      <td>LINESTRING (29.83229 -1.4207, 29.83244 -1.4210...</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>unpaved</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>541223903</td>
+      <td>LINESTRING (29.46531 -2.67232, 29.46536 -2.6722)</td>
+      <td>secondary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3306</th>
+      <td>265590614</td>
+      <td>LINESTRING (30.14376 -1.97209, 30.14375 -1.972...</td>
+      <td>secondary</td>
+      <td>KK 174 Street</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>asphalt</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>3307</th>
+      <td>368194164</td>
+      <td>LINESTRING (29.74382 -1.75641, 29.74382 -1.75648)</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>3308</th>
+      <td>368194165</td>
+      <td>LINESTRING (29.74382 -1.75648, 29.74385 -1.756...</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>[101.34452663345199, 89.0044918819722, 94.6764...</td>
+      <td>[306.0, 525.0, 414.0, 83.0]</td>
+    </tr>
+    <tr>
+      <th>3309</th>
+      <td>540941072</td>
+      <td>LINESTRING (29.44233 -2.56335, 29.44253 -2.563...</td>
+      <td>tertiary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>3310</th>
+      <td>540553047</td>
+      <td>LINESTRING (29.61322 -2.61566, 29.61315 -2.61559)</td>
+      <td>secondary</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>gravel</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+  </tbody>
+</table>
+<p>3311 rows × 9 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="visualizing-the-results">
@@ -664,26 +831,16 @@ convert coverage to meters: 100%|███████████████�
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_assets_per_type</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">asset_types</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">asset_types</span><span class="p">)):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="n">read_osm_data</span><span class="p">(</span><span class="n">infrastructure_path</span><span class="p">,</span><span class="n">asset_type</span><span class="o">=</span><span class="n">asset_type</span><span class="p">)</span>
-    <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 13/13 [06:45&lt;00:00, 31.21s/it]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_assets_exposed</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">number_of_assets_exposed</span> <span class="o">=</span> <span class="p">{}</span>
+
 <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">asset_types</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">save_asset_results</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
+        <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)])</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="kc">None</span>
+        <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">number_of_assets_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -694,10 +851,9 @@ convert coverage to meters: 100%|███████████████�
 <span class="n">percentage_exposed</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">asset_type</span> <span class="ow">in</span> <span class="n">total_assets_per_type</span><span class="p">:</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">total_assets_per_type</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span>
-    <span class="c1"># Check if we have exposed count for the asset type; otherwise, assume 0</span>
     <span class="n">exposed</span> <span class="o">=</span> <span class="n">number_of_assets_exposed</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">asset_type</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># Avoid division by zero by checking if total is zero.</span>
-    <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    
+    <span class="k">if</span> <span class="n">total</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">exposed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">percentage_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">percentage_exposed</span><span class="p">[</span><span class="n">asset_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">exposed</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
@@ -733,7 +889,7 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9fb9863116a58710730c9208e9d60fcd68562f7312f7aca497f9dbb47f966477.png" src="../_images/9fb9863116a58710730c9208e9d60fcd68562f7312f7aca497f9dbb47f966477.png" />
+<img alt="../_images/805156bc18bcc0e9eb6cbc9b18d62ea2477afb2917ba63bf0113f0d7ee6ba63b.png" src="../_images/805156bc18bcc0e9eb6cbc9b18d62ea2477afb2917ba63bf0113f0d7ee6ba63b.png" />
 </div>
 </div>
 </section>

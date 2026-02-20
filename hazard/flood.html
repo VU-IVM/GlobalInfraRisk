@@ -481,10 +481,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -506,9 +505,7 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -562,8 +559,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 5.48 s
-Wall time: 7.46 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4.78 s
+Wall time: 7.81 s
 </pre></div>
 </div>
 </div>
@@ -644,38 +641,86 @@ Wall time: 7.46 s
 </symbol>
 </defs>
 </svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
+<style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
 :root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
 }
 
-html[theme=dark],
-body[data-theme=dark],
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
 body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
 }
 
 .xr-wrap {
   display: block !important;
   min-width: 300px;
   max-width: 700px;
+  line-height: 1.6;
 }
 
 .xr-text-repr-fallback {
@@ -698,11 +743,18 @@ body.vscode-dark {
 }
 
 .xr-obj-type,
-.xr-array-name {
+.xr-obj-name,
+.xr-group-name {
   margin-left: 2px;
   margin-right: 10px;
 }
 
+.xr-group-name::before {
+  content: "📁";
+  padding-right: 0.3em;
+}
+
+.xr-group-name,
 .xr-obj-type {
   color: var(--xr-font-color2);
 }
@@ -710,7 +762,9 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .xr-section-item {
@@ -718,16 +772,24 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+  margin: 0;
 }
 
 .xr-section-item input + label {
   color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
 }
 
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -751,7 +813,7 @@ body.vscode-dark {
 
 .xr-section-summary-in + label:before {
   display: inline-block;
-  content: '►';
+  content: "►";
   font-size: 11px;
   width: 15px;
   text-align: center;
@@ -762,7 +824,7 @@ body.vscode-dark {
 }
 
 .xr-section-summary-in:checked + label:before {
-  content: '▼';
+  content: "▼";
 }
 
 .xr-section-summary-in:checked + label > span {
@@ -772,7 +834,6 @@ body.vscode-dark {
 .xr-section-summary,
 .xr-section-inline-details {
   padding-top: 4px;
-  padding-bottom: 4px;
 }
 
 .xr-section-inline-details {
@@ -782,11 +843,38 @@ body.vscode-dark {
 .xr-section-details {
   display: none;
   grid-column: 1 / -1;
+  margin-top: 4px;
   margin-bottom: 5px;
 }
 
 .xr-section-summary-in:checked ~ .xr-section-details {
   display: contents;
+}
+
+.xr-group-box {
+  display: inline-grid;
+  grid-template-columns: 0px 20px auto;
+  width: 100%;
+}
+
+.xr-group-box-vline {
+  grid-column-start: 1;
+  border-right: 0.2em solid;
+  border-color: var(--xr-border-color);
+  width: 0px;
+}
+
+.xr-group-box-hline {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  height: 1em;
+  width: 20px;
+  border-bottom: 0.2em solid;
+  border-color: var(--xr-border-color);
+}
+
+.xr-group-box-contents {
+  grid-column-start: 3;
 }
 
 .xr-array-wrap {
@@ -834,15 +922,15 @@ body.vscode-dark {
 }
 
 .xr-dim-list:before {
-  content: '(';
+  content: "(";
 }
 
 .xr-dim-list:after {
-  content: ')';
+  content: ")";
 }
 
 .xr-dim-list li:not(:last-child):after {
-  content: ',';
+  content: ",";
   padding-right: 5px;
 }
 
@@ -859,7 +947,9 @@ body.vscode-dark {
 .xr-var-item label,
 .xr-var-item > .xr-var-name span {
   background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
   margin-bottom: 0;
+  padding-top: 2px;
 }
 
 .xr-var-item > .xr-var-name:hover span {
@@ -870,6 +960,7 @@ body.vscode-dark {
 .xr-var-list > li:nth-child(odd) > label,
 .xr-var-list > li:nth-child(odd) > .xr-var-name span {
   background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
 }
 
 .xr-var-name {
@@ -919,8 +1010,15 @@ body.vscode-dark {
 .xr-var-data,
 .xr-index-data {
   display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -931,6 +1029,12 @@ body.vscode-dark {
 
 .xr-var-data > table {
   float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
 }
 
 .xr-var-name span,
@@ -992,35 +1096,25 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 747GB
 Dimensions:      (band: 1, x: 432000, y: 216000)
 Coordinates:
-  * band         (band) int32 4B 1
+  * band         (band) int64 8B 1
   * x            (x) float64 3MB -180.0 -180.0 -180.0 ... 180.0 180.0 180.0
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
-    spatial_ref  int32 4B ...
+    spatial_ref  int64 8B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-fdc0b4a9-e2b8-4ffe-8ca9-e80df35e52d2' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fdc0b4a9-e2b8-4ffe-8ca9-e80df35e52d2' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-2c498ee6-bbbb-4f6c-ba42-c1edf98d08fe' class='xr-section-summary-in' type='checkbox'  checked><label for='section-2c498ee6-bbbb-4f6c-ba42-c1edf98d08fe' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-5f533ba1-5039-472e-8dc8-1e6e53305898' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5f533ba1-5039-472e-8dc8-1e6e53305898' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7f57847a-8057-4f1e-8202-a2e438dd4e93' class='xr-var-data-in' type='checkbox'><label for='data-7f57847a-8057-4f1e-8202-a2e438dd4e93' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-25b30572-df9e-4157-b618-bd9068e8a1ec' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-25b30572-df9e-4157-b618-bd9068e8a1ec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ac0a20a4-925e-4677-8472-ceecf802526c' class='xr-var-data-in' type='checkbox'><label for='data-ac0a20a4-925e-4677-8472-ceecf802526c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-71830f10-eca7-4d3a-96e1-b9d115e99373' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-71830f10-eca7-4d3a-96e1-b9d115e99373' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3acde7cb-cfc7-44f0-b029-c6fcc1269e7f' class='xr-var-data-in' type='checkbox'><label for='data-3acde7cb-cfc7-44f0-b029-c6fcc1269e7f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7d41ce33-aa47-42a5-9978-ad646d31791d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7d41ce33-aa47-42a5-9978-ad646d31791d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5e21c111-cf52-443a-a0c5-46f2767c78b6' class='xr-var-data-in' type='checkbox'><label for='data-5e21c111-cf52-443a-a0c5-46f2767c78b6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f818b5b3-65ae-40bd-a99a-1646fe347a73' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f818b5b3-65ae-40bd-a99a-1646fe347a73' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-320c0a73-f5dc-4354-ac6c-bb972f752a97' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-320c0a73-f5dc-4354-ac6c-bb972f752a97' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b3fea29a-de23-439a-bd95-16bd2a486dae' class='xr-var-data-in' type='checkbox'><label for='data-b3fea29a-de23-439a-bd95-16bd2a486dae' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d8f2fe2c-d85a-4c92-adaf-09908e22ed8f' class='xr-section-summary-in' type='checkbox'  ><label for='section-d8f2fe2c-d85a-4c92-adaf-09908e22ed8f' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2380fde8-9f47-4f6e-8ee7-b6c6660943be' class='xr-index-data-in' type='checkbox'/><label for='index-2380fde8-9f47-4f6e-8ee7-b6c6660943be' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-125a20d2-e7a3-4c72-a2d0-d18999a0d41d' class='xr-index-data-in' type='checkbox'/><label for='index-125a20d2-e7a3-4c72-a2d0-d18999a0d41d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
-       -179.99708333333334,          -179.99625, -179.99541666666667,
-       -179.99458333333334,          -179.99375, -179.99291666666667,
-       -179.99208333333334,
-       ...
-        179.99208333333334,  179.99291666666667,           179.99375,
-        179.99458333333334,  179.99541666666667,           179.99625,
-        179.99708333333334,  179.99791666666667,           179.99875,
-        179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-5f471e55-1871-4199-ae9f-02e96cd81034' class='xr-index-data-in' type='checkbox'/><label for='index-5f471e55-1871-4199-ae9f-02e96cd81034' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
-        89.99708333333334,           89.99625,  89.99541666666667,
-        89.99458333333334,           89.99375,  89.99291666666667,
-        89.99208333333334,
-       ...
-       -89.99208333333334, -89.99291666666667,          -89.99375,
-       -89.99458333333334, -89.99541666666667,          -89.99625,
-       -89.99708333333334, -89.99791666666667,          -89.99875,
-       -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f50ea710-7537-43b1-9c72-0c9687472cd6' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f50ea710-7537-43b1-9c72-0c9687472cd6' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b126972e-953c-4aad-a7de-dbf203a66fc8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b126972e-953c-4aad-a7de-dbf203a66fc8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-93d68928-fd39-4c2f-aed9-976305f14b8b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-93d68928-fd39-4c2f-aed9-976305f14b8b' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-2da27a02-62a6-42fe-b5d3-eabbb05d5fd4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2da27a02-62a6-42fe-b5d3-eabbb05d5fd4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-799915d6-9235-4bee-9e4c-46ee353dd38e' class='xr-var-data-in' type='checkbox'><label for='data-799915d6-9235-4bee-9e4c-46ee353dd38e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-7182d468-58a0-4b2a-b4e0-04104a971daf' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7182d468-58a0-4b2a-b4e0-04104a971daf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a04fc2e5-9282-4eb6-89b0-69430212f716' class='xr-var-data-in' type='checkbox'><label for='data-a04fc2e5-9282-4eb6-89b0-69430212f716' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583], shape=(432000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-1b2a24c4-ae83-464f-8d4f-93ca17f8948e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1b2a24c4-ae83-464f-8d4f-93ca17f8948e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-993cd5c6-9e21-452a-a0cf-1c9d5449dcdc' class='xr-var-data-in' type='checkbox'><label for='data-993cd5c6-9e21-452a-a0cf-1c9d5449dcdc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583], shape=(216000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-50930afe-9dc9-4bcc-b297-2063af37a37c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-50930afe-9dc9-4bcc-b297-2063af37a37c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-771aac3e-08b4-43c2-aaea-d1dba8f74b4e' class='xr-var-data-in' type='checkbox'><label for='data-771aac3e-08b4-43c2-aaea-d1dba8f74b4e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4ced1686-7326-4e57-b5e2-89a75a740d63' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4ced1686-7326-4e57-b5e2-89a75a740d63' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-776beffa-498a-4975-89ea-4f484f4c6ce4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-776beffa-498a-4975-89ea-4f484f4c6ce4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-768c989c-d762-4133-98b1-36253b68e87b' class='xr-var-data-in' type='checkbox'><label for='data-768c989c-d762-4133-98b1-36253b68e87b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -1679,7 +1773,7 @@ Data variables:
 <p>There could be some <strong>NaN</strong> values at the tail of some of the curves. To make sure the code works, we fill up the <strong>NaN</strong> values with the last value of each of the curves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1753,8 +1847,8 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:54&lt;00:00,  2.46s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 6281/6281 [00:04&lt;00:00, 1265.49it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:26&lt;00:00,  5.44it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91431/91431 [00:10&lt;00:00, 8474.12it/s]
 </pre></div>
 </div>
 </div>
@@ -1779,13 +1873,13 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [03:57&lt;00:00,  1.65s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 6281/6281 [00:04&lt;00:00, 1542.27it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 6281/6281 [00:00&lt;00:00, 13827.08it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:18&lt;00:00,  7.77it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91431/91431 [00:10&lt;00:00, 8458.21it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████| 91431/91431 [00:13&lt;00:00, 6587.43it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 26s
-Wall time: 4min 7s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 30.8 s
+Wall time: 57 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1805,13 +1899,13 @@ Wall time: 4min 7s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:26&lt;00:00,  2.27s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 6281/6281 [00:05&lt;00:00, 1212.58it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 6281/6281 [00:00&lt;00:00, 11349.61it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:22&lt;00:00,  6.44it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91431/91431 [00:12&lt;00:00, 7048.33it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████| 91431/91431 [00:14&lt;00:00, 6127.36it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 37s
-Wall time: 5min 38s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 26 s
+Wall time: 1min 4s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1846,23 +1940,6 @@ Wall time: 5min 38s
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">damage_results</span><span class="p">[[</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name_right&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
-                                     <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
-                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name_right&#39;</span><span class="p">,</span>
-                                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="visualizing-the-results">
 <h2>8. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
@@ -1881,7 +1958,7 @@ Wall time: 5min 38s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9869786022d7db26d4cb519313c5b13c6e00fea8095db14b8f875d64a9395f2e.png" src="../_images/9869786022d7db26d4cb519313c5b13c6e00fea8095db14b8f875d64a9395f2e.png" />
+<img alt="../_images/6be7215c1f0131b5c229cc67b189507626717eadc5bce9e737f1fac7f4b7dc93.png" src="../_images/6be7215c1f0131b5c229cc67b189507626717eadc5bce9e737f1fac7f4b7dc93.png" />
 </div>
 </div>
 <p>And create a distribution of the damages.</p>
@@ -1897,7 +1974,7 @@ Wall time: 5min 38s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/610693bbe71c38695886fba33a1b03f11b8c672bbaa87315fd2acef0e6dc13a8.png" src="../_images/610693bbe71c38695886fba33a1b03f11b8c672bbaa87315fd2acef0e6dc13a8.png" />
+<img alt="../_images/3ec7f763855f5665961e017a037bddadfb4b7d4f05de6abc83aa40715690bea4.png" src="../_images/3ec7f763855f5665961e017a037bddadfb4b7d4f05de6abc83aa40715690bea4.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -1915,20 +1992,8 @@ Wall time: 5min 38s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The history saving thread hit an unexpected error (OperationalError(&#39;database is locked&#39;)).History will not be written to the database.
-</pre></div>
+<img alt="../_images/78bf721970c063669d11de87b3050fd25c548a84cd1344ee06eea230d328a7f7.png" src="../_images/78bf721970c063669d11de87b3050fd25c548a84cd1344ee06eea230d328a7f7.png" />
 </div>
-<img alt="../_images/cfd61064a8be8b7c4ce47b761ec0e973548ca208b1fd6823cdd82f791b6c7504.png" src="../_images/cfd61064a8be8b7c4ce47b761ec0e973548ca208b1fd6823cdd82f791b6c7504.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6be0cc17459a4fee80832d2c72346ab2", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1959,7 +2024,7 @@ Wall time: 5min 38s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|█████████████████████████████████████████████████████████████████| 8/8 [41:27&lt;00:00, 310.90s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [08:52&lt;00:00, 66.62s/it]
 </pre></div>
 </div>
 </div>
@@ -1999,7 +2064,7 @@ Wall time: 5min 38s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;River Flood Risk for Tajikistan&#39;)
 </pre></div>
 </div>
-<img alt="../_images/6a54cfab7fa7e98f4737f7d31d4beb396adb90f2fc61ab888e94dd0437843cb1.png" src="../_images/6a54cfab7fa7e98f4737f7d31d4beb396adb90f2fc61ab888e94dd0437843cb1.png" />
+<img alt="../_images/2677f2c8c14d402f5d4e110bd3e09887410e032e43acb60d988ffa02a16fcd77.png" src="../_images/2677f2c8c14d402f5d4e110bd3e09887410e032e43acb60d988ffa02a16fcd77.png" />
 </div>
 </div>
 </section>

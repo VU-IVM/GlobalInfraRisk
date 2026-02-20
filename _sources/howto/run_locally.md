@@ -45,7 +45,7 @@ name: infra-risk
 channels:
   - conda-forge
 dependencies:
-  - python=3.12
+  - python=3.13
   - numpy
   - geopandas
   - rasterio
@@ -58,7 +58,7 @@ dependencies:
   - rioxarray
   - seaborn
   - pip:
-      - damagescanner==0.9b14
+      - damagescanner
       - exactextract
       - contextily
       - openpyxl
@@ -68,7 +68,7 @@ dependencies:
 
 ### Explanation of Dependencies
 
-- **Python 3.12**: Core programming language.
+- **Python 3.13**: Core programming language.
 - **numpy**: Essential for numerical computations.
 - **geopandas**: Enables spatial data handling.
 - **rasterio**: Supports geospatial raster data operations.

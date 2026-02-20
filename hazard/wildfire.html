@@ -479,10 +479,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -515,11 +514,10 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>  <span class="c1"># registers the rio accessor</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
@@ -569,8 +567,8 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 9.05 s
-Wall time: 16 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 7.47 s
+Wall time: 16.9 s
 </pre></div>
 </div>
 </div>
@@ -601,11 +599,6 @@ Wall time: 16 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KeyboardInterrupt
-</pre></div>
-</div>
-</div>
 </div>
 <p>All data is stored as shapefiles. We can directly read them for our area by performing a clip during the reading process.</p>
 <div class="cell docutils container">
@@ -623,6 +616,15 @@ Wall time: 16 s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rasterized_wildfire_map</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="p">):</span>
 
+    <span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">bounds</span>
+    
+    <span class="n">width</span> <span class="o">=</span> <span class="n">maxx</span> <span class="o">-</span> <span class="n">minx</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">maxy</span> <span class="o">-</span> <span class="n">miny</span>
+    
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">([</span><span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span><span class="p">]))</span> <span class="ow">or</span> <span class="n">width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">height</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: invalid bbox bounds </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">bounds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
     <span class="n">country_yearly_wildfires</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">)</span>
         
     <span class="c1"># List of geometries from the GeoDataFrame</span>
@@ -647,11 +649,11 @@ Wall time: 16 s
     <span class="n">rasterized</span> <span class="o">=</span> <span class="n">rasterization</span><span class="o">.</span><span class="n">rasterize</span><span class="p">(</span>
         <span class="n">geom</span><span class="p">,</span>
         <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span>
-        <span class="n">fill</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
         <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
         <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">default_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>  <span class="c1"># ← changed from None</span>
     <span class="p">)</span>
 
     <span class="c1"># Assume rasterized is your NumPy array from the rasterio.features.rasterize() call</span>
@@ -692,14 +694,16 @@ Wall time: 16 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wildfires_per_year</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">shp_files</span><span class="p">,</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">shp_files</span><span class="p">)):</span>
+<span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">shp_files</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">shp_files</span><span class="p">)):</span>
     <span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">wildfires_per_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">rasterized_wildfire_map</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="n">bbox</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rasterized_wildfire_map</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">wildfires_per_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [08:51&lt;00:00, 24.15s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [05:14&lt;00:00, 14.29s/it]
 </pre></div>
 </div>
 </div>
@@ -734,7 +738,7 @@ Wall time: 16 s
 
 <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wildfires_per_year</span><span class="p">)):</span>
     <span class="n">country_hazard_data</span> <span class="o">=</span> <span class="n">wildfires_per_year</span><span class="p">[</span><span class="n">year</span><span class="p">]</span>
-    <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
+    <span class="n">exposed_features</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">country_hazard_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">disable_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="c1">#&#39;values&#39;]</span>
     
     <span class="n">exposed_features</span><span class="p">[</span><span class="n">year</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposed_features</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;coverage&#39;</span><span class="p">]]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
@@ -744,7 +748,7 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [04:03&lt;00:00, 11.05s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 22/22 [00:45&lt;00:00,  2.05s/it]
 </pre></div>
 </div>
 </div>
@@ -839,7 +843,7 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" src="../_images/890fd1f2880317492af41e4d8086b38d831ba4d9ebe91247646f667d931a861f.png" />
+<img alt="../_images/acf8cd4f7778aedc3b810072ece9176e2e21be197f44143221c4ec5a3f133e60.png" src="../_images/acf8cd4f7778aedc3b810072ece9176e2e21be197f44143221c4ec5a3f133e60.png" />
 </div>
 </div>
 </section>
@@ -904,7 +908,7 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ce553995d2595991a52fc5a4e8d3d02c5b90fd4687d1631fa89fda8d9f5aadeb.png" src="../_images/ce553995d2595991a52fc5a4e8d3d02c5b90fd4687d1631fa89fda8d9f5aadeb.png" />
+<img alt="../_images/016fce23c4dc10ec3a3cb6cbe2aad6af2dc6ab85dc80b3c96e3b2c5a2b4f1e86.png" src="../_images/016fce23c4dc10ec3a3cb6cbe2aad6af2dc6ab85dc80b3c96e3b2c5a2b4f1e86.png" />
 </div>
 </div>
 </section>
@@ -968,7 +972,7 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" src="../_images/a0dbd7497d30dfc0be025718dc4e1d127e78387de796eaeff520f6901da41ca2.png" />
+<img alt="../_images/0748ab9e4a2fe5ece9eb573e6758bc4adf6ea733643c8dd4154ac7906d173310.png" src="../_images/0748ab9e4a2fe5ece9eb573e6758bc4adf6ea733643c8dd4154ac7906d173310.png" />
 </div>
 </div>
 <p>And as a final figure, we may want to plot how often certain roads are exposed to wildfires across the time series.</p>
@@ -1021,7 +1025,7 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6d39fd0c8e5691739d8a244a8bea05c0c4462e6c293f4e80cc495de4dcd70950.png" src="../_images/6d39fd0c8e5691739d8a244a8bea05c0c4462e6c293f4e80cc495de4dcd70950.png" />
+<img alt="../_images/5c5056d81e95298faf3cedb2c750fe5cbd1bf4dfc396ea2aeaf14d8dd7f6dd18.png" src="../_images/5c5056d81e95298faf3cedb2c750fe5cbd1bf4dfc396ea2aeaf14d8dd7f6dd18.png" />
 </div>
 </div>
 </section>

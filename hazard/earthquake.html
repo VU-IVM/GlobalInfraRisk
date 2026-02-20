@@ -479,10 +479,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -505,10 +504,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -561,8 +559,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.8 s
-Wall time: 10.1 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 5.52 s
+Wall time: 8.94 s
 </pre></div>
 </div>
 </div>
@@ -581,9 +579,11 @@ Wall time: 10.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;primary&#39;, &#39;trunk&#39;, &#39;track&#39;, &#39;tertiary&#39;, &#39;secondary&#39;,
-       &#39;residential&#39;, &#39;secondary_link&#39;, &#39;trunk_link&#39;, &#39;unclassified&#39;,
-       &#39;tertiary_link&#39;, &#39;primary_link&#39;, &#39;road&#39;], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ArrowStringArray&gt;
+[       &#39;primary&#39;,          &#39;trunk&#39;,          &#39;track&#39;,       &#39;tertiary&#39;,
+      &#39;secondary&#39;, &#39;secondary_link&#39;,    &#39;residential&#39;,   &#39;primary_link&#39;,
+     &#39;trunk_link&#39;,   &#39;unclassified&#39;,  &#39;tertiary_link&#39;,           &#39;road&#39;]
+Length: 12, dtype: str
 </pre></div>
 </div>
 </div>
@@ -1626,9 +1626,11 @@ Wall time: 10.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;primary&#39;, &#39;trunk&#39;, &#39;track&#39;, &#39;tertiary&#39;, &#39;secondary&#39;,
-       &#39;residential&#39;, &#39;secondary_link&#39;, &#39;trunk_link&#39;, &#39;unclassified&#39;,
-       &#39;tertiary_link&#39;, &#39;primary_link&#39;, &#39;road&#39;], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ArrowStringArray&gt;
+[       &#39;primary&#39;,          &#39;trunk&#39;,          &#39;track&#39;,       &#39;tertiary&#39;,
+      &#39;secondary&#39;, &#39;secondary_link&#39;,    &#39;residential&#39;,   &#39;primary_link&#39;,
+     &#39;trunk_link&#39;,   &#39;unclassified&#39;,  &#39;tertiary_link&#39;,           &#39;road&#39;]
+Length: 12, dtype: str
 </pre></div>
 </div>
 </div>
@@ -1679,7 +1681,7 @@ Wall time: 10.1 s
 <p>There could be some <strong>NaN</strong> values at the tail of some of the curves. To make sure the code works, we fill up the <strong>NaN</strong> values with the last value of each of the curves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1745,8 +1747,8 @@ Wall time: 10.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:43&lt;00:00,  2.39s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:32&lt;00:00, 2631.72it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:19&lt;00:00,  7.24it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91431/91431 [00:38&lt;00:00, 2362.48it/s]
 </pre></div>
 </div>
 </div>
@@ -1766,18 +1768,18 @@ convert coverage to meters: 100%|███████████████�
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">vulnerability_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">vulnerability_maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+<span class="n">vulnerability_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">vulnerability_maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [04:59&lt;00:00,  2.08s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:34&lt;00:00, 2483.88it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:07&lt;00:00, 11445.86it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:13&lt;00:00, 10.73it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91384/91384 [00:28&lt;00:00, 3218.91it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████| 91384/91384 [00:09&lt;00:00, 9326.01it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 46s
-Wall time: 5min 48s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 43.5 s
+Wall time: 58.7 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1806,13 +1808,13 @@ Wall time: 5min 48s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">liquefaction_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">liqeufaction_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">liquefaction_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">liqeufaction_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">exposure</span><span class="p">(</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:56&lt;00:00,  2.47s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:26&lt;00:00, 3147.53it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:13&lt;00:00, 10.83it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91384/91384 [00:23&lt;00:00, 3948.36it/s]
 </pre></div>
 </div>
 </div>
@@ -1858,7 +1860,7 @@ convert coverage to meters: 100%|███████████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:10&lt;00:00, 8110.59it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 91384/91384 [00:14&lt;00:00, 6254.81it/s]
 </pre></div>
 </div>
 </div>
@@ -1870,18 +1872,18 @@ convert coverage to meters: 100%|███████████████�
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [05:23&lt;00:00,  2.25s/it]
-convert coverage to meters: 100%|██████████████████████████████████████████████| 84838/84838 [00:37&lt;00:00, 2253.00it/s]
-Calculating damage: 100%|█████████████████████████████████████████████████████| 84838/84838 [00:08&lt;00:00, 10110.22it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|████████████████████████████████████████████████████| 144/144 [00:14&lt;00:00, 10.00it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 91384/91384 [00:31&lt;00:00, 2917.35it/s]
+Calculating damage: 100%|██████████████████████████████████████████████████████| 91384/91384 [00:10&lt;00:00, 9011.19it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3min 54s
-Wall time: 6min 17s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 47.2 s
+Wall time: 1min 4s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1899,7 +1901,7 @@ Wall time: 6min 17s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 84838/84838 [00:11&lt;00:00, 7487.68it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>liquefaction correction boolean: 100%|█████████████████████████████████████████| 91384/91384 [00:15&lt;00:00, 5750.81it/s]
 </pre></div>
 </div>
 </div>
@@ -1931,23 +1933,6 @@ Wall time: 6min 17s
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span> <span class="o">=</span> <span class="n">admin1_country</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">damage_results</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
-                                     <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
-                                     <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
-                                     <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;adm1_code&#39;</span><span class="p">,</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="s1">&#39;damage&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">admin1_damage</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Admin1_Road_Damage_</span><span class="si">{</span><span class="n">country_full_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">hazard</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">return_period</span><span class="si">}</span><span class="s1">.gpkg&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="visualizing-the-results">
 <h2>8. Visualizing the Results<a class="headerlink" href="#visualizing-the-results" title="Permalink to this heading">#</a></h2>
@@ -1966,7 +1951,7 @@ Wall time: 6min 17s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/77982d63754b0055e9861dbeac38f23296464ccf9277e4773be94e5eee446e70.png" src="../_images/77982d63754b0055e9861dbeac38f23296464ccf9277e4773be94e5eee446e70.png" />
+<img alt="../_images/369e73de44a78d98e8a71ce45d43ef01cc35b20f49989dcecf8f0647a3016843.png" src="../_images/369e73de44a78d98e8a71ce45d43ef01cc35b20f49989dcecf8f0647a3016843.png" />
 </div>
 </div>
 <p>And create a distribution of the damages.</p>
@@ -1982,7 +1967,7 @@ Wall time: 6min 17s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/98d3caa90c0d9332bb7425c2690274a96616e61e1858d8aed47ccd9c7194df60.png" src="../_images/98d3caa90c0d9332bb7425c2690274a96616e61e1858d8aed47ccd9c7194df60.png" />
+<img alt="../_images/f2aba4f4fa4744313e55fa9667127d3570ae2c130af49d213c0f40dc264a1bce.png" src="../_images/f2aba4f4fa4744313e55fa9667127d3570ae2c130af49d213c0f40dc264a1bce.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -2000,7 +1985,7 @@ Wall time: 6min 17s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/835741667a530af81a7d5e6992d34862ff346fe63c66bc996c6c8c29d9f3a5db.png" src="../_images/835741667a530af81a7d5e6992d34862ff346fe63c66bc996c6c8c29d9f3a5db.png" />
+<img alt="../_images/ac57ab21753b54a8f8df5e2066781bf78d13f67ad4d6c33b9d7556c4a782c004.png" src="../_images/ac57ab21753b54a8f8df5e2066781bf78d13f67ad4d6c33b9d7556c4a782c004.png" />
 </div>
 </div>
 </section>

@@ -481,10 +481,9 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -503,12 +502,15 @@ Finally, we will visualize the estimated damage using graphs and maps to illustr
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">exactextract</span><span class="w"> </span><span class="kn">import</span> <span class="n">exact_extract</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.vector</span><span class="w"> </span><span class="kn">import</span> <span class="n">VectorScanner</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
+<span class="c1">#from lonboard import viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -562,8 +564,8 @@ This dataset contains the maximum possible damage (in monetary terms) that can b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 10.4 s
-Wall time: 12.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 6.7 s
+Wall time: 10.6 s
 </pre></div>
 </div>
 </div>
@@ -644,38 +646,86 @@ Wall time: 12.7 s
 </symbol>
 </defs>
 </svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
+<style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
 :root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
 }
 
-html[theme=dark],
-body[data-theme=dark],
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
 body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
 }
 
 .xr-wrap {
   display: block !important;
   min-width: 300px;
   max-width: 700px;
+  line-height: 1.6;
 }
 
 .xr-text-repr-fallback {
@@ -698,11 +748,18 @@ body.vscode-dark {
 }
 
 .xr-obj-type,
-.xr-array-name {
+.xr-obj-name,
+.xr-group-name {
   margin-left: 2px;
   margin-right: 10px;
 }
 
+.xr-group-name::before {
+  content: "📁";
+  padding-right: 0.3em;
+}
+
+.xr-group-name,
 .xr-obj-type {
   color: var(--xr-font-color2);
 }
@@ -710,7 +767,9 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .xr-section-item {
@@ -718,16 +777,24 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+  margin: 0;
 }
 
 .xr-section-item input + label {
   color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
 }
 
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -751,7 +818,7 @@ body.vscode-dark {
 
 .xr-section-summary-in + label:before {
   display: inline-block;
-  content: '►';
+  content: "►";
   font-size: 11px;
   width: 15px;
   text-align: center;
@@ -762,7 +829,7 @@ body.vscode-dark {
 }
 
 .xr-section-summary-in:checked + label:before {
-  content: '▼';
+  content: "▼";
 }
 
 .xr-section-summary-in:checked + label > span {
@@ -772,7 +839,6 @@ body.vscode-dark {
 .xr-section-summary,
 .xr-section-inline-details {
   padding-top: 4px;
-  padding-bottom: 4px;
 }
 
 .xr-section-inline-details {
@@ -782,11 +848,38 @@ body.vscode-dark {
 .xr-section-details {
   display: none;
   grid-column: 1 / -1;
+  margin-top: 4px;
   margin-bottom: 5px;
 }
 
 .xr-section-summary-in:checked ~ .xr-section-details {
   display: contents;
+}
+
+.xr-group-box {
+  display: inline-grid;
+  grid-template-columns: 0px 20px auto;
+  width: 100%;
+}
+
+.xr-group-box-vline {
+  grid-column-start: 1;
+  border-right: 0.2em solid;
+  border-color: var(--xr-border-color);
+  width: 0px;
+}
+
+.xr-group-box-hline {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  height: 1em;
+  width: 20px;
+  border-bottom: 0.2em solid;
+  border-color: var(--xr-border-color);
+}
+
+.xr-group-box-contents {
+  grid-column-start: 3;
 }
 
 .xr-array-wrap {
@@ -834,15 +927,15 @@ body.vscode-dark {
 }
 
 .xr-dim-list:before {
-  content: '(';
+  content: "(";
 }
 
 .xr-dim-list:after {
-  content: ')';
+  content: ")";
 }
 
 .xr-dim-list li:not(:last-child):after {
-  content: ',';
+  content: ",";
   padding-right: 5px;
 }
 
@@ -859,7 +952,9 @@ body.vscode-dark {
 .xr-var-item label,
 .xr-var-item > .xr-var-name span {
   background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
   margin-bottom: 0;
+  padding-top: 2px;
 }
 
 .xr-var-item > .xr-var-name:hover span {
@@ -870,6 +965,7 @@ body.vscode-dark {
 .xr-var-list > li:nth-child(odd) > label,
 .xr-var-list > li:nth-child(odd) > .xr-var-name span {
   background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
 }
 
 .xr-var-name {
@@ -919,8 +1015,15 @@ body.vscode-dark {
 .xr-var-data,
 .xr-index-data {
   display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -931,6 +1034,12 @@ body.vscode-dark {
 
 .xr-var-data > table {
   float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
 }
 
 .xr-var-name span,
@@ -992,35 +1101,25 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 747GB
 Dimensions:      (band: 1, x: 432000, y: 216000)
 Coordinates:
-  * band         (band) int32 4B 1
+  * band         (band) int64 8B 1
   * x            (x) float64 3MB -180.0 -180.0 -180.0 ... 180.0 180.0 180.0
   * y            (y) float64 2MB 90.0 90.0 90.0 90.0 ... -90.0 -90.0 -90.0 -90.0
-    spatial_ref  int32 4B ...
+    spatial_ref  int64 8B ...
 Data variables:
-    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-183d97da-caa9-4c6b-a6a0-426c22c54d58' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-183d97da-caa9-4c6b-a6a0-426c22c54d58' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-b0497eb5-ebcc-4ab7-9138-cf94dd226b24' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b0497eb5-ebcc-4ab7-9138-cf94dd226b24' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-2d45cbf7-8cd7-4f60-9ea2-e10ff76f960b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2d45cbf7-8cd7-4f60-9ea2-e10ff76f960b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a3b44243-b2af-4a87-b2f8-ddeedf88204e' class='xr-var-data-in' type='checkbox'><label for='data-a3b44243-b2af-4a87-b2f8-ddeedf88204e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-64c080ac-eb3c-4c10-b731-d97d2b27d9cb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-64c080ac-eb3c-4c10-b731-d97d2b27d9cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c1cd6284-97d7-44fc-a366-0b78adfa47d9' class='xr-var-data-in' type='checkbox'><label for='data-c1cd6284-97d7-44fc-a366-0b78adfa47d9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
-        179.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-d1446222-ec4e-4615-a226-1b420bea6fd6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d1446222-ec4e-4615-a226-1b420bea6fd6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b12fc4f9-7b68-4bd6-b28a-f775d02bf09a' class='xr-var-data-in' type='checkbox'><label for='data-b12fc4f9-7b68-4bd6-b28a-f775d02bf09a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
-       -89.999583])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-31980e4d-7135-4a2f-b135-0e27c06d5d62' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-31980e4d-7135-4a2f-b135-0e27c06d5d62' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6fd2d7cb-cf4d-4409-a017-f5fc67c1e2ac' class='xr-var-data-in' type='checkbox'><label for='data-6fd2d7cb-cf4d-4409-a017-f5fc67c1e2ac' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4c40e6ab-e20d-4c7f-b5ff-548217e92fdc' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4c40e6ab-e20d-4c7f-b5ff-548217e92fdc' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-79de3129-110f-4135-8ae4-d4a3d7fe4b53' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-79de3129-110f-4135-8ae4-d4a3d7fe4b53' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f7170919-a45d-48d6-bb9d-0fb5bf0a1d97' class='xr-var-data-in' type='checkbox'><label for='data-f7170919-a45d-48d6-bb9d-0fb5bf0a1d97' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a85c9310-f676-491c-9781-755382064126' class='xr-section-summary-in' type='checkbox'  ><label for='section-a85c9310-f676-491c-9781-755382064126' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4d966cf9-7981-4c19-990e-fad07fd17ee2' class='xr-index-data-in' type='checkbox'/><label for='index-4d966cf9-7981-4c19-990e-fad07fd17ee2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int32&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c928abba-3c1b-42a7-9712-12cc2d97232e' class='xr-index-data-in' type='checkbox'/><label for='index-c928abba-3c1b-42a7-9712-12cc2d97232e' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-179.99958333333333,          -179.99875, -179.99791666666667,
-       -179.99708333333334,          -179.99625, -179.99541666666667,
-       -179.99458333333334,          -179.99375, -179.99291666666667,
-       -179.99208333333334,
-       ...
-        179.99208333333334,  179.99291666666667,           179.99375,
-        179.99458333333334,  179.99541666666667,           179.99625,
-        179.99708333333334,  179.99791666666667,           179.99875,
-        179.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=432000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-8e22e796-ebbc-4f31-aee0-7c19e85b669a' class='xr-index-data-in' type='checkbox'/><label for='index-8e22e796-ebbc-4f31-aee0-7c19e85b669a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([ 89.99958333333333,           89.99875,  89.99791666666667,
-        89.99708333333334,           89.99625,  89.99541666666667,
-        89.99458333333334,           89.99375,  89.99291666666667,
-        89.99208333333334,
-       ...
-       -89.99208333333334, -89.99291666666667,          -89.99375,
-       -89.99458333333334, -89.99541666666667,          -89.99625,
-       -89.99708333333334, -89.99791666666667,          -89.99875,
-       -89.99958333333333],
-      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=216000))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d7bebad6-e173-4856-9e35-bb43bc007b16' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d7bebad6-e173-4856-9e35-bb43bc007b16' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    band_data    (band, y, x) float64 746GB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ed426588-1b0a-45cb-97b3-d405c688f4ae' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ed426588-1b0a-45cb-97b3-d405c688f4ae' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>x</span>: 432000</li><li><span class='xr-has-index'>y</span>: 216000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-3442a58a-e84e-48a4-a2e2-07ed7dfbfaa4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3442a58a-e84e-48a4-a2e2-07ed7dfbfaa4' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-4ea39b11-dbcf-42bd-bf1c-2e97dab7643b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4ea39b11-dbcf-42bd-bf1c-2e97dab7643b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2394965d-c512-49fd-900a-c4f3f360bea7' class='xr-var-data-in' type='checkbox'><label for='data-2394965d-c512-49fd-900a-c4f3f360bea7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-180.0 -180.0 ... 180.0 180.0</div><input id='attrs-aa2289d1-6327-43ae-8cb3-203fda16a87a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-aa2289d1-6327-43ae-8cb3-203fda16a87a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-532f914e-1302-4c93-9991-291d22ae8346' class='xr-var-data-in' type='checkbox'><label for='data-532f914e-1302-4c93-9991-291d22ae8346' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-179.999583, -179.99875 , -179.997917, ...,  179.997917,  179.99875 ,
+        179.999583], shape=(432000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>90.0 90.0 90.0 ... -90.0 -90.0</div><input id='attrs-70a82b0d-c509-453d-a32d-232d07e255f2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-70a82b0d-c509-453d-a32d-232d07e255f2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ce37161a-c53f-43c8-8745-640f15a6cfd1' class='xr-var-data-in' type='checkbox'><label for='data-ce37161a-c53f-43c8-8745-640f15a6cfd1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 89.999583,  89.99875 ,  89.997917, ..., -89.997917, -89.99875 ,
+       -89.999583], shape=(216000,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-32542bec-22fe-4a28-9f44-e052ebe6a18a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-32542bec-22fe-4a28-9f44-e052ebe6a18a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-794e0caa-5071-428e-a814-22532df1e594' class='xr-var-data-in' type='checkbox'><label for='data-794e0caa-5071-428e-a814-22532df1e594' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AXIS[&quot;Latitude&quot;,NORTH],AXIS[&quot;Longitude&quot;,EAST],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-180.0 0.0008333333333333334 0.0 90.0 0.0 -0.0008333333333333334</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=int64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-def13cdc-526d-466a-bee1-f38034e21e87' class='xr-section-summary-in' type='checkbox'  checked><label for='section-def13cdc-526d-466a-bee1-f38034e21e87' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>band_data</span></div><div class='xr-var-dims'>(band, y, x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-0152e4a4-7d27-4886-ab3e-610e6b4a187a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0152e4a4-7d27-4886-ab3e-610e6b4a187a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b887bdbb-f866-4b87-9e3b-387e8f5a157a' class='xr-var-data-in' type='checkbox'><label for='data-b887bdbb-f866-4b87-9e3b-387e8f5a157a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>TIFFTAG_SOFTWARE :</span></dt><dd>GRASS GIS 7.8.6 with GDAL 3.4.0</dd><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd></dl></div><div class='xr-var-data'><pre>[93312000000 values with dtype=float64]</pre></div></li></ul></div></li></ul></div></div></div></div>
 </div>
 </section>
 <section id="maximum-damages">
@@ -1679,7 +1778,7 @@ Data variables:
 <p>There could be some <strong>NaN</strong> values at the tail of some of the curves. To make sure the code works, we fill up the <strong>NaN</strong> values with the last value of each of the curves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1725,8 +1824,8 @@ Data variables:
 <p>Clip the hazard data to the country of interest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_bounds</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span>
-<span class="n">country_geom</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">ADM0_ISO</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_bounds</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">SOV_A3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">country_geom</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="o">.</span><span class="n">SOV_A3</span> <span class="o">==</span> <span class="n">country_iso3</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span>
 </pre></div>
 </div>
 </div>
@@ -1755,16 +1854,243 @@ Data variables:
 <p>We will use the DamageScanner approach. This is a fully optimised damage calculation method, that can capture a wide range of inputs to perform a damage assessment. It also allows to only assess the potential exposure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">exposure_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">exposure</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [06:59&lt;00:00,  9.55s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3519/3519 [00:02&lt;00:00, 1266.98it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:23&lt;00:00,  1.87it/s]
+convert coverage to meters: 100%|██████████████████████████████████████████████| 90578/90578 [00:10&lt;00:00, 8579.78it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 20.4 s
+Wall time: 47.7 s
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exposure_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>osm_id</th>
+      <th>name</th>
+      <th>object_type</th>
+      <th>waterway</th>
+      <th>aerialway</th>
+      <th>barrier</th>
+      <th>man_made</th>
+      <th>railway</th>
+      <th>z_order</th>
+      <th>other_tags</th>
+      <th>geometry</th>
+      <th>coverage</th>
+      <th>values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25901603</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>LINESTRING (0.64916 6.97327, 0.64927 6.97311, ...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30027014</td>
+      <td>Boulevard de la République</td>
+      <td>trunk</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>8</td>
+      <td>"lanes"=&gt;"2","maxspeed"=&gt;"90","name:en"=&gt;"Repu...</td>
+      <td>LINESTRING (1.2263 6.1233, 1.22721 6.12369, 1....</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30699262</td>
+      <td>NaN</td>
+      <td>tertiary</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>LINESTRING (0.64338 7.3294, 0.64356 7.32905, 0...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30910082</td>
+      <td>NaN</td>
+      <td>tertiary</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>LINESTRING (0.87264 10.25456, 0.87335 10.25483...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30910496</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>"surface"=&gt;"ground"</td>
+      <td>LINESTRING (0.19492 10.88383, 0.19493 10.88364...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>90573</th>
+      <td>1477381414</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>"level"=&gt;"1","source:date"=&gt;"2012","surface"=&gt;...</td>
+      <td>LINESTRING (0.31957 10.53097, 0.3193 10.53083,...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>90574</th>
+      <td>1477381415</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13</td>
+      <td>"bridge"=&gt;"yes","level"=&gt;"1","source:date"=&gt;"2...</td>
+      <td>LINESTRING (0.31962 10.53099, 0.31957 10.53097)</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>90575</th>
+      <td>1477381417</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>"level"=&gt;"1","source:date"=&gt;"2012","surface"=&gt;...</td>
+      <td>LINESTRING (0.31862 10.53042, 0.31847 10.53032...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>90576</th>
+      <td>1477381418</td>
+      <td>NaN</td>
+      <td>other</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13</td>
+      <td>"bridge"=&gt;"yes","level"=&gt;"1","source:date"=&gt;"2...</td>
+      <td>LINESTRING (0.31867 10.53046, 0.31862 10.53042)</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>90577</th>
+      <td>1478829773</td>
+      <td>NaN</td>
+      <td>primary</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7</td>
+      <td>NaN</td>
+      <td>LINESTRING (0.6086 9.52945, 0.60831 9.52924, 0...</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+  </tbody>
+</table>
+<p>90578 rows × 13 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="performing-a-vulnerability-assessment">
@@ -1780,22 +2106,8 @@ convert coverage to meters: 100%|███████████████�
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">vulnerability_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">vulnerability_maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [04:44&lt;00:00,  6.46s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3519/3519 [00:02&lt;00:00, 1255.97it/s]
-Calculating damage: 100%|███████████████████████████████████████████████████████| 3519/3519 [00:00&lt;00:00, 12236.23it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4min 12s
-Wall time: 4min 53s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%%time</span>
+<span class="c1">#vulnerability_results = DamageScanner(hazard_country, features, damage_curves, vulnerability_maxdam).calculate()</span>
 </pre></div>
 </div>
 </div>
@@ -1807,21 +2119,33 @@ Wall time: 4min 53s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+<span class="n">damage_results</span> <span class="o">=</span> <span class="n">DamageScanner</span><span class="p">(</span><span class="n">hazard_country</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">damage_curves</span><span class="p">,</span> <span class="n">maxdam</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">return_full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [05:13&lt;00:00,  7.13s/it]
-convert coverage to meters: 100%|████████████████████████████████████████████████| 3519/3519 [00:03&lt;00:00, 1110.97it/s]
-Calculating damage: 100%|████████████████████████████████████████████████████████| 3519/3519 [00:00&lt;00:00, 9280.90it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overlay raster with vector: 100%|██████████████████████████████████████████████████████| 44/44 [00:24&lt;00:00,  1.79it/s]
+convert coverage to meters: 100%|████████████████████████████████████████████████| 3483/3483 [00:03&lt;00:00, 1032.43it/s]
+Calculating damage: 100%|████████████████████████████████████████████████████████| 3483/3483 [00:00&lt;00:00, 5915.21it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 4min 33s
-Wall time: 5min 25s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 24 s
+Wall time: 42 s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">damage_results</span><span class="o">.</span><span class="n">damage</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(110.42109725459096)
 </pre></div>
 </div>
 </div>
@@ -1888,7 +2212,7 @@ Wall time: 5min 25s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9c00215ab64284116828aa16c9cb633e91e69af4bdba1db7b3af1dba0f23cea6.png" src="../_images/9c00215ab64284116828aa16c9cb633e91e69af4bdba1db7b3af1dba0f23cea6.png" />
+<img alt="../_images/b635c658df504ab06f016164302c3c26e8fe4f81780c68a672f7ec2bec15e8c7.png" src="../_images/b635c658df504ab06f016164302c3c26e8fe4f81780c68a672f7ec2bec15e8c7.png" />
 </div>
 </div>
 <p>And create a distribution of the damages.</p>
@@ -1904,7 +2228,7 @@ Wall time: 5min 25s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;damage&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/929052466cb5db84bd8f1b4bbedefbc5edfef3da131da3115553d0a1ecfc657b.png" src="../_images/929052466cb5db84bd8f1b4bbedefbc5edfef3da131da3115553d0a1ecfc657b.png" />
+<img alt="../_images/58ab71624dba2b910c4cd7bf9d08dfdec269d8f39a80b98e326efaef37361d07.png" src="../_images/58ab71624dba2b910c4cd7bf9d08dfdec269d8f39a80b98e326efaef37361d07.png" />
 </div>
 </div>
 <p>Plot all damages</p>
@@ -1922,17 +2246,8 @@ Wall time: 5min 25s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/74ea0deb49d54cdea9b670b101f673ecf7003ec13b0a2d8716c5c361e166d81a.png" src="../_images/74ea0deb49d54cdea9b670b101f673ecf7003ec13b0a2d8716c5c361e166d81a.png" />
+<img alt="../_images/3a422b6a6479f8e79cfadfd84dc90bb8c7c2b9330ade4c2dec80b61e9ac6df72.png" src="../_images/3a422b6a6479f8e79cfadfd84dc90bb8c7c2b9330ade4c2dec80b61e9ac6df72.png" />
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viz</span><span class="p">(</span><span class="n">damage_results</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0912059464ee4ec9b5c2df08229ca71a", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="performing-the-risk-assessment">
@@ -1963,215 +2278,7 @@ Wall time: 5min 25s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation:  88%|████████████████████████████████████████████████████████▉        | 7/8 [40:53&lt;05:46, 346.52s/it]Traceback (most recent call last):
-  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
-  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
-  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
-rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 847, Y offset 375: TIFFReadEncodedTile() failed.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
-    values_and_coverage_per_area_and_line_object = exact_extract(
-                                                   ^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
-    processor.process()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
-    ret = self.ds.sel(**selection).to_numpy()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
-    return self.variable.to_numpy()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
-    return to_numpy(self._data)
-           ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
-    data = data.get_duck_array()  # type: ignore[no-untyped-call]
-           ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
-    self._ensure_cached()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
-    self.array = as_indexable(self.array.get_duck_array())
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
-    array = self.array[self.key]
-            ~~~~~~~~~~^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
-    return indexing.explicit_indexing_adapter(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
-    result = raw_indexing_method(raw_key.tuple)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
-    out = riods.read(band_key, window=window, masked=self.masked)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
-  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
-rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 847, Y offset 375: TIFFReadEncodedTile() failed.
-Traceback (most recent call last):
-  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
-  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
-  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
-rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 378: TIFFReadEncodedTile() failed.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
-    values_and_coverage_per_area_and_line_object = exact_extract(
-                                                   ^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
-    processor.process()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
-    ret = self.ds.sel(**selection).to_numpy()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
-    return self.variable.to_numpy()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
-    return to_numpy(self._data)
-           ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
-    data = data.get_duck_array()  # type: ignore[no-untyped-call]
-           ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
-    self._ensure_cached()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
-    self.array = as_indexable(self.array.get_duck_array())
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
-    array = self.array[self.key]
-            ~~~~~~~~~~^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
-    return indexing.explicit_indexing_adapter(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
-    result = raw_indexing_method(raw_key.tuple)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
-    out = riods.read(band_key, window=window, masked=self.masked)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
-  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
-rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 378: TIFFReadEncodedTile() failed.
-Traceback (most recent call last):
-  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
-  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
-  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
-rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
-    values_and_coverage_per_area_and_line_object = exact_extract(
-                                                   ^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
-    processor.process()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
-    ret = self.ds.sel(**selection).to_numpy()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
-    return self.variable.to_numpy()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
-    return to_numpy(self._data)
-           ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
-    data = data.get_duck_array()  # type: ignore[no-untyped-call]
-           ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
-    self._ensure_cached()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
-    self.array = as_indexable(self.array.get_duck_array())
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
-    array = self.array[self.key]
-            ~~~~~~~~~~^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
-    return indexing.explicit_indexing_adapter(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
-    result = raw_indexing_method(raw_key.tuple)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
-    out = riods.read(band_key, window=window, masked=self.masked)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
-  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
-rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
-Traceback (most recent call last):
-  File &quot;rasterio\\_io.pyx&quot;, line 977, in rasterio._io.DatasetReaderBase._read
-  File &quot;rasterio\\_io.pyx&quot;, line 215, in rasterio._io.io_multi_band
-  File &quot;rasterio\\_err.pyx&quot;, line 195, in rasterio._err.exc_wrap_int
-rasterio._err.CPLE_AppDefinedError: global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\damagescanner\vector.py&quot;, line 360, in _overlay_raster_vector
-    values_and_coverage_per_area_and_line_object = exact_extract(
-                                                   ^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\exact_extract.py&quot;, line 476, in exact_extract
-    processor.process()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\exactextract\raster.py&quot;, line 357, in read_window
-    ret = self.ds.sel(**selection).to_numpy()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\dataarray.py&quot;, line 802, in to_numpy
-    return self.variable.to_numpy()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\core.py&quot;, line 828, in to_numpy
-    return to_numpy(self._data)
-           ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\namedarray\pycompat.py&quot;, line 106, in to_numpy
-    data = data.get_duck_array()  # type: ignore[no-untyped-call]
-           ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 833, in get_duck_array
-    self._ensure_cached()
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 827, in _ensure_cached
-    self.array = as_indexable(self.array.get_duck_array())
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 784, in get_duck_array
-    return self.array.get_duck_array()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 647, in get_duck_array
-    array = self.array[self.key]
-            ~~~~~~~~~~^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 453, in __getitem__
-    return indexing.explicit_indexing_adapter(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\xarray\core\indexing.py&quot;, line 1011, in explicit_indexing_adapter
-    result = raw_indexing_method(raw_key.tuple)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\eks510\.conda\envs\pygis\Lib\site-packages\rioxarray\_io.py&quot;, line 430, in _getitem
-    out = riods.read(band_key, window=window, masked=self.masked)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;rasterio\\_io.pyx&quot;, line 653, in rasterio._io.DatasetReaderBase.read
-  File &quot;rasterio\\_io.pyx&quot;, line 980, in rasterio._io.DatasetReaderBase._read
-rasterio.errors.RasterioIOError: Read or write failed. global_pc_h1000glob.tif, band 1: IReadBlock failed at X offset 846, Y offset 381: TIFFReadEncodedTile() failed.
-Risk Calculation: 100%|█████████████████████████████████████████████████████████████| 8/8 [12:14:42&lt;00:00, 5510.34s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [05:37&lt;00:00, 42.13s/it]
 </pre></div>
 </div>
 </div>
@@ -2211,7 +2318,7 @@ Risk Calculation: 100%|███████████████████
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;River Flood Risk for Togo&#39;)
 </pre></div>
 </div>
-<img alt="../_images/403e42f63898df74fd918a626160937d86ca111b293393f080873723aabf746b.png" src="../_images/403e42f63898df74fd918a626160937d86ca111b293393f080873723aabf746b.png" />
+<img alt="../_images/50925dce9274582a9f8a831a42f7cd841219ff63ed11118092283521c6d2aaca.png" src="../_images/50925dce9274582a9f8a831a42f7cd841219ff63ed11118092283521c6d2aaca.png" />
 </div>
 </div>
 </section>

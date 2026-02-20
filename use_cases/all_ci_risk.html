@@ -476,10 +476,9 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner==0.9b14</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
 <span class="c1">#!pip install contextily</span>
 <span class="c1">#!pip install exactextract</span>
-<span class="c1">#!pip install lonboard</span>
 </pre></div>
 </div>
 </div>
@@ -502,10 +501,8 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <span class="kn">import</span><span class="w"> </span><span class="nn">damagescanner.download</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">download</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DamageScanner</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.osm</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_osm_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.base_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">damagescanner.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DICT_CIS_VULNERABILITY_FLOOD</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statistics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mode</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">viz</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> <span class="c1"># exactextract gives a warning that is invalid</span>
@@ -596,7 +593,7 @@ This dataset includes information on the hazard affecting the infrastructure (e.
     <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>  
     <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">damage_curves</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ci_system</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+    <span class="n">damage_curves</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
 
     <span class="c1"># Make sure we set the index of the damage curves (the inundation depth) in the same metric as the hazard data (e.g. meters or centimeters).</span>
     <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">damage_curves</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span>
@@ -806,20 +803,25 @@ This dataset includes information on the hazard affecting the infrastructure (e.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [11:14&lt;00:00, 84.33s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:13&lt;00:00,  1.64s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:16&lt;00:00,  9.62s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:03&lt;00:00,  7.89s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:04&lt;00:00,  8.08s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:02&lt;00:00,  7.79s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [02:34&lt;00:00, 19.29s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [00:17&lt;00:00,  2.16s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:40&lt;00:00, 12.56s/it]
+Risk Calculation:   0%|                                                                          | 0/8 [00:11&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems that telecom is most likely not mapped or has no exposure
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:24&lt;00:00, 10.54s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:17&lt;00:00,  9.73s/it]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems that waste_water is most likely not mapped or has no exposure
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:14&lt;00:00,  9.34s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:06&lt;00:00,  8.29s/it]
-Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:30&lt;00:00, 11.34s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:22&lt;00:00, 10.26s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:25&lt;00:00, 10.73s/it]
+Risk Calculation: 100%|██████████████████████████████████████████████████████████████████| 8/8 [01:48&lt;00:00, 13.58s/it]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It seems that gas is most likely not mapped or has no exposure
@@ -869,7 +871,7 @@ It seems that oil is most likely not mapped or has no exposure
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;River Flood Damage for Belize for multiple \n Critical Infrastructure systems&#39;)
 </pre></div>
 </div>
-<img alt="../_images/3d309b831987ab6e86e3f5a73ae7e67cf998bdd1bfd0df355e224506fd1ad57e.png" src="../_images/3d309b831987ab6e86e3f5a73ae7e67cf998bdd1bfd0df355e224506fd1ad57e.png" />
+<img alt="../_images/c47d6149c9f947c86b0586e7f2ead76dd6cceab9aa37fb73445dbd72f32a31d4.png" src="../_images/c47d6149c9f947c86b0586e7f2ead76dd6cceab9aa37fb73445dbd72f32a31d4.png" />
 </div>
 </div>
 </section>
