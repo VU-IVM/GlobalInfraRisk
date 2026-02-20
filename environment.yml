@@ -4,7 +4,7 @@ channels:
     - conda-forge
 
 dependencies:
-        - python=3.12
+        - python=3.13
         - numpy
         - geopandas
         - rasterio
@@ -17,7 +17,7 @@ dependencies:
         - rioxarray 
         - seaborn
         - pip:
-            - damagescanner==0.9b14
+            - damagescanner
             - exactextract
             - contextily
             - openpyxl 
