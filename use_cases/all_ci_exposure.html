@@ -471,12 +471,19 @@ Finally, we will visualize the estimated exposure using graphs and maps.</p></li
 <section id="loading-the-necessary-packages">
 <h2>1. Loading the Necessary Packages<a class="headerlink" href="#loading-the-necessary-packages" title="Permalink to this heading">#</a></h2>
 <p>To perform the assessment, we are going to make use of several <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">python packages</a>.</p>
-<p>In case you run this in Google Colab, you will have to install the packages below <strong>(remove the hashtag in front of them)</strong>.</p>
+<p>In case you run this in Google Colab, you will need to install the packages below <strong>(remove the hashtag in front of them)</strong>. The installation is split into two steps:</p>
+<p><strong>Step 1:</strong> Install <code class="docutils literal notranslate"><span class="pre">damagescanner</span></code> first. Because this upgrades NumPy to a newer version than what Colab has pre-installed, Google Colab will prompt you to restart the runtime after installation — <strong>accept the restart</strong>. This is necessary to ensure the newly installed NumPy version is actually loaded into memory.</p>
+<p><strong>Step 2:</strong> After the restart, run the second cell to install <code class="docutils literal notranslate"><span class="pre">contextily</span></code>. This package is installed separately to avoid the installation to fail due to the requested runtime restart.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install damagescanner</span>
-<span class="c1">#!pip install contextily</span>
-<span class="c1">#!pip install exactextract</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install contextily</span>
 </pre></div>
 </div>
 </div>
